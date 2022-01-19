@@ -1,11 +1,4 @@
-package com.hustunique.musica.Main;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import com.hustunique.musica.AapterMain.Adapter01;
-import com.hustunique.musica.R;
+package com.hustunique.musica.home;
 
 public class PresenterMain implements IOrigin.IPresenter {
     IOrigin.IView view;

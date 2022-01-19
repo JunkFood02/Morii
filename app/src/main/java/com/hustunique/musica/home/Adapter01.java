@@ -1,4 +1,4 @@
-package com.hustunique.musica.AapterMain;
+package com.hustunique.musica.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.Exact.ExactActivity;
+import com.hustunique.musica.content.ExactActivity;
 import com.hustunique.musica.R;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class Adapter01 extends RecyclerView.Adapter<Adapter01.MyViewHolder> impl
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.adapter01,parent,false);
+        inflater = LayoutInflater.from(context).inflate(R.layout.cardview_item,parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(inflater);
         return myViewHolder;
     }

@@ -18,17 +18,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/Emotion"
-        android:layout_width="86dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="40dp"
-        android:text="心情"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,4 @@
-package com.hustunique.musica.AapterMain;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+package com.hustunique.musica.home;
 
 import com.hustunique.musica.R;
 

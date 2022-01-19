@@ -1,14 +1,12 @@
-package com.hustunique.musica.Main;
+package com.hustunique.musica.home;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-import com.hustunique.musica.AapterMain.Adapter01;
-import com.hustunique.musica.Piano.TopicSelect;
+import com.hustunique.musica.music.MusicSelectActivity;
 import com.hustunique.musica.R;
 
 import java.util.List;
@@ -27,19 +25,16 @@ public class MainActivity extends AppCompatActivity implements IOrigin.IView {
         presenter = new PresenterMain(this);
         presenter.getUI();
         //初始化布局
-        Button button = (Button) findViewById(R.id.buttonCreate);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TopicSelect.class);
-                startActivity(intent);
-            }
+        Button button = findViewById(R.id.buttonCreate);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MusicSelectActivity.class);
+            startActivity(intent);
         });
     }
 
     @Override
     public void GetRecyclerView(List<Integer> list){
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView01);
+        recyclerView = findViewById(R.id.recyclerView01);
         adapter = new Adapter01(this,list);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);

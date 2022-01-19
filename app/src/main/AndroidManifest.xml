@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musica">
         <activity
-            android:name=".Exact.ExactActivity"
+            android:name=".content.ExactActivity"
             android:exported="false" />
         <activity
-            android:name=".Piano.TopicSelect"
+            android:name=".music.MusicSelectActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Main.MainActivity"
+            android:name=".home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

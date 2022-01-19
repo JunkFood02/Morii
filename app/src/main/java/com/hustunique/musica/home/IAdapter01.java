@@ -1,4 +1,4 @@
-package com.hustunique.musica.AapterMain;
+package com.hustunique.musica.home;
 
 public interface IAdapter01 {
     public interface IPresenter
