@@ -4,15 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#f8f8ff"
+    tools:context=".Main.MainActivity">
+
+
+    <ImageView
+        android:id="@+id/BackGroundView"
+        android:layout_width="391dp"
+        android:layout_height="594dp"
+        android:background="#d3d3d3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreate" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView01"
+        android:layout_width="362dp"
+        android:layout_height="533dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BackGroundView"
+        app:layout_constraintEnd_toEndOf="@+id/BackGroundView"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="@+id/BackGroundView"
+        app:layout_constraintTop_toTopOf="@+id/BackGroundView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/buttonCreate"
+        android:layout_width="270dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="28dp"
+        android:background="#f8f8ff"
+        android:gravity="center"
+        android:text="点击创造属于你的自然音乐"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textView2"
+        android:layout_width="162dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="你好,XXX"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="157dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="我的创作"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        app:layout_constraintStart_toStartOf="@+id/BackGroundView"
+        app:layout_constraintTop_toTopOf="@+id/BackGroundView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

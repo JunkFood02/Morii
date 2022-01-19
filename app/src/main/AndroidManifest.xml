@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hustunique.musica">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
 
         android:name=".MyApplication"
@@ -13,7 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musica">
         <activity
-            android:name=".MainActivity"
+            android:name=".Exact.ExactActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Piano.TopicSelect"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
