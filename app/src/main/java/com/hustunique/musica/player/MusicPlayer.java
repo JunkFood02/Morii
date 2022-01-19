@@ -1,10 +1,13 @@
 package com.hustunique.musica.player;
 
+import com.hustunique.musica.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MusicPlayer {
     List<Track> tracks = new ArrayList<>();
+    Track MusicTrack=new Track();
 
     public void addTrack(Track t) {
         tracks.add(t);
@@ -25,11 +28,19 @@ public class MusicPlayer {
         }
     }
 
+    public void switchMusicTrack(int resId) {
+        new Thread(() -> {
+            MusicTrack.reset();
+            MusicTrack.play(resId);
+        }).start();
+
+    }
+
     public void exchangeAudio(int trackId, int resId) {
         for (Track t : tracks) {
             if (t.getId() == trackId) {
                 t.reset();
-                t.init(resId);
+                t.play(resId);
                 return;
             }
         }
@@ -47,5 +58,9 @@ public class MusicPlayer {
         ) {
             t.play();
         }
+    }
+
+    public MusicPlayer() {
+        tracks.add(MusicTrack);
     }
 }

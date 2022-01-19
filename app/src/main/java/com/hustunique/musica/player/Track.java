@@ -13,7 +13,11 @@ public class Track {
     }
 
     public Track(int resId) {
-        init(resId);
+        play(resId);
+    }
+
+    public Track() {
+        player=new MediaPlayer();
     }
 
     public void play() {
@@ -34,11 +38,20 @@ public class Track {
         player.reset();
     }
 
+
     public void init(int resId) {
         id = resId;
         player = MediaPlayer.create(MyApplication.context, resId);
         player.setLooping(true);
-        play();
+    }
+
+
+    public void play(int resId) {
+        new Thread(() -> {
+            init(resId);
+            play();
+        }).start();
+
     }
 
 }
