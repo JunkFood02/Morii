@@ -1,5 +1,9 @@
 package com.hustunique.musica.music;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,10 +14,12 @@ import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,7 +46,7 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
     private void initUI() {
         textView = findViewById(R.id.Emotion);
         setRecyclerView();
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        //WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
     }
 
     private void setRecyclerView() {
@@ -56,6 +62,7 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
         long animationDuration=200;
         fadeOut.setDuration(animationDuration);
         presenter.switchMusic(0);
+        NotificationUtil.setNotification(getApplicationContext(),"心情 " + 0);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int previousPosition, currentPosition;
 
@@ -68,6 +75,7 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
                     Log.d(TAG, "onScrollStateChanged: currentPosition=" + currentPosition);
                     if (currentPosition < 0) return;
                     if (currentPosition != previousPosition) {
+                        NotificationUtil.setNotification(getApplicationContext(),"心情 " + currentPosition);
                         textView.startAnimation(fadeOut);
                         textView.setText("心情 " + currentPosition);
                         presenter.switchMusic(currentPosition);
@@ -78,6 +86,5 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
             }
         });
     }
-
 
 }
