@@ -1,4 +1,4 @@
-package com.hustunique.musica;
+package com.hustunique.musica.home;
 
 import android.graphics.Bitmap;
 
@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class WorkGroup {
+public class MusicDiaryItem {
     private Calendar calendar;
     private int PianoID;
     private List<Integer> NoiseID;
     private String title;
     private String article;
     private Bitmap BackgroundColor;
-    private String workID;
+    private String itemID;
 
-    public String getWorkID() {
-        return workID;
+    public String getItemID() {
+        return itemID;
     }
 
-    public void setWorkID(String workID) {
-        this.workID = workID;
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 
     public Bitmap getBackgroundColor() {

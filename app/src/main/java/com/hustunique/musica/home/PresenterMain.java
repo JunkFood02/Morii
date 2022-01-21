@@ -1,10 +1,10 @@
 package com.hustunique.musica.home;
 
-public class PresenterMain implements IOrigin.IPresenter {
-    IOrigin.IView view;
-    IOrigin.IModel model;
+public class PresenterMain implements IHomePage.IPresenter {
+    IHomePage.IView view;
+    IHomePage.IModel model;
 
-    PresenterMain(IOrigin.IView iViewMain){
+    PresenterMain(IHomePage.IView iViewMain){
         this.view = iViewMain;
         this.model = new ModelMain();
     }
@@ -13,4 +13,11 @@ public class PresenterMain implements IOrigin.IPresenter {
     public void getUI(){
         view.GetRecyclerView(model.Init());
     }
+
+    @Override
+    public void setRecyclerViewItem(int position) {
+
+    }
+
+
 }

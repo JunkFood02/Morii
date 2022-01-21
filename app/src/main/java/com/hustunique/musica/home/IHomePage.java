@@ -1,20 +1,19 @@
 package com.hustunique.musica.home;
 
-import com.hustunique.musica.WorkGroup;
-
 import java.util.List;
 
-public interface IOrigin {
+public interface IHomePage {
     public interface IPresenter
     {
         void getUI();
+        void setRecyclerViewItem(int position);
     }
 
     public interface IView {
-        void GetRecyclerView(List<WorkGroup> list);
+        void GetRecyclerView(List<MusicDiaryItem> list);
     }
 
     public interface IModel{
-        List<WorkGroup> Init();//暂时的初始化
+        List<MusicDiaryItem> Init();//暂时的初始化
     }
 }

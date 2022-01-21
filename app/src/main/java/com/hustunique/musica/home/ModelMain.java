@@ -1,26 +1,24 @@
 package com.hustunique.musica.home;
 
-import com.hustunique.musica.WorkGroup;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelMain implements IOrigin.IModel{
-    private List<WorkGroup> list;
+public class ModelMain implements IHomePage.IModel{
+    private List<MusicDiaryItem> list;
 
     @Override
-    public List<WorkGroup> Init(){
+    public List<MusicDiaryItem> Init(){
         //查询数据库，返回list
-        list = new ArrayList<WorkGroup>();
-        WorkGroup workGroup = new WorkGroup();
-//        workGroup.setBackgroundColor();
-//        workGroup.setPianoID();
-//        workGroup.setNoiseID();
-        workGroup.setCalendar();
-        workGroup.setWorkID("!!@#");
-        workGroup.setArticle("I am a ....");
-        workGroup.setTitle("Me");
-        for (int i=1;i<=10;i++) list.add(workGroup);
+        list = new ArrayList<>();
+        MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
+//        musicDiaryItem.setBackgroundColor();
+//        musicDiaryItem.setPianoID();
+//        musicDiaryItem.setNoiseID();
+        musicDiaryItem.setCalendar();
+        musicDiaryItem.setWorkID("!!@#");
+        musicDiaryItem.setArticle("I am a ....");
+        musicDiaryItem.setTitle("Me");
+        for (int i=1;i<=10;i++) list.add(musicDiaryItem);
         return list;
     }
 

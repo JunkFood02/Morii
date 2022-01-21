@@ -1,4 +1,5 @@
 package com.hustunique.musica.home;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,17 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.musica.R;
-import com.hustunique.musica.WorkGroup;
 import com.hustunique.musica.music.MusicSelectActivity;
 
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IOrigin.IView {
+public class MainActivity extends AppCompatActivity implements IHomePage.IView {
 
-    private IOrigin.IPresenter presenter;
+    private IHomePage.IPresenter presenter;
     private RecyclerView recyclerView;
-    private Adapter01 adapter;
+    private MusicDiaryAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +35,10 @@ public class MainActivity extends AppCompatActivity implements IOrigin.IView {
     }
 
     @Override
-    public void GetRecyclerView(List<WorkGroup> list){
+    public void GetRecyclerView(List<MusicDiaryItem> list) {
         recyclerView = findViewById(R.id.recyclerView01);
-        adapter = new Adapter01(this,list);
-        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        adapter = new MusicDiaryAdapter(this, list);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
     }
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements IOrigin.IView {
 
     @Override
     protected void onResume() {
-        presenter.getUI();
+        //presenter.getUI();
         super.onResume();
     }
 }
