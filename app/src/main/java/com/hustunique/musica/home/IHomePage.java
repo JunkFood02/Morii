@@ -2,17 +2,18 @@ package com.hustunique.musica.home;
 
 import java.util.List;
 
-public interface IOrigin {
+public interface IHomePage {
     public interface IPresenter
     {
         void getUI();
+        void setRecyclerViewItem(int position);
     }
 
     public interface IView {
-        void GetRecyclerView(List<Integer> list);
+        void GetRecyclerView(List<MusicDiaryItem> list);
     }
 
     public interface IModel{
-        List<Integer> Init();//暂时的初始化
+        List<MusicDiaryItem> Init();//暂时的初始化
     }
 }

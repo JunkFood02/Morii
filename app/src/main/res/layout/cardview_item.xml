@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/square"
     android:layout_margin="5dp"
@@ -13,12 +13,12 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="10dp"
         />
 
     <ImageView
         android:id="@+id/PhotoTitle"
-        android:layout_width="370dp"
+        android:layout_width="wrap_content"
         android:layout_height="159dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/TextDate"
-        android:layout_width="112dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="left"
         android:gravity="center"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/TextTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="38dp"
         android:layout_gravity="left"
         android:text=" 今天的空气是橘子味的"
@@ -44,10 +44,10 @@
 
     <TextView
         android:id="@+id/TextTime"
-        android:layout_width="295dp"
+        android:layout_width="wrap_content"
         android:layout_height="27dp"
-        android:layout_gravity="center"
-        android:gravity="right"
+        android:layout_gravity="right"
+        android:gravity="center"
         android:text="Time : 06:06:06"
         android:textSize="16sp"
         android:textStyle="italic|bold" />

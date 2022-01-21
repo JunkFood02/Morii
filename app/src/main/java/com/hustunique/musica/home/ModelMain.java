@@ -3,17 +3,24 @@ package com.hustunique.musica.home;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelMain implements IOrigin.IModel{
-    private List<Integer> list;
+public class ModelMain implements IHomePage.IModel{
+    private List<MusicDiaryItem> list;
 
     @Override
-    public List<Integer> Init(){
+    public List<MusicDiaryItem> Init(){
         //查询数据库，返回list
         list = new ArrayList<>();
-        for (int i=1;i<=10;i++) list.add(i);
+        MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
+//        musicDiaryItem.setBackgroundColor();
+//        musicDiaryItem.setPianoID();
+//        musicDiaryItem.setNoiseID();
+        musicDiaryItem.setCalendar();
+        musicDiaryItem.setItemID("!!@#");
+        musicDiaryItem.setArticle("I am a ....");
+        musicDiaryItem.setTitle("Me");
+        for (int i=1;i<=10;i++) list.add(musicDiaryItem);
         return list;
     }
-
 
 
 }
