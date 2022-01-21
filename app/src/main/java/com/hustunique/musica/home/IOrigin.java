@@ -1,5 +1,7 @@
 package com.hustunique.musica.home;
 
+import com.hustunique.musica.WorkGroup;
+
 import java.util.List;
 
 public interface IOrigin {
@@ -9,10 +11,10 @@ public interface IOrigin {
     }
 
     public interface IView {
-        void GetRecyclerView(List<Integer> list);
+        void GetRecyclerView(List<WorkGroup> list);
     }
 
     public interface IModel{
-        List<Integer> Init();//暂时的初始化
+        List<WorkGroup> Init();//暂时的初始化
     }
 }

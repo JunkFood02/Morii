@@ -13,7 +13,6 @@ public class Presenter01 implements IAdapter01.IPresenter {
     public void getUI(Adapter01.MyViewHolder holder, int position){
         //从model层获取数据
         //然后修改view层UI
-//        holder.TextTime.setText("今天空气橘子");
         holder.PhotoTitle.setBackgroundResource(R.drawable.orange);
     }
 

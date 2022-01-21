@@ -5,10 +5,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.musica.R;
+import com.hustunique.musica.WorkGroup;
 import com.hustunique.musica.music.MusicSelectActivity;
 
 import java.util.List;
@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity implements IOrigin.IView {
 
         presenter = new PresenterMain(this);
         presenter.getUI();
-        //初始化布局
-//        Toast.makeText(this,"QQQ",Toast.LENGTH_LONG);
         Button button = findViewById(R.id.buttonCreate);
         button.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, MusicSelectActivity.class);
@@ -36,14 +34,12 @@ public class MainActivity extends AppCompatActivity implements IOrigin.IView {
     }
 
     @Override
-    public void GetRecyclerView(List<Integer> list){
+    public void GetRecyclerView(List<WorkGroup> list){
         recyclerView = findViewById(R.id.recyclerView01);
         adapter = new Adapter01(this,list);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(recyclerView);
     }
 
 

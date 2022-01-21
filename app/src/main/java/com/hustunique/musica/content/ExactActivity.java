@@ -1,9 +1,8 @@
 package com.hustunique.musica.content;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hustunique.musica.R;
 
@@ -13,5 +12,8 @@ public class ExactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+
+        String Id = getIntent().getStringExtra("WID");
+        // get the information
     }
 }
