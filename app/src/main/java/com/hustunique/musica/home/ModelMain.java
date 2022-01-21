@@ -15,7 +15,7 @@ public class ModelMain implements IHomePage.IModel{
 //        musicDiaryItem.setPianoID();
 //        musicDiaryItem.setNoiseID();
         musicDiaryItem.setCalendar();
-        musicDiaryItem.setWorkID("!!@#");
+        musicDiaryItem.setItemID("!!@#");
         musicDiaryItem.setArticle("I am a ....");
         musicDiaryItem.setTitle("Me");
         for (int i=1;i<=10;i++) list.add(musicDiaryItem);

@@ -57,6 +57,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
         if (position % 7 + 1 == 7) holder.imageView.setImageResource(R.drawable.x7);
         holder.textView.setText("白噪声"+String.valueOf(position+1));
         Log.d("RECYCLER2", String.valueOf(position));
+        holder.itemView.setOnLongClickListener(new OnDragListener(holder.itemView));
         holder.itemView.setOnClickListener(v -> {
 //            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));

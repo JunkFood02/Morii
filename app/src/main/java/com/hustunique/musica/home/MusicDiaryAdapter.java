@@ -83,7 +83,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExactActivity.class);
-                intent.putExtra("WID", musicDiaryItem.getWorkID());
+                intent.putExtra("WID", musicDiaryItem.getItemID());
                 context.startActivity(intent);
             }
         });

@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements IHomePage.IView {
 
     @Override
     protected void onResume() {
-        //presenter.getUI();
         super.onResume();
     }
 }
