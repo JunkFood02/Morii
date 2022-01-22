@@ -10,13 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.musica.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+public class MixActivity extends AppCompatActivity implements MixContract.IView{
 
-public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
-
-    private IMixDesign.IPresenter presenter;
+    private MixContract.IPresenter presenter;
     private RecyclerView recyclerView;
     private ImageView[] squares = new ImageView[9];
     @Override

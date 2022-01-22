@@ -27,7 +27,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
     private View inflater;
 
     //构造方法，传入数据
-    public WhiteNoiseAdapter(Context context, IMixDesign.IPresenter presenter) {
+    public WhiteNoiseAdapter(Context context, MixContract.IPresenter presenter) {
         this.context = context;
         this.list = presenter.getList();
 

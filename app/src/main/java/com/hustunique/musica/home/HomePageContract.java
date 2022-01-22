@@ -2,7 +2,7 @@ package com.hustunique.musica.home;
 
 import java.util.List;
 
-public interface IHomePage {
+public interface HomePageContract {
     public interface IPresenter
     {
         void getUI();

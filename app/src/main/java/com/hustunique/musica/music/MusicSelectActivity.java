@@ -24,9 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hustunique.musica.R;
 import com.hustunique.musica.design.MixActivity;
 
-public class MusicSelectActivity extends AppCompatActivity implements IMusicSelect.IView {
+public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
 
-    private IMusicSelect.IPresenter presenter;
+    private MusicSelectContract.IPresenter presenter;
     private static final String TAG = "MusicSelectActivity";
     private TextView textView;
     private TextView Selected;

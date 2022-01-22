@@ -14,9 +14,9 @@ import com.hustunique.musica.music.MusicSelectActivity;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IHomePage.IView {
+public class MainActivity extends AppCompatActivity implements HomePageContract.IView {
 
-    private IHomePage.IPresenter presenter;
+    private HomePageContract.IPresenter presenter;
     private RecyclerView recyclerView;
     private MusicDiaryAdapter adapter;
 

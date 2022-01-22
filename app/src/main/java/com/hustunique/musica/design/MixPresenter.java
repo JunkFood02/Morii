@@ -3,11 +3,11 @@ package com.hustunique.musica.design;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MixPresenter implements IMixDesign.IPresenter{
-    private IMixDesign.IView view;
+public class MixPresenter implements MixContract.IPresenter{
+    private MixContract.IView view;
     private final List<Integer> list = new ArrayList<>();
 
-    MixPresenter(IMixDesign.IView view) {
+    MixPresenter(MixContract.IView view) {
         this.view = view;
         initWhiteNoise();
     }

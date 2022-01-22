@@ -3,7 +3,7 @@ package com.hustunique.musica.home;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelMain implements IHomePage.IModel{
+public class ModelMain implements HomePageContract.IModel{
     private List<MusicDiaryItem> list;
 
     @Override

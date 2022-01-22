@@ -1,4 +1,4 @@
 package com.hustunique.musica.design;
 
-public class MixModel implements IMixDesign.IModel{
+public class MixModel implements MixContract.IModel{
 }

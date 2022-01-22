@@ -2,7 +2,7 @@ package com.hustunique.musica.design;
 
 import java.util.List;
 
-public interface IMixDesign {
+public interface MixContract {
         interface IPresenter {
 
             List<Integer> getList();

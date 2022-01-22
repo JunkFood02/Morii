@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +25,7 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     private View inflater;
 
     //构造方法，传入数据
-    public MusicSelectAdapter(Context context, IMusicSelect.IPresenter presenter) {
+    public MusicSelectAdapter(Context context, MusicSelectContract.IPresenter presenter) {
         this.context = context;
         this.list = presenter.getMusicTabList();
 
