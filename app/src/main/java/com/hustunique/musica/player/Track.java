@@ -2,7 +2,7 @@ package com.hustunique.musica.player;
 
 import android.media.MediaPlayer;
 
-import com.hustunique.musica.MyApplication;
+import com.hustunique.musica.util.MyApplication;
 
 public class Track {
     private MediaPlayer player;

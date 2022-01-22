@@ -3,25 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/drawable/square.xml" value="0.37552083333333336" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/drawable/square2.xml" value="0.37552083333333336" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_content.xml" value="0.359375" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_mix.xml" value="0.359375" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_music_select.xml" value="0.359375" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/cardview_item.xml" value="0.359375" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/musicdesign_item.xml" value="0.22" />
-        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/musictab_item.xml" value="0.359375" />
-        <entry key="app/src/main/res/layout/activity_content.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_exact.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_noise_select.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/adapter01.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/adapter02.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/music_item.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/musictab_item.xml" value="0.22509057971014493" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.3170007423904974" />
+        <entry key="app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.21041666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.1859375" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1859375" />
+        <entry key="app/src/main/res/drawable/square.xml" value="0.1859375" />
+        <entry key="app/src/main/res/layout/action_bar.xml" value="0.4" />
+        <entry key="app/src/main/res/layout/activity_content.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.4" />
+        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.4" />
+        <entry key="app/src/main/res/layout/biggerview_notification.xml" value="0.4" />
+        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.4" />
+        <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
       </map>
     </option>
   </component>
@@ -30,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.4" />
+      </ProjectState>
+    </option>
   </component>
 </project>

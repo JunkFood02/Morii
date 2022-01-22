@@ -1,4 +1,4 @@
-package com.hustunique.musica;
+package com.hustunique.musica.util;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

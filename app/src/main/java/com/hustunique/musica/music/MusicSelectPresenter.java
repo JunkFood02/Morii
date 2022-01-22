@@ -1,6 +1,6 @@
 package com.hustunique.musica.music;
 
-import static com.hustunique.musica.MyApplication.musicPlayer;
+import static com.hustunique.musica.util.MyApplication.musicPlayer;
 
 import com.hustunique.musica.R;
 
