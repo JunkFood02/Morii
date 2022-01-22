@@ -43,6 +43,7 @@ public class Track {
         id = resId;
         player = MediaPlayer.create(MyApplication.context, resId);
         player.setLooping(true);
+        player.seekTo(1000);
     }
 
 

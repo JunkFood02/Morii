@@ -35,4 +35,10 @@ public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
     public void switchMusic(int position) {
         musicPlayer.switchMusicTrack(musicTabList.get(position).getMusicResId());
     }
+
+    @Override
+    public void stopMusic() {
+        musicPlayer.pause();
+    }
+
 }

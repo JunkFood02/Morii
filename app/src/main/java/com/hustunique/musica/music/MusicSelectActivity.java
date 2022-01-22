@@ -46,6 +46,12 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.stopMusic();
+    }
+
     private void initUI() {
         textView = findViewById(R.id.Emotion);
         constraintLayout=findViewById(R.id.musicSelectLayout);
