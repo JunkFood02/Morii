@@ -13,13 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.musica.R;
-import com.hustunique.musica.RoundImage;
+import com.hustunique.musica.util.RoundImage;
 
 import java.util.List;
 
 public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.musica.design.WhiteNoiseAdapter.ViewHolder> {
     private final Context context;
-
+    private int[] imageLists;
     private final List<Integer> list;
     //类型待定
 
@@ -30,7 +30,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
     public WhiteNoiseAdapter(Context context, IMixDesign.IPresenter presenter) {
         this.context = context;
         this.list = presenter.getList();
-
+        imageLists = new int[]{R.drawable.x1,R.drawable.x2,R.drawable.x3,R.drawable.x4,R.drawable.x5,R.drawable.x6,R.drawable.x7};
     }
 
     @NonNull
@@ -46,17 +46,12 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
         //将数据和控件绑定
         //
         holder.Select = false;
-        if (position % 7 + 1 == 1) holder.imageView.setImageResource(R.drawable.x1);
-        if (position % 7 + 1 == 2) holder.imageView.setImageResource(R.drawable.x2);
-        //Do not setBackgroundResource !
-        if (position % 7 + 1 == 3) holder.imageView.setImageResource(R.drawable.x3);
-        //you cannot make it!
-        if (position % 7 + 1 == 4) holder.imageView.setImageResource(R.drawable.x4);
-        if (position % 7 + 1 == 5) holder.imageView.setImageResource(R.drawable.x5);
-        if (position % 7 + 1 == 6) holder.imageView.setImageResource(R.drawable.x6);
-        if (position % 7 + 1 == 7) holder.imageView.setImageResource(R.drawable.x7);
+        holder.imageView.setImageResource(imageLists[position % 7]);
+
         holder.textView.setText("白噪声"+String.valueOf(position+1));
         Log.d("RECYCLER2", String.valueOf(position));
+        holder.itemView.setOnLongClickListener(new OnDragListener(imageLists[position % 7]));
+        //Log.d("imageViewID", imageLists[position % 7]+"");
         holder.itemView.setOnClickListener(v -> {
 //            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));

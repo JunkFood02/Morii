@@ -2,7 +2,7 @@ package com.hustunique.musica.player;
 
 import android.media.MediaPlayer;
 
-import com.hustunique.musica.MyApplication;
+import com.hustunique.musica.util.MyApplication;
 
 public class Track {
     private MediaPlayer player;
@@ -43,6 +43,7 @@ public class Track {
         id = resId;
         player = MediaPlayer.create(MyApplication.context, resId);
         player.setLooping(true);
+        player.seekTo(1000);
     }
 
 

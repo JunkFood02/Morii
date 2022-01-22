@@ -2,6 +2,7 @@ package com.hustunique.musica.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,24 +15,20 @@ import com.hustunique.musica.music.MusicSelectActivity;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements IHomePage.IView {
-
-    private IHomePage.IPresenter presenter;
+public class MainActivity extends AppCompatActivity implements HomePageContract.IView {
+    private static final String TAG = "MainActivity";
+    private HomePageContract.IPresenter presenter;
     private RecyclerView recyclerView;
     private MusicDiaryAdapter adapter;
-
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initUI();
         presenter = new PresenterMain(this);
         presenter.getUI();
-        Button button = findViewById(R.id.buttonCreate);
-        button.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, MusicSelectActivity.class);
-            startActivity(intent);
-        });
+
     }
 
     @Override
@@ -46,7 +43,16 @@ public class MainActivity extends AppCompatActivity implements IHomePage.IView {
 
     @Override
     protected void onResume() {
-        //presenter.getUI();
         super.onResume();
     }
+    private void initUI()
+    {
+        Log.d(TAG, "initUI: ");
+        button = findViewById(R.id.buttonMain);
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MusicSelectActivity.class);
+            startActivity(intent);
+        });
+    }
+
 }

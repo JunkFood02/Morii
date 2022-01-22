@@ -1,15 +1,22 @@
 package com.hustunique.musica.music;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,12 +24,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hustunique.musica.R;
 import com.hustunique.musica.design.MixActivity;
 
-public class MusicSelectActivity extends AppCompatActivity implements IMusicSelect.IView {
+public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
 
-    private IMusicSelect.IPresenter presenter;
+    private MusicSelectContract.IPresenter presenter;
     private static final String TAG = "MusicSelectActivity";
     private TextView textView;
     private TextView Selected;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +46,17 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.stopMusic();
+    }
+
     private void initUI() {
         textView = findViewById(R.id.Emotion);
+        constraintLayout=findViewById(R.id.musicSelectLayout);
         setRecyclerView();
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        setImmersiveStatusBar();
     }
 
     private void setRecyclerView() {
@@ -79,6 +94,25 @@ public class MusicSelectActivity extends AppCompatActivity implements IMusicSele
             }
         });
     }
-
+    /**
+     *<p>Make contents show behind the transparent Status Bar.<p/>
+     */
+    private void setImmersiveStatusBar() {
+        if (Build.VERSION.SDK_INT >= 31) {
+            WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+            ViewCompat.setOnApplyWindowInsetsListener(constraintLayout, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                mlp.leftMargin = insets.left;
+                mlp.bottomMargin = insets.bottom;
+                mlp.rightMargin = insets.right;
+                v.setLayoutParams(mlp);
+                return WindowInsetsCompat.CONSUMED;
+            });
+        } else {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+    }
 
 }

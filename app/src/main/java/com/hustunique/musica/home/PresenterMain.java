@@ -1,10 +1,10 @@
 package com.hustunique.musica.home;
 
-public class PresenterMain implements IHomePage.IPresenter {
-    IHomePage.IView view;
-    IHomePage.IModel model;
+public class PresenterMain implements HomePageContract.IPresenter {
+    HomePageContract.IView view;
+    HomePageContract.IModel model;
 
-    PresenterMain(IHomePage.IView iViewMain){
+    PresenterMain(HomePageContract.IView iViewMain){
         this.view = iViewMain;
         this.model = new ModelMain();
     }
