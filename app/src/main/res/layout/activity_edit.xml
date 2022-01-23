@@ -7,29 +7,23 @@
     android:fadeScrollbars="false"
     tools:context=".edit.EditActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        app:cardBackgroundColor="#99DDD8D8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.0">
 
-        <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textLayoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="21dp"
+        android:hint="标题"
+        app:layout_constraintTop_toBottomOf="@id/cardView">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
-            android:hint="标题"
             android:textSize="20sp" />
-    </androidx.cardview.widget.CardView>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -177,26 +171,26 @@
         app:layout_constraintGuide_percent="0.40"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="32dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="21dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="#99DDD8D8"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="写点你想说的吧（^.^）"
-        android:inputType="textMultiLine"
-        android:minHeight="48dp"
-        android:scrollbars="vertical"
-        android:singleLine="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/textLayoutTitle">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="写点你想说的吧（^.^）"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

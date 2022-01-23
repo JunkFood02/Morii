@@ -13,10 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hustunique.musica.R;
 import com.hustunique.musica.edit.EditActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
     private ImageView completeEdit;
     private IMixDesign.IPresenter presenter;

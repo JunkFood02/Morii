@@ -1,5 +1,7 @@
 package com.hustunique.musica.design;
 
+import static com.hustunique.musica.util.MyApplication.soundItemList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
@@ -17,10 +19,8 @@ import com.hustunique.musica.util.RoundImage;
 
 import java.util.List;
 
-public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.musica.design.WhiteNoiseAdapter.ViewHolder> {
+public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder> {
     private final Context context;
-    private int[] imageLists;
-    private final List<Integer> list;
     //类型待定
 
 
@@ -29,41 +29,39 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
     //构造方法，传入数据
     public WhiteNoiseAdapter(Context context, IMixDesign.IPresenter presenter) {
         this.context = context;
-        this.list = presenter.getList();
-        imageLists = new int[]{R.drawable.x1,R.drawable.x2,R.drawable.x3,R.drawable.x4,R.drawable.x5,R.drawable.x6,R.drawable.x7};
     }
 
     @NonNull
     @Override
-    public com.hustunique.musica.design.WhiteNoiseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public WhiteNoiseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
         inflater = LayoutInflater.from(context).inflate(R.layout.musicdesign_item, parent, false);
-        return new com.hustunique.musica.design.WhiteNoiseAdapter.ViewHolder(inflater);
+        return new WhiteNoiseAdapter.ViewHolder(inflater);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.hustunique.musica.design.WhiteNoiseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull WhiteNoiseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         //将数据和控件绑定
         //
         holder.Select = false;
-        holder.imageView.setImageResource(imageLists[position % 7]);
+        holder.imageView.setImageResource(soundItemList.get(position % 7).getIconResId());
 
-        holder.textView.setText("白噪声"+String.valueOf(position+1));
+        holder.textView.setText("白噪声" + String.valueOf(position + 1));
         Log.d("RECYCLER2", String.valueOf(position));
-        holder.itemView.setOnLongClickListener(new OnDragListener(imageLists[position % 7]));
+        holder.itemView.setOnLongClickListener(new OnDragListener(soundItemList.get(position % 7).getIconResId()));
         //Log.d("imageViewID", imageLists[position % 7]+"");
         holder.itemView.setOnClickListener(v -> {
 //            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));
             else holder.textView.setTextColor(Color.parseColor("#FF888888"));
-            holder.Select=!holder.Select;
+            holder.Select = !holder.Select;
         });
     }
 
     @Override
     public int getItemCount() {
         //返回Item总条数
-        return list.size();
+        return soundItemList.size();
     }
 
     //内部类，绑定控件
@@ -71,6 +69,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<com.hustunique.music
         RoundImage imageView;
         TextView textView;
         boolean Select = false;
+
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.RoundIcon);

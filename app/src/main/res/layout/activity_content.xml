@@ -7,7 +7,6 @@
     tools:context=".content.ExactActivity">
 
 
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -48,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center|end"/>
+            android:gravity="center|end" />
 
         <ImageView
             android:id="@+id/imageView_look_share"
@@ -61,14 +60,14 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/CardView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="10dp"
-        android:id="@+id/CardView"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <ImageView
@@ -80,16 +79,16 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/TextExact"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
-        android:id="@+id/TextExact"
-        app:layout_constraintTop_toBottomOf="@id/CardView"
         app:layout_constraintBottom_toTopOf="@id/include2"
+        app:layout_constraintTop_toBottomOf="@id/CardView"
 
         >
 
@@ -97,35 +96,34 @@
             android:id="@+id/TitleExact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="23dp"
-            android:textStyle="bold"
             android:layout_gravity="left"
-            android:text="今日も空気がオレンジっぽいね" />
+            android:text="今日も空気がオレンジっぽいね"
+            android:textSize="23dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/TimeExact"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:textStyle="italic"
-            android:text="12月6日 周四    11：00 " />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="12月6日 周四    11：00 "
+            android:textStyle="italic" />
 
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:fadeScrollbars="true"
             android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbars="vertical"
-            >
+            android:scrollbars="vertical">
 
             <TextView
                 android:id="@+id/ArticleExact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  " />
+                android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
+                android:textSize="20dp" />
 
 
         </ScrollView>
@@ -138,12 +136,12 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/include2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="删除音乐" />
+        android:text="删除音乐"
+        app:layout_constraintBottom_toTopOf="@id/include2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/include2"
@@ -152,10 +150,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

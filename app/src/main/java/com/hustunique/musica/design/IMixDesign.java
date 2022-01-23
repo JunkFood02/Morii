@@ -5,7 +5,6 @@ import java.util.List;
 public interface IMixDesign {
         interface IPresenter {
 
-            List<Integer> getList();
         }
 
         interface IView {

@@ -1,5 +1,7 @@
 package com.hustunique.musica.music;
 
+import static com.hustunique.musica.util.MyApplication.musicTabList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -18,7 +20,6 @@ import java.util.List;
 public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.ViewHolder> {
     private final Context context;
 
-    private final List<MusicTab> list;
     //类型待定
 
 
@@ -27,8 +28,6 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     //构造方法，传入数据
     public MusicSelectAdapter(Context context, MusicSelectContract.IPresenter presenter) {
         this.context = context;
-        this.list = presenter.getMusicTabList();
-
     }
 
     @NonNull
@@ -44,7 +43,7 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
         //将数据和控件绑定
         //
 
-        holder.imageView.setBackgroundResource(list.get(position).getImageResId());
+        holder.imageView.setBackgroundResource(musicTabList.get(position).getImageResId());
         Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(v -> {
         });
@@ -53,7 +52,7 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     @Override
     public int getItemCount() {
         //返回Item总条数
-        return list.size();
+        return musicTabList.size();
     }
 
     //内部类，绑定控件
