@@ -10,6 +10,8 @@ public interface IMixDesign {
         interface IView {
 
     }
-        interface IModel{}
+        interface IModel{
+
+        }
 
 }

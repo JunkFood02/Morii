@@ -3,17 +3,17 @@ package com.hustunique.musica.home;
 import java.util.List;
 
 public interface HomePageContract {
-    public interface IPresenter
+    interface IPresenter
     {
         void getUI();
         void setRecyclerViewItem(int position);
     }
 
-    public interface IView {
+    interface IView {
         void GetRecyclerView(List<MusicDiaryItem> list);
     }
 
-    public interface IModel{
+    interface IModel{
         List<MusicDiaryItem> Init();//暂时的初始化
     }
 }
