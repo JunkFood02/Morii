@@ -1,5 +1,7 @@
 package com.hustunique.musica.music;
 
+import static com.hustunique.musica.util.MyApplication.musicTabList;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,6 +74,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         long animationDuration=200;
         fadeOut.setDuration(animationDuration);
         presenter.switchMusic(0);
+        textView.setText(musicTabList.get(0).getEmotion());
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int previousPosition, currentPosition;
 
@@ -85,7 +88,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
                     if (currentPosition < 0) return;
                     if (currentPosition != previousPosition) {
                         textView.startAnimation(fadeOut);
-                        textView.setText("心情 " + currentPosition);
+                        textView.setText(musicTabList.get(currentPosition).getEmotion());
                         presenter.switchMusic(currentPosition);
                         previousPosition = currentPosition;
                     }

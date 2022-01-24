@@ -34,12 +34,11 @@ public class MyApplication extends Application {
         soundItemList.add(new SoundItem(R.drawable.x5));
         soundItemList.add(new SoundItem(R.drawable.x6));
         soundItemList.add(new SoundItem(R.drawable.x7));
-        musicTabList.add(new MusicTab(R.drawable.x7,R.raw.rain));
-        musicTabList.add(new MusicTab(R.drawable.x1,R.raw.cafe));
-        musicTabList.add(new MusicTab(R.drawable.x2,R.raw.bird));
-        musicTabList.add(new MusicTab(R.drawable.x3,R.raw.night));
-        musicTabList.add(new MusicTab(R.drawable.x4,R.raw.wave));
-        musicTabList.add(new MusicTab(R.drawable.x5,R.raw.wind));
-        musicTabList.add(new MusicTab(R.drawable.x6,R.raw.fire));
+        musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));
+        musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
+        musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));
+        musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
+        musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));
+        musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
     }
 }
