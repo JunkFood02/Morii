@@ -25,7 +25,7 @@
             android:name=".design.MixActivity"
             android:exported="false" />
         <activity
-            android:name=".content.ExactActivity"
+            android:name=".content.ContentActivity"
             android:exported="false" />
         <activity
             android:name=".music.MusicSelectActivity"

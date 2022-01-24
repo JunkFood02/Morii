@@ -1,13 +1,8 @@
 package com.hustunique.musica.music;
 
-import static com.hustunique.musica.util.MyApplication.musicPlayer;
-import static com.hustunique.musica.util.MyApplication.musicTabList;
 import static com.hustunique.musica.util.MyApplication.playerUtil;
 
-import com.hustunique.musica.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.hustunique.musica.util.AudioExoPlayerUtil;
 
 public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 
@@ -20,13 +15,12 @@ public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 
     @Override
     public void switchMusic(int position) {
-        //musicPlayer.switchMusicTrack(musicTabList.get(position).getMusicResId());
-        playerUtil.play(position);
+        AudioExoPlayerUtil.play(position);
     }
 
     @Override
     public void stopMusic() {
-        musicPlayer.pause();
+        AudioExoPlayerUtil.pause();
     }
 
 }

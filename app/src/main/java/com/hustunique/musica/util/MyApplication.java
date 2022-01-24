@@ -7,8 +7,6 @@ import android.content.Context;
 import com.hustunique.musica.R;
 import com.hustunique.musica.design.SoundItem;
 import com.hustunique.musica.music.MusicTab;
-import com.hustunique.musica.player.AudioExoPlayerUtil;
-import com.hustunique.musica.player.MusicPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ public class MyApplication extends Application {
     public static Context context;
     public static List<MusicTab> musicTabList = new ArrayList<>();
     public static List<SoundItem> soundItemList = new ArrayList<>();
-    public static MusicPlayer musicPlayer = new MusicPlayer();
     public static AudioExoPlayerUtil playerUtil;
     @Override
     public void onCreate() {
@@ -42,6 +39,6 @@ public class MyApplication extends Application {
         musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
         musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));
         musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
-        playerUtil.addItems();
+        playerUtil.initMusicPlayer();
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".content.ExactActivity">
+    tools:context=".content.ContentActivity">
 
 
     <LinearLayout
@@ -93,7 +93,7 @@
         >
 
         <TextView
-            android:id="@+id/TitleExact"
+            android:id="@+id/musicDiaryTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -102,7 +102,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/TimeExact"
+            android:id="@+id/musicDiaryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -119,7 +119,7 @@
             android:scrollbars="vertical">
 
             <TextView
-                android:id="@+id/ArticleExact"
+                android:id="@+id/diaryContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "

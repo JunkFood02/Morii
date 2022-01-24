@@ -3,6 +3,7 @@ package com.hustunique.musica.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.musica.R;
-import com.hustunique.musica.content.ExactActivity;
+import com.hustunique.musica.content.ContentActivity;
 
 import java.util.Calendar;
 import java.util.List;
@@ -82,8 +83,8 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ExactActivity.class);
-                intent.putExtra("WID", musicDiaryItem.getItemID());
+                Intent intent = new Intent(context, ContentActivity.class);
+                intent.putExtra("diary",musicDiaryItem);
                 context.startActivity(intent);
             }
         });

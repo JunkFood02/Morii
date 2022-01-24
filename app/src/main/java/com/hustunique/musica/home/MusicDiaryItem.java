@@ -2,45 +2,44 @@ package com.hustunique.musica.home;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class MusicDiaryItem {
+public class MusicDiaryItem implements Serializable {
     private Calendar calendar;
-    private int PianoID;
-    private List<Integer> NoiseID;
+    private String date;
+    private int musicTabId;
+    private int SoundItemId;
     private String title;
     private String article;
-    private Bitmap BackgroundColor;
-    private String itemID;
+    private int itemID;
 
-    public String getItemID() {
+    public MusicDiaryItem() {
+        calendar=Calendar.getInstance();
+    }
+
+    public int getItemID() {
         return itemID;
     }
 
-    public void setItemID(String itemID) {
+    public void setItemID(int itemID) {
         this.itemID = itemID;
     }
 
-    public Bitmap getBackgroundColor() {
-        return BackgroundColor;
+    public String getDate() {
+        return date;
     }
 
-    public void setBackgroundColor(Bitmap backgroundColor) {
-        BackgroundColor = backgroundColor;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public void setCalendar(){
         this.calendar = Calendar.getInstance();
     }
-    public void setPianoID(int pianoID){
-        this.PianoID=pianoID;
-    }
-    public void setNoiseID(List<Integer> list){
-        NoiseID = new ArrayList<Integer>();
-        NoiseID = list;
-    }
+
     public void setTitle(String s){
         this.title = s;
     }
@@ -56,12 +55,20 @@ public class MusicDiaryItem {
         return title;
     }
 
-    public List<Integer> getNoiseID() {
-        return NoiseID;
+    public int getMusicTabId() {
+        return musicTabId;
     }
 
-    public int getPianoID() {
-        return PianoID;
+    public void setMusicTabId(int musicTabId) {
+        this.musicTabId = musicTabId;
+    }
+
+    public int getSoundItemId() {
+        return SoundItemId;
+    }
+
+    public void setSoundItemId(int soundItemId) {
+        SoundItemId = soundItemId;
     }
 
     public Calendar getCalendar() {
