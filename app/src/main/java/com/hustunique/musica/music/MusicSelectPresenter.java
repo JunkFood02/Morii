@@ -2,6 +2,7 @@ package com.hustunique.musica.music;
 
 import static com.hustunique.musica.util.MyApplication.musicPlayer;
 import static com.hustunique.musica.util.MyApplication.musicTabList;
+import static com.hustunique.musica.util.MyApplication.playerUtil;
 
 import com.hustunique.musica.R;
 
@@ -19,7 +20,8 @@ public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 
     @Override
     public void switchMusic(int position) {
-        musicPlayer.switchMusicTrack(musicTabList.get(position).getMusicResId());
+        //musicPlayer.switchMusicTrack(musicTabList.get(position).getMusicResId());
+        playerUtil.play(position);
     }
 
     @Override
