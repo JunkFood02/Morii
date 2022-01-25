@@ -45,7 +45,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         Selected = (TextView) findViewById(R.id.okay);
         initUI();
         Selected.setOnClickListener(view -> {
-            Intent intent = new Intent(MusicSelectActivity.this, EditActivity.class);
+            Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
             intent.putExtra("musicTabId", currentPosition);
             startActivity(intent);
         });

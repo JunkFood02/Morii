@@ -94,43 +94,6 @@ public class EditActivity extends AppCompatActivity implements EditContract.IVie
             Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();
         });
         back_layout.setOnClickListener(v -> onBackPressed());
-        /*
-        TextWatcher nameWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                _music_name = s.toString().trim();
-            }
-        };
-        TextWatcher contentWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                _music_content = s.toString().trim();
-            }
-        };
-        music_name.addTextChangedListener(nameWatcher);
-        music_content.addTextChangedListener(contentWatcher);
-
-         */
 
     }
 
