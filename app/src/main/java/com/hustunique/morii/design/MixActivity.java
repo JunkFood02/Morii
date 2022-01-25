@@ -1,8 +1,7 @@
-package com.hustunique.musica.design;
+package com.hustunique.morii.design;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.edit.EditActivity;
+import morii.R;
+import com.hustunique.morii.edit.EditActivity;
 
 import java.util.HashMap;
 import java.util.Map;

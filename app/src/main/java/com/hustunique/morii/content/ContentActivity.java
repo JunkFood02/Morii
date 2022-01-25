@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hustunique.morii.R;
+import morii.R;
 import com.hustunique.morii.home.MusicDiaryItem;
 
 public class ContentActivity extends AppCompatActivity {

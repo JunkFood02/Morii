@@ -1,4 +1,4 @@
-package com.hustunique.musica.design;
+package com.hustunique.morii.design;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -12,8 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.util.MyApplication;
+import morii.R;
+import com.hustunique.morii.util.MyApplication;
 
 public class Drag implements View.OnTouchListener {
     private int imageID;

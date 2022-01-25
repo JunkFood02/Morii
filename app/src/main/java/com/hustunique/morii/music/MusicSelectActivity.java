@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.morii.R;
+import morii.R;
 import com.hustunique.morii.design.MixActivity;
 
 public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {

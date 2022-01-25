@@ -1,4 +1,4 @@
-package com.hustunique.musica.design;
+package com.hustunique.morii.design;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.hustunique.musica.R;
+import morii.R;
 
 public class DragListener implements View.OnLongClickListener {
     private int imageID;

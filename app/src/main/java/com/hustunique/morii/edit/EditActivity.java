@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.hustunique.morii.R;
+import morii.R;
 import com.hustunique.morii.content.ContentActivity;
 
 import java.text.SimpleDateFormat;

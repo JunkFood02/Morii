@@ -1,15 +1,16 @@
-package com.hustunique.musica.util;
+package com.hustunique.morii.util;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.design.SoundItem;
-import com.hustunique.musica.music.MusicTab;
+import com.hustunique.morii.design.SoundItem;
+import com.hustunique.morii.music.MusicTab;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import morii.R;
 
 public class MyApplication extends Application {
     @SuppressLint("StaticFieldLeak")

@@ -1,4 +1,4 @@
-package com.hustunique.musica.util;
+package com.hustunique.morii.util;
 
 
 import android.content.Context;

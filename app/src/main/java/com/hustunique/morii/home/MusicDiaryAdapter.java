@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.morii.R;
+import morii.R;
 import com.hustunique.morii.content.ContentActivity;
 
 import java.util.Calendar;
