@@ -7,9 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-public class OnDragListener implements View.OnLongClickListener {
+import com.hustunique.musica.R;
+
+public class DragListener implements View.OnLongClickListener {
     private int imageID;
-    public OnDragListener(int resourceId) {
+    private boolean dragFromSquares = false;
+    public DragListener(int resourceId) {
+        imageID = resourceId;
+    }
+    public DragListener(int resourceId,boolean dragFromSquares){
+        this.dragFromSquares = dragFromSquares;
         imageID = resourceId;
     }
 
@@ -24,6 +31,10 @@ public class OnDragListener implements View.OnLongClickListener {
         View.DragShadowBuilder shadow = new View.DragShadowBuilder(v);
         ClipData dragDate = new ClipData("wdwd",mimeTypes,item);
         v.startDrag(dragDate,shadow,null,View.DRAG_FLAG_GLOBAL);
+        if(dragFromSquares){
+            ImageView imageView = (ImageView) v;
+            imageView.setImageResource(R.drawable.square);
+        }
         return false;
     }
 }
