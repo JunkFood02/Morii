@@ -1,5 +1,6 @@
 package com.hustunique.morii.content;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +17,8 @@ public class ContentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
-
-        MusicDiaryItem musicDiaryItem = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
+        Intent intent=getIntent();
+        MusicDiaryItem musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
         TextView title, article,date;
         title = findViewById(R.id.musicDiaryTitle);
         article = findViewById(R.id.diaryContent);

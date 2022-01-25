@@ -24,7 +24,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
+
 import com.hustunique.morii.design.MixActivity;
+import com.hustunique.morii.edit.EditActivity;
 
 public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
 
@@ -33,6 +35,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
     private TextView textView;
     private TextView Selected;
     private ConstraintLayout constraintLayout;
+    private int previousPosition, currentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         Selected = (TextView) findViewById(R.id.okay);
         initUI();
         Selected.setOnClickListener(view -> {
-            Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
+            Intent intent = new Intent(MusicSelectActivity.this, EditActivity.class);
+            intent.putExtra("musicTabId", currentPosition);
             startActivity(intent);
         });
 
@@ -56,7 +60,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
 
     private void initUI() {
         textView = findViewById(R.id.Emotion);
-        constraintLayout=findViewById(R.id.musicSelectLayout);
+        constraintLayout = findViewById(R.id.musicSelectLayout);
         setRecyclerView();
         setImmersiveStatusBar();
     }
@@ -71,12 +75,11 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(recyclerView);
         Animation fadeOut = new AlphaAnimation(0.0f, 1f);
-        long animationDuration=200;
+        long animationDuration = 200;
         fadeOut.setDuration(animationDuration);
         presenter.switchMusic(0);
         textView.setText(musicTabList.get(0).getEmotion());
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int previousPosition, currentPosition;
 
 
             @Override
@@ -97,8 +100,9 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
             }
         });
     }
+
     /**
-     *<p>Make contents show behind the transparent Status Bar.<p/>
+     * <p>Make contents show behind the transparent Status Bar.<p/>
      */
     private void setImmersiveStatusBar() {
         if (Build.VERSION.SDK_INT >= 31) {
