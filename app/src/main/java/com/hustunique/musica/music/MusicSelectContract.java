@@ -1,6 +1,4 @@
-package com.hustunique.musica.music;
-
-import java.util.List;
+package com.hustunique.morii.music;
 
 public interface MusicSelectContract {
     interface IPresenter {

@@ -1,6 +1,6 @@
-package com.hustunique.musica.design;
+package com.hustunique.morii.design;
 
-import static com.hustunique.musica.util.MyApplication.soundItemList;
+import static com.hustunique.morii.util.MyApplication.soundItemList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,10 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.util.RoundImage;
-
-import java.util.List;
+import com.hustunique.morii.R;
+import com.hustunique.morii.util.RoundImage;
 
 public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder> {
     private final Context context;
@@ -48,7 +46,9 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
 
         holder.textView.setText("白噪声" + String.valueOf(position + 1));
         Log.d("RECYCLER2", String.valueOf(position));
-        holder.itemView.setOnLongClickListener(new OnDragListener(soundItemList.get(position % 7).getIconResId()));
+        holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
+
+        // holder.itemView.setOnLongClickListener(new DragListener(soundItemList.get(position % 7).getIconResId()));
         //Log.d("imageViewID", imageLists[position % 7]+"");
         holder.itemView.setOnClickListener(v -> {
 //            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);

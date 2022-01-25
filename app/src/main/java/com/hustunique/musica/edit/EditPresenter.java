@@ -1,8 +1,6 @@
-package com.hustunique.musica.edit;
+package com.hustunique.morii.edit;
 
 import android.content.Context;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class EditPresenter implements EditContract.IPresenter,EditContract.IListener{
     private EditContract.IView view;

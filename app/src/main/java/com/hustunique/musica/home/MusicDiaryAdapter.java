@@ -1,9 +1,8 @@
-package com.hustunique.musica.home;
+package com.hustunique.morii.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.content.ContentActivity;
+import com.hustunique.morii.R;
+import com.hustunique.morii.content.ContentActivity;
 
 import java.util.Calendar;
 import java.util.List;

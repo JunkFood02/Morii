@@ -1,9 +1,6 @@
-package com.hustunique.musica.edit;
+package com.hustunique.morii.edit;
 
 import android.content.Context;
-import android.content.Intent;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public interface EditContract {
     interface IPresenter {

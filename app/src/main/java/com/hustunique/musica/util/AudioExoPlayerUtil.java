@@ -1,14 +1,13 @@
-package com.hustunique.musica.util;
+package com.hustunique.morii.util;
 
-import static com.hustunique.musica.util.MyApplication.context;
-import static com.hustunique.musica.util.MyApplication.musicTabList;
+import static com.hustunique.morii.util.MyApplication.context;
+import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
-import com.hustunique.musica.music.MusicTab;
+import com.hustunique.morii.music.MusicTab;
 
 public class AudioExoPlayerUtil {
     public static final int NEXT = 1;

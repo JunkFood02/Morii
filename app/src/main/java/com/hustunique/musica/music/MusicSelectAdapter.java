@@ -1,6 +1,6 @@
-package com.hustunique.musica.music;
+package com.hustunique.morii.music;
 
-import static com.hustunique.musica.util.MyApplication.musicTabList;
+import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,9 +13,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-
-import java.util.List;
+import com.hustunique.morii.R;
 
 public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.ViewHolder> {
     private final Context context;

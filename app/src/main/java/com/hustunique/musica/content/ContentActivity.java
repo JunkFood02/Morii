@@ -1,4 +1,4 @@
-package com.hustunique.musica.content;
+package com.hustunique.morii.content;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.home.MusicDiaryItem;
+import com.hustunique.morii.R;
+import com.hustunique.morii.home.MusicDiaryItem;
 
 public class ContentActivity extends AppCompatActivity {
 

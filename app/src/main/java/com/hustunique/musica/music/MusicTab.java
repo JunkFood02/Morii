@@ -1,4 +1,4 @@
-package com.hustunique.musica.music;
+package com.hustunique.morii.music;
 
 public class MusicTab {
     private final String emotion;

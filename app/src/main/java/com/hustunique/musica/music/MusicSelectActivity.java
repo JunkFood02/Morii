@@ -1,6 +1,6 @@
-package com.hustunique.musica.music;
+package com.hustunique.morii.music;
 
-import static com.hustunique.musica.util.MyApplication.musicTabList;
+import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.content.Intent;
 import android.os.Build;
@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.design.MixActivity;
+import com.hustunique.morii.R;
+import com.hustunique.morii.design.MixActivity;
 
 public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
 

@@ -1,11 +1,7 @@
-package com.hustunique.musica.home;
-
-import android.graphics.Bitmap;
+package com.hustunique.morii.home;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class MusicDiaryItem implements Serializable {
     private Calendar calendar;

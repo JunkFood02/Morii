@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textLayoutTitle"
+        android:id="@+id/textLayoutTitle_music_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="21dp"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView_hour"
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
@@ -123,7 +123,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -133,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -179,10 +179,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="21dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/outside"
+        android:id="@+id/textLayoutTitle_music_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textLayoutTitle">
+        app:layout_constraintTop_toBottomOf="@id/textLayoutTitle_music_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTextPersonName"
@@ -205,7 +205,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/outside"
+        app:layout_constraintTop_toBottomOf="@+id/textLayoutTitle_music_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

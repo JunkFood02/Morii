@@ -1,4 +1,4 @@
-package com.hustunique.musica.home;
+package com.hustunique.morii.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hustunique.musica.R;
-import com.hustunique.musica.music.MusicSelectActivity;
+import com.hustunique.morii.R;
+import com.hustunique.morii.music.MusicSelectActivity;
 
 import java.util.List;
 

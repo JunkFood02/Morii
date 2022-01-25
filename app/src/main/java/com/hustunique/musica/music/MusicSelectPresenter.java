@@ -1,8 +1,6 @@
-package com.hustunique.musica.music;
+package com.hustunique.morii.music;
 
-import static com.hustunique.musica.util.MyApplication.playerUtil;
-
-import com.hustunique.musica.util.AudioExoPlayerUtil;
+import com.hustunique.morii.util.AudioExoPlayerUtil;
 
 public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 

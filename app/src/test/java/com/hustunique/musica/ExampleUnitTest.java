@@ -1,4 +1,4 @@
-package com.hustunique.musica;
+package com.hustunique.morii;
 
 import org.junit.Test;
 
