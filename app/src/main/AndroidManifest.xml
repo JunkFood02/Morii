@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hustunique.musica">
+    package="morii">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".util.MyApplication"
+        android:name="com.hustunique.morii.util.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Musica">
+        android:theme="@style/Theme.Morii">
         <activity
-            android:name=".edit.EditActivity"
+            android:name="com.hustunique.morii.edit.EditActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,24 +23,25 @@
 
         </activity>
         <activity
-            android:name=".design.MixActivity"
+            android:name="com.hustunique.morii.design.MixActivity"
             android:exported="false" />
         <activity
-            android:name=".content.ExactActivity"
+            android:name="com.hustunique.morii.content.ContentActivity"
             android:exported="false" />
         <activity
-            android:name=".music.MusicSelectActivity"
+            android:name="com.hustunique.morii.music.MusicSelectActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".home.MainActivity"
+            android:name="com.hustunique.morii.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
     </application>

@@ -4,6 +4,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".content.ExactActivity">
+    tools:context="com.hustunique.morii.content.ContentActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/titleBarLayout_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/backLayout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView_edit_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageView_edit_back"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回忆"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/completeLayout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/imageView_edit_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/outline_ios_share_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content">
+
+        <ImageView
+            android:id="@+id/PhotoShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/orange" />
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/TextExact"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/include2"
+        app:layout_constraintTop_toBottomOf="@id/CardView"
+
+        >
+
+        <TextView
+            android:id="@+id/musicDiaryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="今日も空気がオレンジっぽいね"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/musicDiaryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="12月6日 周四    11：00 "
+            android:textStyle="italic" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:fadeScrollbars="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical">
+
+            <TextView
+                android:id="@+id/diaryContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
+                android:textSize="20dp" />
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="删除音乐"
+        app:layout_constraintBottom_toTopOf="@id/include2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/seekbar_exact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
