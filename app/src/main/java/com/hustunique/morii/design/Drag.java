@@ -18,19 +18,20 @@ import com.hustunique.morii.util.MyApplication;
 
 public class Drag implements View.OnTouchListener {
     private static LinearLayout _delete_area ;
-    private int imageID;
+    private int imageID,resId;
     private boolean dragFromSquares = false;
     private long start;
     private float x, y;
     Vibrator v = (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
 
-    public Drag(int resourceId) {
-        imageID = resourceId;
+    public Drag(int iconId) {
+        imageID = iconId;
     }
 
-    public Drag(int resourceId, boolean dragFromSquares) {
+    public Drag(int iconId, boolean dragFromSquares,int resId) {
         this.dragFromSquares = dragFromSquares;
-        imageID = resourceId;
+        imageID = iconId;
+        this.resId = resId;
     }
 
     @Override
@@ -44,6 +45,7 @@ public class Drag implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isLongPressed(event.getX(), event.getY())) {
+                    MyApplication.getSoundItemThroughIconID(imageID).reResId(resId);
                     //传递被拖动View数据
                     makeVibrate();
                     Intent intent = new Intent();

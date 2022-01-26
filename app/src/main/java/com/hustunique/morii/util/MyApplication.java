@@ -58,6 +58,32 @@ public class MyApplication extends Application {
         musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
         musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
         musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
+
         playerUtil.initMusicPlayer();
+    }
+    public static SoundItem getSoundItemThroughIconID(int iconID){
+        switch (iconID){
+            case R.drawable.x1:
+                return soundItemList.get(0);
+            case R.drawable.x2:
+                return soundItemList.get(1);
+            case R.drawable.x3:
+                return soundItemList.get(2);
+            case R.drawable.x4:
+                return soundItemList.get(3);
+            case R.drawable.x5:
+                return soundItemList.get(4);
+            case R.drawable.x6:
+                return soundItemList.get(5);
+            case R.drawable.x7:
+                return soundItemList.get(6);
+            default:
+                return soundItemList.get(8);
+        }
+    }
+    public static void clearAllResIdInSoundItemList(){
+        for (SoundItem soundItem:soundItemList){
+            soundItem.getResIdList().clear();
+        }
     }
 }

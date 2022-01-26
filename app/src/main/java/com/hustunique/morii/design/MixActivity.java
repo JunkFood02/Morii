@@ -14,16 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
 import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.util.MyApplication;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
     private LinearLayout delete_area;
     public static final int DRAG_SQUARE = 1;
     private IMixDesign.IPresenter presenter;
-    private final ImageView[] squares = new ImageView[9];
-    private final Map<ImageView,Integer>imageViewIntegerMap = new HashMap<>(9);
+    private final List<ImageView> squareList = new ArrayList<>(9);
+    //private final ImageView[] squares = new ImageView[9];
+    private final Map<ImageView,SoundItem>imageViewIntegerMap = new HashMap<>(9);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
     }
 
     private void initUI() {
+        MyApplication.clearAllResIdInSoundItemList();
         delete_area = findViewById(R.id.delete_area);
         Drag.setDelete_area(delete_area);
         ImageView complete_image = findViewById(R.id.imageView_edit_complete);
@@ -42,15 +47,16 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
         TextView complete_text = findViewById(R.id.textView_edit_complete);
         TextView back_text = findViewById(R.id.textView_edit_back);
         delete_area.setVisibility(View.GONE);
-        squares[0] = findViewById(R.id.square1);
-        squares[1] = findViewById(R.id.square2);
-        squares[2] = findViewById(R.id.square3);
-        squares[3] = findViewById(R.id.square4);
-        squares[4] = findViewById(R.id.square5);
-        squares[5] = findViewById(R.id.square6);
-        squares[6] = findViewById(R.id.square7);
-        squares[7] = findViewById(R.id.square8);
-        squares[8] = findViewById(R.id.square9);
+        squareList.add(findViewById(R.id.square1));
+        squareList.add(findViewById(R.id.square2));
+        squareList.add(findViewById(R.id.square3));
+        squareList.add(findViewById(R.id.square4));
+        squareList.add(findViewById(R.id.square5));
+        squareList.add(findViewById(R.id.square6));
+        squareList.add(findViewById(R.id.square7));
+        squareList.add(findViewById(R.id.square8));
+        squareList.add(findViewById(R.id.square9));
+
         complete_image.setOnClickListener(v->{
             Intent intent = new Intent(this, EditActivity.class);
             startActivity(intent);
@@ -61,20 +67,29 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
         });
         back_text.setOnClickListener(v->onBackPressed());
         back_image.setOnClickListener(v->onBackPressed());
-        for (ImageView square : squares) {
-            imageViewIntegerMap.put(square, R.drawable.square);
+        for(ImageView square:squareList){
+            imageViewIntegerMap.put(square, MyApplication.soundItemList.get(7));
         }
+        /*
+        for (ImageView square : squares) {
+            imageViewIntegerMap.put(square, MyApplication.soundItemList.get(7));
+        }
+
+         */
         for (ImageView imageView:imageViewIntegerMap.keySet()){
-            // imageView.setOnLongClickListener(new DragListener(imageViewIntegerMap.get(imageView),true));
-            if(imageViewIntegerMap.get(imageView)!=R.drawable.square){
-                imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView),true));
+            if(imageViewIntegerMap.get(imageView).getIconResId()!=R.drawable.square){
+                imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView).getIconResId(),true,squareList.indexOf(imageView)));
             }
             imageView.setOnDragListener(((v, event) -> {
+                int iconId;
+                int resId;
                 if (event.getAction() == DragEvent.ACTION_DROP) {
-                    imageView.setImageResource(event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1));
-                    imageViewIntegerMap.put(imageView, event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1));
-                    //imageView.setOnLongClickListener(new DragListener(imageViewIntegerMap.get(imageView),true));
-                    imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView), true));
+                    iconId = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
+                    resId = squareList.indexOf(imageView);
+                    imageView.setImageResource(iconId);
+                    MyApplication.getSoundItemThroughIconID(iconId).addResId(resId);
+                    imageViewIntegerMap.put(imageView, MyApplication.getSoundItemThroughIconID(iconId));
+                    imageView.setOnTouchListener(new Drag(iconId, true,resId));
                     delete_area.setVisibility(View.GONE);
                 }
                 return true;
@@ -92,12 +107,15 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnDragListener((v, event) -> {
-            switch (event.getAction()){
-                case DragEvent.ACTION_DROP:
-                    delete_area.setVisibility(View.GONE);
-                    break;
+            int iconId;
+
+            if (event.getAction() == DragEvent.ACTION_DROP) {
+                iconId = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
+                MyApplication.getSoundItemThroughIconID(iconId).clearResId();
+                delete_area.setVisibility(View.GONE);
             }
             return true;
+
         });
 
     }
