@@ -11,9 +11,10 @@ public class MusicDiaryItem implements Serializable {
     private String title;
     private String article;
     private int itemID;
+    private String imagePath;
 
     public MusicDiaryItem() {
-        calendar=Calendar.getInstance();
+        calendar = Calendar.getInstance();
     }
 
     public int getItemID() {
@@ -32,15 +33,16 @@ public class MusicDiaryItem implements Serializable {
         this.date = date;
     }
 
-    public void setCalendar(){
+    public void setCalendar() {
         this.calendar = Calendar.getInstance();
     }
 
-    public void setTitle(String s){
+    public void setTitle(String s) {
         this.title = s;
     }
-    public void setArticle(String s){
-        this.article = s ;
+
+    public void setArticle(String s) {
+        this.article = s;
     }
 
     public String getArticle() {
@@ -70,4 +72,13 @@ public class MusicDiaryItem implements Serializable {
     public Calendar getCalendar() {
         return calendar;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
 }

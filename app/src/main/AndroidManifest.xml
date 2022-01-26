@@ -37,6 +37,7 @@
         </activity>
         <activity
             android:name="com.hustunique.morii.home.MainActivity"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

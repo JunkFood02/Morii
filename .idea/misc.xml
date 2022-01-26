@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/layout/gradient.xml" value="0.11842105263157894" />
         <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.45736143144434394" />
         <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
-        <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.11842105263157894" />
+        <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.1" />
       </map>
     </option>
   </component>

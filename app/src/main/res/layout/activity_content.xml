@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="今日も空気がオレンジっぽいね"
-            android:textSize="23dp"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <TextView
@@ -119,7 +119,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="12月6日 周四    11：00 "
+            android:text="12月6日 周四  11：00 "
             android:textStyle="italic" />
 
         <ScrollView
@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
 
         </ScrollView>
