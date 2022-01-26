@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
+
+import com.google.android.material.imageview.ShapeableImageView;
 import com.hustunique.morii.util.RoundImage;
 
 public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder> {
@@ -66,7 +68,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
 
     //内部类，绑定控件
     class ViewHolder extends RecyclerView.ViewHolder {
-        RoundImage imageView;
+        ShapeableImageView imageView;
         TextView textView;
         boolean Select = false;
 

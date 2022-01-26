@@ -11,11 +11,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import morii.R;
 import com.hustunique.morii.util.MyApplication;
 
 public class Drag implements View.OnTouchListener {
+    private static LinearLayout _delete_area ;
     private int imageID;
     private boolean dragFromSquares = false;
     private long start;
@@ -46,7 +48,7 @@ public class Drag implements View.OnTouchListener {
                     makeVibrate();
                     Intent intent = new Intent();
                     intent.putExtra("ImageID", imageID);
-                    Log.d("imageViewID", imageID + "");
+                    Log.d("imageViewID", imageID + ""+"draged");
                     ClipData.Item item = new ClipData.Item(intent);
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};
                     View.DragShadowBuilder shadow = new View.DragShadowBuilder(v);
@@ -55,6 +57,7 @@ public class Drag implements View.OnTouchListener {
                     if (dragFromSquares) {
                         ImageView imageView = (ImageView) v;
                         imageView.setImageResource(R.drawable.square);
+                        _delete_area.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
@@ -63,10 +66,10 @@ public class Drag implements View.OnTouchListener {
     }
 
     private boolean isLongPressed(float thisX, float thisY) {
-        long lastTine = System.currentTimeMillis() - start;
+        long lastTime = System.currentTimeMillis() - start;
         float offsetX = Math.abs(thisX - x);
         float offsetY = Math.abs(thisY - y);
-        return (lastTine >= 50 && offsetX <= 50 && offsetY <= 25);
+        return (lastTime >= 50 && offsetX <= 50 && offsetY <= 25);
     }
 
     private void makeVibrate() {
@@ -76,5 +79,8 @@ public class Drag implements View.OnTouchListener {
         } else {
             v.vibrate(vibrateDuration);
         }
+    }
+    public static void setDelete_area(LinearLayout delete_area){
+        _delete_area = delete_area;
     }
 }

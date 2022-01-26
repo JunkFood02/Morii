@@ -3,6 +3,7 @@ package com.hustunique.morii.home;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
+
 import com.hustunique.morii.content.ContentActivity;
 
 import java.util.Calendar;
@@ -32,14 +34,14 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
     private Context context;
 
 
-
     private List<MusicDiaryItem> list;
     //类型待定
 
 
     private View inflater;
+
     //构造方法，传入数据
-    public MusicDiaryAdapter(Context context, List<MusicDiaryItem> list){
+    public MusicDiaryAdapter(Context context, List<MusicDiaryItem> list) {
         this.context = context;
         this.list = list;
     }
@@ -47,7 +49,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.cardview_item,parent,false);
+        inflater = LayoutInflater.from(context).inflate(R.layout.cardview_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(inflater);
         return myViewHolder;
     }
@@ -56,34 +58,36 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
     public void onBindViewHolder(MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         //将数据和控件绑定
         //
-        holder.PhotoTitle.setImageResource(R.drawable.orange);
         MusicDiaryItem musicDiaryItem = list.get(position);
+        String imagePath = musicDiaryItem.getImagePath();
+        if (null != imagePath)
+            holder.PhotoTitle.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+        else holder.PhotoTitle.setImageResource(R.drawable.orange);
         Calendar calendar = musicDiaryItem.getCalendar();
-        String month = String.valueOf(calendar.get(Calendar.MONTH)+1);
+        String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);
         String day = String.valueOf(calendar.get(Calendar.DATE));
         String hour = String.valueOf(calendar.get(Calendar.HOUR));
         String minute = String.valueOf(calendar.get(Calendar.MINUTE));
         String second = String.valueOf(calendar.get(Calendar.SECOND));
-        if(calendar.get(Calendar.HOUR)<10) hour = "0" + hour;
-        if(calendar.get(Calendar.MINUTE)<10) minute = "0" + minute;
-        if(calendar.get(Calendar.SECOND)<10) second = "0" + second;
+        if (calendar.get(Calendar.HOUR) < 10) hour = "0" + hour;
+        if (calendar.get(Calendar.MINUTE) < 10) minute = "0" + minute;
+        if (calendar.get(Calendar.SECOND) < 10) second = "0" + second;
         String Weekday = "日一二三四五六";
         int week = calendar.get(Calendar.DAY_OF_WEEK);
 //        holder.TextDate.setText(String.valueOf(week));
-        holder.TextDate.setText(month+"月"+day+"日"+" 周"+Weekday.charAt(week-1));
-        holder.TextTitle.setText(" "+ musicDiaryItem.getTitle());
-        holder.TextTime.setText("Time : "+hour+":"+minute+":"+second+" ");
+        holder.TextDate.setText(month + "月" + day + "日" + " 周" + Weekday.charAt(week - 1));
+        holder.TextTitle.setText(" " + musicDiaryItem.getTitle());
+        holder.TextTime.setText("Time : " + hour + ":" + minute + ":" + second + " ");
 
 //        holder.PhotoTitle.setImageBitmap(musicDiaryItem.getBackgroundColor());
 
 
-
-        Log.d("RECYCLER",String.valueOf(position));
+        Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ContentActivity.class);
-                intent.putExtra("diary",musicDiaryItem);
+                intent.putExtra("diary", musicDiaryItem);
                 context.startActivity(intent);
             }
         });
@@ -95,12 +99,14 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         return list.size();
 //        return 5;
     }
+
     //内部类，绑定控件
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         TextView TextTitle;
         TextView TextTime;
         TextView TextDate;
         ImageView PhotoTitle;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             TextTitle = (TextView) itemView.findViewById(R.id.TextTitle);

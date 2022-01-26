@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
+    private LinearLayout delete_area;
     public static final int DRAG_SQUARE = 1;
-    private ImageView complete_image,back_image;
-    private TextView complete_text,back_text;
     private IMixDesign.IPresenter presenter;
-    private RecyclerView recyclerView;
-    private ImageView[] squares = new ImageView[9];
-    private Map<ImageView,Integer>imageViewIntegerMap = new HashMap<>(9);
+    private final ImageView[] squares = new ImageView[9];
+    private final Map<ImageView,Integer>imageViewIntegerMap = new HashMap<>(9);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +35,13 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
     }
 
     private void initUI() {
-        complete_image = findViewById(R.id.imageView_edit_complete);
-        back_image = findViewById(R.id.imageView_edit_back);
-        complete_text = findViewById(R.id.textView_edit_complete);
-        back_text = findViewById(R.id.textView_edit_back);
+        delete_area = findViewById(R.id.delete_area);
+        Drag.setDelete_area(delete_area);
+        ImageView complete_image = findViewById(R.id.imageView_edit_complete);
+        ImageView back_image = findViewById(R.id.imageView_edit_back);
+        TextView complete_text = findViewById(R.id.textView_edit_complete);
+        TextView back_text = findViewById(R.id.textView_edit_back);
+        delete_area.setVisibility(View.GONE);
         squares[0] = findViewById(R.id.square1);
         squares[1] = findViewById(R.id.square2);
         squares[2] = findViewById(R.id.square3);
@@ -57,26 +59,23 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
             Intent intent = new Intent(this, EditActivity.class);
             startActivity(intent);
         });
-        back_text.setOnClickListener(v->{
-            finish();
-        });
-        back_image.setOnClickListener(v->{
-            finish();
-        });
-        for(int i = 0;i<squares.length;i++){
-            imageViewIntegerMap.put(squares[i],R.drawable.square);
+        back_text.setOnClickListener(v->onBackPressed());
+        back_image.setOnClickListener(v->onBackPressed());
+        for (ImageView square : squares) {
+            imageViewIntegerMap.put(square, R.drawable.square);
         }
         for (ImageView imageView:imageViewIntegerMap.keySet()){
             // imageView.setOnLongClickListener(new DragListener(imageViewIntegerMap.get(imageView),true));
-            imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView),true));
+            if(imageViewIntegerMap.get(imageView)!=R.drawable.square){
+                imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView),true));
+            }
             imageView.setOnDragListener(((v, event) -> {
-                switch (event.getAction()){
-                    case DragEvent.ACTION_DROP:
-                        imageView.setImageResource(event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID",R.drawable.x1));
-                        imageViewIntegerMap.put(imageView,event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID",R.drawable.x1));
-                        //imageView.setOnLongClickListener(new DragListener(imageViewIntegerMap.get(imageView),true));
-                        imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView),true));
-                        break;
+                if (event.getAction() == DragEvent.ACTION_DROP) {
+                    imageView.setImageResource(event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1));
+                    imageViewIntegerMap.put(imageView, event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1));
+                    //imageView.setOnLongClickListener(new DragListener(imageViewIntegerMap.get(imageView),true));
+                    imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView), true));
+                    delete_area.setVisibility(View.GONE);
                 }
                 return true;
             }));
@@ -86,21 +85,19 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
     }
 
     private void setRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerView03);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView03);
         WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this, presenter);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 //        StaggeredGridLayoutManager manager= new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
-        recyclerView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                switch (event.getAction()){
-                    case DragEvent.ACTION_DROP:
-                        break;
-                }
-                return true;
+        recyclerView.setOnDragListener((v, event) -> {
+            switch (event.getAction()){
+                case DragEvent.ACTION_DROP:
+                    delete_area.setVisibility(View.GONE);
+                    break;
             }
+            return true;
         });
 
     }
