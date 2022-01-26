@@ -2,6 +2,7 @@ package com.hustunique.morii.home;
 
 import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,5 +60,4 @@ public class MainActivity extends AppCompatActivity implements HomePageContract.
             startActivity(intent);
         });
     }
-
 }

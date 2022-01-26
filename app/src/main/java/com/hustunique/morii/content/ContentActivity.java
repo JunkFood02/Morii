@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import morii.R;
 
+import com.bumptech.glide.Glide;
 import com.hustunique.morii.home.MainActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
 
@@ -42,7 +43,7 @@ public class ContentActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.PhotoShow);
         imagePath = musicDiaryItem.getImagePath();
         if (imagePath != null)
-            imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            Glide.with(this).load(new File(imagePath)).into(imageView);
         else
             imageView.setBackgroundResource(R.drawable.orange);
     }

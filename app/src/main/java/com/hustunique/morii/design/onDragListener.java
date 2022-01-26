@@ -1,34 +1,37 @@
 package com.hustunique.morii.design;
 
+import static com.hustunique.morii.design.MixActivity.handler;
+
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Message;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import morii.R;
+
 import com.hustunique.morii.util.MyApplication;
 
-public class Drag implements View.OnTouchListener {
-    private static LinearLayout _delete_area ;
-    private int imageID,resId;
+public class onDragListener implements View.OnTouchListener {
+    private int imageID, resId;
     private boolean dragFromSquares = false;
     private long start;
     private float x, y;
-    Vibrator v = (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
+    private static final Vibrator v =
+            (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
 
-    public Drag(int iconId) {
+    public onDragListener(int iconId) {
         imageID = iconId;
     }
 
-    public Drag(int iconId, boolean dragFromSquares,int resId) {
+    public onDragListener(int iconId, boolean dragFromSquares, int resId) {
         this.dragFromSquares = dragFromSquares;
         imageID = iconId;
         this.resId = resId;
@@ -50,16 +53,18 @@ public class Drag implements View.OnTouchListener {
                     makeVibrate();
                     Intent intent = new Intent();
                     intent.putExtra("ImageID", imageID);
-                    Log.d("imageViewID", imageID + ""+"draged");
+                    Log.d("imageViewID", imageID + "" + "draged");
                     ClipData.Item item = new ClipData.Item(intent);
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};
                     View.DragShadowBuilder shadow = new View.DragShadowBuilder(v);
-                    ClipData dragDate = new ClipData("wdwd", mimeTypes, item);
-                    v.startDrag(dragDate, shadow, null, View.DRAG_FLAG_GLOBAL);
+                    ClipData dragData = new ClipData("wdwd", mimeTypes, item);
+                    v.startDragAndDrop(dragData, shadow, null, View.DRAG_FLAG_GLOBAL);
                     if (dragFromSquares) {
                         ImageView imageView = (ImageView) v;
                         imageView.setImageResource(R.drawable.square);
-                        _delete_area.setVisibility(View.VISIBLE);
+                        Message message = handler.obtainMessage();
+                        message.what = MixActivity.SHOW_DELETE_AREA;
+                        handler.sendMessage(message);
                     }
                 }
                 break;
@@ -74,15 +79,13 @@ public class Drag implements View.OnTouchListener {
         return (lastTime >= 50 && offsetX <= 50 && offsetY <= 25);
     }
 
-    private void makeVibrate() {
-        long vibrateDuration=50;
+    public static void makeVibrate() {
+        long vibrateDuration = 50;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createOneShot(vibrateDuration, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
             v.vibrate(vibrateDuration);
         }
     }
-    public static void setDelete_area(LinearLayout delete_area){
-        _delete_area = delete_area;
-    }
+
 }

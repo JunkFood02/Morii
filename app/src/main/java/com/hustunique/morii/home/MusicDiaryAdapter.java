@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
 
+import com.bumptech.glide.Glide;
 import com.hustunique.morii.content.ContentActivity;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         MusicDiaryItem musicDiaryItem = list.get(position);
         String imagePath = musicDiaryItem.getImagePath();
         if (null != imagePath)
-            holder.PhotoTitle.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            Glide.with(context).load(new File(imagePath)).into(holder.PhotoTitle);
         else holder.PhotoTitle.setImageResource(R.drawable.orange);
         Calendar calendar = musicDiaryItem.getCalendar();
         String month = String.valueOf(calendar.get(Calendar.MONTH) + 1);

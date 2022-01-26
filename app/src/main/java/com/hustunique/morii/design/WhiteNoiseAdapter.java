@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import morii.R;
 
 import com.google.android.material.imageview.ShapeableImageView;
-import com.hustunique.morii.util.RoundImage;
 
 public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder> {
     private final Context context;
@@ -48,12 +47,8 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
 
         holder.textView.setText("白噪声" + String.valueOf(position + 1));
         Log.d("RECYCLER2", String.valueOf(position));
-        holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
-
-        // holder.itemView.setOnLongClickListener(new DragListener(soundItemList.get(position % 7).getIconResId()));
-        //Log.d("imageViewID", imageLists[position % 7]+"");
+        holder.itemView.setOnTouchListener(new onDragListener(soundItemList.get(position % 7).getIconResId()));
         holder.itemView.setOnClickListener(v -> {
-//            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));
             else holder.textView.setTextColor(Color.parseColor("#FF888888"));
             holder.Select = !holder.Select;
