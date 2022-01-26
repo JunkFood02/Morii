@@ -7,7 +7,7 @@
     >
 
 
-    <morii.util.RoundImage
+    <com.hustunique.morii.util.RoundImage
         android:id="@+id/RoundIcon"
         android:layout_width="118dp"
         android:layout_height="62dp"
