@@ -19,12 +19,12 @@
         <entry key="app/src/main/res/layout/activity_content.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_edit.xml" value="0.32265446224256294" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.2" />
         <entry key="app/src/main/res/layout/biggerview_notification.xml" value="0.4" />
         <entry key="app/src/main/res/layout/cardview_item.xml" value="0.2019588345414216" />
         <entry key="app/src/main/res/layout/gradient.xml" value="0.11842105263157894" />
-        <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.45736143144434394" />
         <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.11842105263157894" />
       </map>

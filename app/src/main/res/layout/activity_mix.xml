@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context=".design.MixActivity">
+    tools:context="com.hustunique.morii.design.MixActivity">
 
 
     <include

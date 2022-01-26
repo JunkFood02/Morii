@@ -27,13 +27,19 @@ public class MyApplication extends Application {
     }
 
     private void initResourcesList() {
-        soundItemList.add(new SoundItem(R.drawable.x1));
-        soundItemList.add(new SoundItem(R.drawable.x2));
-        soundItemList.add(new SoundItem(R.drawable.x3));
-        soundItemList.add(new SoundItem(R.drawable.x4));
-        soundItemList.add(new SoundItem(R.drawable.x5));
-        soundItemList.add(new SoundItem(R.drawable.x6));
-        soundItemList.add(new SoundItem(R.drawable.x7));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
+
         musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));
         musicTabList.add(new MusicTab("律动",R.drawable.x1,R.raw.jazz));
         musicTabList.add(new MusicTab("宁静",R.drawable.x7,R.raw.peaceful));

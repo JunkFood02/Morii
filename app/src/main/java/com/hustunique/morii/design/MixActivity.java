@@ -41,6 +41,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView{
         ImageView back_image = findViewById(R.id.imageView_edit_back);
         TextView complete_text = findViewById(R.id.textView_edit_complete);
         TextView back_text = findViewById(R.id.textView_edit_back);
+        delete_area.setVisibility(View.GONE);
         squares[0] = findViewById(R.id.square1);
         squares[1] = findViewById(R.id.square2);
         squares[2] = findViewById(R.id.square3);
