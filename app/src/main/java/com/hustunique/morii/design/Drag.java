@@ -19,7 +19,7 @@ import morii.R;
 
 import com.hustunique.morii.util.MyApplication;
 
-public class onDragListener implements View.OnTouchListener {
+public class Drag implements View.OnTouchListener {
     private int imageID, resId;
     private boolean dragFromSquares = false;
     private long start;
@@ -27,11 +27,11 @@ public class onDragListener implements View.OnTouchListener {
     private static final Vibrator v =
             (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
 
-    public onDragListener(int iconId) {
+    public Drag(int iconId) {
         imageID = iconId;
     }
 
-    public onDragListener(int iconId, boolean dragFromSquares, int resId) {
+    public Drag(int iconId, boolean dragFromSquares, int resId) {
         this.dragFromSquares = dragFromSquares;
         imageID = iconId;
         this.resId = resId;

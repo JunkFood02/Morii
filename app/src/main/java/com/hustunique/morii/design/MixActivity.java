@@ -12,7 +12,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -94,7 +93,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
          */
         for (ImageView imageView : imageViewIntegerMap.keySet()) {
             if (imageViewIntegerMap.get(imageView).getIconResId() != R.drawable.square) {
-                imageView.setOnTouchListener(new onDragListener(imageViewIntegerMap.get(imageView).getIconResId(), true, squareList.indexOf(imageView)));
+                imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView).getIconResId(), true, squareList.indexOf(imageView)));
             }
             imageView.setOnDragListener(((v, event) -> {
                 int iconId;
@@ -105,7 +104,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
                     imageView.setImageResource(iconId);
                     MyApplication.getSoundItemThroughIconID(iconId).addResId(resId);
                     imageViewIntegerMap.put(imageView, MyApplication.getSoundItemThroughIconID(iconId));
-                    imageView.setOnTouchListener(new onDragListener(iconId, true, resId));
+                    imageView.setOnTouchListener(new Drag(iconId, true, resId));
                     hideDeleteArea();
                 }
                 return true;
@@ -128,7 +127,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
                 iconId = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
                 MyApplication.getSoundItemThroughIconID(iconId).clearResId();
                 hideDeleteArea();
-                onDragListener.makeVibrate();
+                Drag.makeVibrate();
             }
             return true;
 

@@ -12,33 +12,28 @@
     app:cardCornerRadius="6dp">
 
 
-    <LinearLayout
-
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="3dp">
-
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+        android:padding="6dp">
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:id="@+id/photoCard"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="6dp"
+            android:transitionName="photo"
             app:cardCornerRadius="10dp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/PhotoTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 tools:srcCompat="@drawable/orange" />
 
@@ -46,39 +41,38 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <TextView
             android:id="@+id/TextDate"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="left"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
             android:text="12月9日 周四"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/photoCard"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/TextTitle"
             android:layout_width="wrap_content"
-            android:layout_height="38dp"
-            android:layout_gravity="left"
-            android:text=" 今天的空气是橘子味的"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/TextDate"
+            app:layout_constraintStart_toStartOf="@id/TextDate"
+            android:text="今天的空气是橘子味的"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+             />
 
         <TextView
             android:id="@+id/TextTime"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_gravity="right"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/TextTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="12dp"
             android:text="Time : 06:06:06"
             android:textSize="16sp"
             android:textStyle="italic|bold" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

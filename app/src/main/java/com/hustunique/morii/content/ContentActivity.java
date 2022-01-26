@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.Explode;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +31,8 @@ public class ContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setSharedElementEnterTransition(new AutoTransition());
         setContentView(R.layout.activity_content);
         Intent intent = getIntent();
         MusicDiaryItem musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
@@ -45,15 +51,17 @@ public class ContentActivity extends AppCompatActivity {
         if (imagePath != null)
             Glide.with(this).load(new File(imagePath)).into(imageView);
         else
-            imageView.setBackgroundResource(R.drawable.orange);
+            Glide.with(this).load(R.drawable.orange).into(imageView);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Toast.makeText(this, "Back to home page.", Toast.LENGTH_SHORT).show();
-        Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
-        startActivity(backIntent);
+        if (getIntent().getIntExtra("NewItem", 0) == 1){
+            Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
+            startActivity(backIntent);
+        }
+
     }
 
     @Override

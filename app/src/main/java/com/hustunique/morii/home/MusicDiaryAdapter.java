@@ -1,16 +1,20 @@
 package com.hustunique.morii.home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
@@ -79,7 +83,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
 //        holder.TextDate.setText(String.valueOf(week));
         holder.TextDate.setText(month + "月" + day + "日" + " 周" + Weekday.charAt(week - 1));
         holder.TextTitle.setText(" " + musicDiaryItem.getTitle());
-        holder.TextTime.setText("Time : " + hour + ":" + minute + ":" + second + " ");
+        holder.TextTime.setText("Time:" + hour + ":" + minute + ":" + second + " ");
 
 //        holder.PhotoTitle.setImageBitmap(musicDiaryItem.getBackgroundColor());
 
@@ -90,7 +94,11 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             public void onClick(View v) {
                 Intent intent = new Intent(context, ContentActivity.class);
                 intent.putExtra("diary", musicDiaryItem);
-                context.startActivity(intent);
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation((Activity) context,
+                                Pair.create(holder.cardView, "photo"));
+                context.startActivity(intent,
+                        options.toBundle());
             }
         });
     }
@@ -108,9 +116,11 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         TextView TextTime;
         TextView TextDate;
         ImageView PhotoTitle;
+        CardView cardView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.photoCard);
             TextTitle = (TextView) itemView.findViewById(R.id.TextTitle);
             TextDate = (TextView) itemView.findViewById(R.id.TextDate);
             PhotoTitle = (ImageView) itemView.findViewById(R.id.PhotoTitle);
