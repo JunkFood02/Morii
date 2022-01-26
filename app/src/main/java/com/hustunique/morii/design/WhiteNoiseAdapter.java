@@ -26,7 +26,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
     private View inflater;
 
     //构造方法，传入数据
-    public WhiteNoiseAdapter(Context context, IMixDesign.IPresenter presenter) {
+    public WhiteNoiseAdapter(Context context) {
         this.context = context;
     }
 

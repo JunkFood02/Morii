@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import morii.R;
 
 import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.music.MusicSelectActivity;
 import com.hustunique.morii.util.MyApplication;
 
 import java.util.ArrayList;
@@ -29,17 +30,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
+/**
+ * 要求
+ * 在PositionSoundItemIdMap内建立位置(0-8)与SoundItem在SoundItemList中的位置的映射
+ * 加入判空,空白的方格不能被拖动
+ * 在intent中将映射关系传给下一Activity,这里可以我来写
+ *
+ * 不要硬编码,这点很重要,人可以糊弄代码不能糊弄
+ */
+public class MixActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static LinearLayout delete_area;
     public static final int DRAG_SQUARE = 1;
     public static final int SHOW_DELETE_AREA = -1;
-    private IMixDesign.IPresenter presenter;
     private final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
-    //private final ImageView[] squares = new ImageView[9];
     private final Map<ImageView, SoundItem> imageViewIntegerMap = new HashMap<>(9);
+    private final Map<Integer, Integer> PositionSoundItemIdMap = new HashMap<>();
     public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -53,7 +61,6 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mix);
-        presenter = new MixPresenter(this);
         initUI();
     }
 
@@ -85,12 +92,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
         for (ImageView square : squareList) {
             imageViewIntegerMap.put(square, MyApplication.soundItemList.get(7));
         }
-        /*
-        for (ImageView square : squares) {
-            imageViewIntegerMap.put(square, MyApplication.soundItemList.get(7));
-        }
 
-         */
         for (ImageView imageView : imageViewIntegerMap.keySet()) {
             if (imageViewIntegerMap.get(imageView).getIconResId() != R.drawable.square) {
                 imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView).getIconResId(), true, squareList.indexOf(imageView)));
@@ -116,7 +118,7 @@ public class MixActivity extends AppCompatActivity implements IMixDesign.IView {
 
     private void setRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView03);
-        WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this, presenter);
+        WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

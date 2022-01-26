@@ -57,9 +57,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享"
+                android:layout_marginEnd="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageView_content_complete"
+                app:layout_constraintTop_toTopOf="parent" />
             <ImageView
-                android:id="@+id/imageView_edit_complete"
+                android:id="@+id/imageView_content_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

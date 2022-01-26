@@ -58,7 +58,7 @@ public class Drag implements View.OnTouchListener {
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};
                     View.DragShadowBuilder shadow = new View.DragShadowBuilder(v);
                     ClipData dragData = new ClipData("wdwd", mimeTypes, item);
-                    v.startDragAndDrop(dragData, shadow, null, View.DRAG_FLAG_GLOBAL);
+                    v.startDragAndDrop(dragData, shadow, null, 0);
                     if (dragFromSquares) {
                         ImageView imageView = (ImageView) v;
                         imageView.setImageResource(R.drawable.square);
