@@ -124,6 +124,7 @@ public class MixActivity extends AppCompatActivity {
                     imageView.setOnTouchListener(new Drag(position,true, indexOfSoundItem));
                     if(rmposition != -1){
                         positionSoundItemIdMap.remove(rmposition);
+                        squareList.get(rmposition).setOnTouchListener(null);
                     }
                     hideDeleteArea();
                 }
@@ -146,6 +147,7 @@ public class MixActivity extends AppCompatActivity {
                 int rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
                 if(rmposition != -1){
                     positionSoundItemIdMap.remove(rmposition);
+                    squareList.get(rmposition).setOnTouchListener(null);
                 }
                 hideDeleteArea();
                 Drag.makeVibrate();
