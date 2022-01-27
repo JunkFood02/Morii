@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -17,14 +16,14 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import morii.R;
-
 import com.bumptech.glide.Glide;
 import com.hustunique.morii.content.ContentActivity;
 
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
+
+import morii.R;
 
 
 /*
@@ -85,8 +84,6 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         holder.TextTitle.setText(" " + musicDiaryItem.getTitle());
         holder.TextTime.setText("Time:" + hour + ":" + minute + ":" + second + " ");
 
-//        holder.PhotoTitle.setImageBitmap(musicDiaryItem.getBackgroundColor());
-
 
         Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +96,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
                                 Pair.create(holder.cardView, "photo"));
                 context.startActivity(intent,
                         options.toBundle());
+
             }
         });
     }

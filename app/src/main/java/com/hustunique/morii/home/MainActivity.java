@@ -3,14 +3,10 @@ package com.hustunique.morii.home;
 import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
-import android.transition.ChangeClipBounds;
 import android.transition.Explode;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
@@ -19,11 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import morii.R;
-
 import com.hustunique.morii.music.MusicSelectActivity;
 
 import java.util.List;
+
+import morii.R;
 
 
 public class MainActivity extends AppCompatActivity implements HomePageContract.IView {
