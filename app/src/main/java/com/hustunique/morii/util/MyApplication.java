@@ -20,13 +20,11 @@ public class MyApplication extends Application {
     public final static List<MusicTab> musicTabList = new ArrayList<>();
     public final static List<SoundItem> soundItemList = new ArrayList<>();
     public final static List<MusicDiaryItem> musicDiaryList = new ArrayList<>();
-    public static AudioExoPlayerUtil playerUtil;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        playerUtil = new AudioExoPlayerUtil();
         initResourcesList();
     }
 
@@ -39,18 +37,14 @@ public class MyApplication extends Application {
             musicDiaryItem.setArticle("This is content of the article " + i);
             musicDiaryList.add(musicDiaryItem);
         }
-        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_air_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24));
-        soundItemList.add(new SoundItem(R.drawable.outline_grass_24));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24,"风声",R.raw.wind));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24,"鸟语",R.raw.bird));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24,"咖啡馆",R.raw.cafe));
+        soundItemList.add(new SoundItem(R.drawable.outline_grass_24,"夜晚",R.raw.night));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24,"风声",R.raw.wind));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24,"鸟语",R.raw.bird));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24,"咖啡馆",R.raw.cafe));
+        soundItemList.add(new SoundItem(R.drawable.outline_grass_24,"夜晚",R.raw.night));
 
         musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
         musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
@@ -59,7 +53,8 @@ public class MyApplication extends Application {
         musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
         musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
 
-        playerUtil.initMusicPlayer();
+        AudioExoPlayerUtil.initMusicPlayer();
+        AudioExoPlayerUtil.initSoundPlayer();
     }
     public static int getSoundItemPositionThroughIconID(int iconID){
         switch (iconID){

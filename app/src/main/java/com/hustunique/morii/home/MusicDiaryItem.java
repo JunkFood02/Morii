@@ -7,7 +7,6 @@ public class MusicDiaryItem implements Serializable {
     private Calendar calendar;
     private String date;
     private int musicTabId;
-    private int SoundItemId;
     private String title;
     private String article;
     private int itemID;
@@ -61,13 +60,6 @@ public class MusicDiaryItem implements Serializable {
         this.musicTabId = musicTabId;
     }
 
-    public int getSoundItemId() {
-        return SoundItemId;
-    }
-
-    public void setSoundItemId(int soundItemId) {
-        SoundItemId = soundItemId;
-    }
 
     public Calendar getCalendar() {
         return calendar;

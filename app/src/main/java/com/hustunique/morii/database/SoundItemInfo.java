@@ -5,14 +5,10 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class DiaryInfo {
+public class SoundItemInfo {
     @PrimaryKey(autoGenerate = true)
-    public int id;
-
-    public String title;
-    public String article;
-    public String imagePath;
-    public int musicTabId;
-    public String date;
+    public int soundItemInfoId;
+    public int diaryInfoId;
+    public int soundItemId;
+    public int soundItemPosition;
 }
-

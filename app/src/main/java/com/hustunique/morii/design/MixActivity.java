@@ -11,6 +11,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import morii.R;
 
 import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.MyApplication;
 
 import java.util.ArrayList;
@@ -30,19 +32,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 要求
- * 在PositionSoundItemIdMap内建立位置(0-8)与SoundItem在SoundItemList中的位置的映射
- * 加入判空,空白的方格不能被拖动
- * 在intent中将映射关系传给下一Activity,这里可以我来写
- *
- * 不要硬编码,这点很重要,人可以糊弄代码不能糊弄
- */
+
 public class MixActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static LinearLayout delete_area;
-    public static final int DRAG_SQUARE = 1;
+    private static final String TAG = "MixActivity";
     public static final int SHOW_DELETE_AREA = -1;
+    private static int playbackStatus = 1;
     private final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
@@ -66,6 +62,7 @@ public class MixActivity extends AppCompatActivity {
 
     private void initUI() {
         int animationDuration = 100;
+        Button playbackButton = findViewById(R.id.playbackButton);
         fadeIn.setDuration(animationDuration);
         fadeIn.setFillAfter(true);
         fadeout.setDuration(animationDuration);
@@ -83,15 +80,24 @@ public class MixActivity extends AppCompatActivity {
         squareList.add(findViewById(R.id.square7));
         squareList.add(findViewById(R.id.square8));
         squareList.add(findViewById(R.id.square9));
-
+        playbackButton.setOnClickListener(v -> {
+            if (playbackStatus == 1) {
+                AudioExoPlayerUtil.startAllSoundPlayers();
+                playbackButton.setText("暂停");
+            } else {
+                AudioExoPlayerUtil.stopAllSoundPlayers();
+                playbackButton.setText("播放");
+            }
+            playbackStatus = -playbackStatus;
+        });
         completeLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditActivity.class);
             Bundle bundle = new Bundle();
-            for(Map.Entry<Integer,Integer> entry:positionSoundItemIdMap.entrySet()){
-                bundle.putInt(entry.getKey()+"",entry.getValue());
-                Log.d("activityData","key = "+entry.getKey()+" value = "+entry.getValue());
+            for (Map.Entry<Integer, Integer> entry : positionSoundItemIdMap.entrySet()) {
+                bundle.putInt(entry.getKey() + "", entry.getValue());
+                Log.d("activityData", "key = " + entry.getKey() + " value = " + entry.getValue());
             }
-            intent.putExtra("positionSoundItemIdMap",bundle);
+            intent.putExtra("positionSoundItemIdMap", bundle);
             startActivity(intent);
         });
         backLayout.setOnClickListener(v -> onBackPressed());
@@ -105,15 +111,16 @@ public class MixActivity extends AppCompatActivity {
                 int position;
                 int soundItemId;
                 int iconID;
-                if (event.getAction() == DragEvent.ACTION_DROP){
+                if (event.getAction() == DragEvent.ACTION_DROP) {
                     rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
-                    if(rmposition != -1){
+                    if (rmposition != -1) {
                         /**
                          *here to cover a sound item , params may be used here are
                          *  positionSoundItemIdMap.get(rmposition) -- soundItemId
                          *  rmposition ,the position of the soundItem
                          */
-                        dragToStopSoundItem(positionSoundItemIdMap.get(rmposition),rmposition);
+                        Log.d(TAG, "3");
+                        stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                         positionSoundItemIdMap.remove(rmposition);
                         squareList.get(rmposition).setImageResource(R.drawable.square);
                         imageViewSoundItemMap.remove(squareList.get(rmposition));
@@ -121,24 +128,24 @@ public class MixActivity extends AppCompatActivity {
                     }
                     iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
                     position = squareList.indexOf(imageView);
-                    soundItemId = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem",0);
+                    soundItemId = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem", 0);
                     imageView.setImageResource(iconID);
-                    positionSoundItemIdMap.put(position,soundItemId);
+                    positionSoundItemIdMap.put(position, soundItemId);
                     imageViewSoundItemMap.put(imageView, MyApplication.soundItemList.get(soundItemId));
-                    imageView.setOnTouchListener(new StartDrag(position,true, soundItemId));
+                    imageView.setOnTouchListener(new StartDrag(position, true, soundItemId));
                     /**
                      *here to start a sound item , params may be used here are
                      * soundItemId  -- soundItemId
                      *  position ,the position of the soundItem
                      */
-                    dragToStartDeleteSoundItem(soundItemId,position);
+                    Log.d(TAG, "2");
+                    startPlayingSoundItem(soundItemId, position);
                     hideDeleteArea();
                 }
-                if(imageViewSoundItemMap.get(imageView) == null){
-                    if(event.getAction() == DragEvent.ACTION_DRAG_ENTERED){
+                if (imageViewSoundItemMap.get(imageView) == null) {
+                    if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED) {
                         ((ImageView) v).setImageResource(R.drawable.square_gray);
-                    }
-                    else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED){
+                    } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED) {
                         ((ImageView) v).setImageResource(R.drawable.square);
                     }
                 }
@@ -158,13 +165,14 @@ public class MixActivity extends AppCompatActivity {
         recyclerView.setOnDragListener((v, event) -> {
             if (event.getAction() == DragEvent.ACTION_DROP) {
                 int rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
-                if(rmposition != -1){
+                if (rmposition != -1) {
                     /**
-                    *here to stop a sound item , params may be used here are
+                     *here to stop a sound item , params may be used here are
                      *  positionSoundItemIdMap.get(rmposition) -- soundItemId
                      *  rmposition ,the position of the soundItem
                      */
-                    dragToStopSoundItem(positionSoundItemIdMap.get(rmposition),rmposition);
+                    Log.d(TAG, "1");
+                    stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
                     squareList.get(rmposition).setImageResource(R.drawable.square);
                     imageViewSoundItemMap.remove(squareList.get(rmposition));
@@ -192,10 +200,18 @@ public class MixActivity extends AppCompatActivity {
             delete_area.setVisibility(View.INVISIBLE);
         }
     }
-    private void dragToStopSoundItem(int soundItemId,int position){
 
+    private void stopPlayingSoundItem(int soundItemId, int position) {
+        AudioExoPlayerUtil.stopPlayingSoundItem(position);
     }
-    private void dragToStartDeleteSoundItem(int soundItemId,int position){
 
+    private void startPlayingSoundItem(int soundItemId, int position) {
+        AudioExoPlayerUtil.startPlayingSoundItem(soundItemId, position);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AudioExoPlayerUtil.stopAllSoundPlayers();
     }
 }
