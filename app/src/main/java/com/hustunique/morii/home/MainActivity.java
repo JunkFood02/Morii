@@ -1,8 +1,18 @@
 package com.hustunique.morii.home;
 
+import static com.hustunique.morii.util.MyApplication.musicDiaryList;
+
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.ChangeClipBounds;
+import android.transition.Explode;
+import android.transition.Transition;
 import android.util.Log;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
+
 import com.hustunique.morii.music.MusicSelectActivity;
 
 import java.util.List;
@@ -21,8 +32,12 @@ public class MainActivity extends AppCompatActivity implements HomePageContract.
     private RecyclerView recyclerView;
     private MusicDiaryAdapter adapter;
     private Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setExitTransition(new Explode());
+        getWindow().setSharedElementExitTransition(new AutoTransition());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
@@ -44,15 +59,15 @@ public class MainActivity extends AppCompatActivity implements HomePageContract.
     @Override
     protected void onResume() {
         super.onResume();
+        adapter.notifyItemInserted(musicDiaryList.size());
     }
-    private void initUI()
-    {
+
+    private void initUI() {
         Log.d(TAG, "initUI: ");
         button = findViewById(R.id.buttonMain);
         button.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, MusicSelectActivity.class);
-            startActivity(intent);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         });
     }
-
 }

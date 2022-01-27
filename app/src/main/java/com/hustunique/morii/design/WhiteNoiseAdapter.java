@@ -15,7 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import morii.R;
-import com.hustunique.morii.util.RoundImage;
+
+import com.google.android.material.imageview.ShapeableImageView;
 
 public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder> {
     private final Context context;
@@ -25,7 +26,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
     private View inflater;
 
     //构造方法，传入数据
-    public WhiteNoiseAdapter(Context context, IMixDesign.IPresenter presenter) {
+    public WhiteNoiseAdapter(Context context) {
         this.context = context;
     }
 
@@ -47,11 +48,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
         holder.textView.setText("白噪声" + String.valueOf(position + 1));
         Log.d("RECYCLER2", String.valueOf(position));
         holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
-
-        // holder.itemView.setOnLongClickListener(new DragListener(soundItemList.get(position % 7).getIconResId()));
-        //Log.d("imageViewID", imageLists[position % 7]+"");
         holder.itemView.setOnClickListener(v -> {
-//            Toast.makeText(context,"QWQ",Toast.LENGTH_LONG);
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));
             else holder.textView.setTextColor(Color.parseColor("#FF888888"));
             holder.Select = !holder.Select;
@@ -66,7 +63,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
 
     //内部类，绑定控件
     class ViewHolder extends RecyclerView.ViewHolder {
-        RoundImage imageView;
+        ShapeableImageView imageView;
         TextView textView;
         boolean Select = false;
 
