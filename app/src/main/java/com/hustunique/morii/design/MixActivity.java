@@ -87,6 +87,12 @@ public class MixActivity extends AppCompatActivity {
 
         completeLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditActivity.class);
+            Bundle bundle = new Bundle();
+            for(Map.Entry<Integer,Integer> entry:positionSoundItemIdMap.entrySet()){
+                bundle.putInt(entry.getKey()+"",entry.getValue());
+                Log.d("activityData","key = "+entry.getKey()+" value = "+entry.getValue());
+            }
+            intent.putExtra("positionSoundItemIdMap",bundle);
             startActivity(intent);
         });
         backLayout.setOnClickListener(v -> onBackPressed());
@@ -95,7 +101,8 @@ public class MixActivity extends AppCompatActivity {
         }
 
         for (ImageView imageView : imageViewSoundItemMap.keySet()) {
-            /*int iconId = imageViewSoundItemMap.get(imageView).getIconResId();
+            /*
+            int iconId = imageViewSoundItemMap.get(imageView).getIconResId();
             if (iconId != R.drawable.square) {
                 imageView.setOnTouchListener(new Drag(iconId, true, squareList.indexOf(imageView)));
             }
