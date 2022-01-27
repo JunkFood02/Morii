@@ -19,22 +19,22 @@ import morii.R;
 
 import com.hustunique.morii.util.MyApplication;
 
-public class Drag implements View.OnTouchListener {
-    private int imageID,indexOfSoundItem,position;
+public class StartDrag implements View.OnTouchListener {
+    private int imageID,soundItemId,position = -1;
     private boolean dragFromSquares = false;
     private long start;
     private float x, y;
     private static final Vibrator v =
             (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
 
-    public Drag(int indexOfSoundItem) {
-        this.indexOfSoundItem = indexOfSoundItem;
+    public StartDrag(int soundItemId) {
+        this.soundItemId = soundItemId;
     }
 
-    public Drag(int position,boolean dragFromSquares, int indexOfSoundItem) {
+    public StartDrag(int position, boolean dragFromSquares, int indexOfSoundItem) {
         this.position = position;
         this.dragFromSquares = dragFromSquares;
-        this.indexOfSoundItem = indexOfSoundItem;
+        this.soundItemId = indexOfSoundItem;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class Drag implements View.OnTouchListener {
                     //MyApplication.getSoundItemThroughIconID(imageID).reResId(resId);
                     //传递被拖动View数据
                     makeVibrate();
-                    imageID = MyApplication.soundItemList.get(indexOfSoundItem).getIconResId();
+                    imageID = MyApplication.soundItemList.get(soundItemId).getIconResId();
                     Intent intent = new Intent();
                     intent.putExtra("position", position);
                     intent.putExtra("ImageID", imageID);
-                    intent.putExtra("indexOfSoundItem", indexOfSoundItem);
+                    intent.putExtra("indexOfSoundItem", soundItemId);
                     Log.d("imageViewID", imageID + "" + "draged");
                     ClipData.Item item = new ClipData.Item(intent);
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};
@@ -64,7 +64,7 @@ public class Drag implements View.OnTouchListener {
                     v.startDragAndDrop(dragData, shadow, null, 0);
                     if (dragFromSquares) {
                         ImageView imageView = (ImageView) v;
-                        imageView.setImageResource(R.drawable.square);
+                        imageView.setImageResource(R.drawable.square_green);
                         Message message = handler.obtainMessage();
                         message.what = MixActivity.SHOW_DELETE_AREA;
                         handler.sendMessage(message);
