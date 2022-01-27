@@ -61,29 +61,29 @@ public class MyApplication extends Application {
 
         playerUtil.initMusicPlayer();
     }
-    public static SoundItem getSoundItemThroughIconID(int iconID){
+    public static int getSoundItemPositionThroughIconID(int iconID){
         switch (iconID){
-            case R.drawable.x1:
-                return soundItemList.get(0);
-            case R.drawable.x2:
-                return soundItemList.get(1);
-            case R.drawable.x3:
-                return soundItemList.get(2);
-            case R.drawable.x4:
-                return soundItemList.get(3);
+            case R.drawable.outline_air_24:
+                return 0;
+            case R.drawable.outline_flutter_dash_24:
+                return 1;
+            case R.drawable.outline_free_breakfast_24:
+                return 2;
+            case R.drawable.outline_grass_24:
+                return 3;
             case R.drawable.x5:
-                return soundItemList.get(4);
+                return 4;
             case R.drawable.x6:
-                return soundItemList.get(5);
+                return 5;
             case R.drawable.x7:
-                return soundItemList.get(6);
+                return 6;
             default:
-                return soundItemList.get(8);
+                return 7;
         }
     }
     public static void clearAllResIdInSoundItemList(){
         for (SoundItem soundItem:soundItemList){
-            soundItem.getResIdList().clear();
+            //soundItem.getResIdList().clear();
         }
     }
 }

@@ -20,21 +20,21 @@ import morii.R;
 import com.hustunique.morii.util.MyApplication;
 
 public class Drag implements View.OnTouchListener {
-    private int imageID, resId;
+    private int imageID,indexOfSoundItem,position;
     private boolean dragFromSquares = false;
     private long start;
     private float x, y;
     private static final Vibrator v =
             (Vibrator) MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE);
 
-    public Drag(int iconId) {
-        imageID = iconId;
+    public Drag(int indexOfSoundItem) {
+        this.indexOfSoundItem = indexOfSoundItem;
     }
 
-    public Drag(int iconId, boolean dragFromSquares, int resId) {
+    public Drag(int position,boolean dragFromSquares, int indexOfSoundItem) {
+        this.position = position;
         this.dragFromSquares = dragFromSquares;
-        imageID = iconId;
-        this.resId = resId;
+        this.indexOfSoundItem = indexOfSoundItem;
     }
 
     @Override
@@ -48,11 +48,14 @@ public class Drag implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isLongPressed(event.getX(), event.getY())) {
-                    MyApplication.getSoundItemThroughIconID(imageID).reResId(resId);
+                    //MyApplication.getSoundItemThroughIconID(imageID).reResId(resId);
                     //传递被拖动View数据
                     makeVibrate();
+                    imageID = MyApplication.soundItemList.get(indexOfSoundItem).getIconResId();
                     Intent intent = new Intent();
+                    intent.putExtra("position", position);
                     intent.putExtra("ImageID", imageID);
+                    intent.putExtra("indexOfSoundItem", indexOfSoundItem);
                     Log.d("imageViewID", imageID + "" + "draged");
                     ClipData.Item item = new ClipData.Item(intent);
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};

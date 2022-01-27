@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -46,8 +47,8 @@ public class MixActivity extends AppCompatActivity {
     private final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
-    private final Map<ImageView, SoundItem> imageViewIntegerMap = new HashMap<>(9);
-    private final Map<Integer, Integer> PositionSoundItemIdMap = new HashMap<>();
+    private final Map<ImageView, SoundItem> imageViewSoundItemMap = new HashMap<>(9);
+    private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
     public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -90,23 +91,33 @@ public class MixActivity extends AppCompatActivity {
         });
         backLayout.setOnClickListener(v -> onBackPressed());
         for (ImageView square : squareList) {
-            imageViewIntegerMap.put(square, MyApplication.soundItemList.get(7));
+            imageViewSoundItemMap.put(square, null);
         }
 
-        for (ImageView imageView : imageViewIntegerMap.keySet()) {
-            if (imageViewIntegerMap.get(imageView).getIconResId() != R.drawable.square) {
-                imageView.setOnTouchListener(new Drag(imageViewIntegerMap.get(imageView).getIconResId(), true, squareList.indexOf(imageView)));
+        for (ImageView imageView : imageViewSoundItemMap.keySet()) {
+            /*int iconId = imageViewSoundItemMap.get(imageView).getIconResId();
+            if (iconId != R.drawable.square) {
+                imageView.setOnTouchListener(new Drag(iconId, true, squareList.indexOf(imageView)));
             }
+             */
             imageView.setOnDragListener(((v, event) -> {
-                int iconId;
-                int resId;
+                int rmposition;
+                int position;
+                int indexOfSoundItem;
+                int iconID;
                 if (event.getAction() == DragEvent.ACTION_DROP) {
-                    iconId = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
-                    resId = squareList.indexOf(imageView);
-                    imageView.setImageResource(iconId);
-                    MyApplication.getSoundItemThroughIconID(iconId).addResId(resId);
-                    imageViewIntegerMap.put(imageView, MyApplication.getSoundItemThroughIconID(iconId));
-                    imageView.setOnTouchListener(new Drag(iconId, true, resId));
+                    rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
+                    iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
+                    position = squareList.indexOf(imageView);
+                    indexOfSoundItem = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem",0);
+                    imageView.setImageResource(iconID);
+                    positionSoundItemIdMap.put(position,indexOfSoundItem);
+                    Log.d("indexOfSoundItem",indexOfSoundItem +"");
+                    imageViewSoundItemMap.put(imageView, MyApplication.soundItemList.get(indexOfSoundItem));
+                    imageView.setOnTouchListener(new Drag(position,true, indexOfSoundItem));
+                    if(rmposition != -1){
+                        positionSoundItemIdMap.remove(rmposition);
+                    }
                     hideDeleteArea();
                 }
                 return true;
@@ -123,14 +134,16 @@ public class MixActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnDragListener((v, event) -> {
-            int iconId;
 
             if (event.getAction() == DragEvent.ACTION_DROP) {
-                iconId = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
-                MyApplication.getSoundItemThroughIconID(iconId).clearResId();
+                int rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
+                if(rmposition != -1){
+                    positionSoundItemIdMap.remove(rmposition);
+                }
                 hideDeleteArea();
                 Drag.makeVibrate();
             }
+            Log.d("positionSoundItemIdMap",positionSoundItemIdMap.toString());
             return true;
 
         });
