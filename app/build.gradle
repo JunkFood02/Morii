@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
 }
-apply plugin: 'kotlin-android'
 
 android {
     compileSdk 31
@@ -39,6 +38,5 @@ dependencies {
     def room_version = "2.4.1"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
 }

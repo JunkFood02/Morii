@@ -30,13 +30,15 @@ import morii.R;
 
 import com.hustunique.morii.design.MixActivity;
 import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.util.BaseActivity;
 
-public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
+public class MusicSelectActivity extends BaseActivity implements MusicSelectContract.IView {
 
     private MusicSelectContract.IPresenter presenter;
     private static final String TAG = "MusicSelectActivity";
+    private androidx.cardview.widget.CardView GiveUp;
+    private androidx.cardview.widget.CardView Selected;
     private TextView textView;
-    private TextView Selected;
     private ConstraintLayout constraintLayout;
     private int previousPosition, currentPosition;
 
@@ -47,12 +49,16 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
         presenter = new MusicSelectPresenter(this);
-        Selected = (TextView) findViewById(R.id.okay);
+        Selected =  findViewById(R.id.okay);
+        GiveUp = findViewById(R.id.backLayout_select);
         initUI();
         Selected.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
             intent.putExtra("musicTabId", currentPosition);
             startActivity(intent);
+        });
+        GiveUp.setOnClickListener(view -> {
+            this.finish();
         });
 
     }
@@ -67,7 +73,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         textView = findViewById(R.id.Emotion);
         constraintLayout = findViewById(R.id.musicSelectLayout);
         setRecyclerView();
-        setImmersiveStatusBar();
+        //setImmersiveStatusBar();
     }
 
     private void setRecyclerView() {

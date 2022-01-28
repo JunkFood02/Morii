@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E3E9F4"
+    android:fitsSystemWindows="true"
     tools:context="com.hustunique.morii.content.ContentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleBarLayout_content"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/backLayout_edit"
+            android:id="@+id/backLayout_content"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -22,17 +27,20 @@
 
             <ImageView
                 android:id="@+id/imageView_edit_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
+                app:srcCompat="@drawable/ic_icon_back_design" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="返回"
+                android:layout_marginLeft="4dp"
+                android:text="返回首页"
+                android:textColor="#1D283F"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageView_edit_back"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="回忆"
-            android:textSize="24sp"
+            android:textColor="#1D283F"
+            android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,107 +69,106 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
                 android:text="分享"
-                android:layout_marginEnd="6dp"
+                android:textColor="#1D283F"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/imageView_content_complete"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/imageView_content_complete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_ios_share_24" />
+                app:srcCompat="@drawable/ic_icon_share_design" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.cardview.widget.CardView
-        android:transitionName="photo"
         android:id="@+id/CardView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_margin="21dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@id/include2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content">
 
-        <ImageView
-            android:id="@+id/PhotoShow"
+
+        <LinearLayout
+            android:id="@+id/TextExact"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/orange"
-             />
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/TextExact"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/include2"
-        app:layout_constraintTop_toBottomOf="@id/CardView"
-
-        >
-
-        <TextView
-            android:id="@+id/musicDiaryTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="今日も空気がオレンジっぽいね"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/musicDiaryDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="12月6日 周四  11：00 "
-            android:textStyle="italic" />
-
-        <ScrollView
-            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:fadeScrollbars="true"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
-            android:scrollbars="vertical">
+            android:layout_marginBottom="80dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/PhotoShow"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/orange"
+                android:transitionName="photo"
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <TextView
-                android:id="@+id/diaryContent"
-                android:layout_width="match_parent"
+                android:id="@+id/musicDiaryTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
-                android:textSize="20sp" />
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="空気"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/musicDiaryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="#12月9日 周四       11：00 "
+                android:textSize="16sp" />
 
-        </ScrollView>
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fadeScrollbars="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="vertical">
 
+                <TextView
+                    android:id="@+id/diaryContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
+                    android:textSize="12sp" />
 
-    </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="311dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#C1D3FF"
+            android:text="删除音乐"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="删除音乐"
-        app:layout_constraintBottom_toTopOf="@id/include2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </androidx.cardview.widget.CardView>
 
     <include
         android:id="@+id/include2"

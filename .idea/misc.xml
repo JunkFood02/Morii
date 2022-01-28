@@ -4,17 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.19814814814814816" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/arcview.xml" value="0.15555555555555556" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/circle.xml" value="0.15555555555555556" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/cover.xml" value="0.15555555555555556" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/gradient_base.xml" value="0.15555555555555556" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/ic_baseline_chevron_right_24.xml" value="0.11388888888888889" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/ic_morii_icon.xml" value="0.1421875" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/drawable/outline_air_24.xml" value="0.1421875" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/layout/activity_content.xml" value="0.17255434782608695" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/layout/activity_main.xml" value="0.17604617604617603" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/layout/cardview_item.xml" value="0.2484375" />
-        <entry key="..\:/data/Stayup/stayup/Musica/app/src/main/res/layout/test.xml" value="0.264" />
+        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_edit.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/Mark/Musica/app/src/main/res/layout/activity_main.xml" value="0.17477203647416414" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.1" />
@@ -25,29 +16,24 @@
         <entry key="app/src/main/res/drawable/square.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/square2.xml" value="0.19814814814814816" />
         <entry key="app/src/main/res/layout/action_bar.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_content.xml" value="0.184375" />
-        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_content.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.32265446224256294" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37176833471100684" />
+        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.3536693191865606" />
         <entry key="app/src/main/res/layout/biggerview_notification.xml" value="0.4" />
-        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.2019588345414216" />
-        <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.3338870431893688" />
+        <entry key="app/src/main/res/layout/gradient.xml" value="0.11842105263157894" />
+        <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.45736143144434394" />
         <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="SuppressABINotification">
-    <option name="modulesWithSuppressedNotConfigured">
-      <set>
-        <option value="Morii.app" />
-      </set>
-    </option>
   </component>
 </project>

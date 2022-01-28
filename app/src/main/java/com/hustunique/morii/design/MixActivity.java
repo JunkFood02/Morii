@@ -25,6 +25,7 @@ import morii.R;
 
 import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
+import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.MyApplication;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MixActivity extends AppCompatActivity {
+public class MixActivity extends BaseActivity {
     @SuppressLint("StaticFieldLeak")
     private static LinearLayout delete_area;
     private static final String TAG = "MixActivity";

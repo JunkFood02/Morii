@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
 import android.transition.ChangeScroll;
 import android.transition.Explode;
 import android.transition.Slide;
@@ -31,13 +32,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.transition.MaterialElevationScale;
 import com.google.android.material.transition.platform.MaterialFadeThrough;
 import com.hustunique.morii.music.MusicSelectActivity;
+import com.hustunique.morii.util.BaseActivity;
 
 import java.util.List;
 
 import morii.R;
 
 
-public class MainActivity extends AppCompatActivity implements HomePageContract.IView {
+public class MainActivity extends BaseActivity implements HomePageContract.IView {
     private static final String TAG = "MainActivity";
     private HomePageContract.IPresenter presenter;
     private ConstraintLayout constraintLayout;
@@ -47,10 +49,10 @@ public class MainActivity extends AppCompatActivity implements HomePageContract.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setImmersiveStatusBar();
+        //setImmersiveStatusBar();
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         getWindow().setExitTransition(new Slide());
-        getWindow().setSharedElementExitTransition(new AutoTransition());
+        getWindow().setSharedElementExitTransition(new ChangeBounds());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();

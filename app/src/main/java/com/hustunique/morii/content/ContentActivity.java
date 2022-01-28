@@ -14,14 +14,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.hustunique.morii.home.MainActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
+import com.hustunique.morii.util.BaseActivity;
 
 import java.io.File;
 
 import morii.R;
 
-public class ContentActivity extends AppCompatActivity {
+public class ContentActivity extends BaseActivity {
 
     private String imagePath;
+    private androidx.constraintlayout.widget.ConstraintLayout GoBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,10 @@ public class ContentActivity extends AppCompatActivity {
         if (intent.getIntExtra("NewItem", 0) == 1)
             musicDiaryList.add(musicDiaryItem);
         TextView title, article, date;
+        GoBack = findViewById(R.id.backLayout_content);
+        GoBack.setOnClickListener(view ->{
+            this.finish();
+        });
         title = findViewById(R.id.musicDiaryTitle);
         article = findViewById(R.id.diaryContent);
         date = findViewById(R.id.musicDiaryDate);
