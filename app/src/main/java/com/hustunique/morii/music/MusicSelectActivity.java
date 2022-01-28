@@ -5,9 +5,12 @@ import static com.hustunique.morii.util.MyApplication.musicTabList;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
@@ -39,6 +42,8 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new AutoTransition());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
         presenter = new MusicSelectPresenter(this);

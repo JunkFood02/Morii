@@ -33,7 +33,7 @@ public class MyApplication extends Application {
             MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
             musicDiaryItem.setItemID(i);
             musicDiaryItem.setDate(Calendar.getInstance().getTime().toString());
-            musicDiaryItem.setTitle("Default Title " + i);
+            musicDiaryItem.setTitle("今天的空气是橘子味的 " + i);
             musicDiaryItem.setArticle("This is content of the article " + i);
             musicDiaryList.add(musicDiaryItem);
         }

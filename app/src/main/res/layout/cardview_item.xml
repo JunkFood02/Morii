@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="12dp"
     android:clickable="true"
     android:focusable="true"
@@ -15,17 +15,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="6dp">
+        android:layout_marginBottom="12dp"
+        >
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/photoCard"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="6dp"
+            android:layout_height="135dp"
+
             android:transitionName="photo"
-            app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -48,7 +47,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
             android:text="12月9日 周四"
-            android:textSize="16sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/photoCard" />
 
@@ -56,23 +55,26 @@
             android:id="@+id/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/TextDate"
-            app:layout_constraintStart_toStartOf="@id/TextDate"
             android:text="今天的空气是橘子味的"
-            android:textSize="25sp"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
             android:textStyle="bold"
-             />
+            android:layout_marginStart="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextDate" />
 
         <TextView
             android:id="@+id/TextTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/TextTitle"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="12dp"
             android:text="Time : 06:06:06"
             android:textSize="16sp"
-            android:textStyle="italic|bold" />
+            android:textStyle="italic|bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
