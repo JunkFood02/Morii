@@ -58,6 +58,8 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     }
 
     private void initUI() {
+
+
         textContent = findViewById(R.id.editTextContent);
         textTitle = findViewById(R.id.editTextTitle);
         TextView textView_hour = findViewById(R.id.textView_hour);
