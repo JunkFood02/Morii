@@ -36,10 +36,12 @@ import java.util.Map;
 public class MixActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static LinearLayout delete_area;
+    private ImageView cardImage;
     private static final String TAG = "MixActivity";
     public static final int SHOW_DELETE_AREA = -1;
     private static int playbackStatus = 1;
-    private final List<ImageView> squareList = new ArrayList<>(9);
+    private  final List<LinearLayout> squareLayoutList = new ArrayList<>(9);
+    private  final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
     private final Map<ImageView, SoundItem> imageViewSoundItemMap = new HashMap<>(9);
@@ -56,11 +58,14 @@ public class MixActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mix);
+        setContentView(R.layout.activity_mix_plus);
         initUI();
     }
 
     private void initUI() {
+        cardImage = findViewById(R.id.imageView_card);
+        //cardImage.setImageResource(R.drawable.x2);
+        cardImage.setImageResource(MyApplication.musicTabList.get(getIntent().getIntExtra("musicTabId",1)).getImageResId());
         int animationDuration = 100;
         Button playbackButton = findViewById(R.id.playbackButton);
         fadeIn.setDuration(animationDuration);
@@ -71,15 +76,25 @@ public class MixActivity extends AppCompatActivity {
         delete_area = findViewById(R.id.delete_area);
         ConstraintLayout backLayout = findViewById(R.id.backLayout_mix);
         ConstraintLayout completeLayout = findViewById(R.id.completeLayout_mix);
-        squareList.add(findViewById(R.id.square1));
-        squareList.add(findViewById(R.id.square2));
-        squareList.add(findViewById(R.id.square3));
-        squareList.add(findViewById(R.id.square4));
-        squareList.add(findViewById(R.id.square5));
-        squareList.add(findViewById(R.id.square6));
-        squareList.add(findViewById(R.id.square7));
-        squareList.add(findViewById(R.id.square8));
-        squareList.add(findViewById(R.id.square9));
+        squareList.add(findViewById(R.id.square_image1));
+        squareList.add(findViewById(R.id.square_image2));
+        squareList.add(findViewById(R.id.square_image3));
+        squareList.add(findViewById(R.id.square_image4));
+        squareList.add(findViewById(R.id.square_image5));
+        squareList.add(findViewById(R.id.square_image6));
+        squareList.add(findViewById(R.id.square_image7));
+        squareList.add(findViewById(R.id.square_image8));
+        squareList.add(findViewById(R.id.square_image9));
+        squareLayoutList.add(findViewById(R.id.square1));
+        squareLayoutList.add(findViewById(R.id.square2));
+        squareLayoutList.add(findViewById(R.id.square3));
+        squareLayoutList.add(findViewById(R.id.square4));
+        squareLayoutList.add(findViewById(R.id.square5));
+        squareLayoutList.add(findViewById(R.id.square6));
+        squareLayoutList.add(findViewById(R.id.square7));
+        squareLayoutList.add(findViewById(R.id.square8));
+        squareLayoutList.add(findViewById(R.id.square9));
+
         playbackButton.setOnClickListener(v -> {
             if (playbackStatus == 1) {
                 AudioExoPlayerUtil.startAllSoundPlayers();
@@ -108,7 +123,7 @@ public class MixActivity extends AppCompatActivity {
         for (ImageView imageView : imageViewSoundItemMap.keySet()) {
             imageView.setOnDragListener(((v, event) -> {
                 int rmposition;
-                int position;
+                int position = squareList.indexOf(imageView);
                 int soundItemId;
                 int iconID;
                 if (event.getAction() == DragEvent.ACTION_DROP) {
@@ -122,12 +137,13 @@ public class MixActivity extends AppCompatActivity {
                         Log.d(TAG, "3");
                         stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                         positionSoundItemIdMap.remove(rmposition);
-                        squareList.get(rmposition).setImageResource(R.drawable.square);
+                        //squareList.get(rmposition).setImageResource(R.drawable.square);
                         imageViewSoundItemMap.remove(squareList.get(rmposition));
                         squareList.get(rmposition).setOnTouchListener(null);
                     }
                     iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
-                    position = squareList.indexOf(imageView);
+                    //position = squareList.indexOf(imageView);
+                    squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.transparent));
                     soundItemId = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem", 0);
                     imageView.setImageResource(iconID);
                     positionSoundItemIdMap.put(position, soundItemId);
@@ -144,9 +160,9 @@ public class MixActivity extends AppCompatActivity {
                 }
                 if (imageViewSoundItemMap.get(imageView) == null) {
                     if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED) {
-                        ((ImageView) v).setImageResource(R.drawable.square_gray);
+                        squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.gray));
                     } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED) {
-                        ((ImageView) v).setImageResource(R.drawable.square);
+                        squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.transparent));
                     }
                 }
                 return true;
