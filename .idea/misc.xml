@@ -39,6 +39,7 @@
         <entry key="app/src/main/res/font-v26/pingfang.xml" value="0.33487179487179486" />
         <entry key="app/src/main/res/font/pf.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/font/pingfang.xml" value="0.15341880341880343" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout-v28/musicdesign_item.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/action_bar.xml" value="0.14361702127659576" />
         <entry key="app/src/main/res/layout/activity_content.xml" value="0.1" />
@@ -47,6 +48,15 @@
         <entry key="app/src/main/res/layout/activity_mix.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_mix_plus.xml" value="0.4213197969543147" />
         <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.2" />
+=======
+        <entry key="app/src/main/res/layout/action_bar.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/layout/activity_content.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.32265446224256294" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37176833471100684" />
+        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_mix_plus.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.5" />
+>>>>>>> 76b3fe7 (Merge branches, UI improvement, Font added.)
         <entry key="app/src/main/res/layout/biggerview_notification.xml" value="0.4" />
         <entry key="app/src/main/res/layout/cardview_item.xml" value="0.2319277108433735" />
         <entry key="app/src/main/res/layout/gradient.xml" value="0.11842105263157894" />

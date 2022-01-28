@@ -20,10 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+
 import com.google.android.material.imageview.ShapeableImageView;
 import com.hustunique.morii.content.ContentActivity;
 
@@ -93,6 +90,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
                         .makeSceneTransitionAnimation((Activity) activity,
                                 Pair.create(holder.PhotoTitle, "photo"));
                 activity.startActivity(intent,
+
                         options.toBundle());
             }
         });
@@ -118,6 +116,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             TextDate = itemView.findViewById(R.id.TextDate);
             PhotoTitle = itemView.findViewById(R.id.PhotoTitle);
             TextTime = itemView.findViewById(R.id.TextTime);
+
         }
     }
 }

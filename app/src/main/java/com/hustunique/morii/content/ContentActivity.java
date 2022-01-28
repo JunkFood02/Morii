@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.Slide;
 import android.util.Log;
+
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;

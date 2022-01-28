@@ -192,8 +192,12 @@ public class MixActivity extends BaseActivity {
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
+<<<<<<< HEAD
 
                     squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
+=======
+                    //squareList.get(rmposition).setImageResource(R.drawable.square);
+>>>>>>> 76b3fe7 (Merge branches, UI improvement, Font added.)
                     imageViewSoundItemMap.remove(squareList.get(rmposition));
                     squareList.get(rmposition).setOnTouchListener(null);
                 }
