@@ -49,16 +49,18 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
         presenter = new MusicSelectPresenter(this);
-        Selected =  findViewById(R.id.okay);
+        Selected = findViewById(R.id.okay);
         GiveUp = findViewById(R.id.backLayout_select);
         initUI();
+        Selected.measure(0, 0);
+        Log.d(TAG, "onCreate: " + Selected.getMeasuredWidth());
         Selected.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
             intent.putExtra("musicTabId", currentPosition);
             startActivity(intent);
         });
         GiveUp.setOnClickListener(view -> {
-            this.finish();
+            onBackPressed();
         });
 
     }

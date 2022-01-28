@@ -5,6 +5,7 @@ import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.AutoTransition;
+import android.transition.Slide;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,8 +38,11 @@ public class ContentActivity extends BaseActivity {
             musicDiaryList.add(musicDiaryItem);
         TextView title, article, date;
         GoBack = findViewById(R.id.backLayout_content);
-        GoBack.setOnClickListener(view ->{
-            this.finish();
+        GoBack.setOnClickListener(view -> {
+            if (getIntent().getIntExtra("NewItem", 0) == 1) {
+                Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
+                startActivity(backIntent);
+            } else onBackPressed();
         });
         title = findViewById(R.id.musicDiaryTitle);
         article = findViewById(R.id.diaryContent);
@@ -59,11 +63,6 @@ public class ContentActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (getIntent().getIntExtra("NewItem", 0) == 1) {
-            Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
-            startActivity(backIntent);
-        }
-
     }
 
     @Override
