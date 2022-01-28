@@ -56,26 +56,7 @@ public class MyApplication extends Application {
         AudioExoPlayerUtil.initMusicPlayer();
         AudioExoPlayerUtil.initSoundPlayer();
     }
-    public static int getSoundItemPositionThroughIconID(int iconID){
-        switch (iconID){
-            case R.drawable.outline_air_24:
-                return 0;
-            case R.drawable.outline_flutter_dash_24:
-                return 1;
-            case R.drawable.outline_free_breakfast_24:
-                return 2;
-            case R.drawable.outline_grass_24:
-                return 3;
-            case R.drawable.x5:
-                return 4;
-            case R.drawable.x6:
-                return 5;
-            case R.drawable.x7:
-                return 6;
-            default:
-                return 7;
-        }
-    }
+
     public static void clearAllResIdInSoundItemList(){
         for (SoundItem soundItem:soundItemList){
             //soundItem.getResIdList().clear();
