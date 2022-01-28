@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.hustunique.morii.content.ContentActivity;
 
 import java.io.File;
@@ -93,7 +94,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
                 intent.putExtra("diary", musicDiaryItem);
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation((Activity) context,
-                                Pair.create(holder.cardView, "photo"));
+                                Pair.create(holder.PhotoTitle, "photo"));
                 context.startActivity(intent,
                         options.toBundle());
 
@@ -113,15 +114,13 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         TextView TextTitle;
         TextView TextTime;
         TextView TextDate;
-        ImageView PhotoTitle;
-        CardView cardView;
+        ShapeableImageView PhotoTitle;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.photoCard);
             TextTitle = (TextView) itemView.findViewById(R.id.TextTitle);
             TextDate = (TextView) itemView.findViewById(R.id.TextDate);
-            PhotoTitle = (ImageView) itemView.findViewById(R.id.PhotoTitle);
+            PhotoTitle = itemView.findViewById(R.id.PhotoTitle);
             TextTime = (TextView) itemView.findViewById(R.id.TextTime);
         }
     }

@@ -43,8 +43,7 @@
             android:id="@+id/buttonMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold"
+            android:fontFamily="@font/pingfang_medium"
             android:translationZ="20dp"
             android:text="点击创造属于你的自然音乐"
             android:textSize="21sp"
@@ -79,6 +78,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView01"
             android:layout_width="match_parent"
+            android:overScrollMode="never"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
             app:layout_constraintBottom_toBottomOf="parent"

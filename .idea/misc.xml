@@ -15,14 +15,18 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/square.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/square2.xml" value="0.19814814814814816" />
+        <entry key="app/src/main/res/font-v26/pingfang.xml" value="0.33487179487179486" />
+        <entry key="app/src/main/res/font/pf.xml" value="0.11203703703703703" />
+        <entry key="app/src/main/res/font/pingfang.xml" value="0.15341880341880343" />
         <entry key="app/src/main/res/layout/action_bar.xml" value="0.14361702127659576" />
-        <entry key="app/src/main/res/layout/activity_content.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_content.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_edit.xml" value="0.32265446224256294" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37176833471100684" />
-        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.3536693191865606" />
+        <entry key="app/src/main/res/layout/activity_mix.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_mix_plus.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_music_select.xml" value="0.5" />
         <entry key="app/src/main/res/layout/biggerview_notification.xml" value="0.4" />
-        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.3338870431893688" />
+        <entry key="app/src/main/res/layout/cardview_item.xml" value="0.2319277108433735" />
         <entry key="app/src/main/res/layout/gradient.xml" value="0.11842105263157894" />
         <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.45736143144434394" />
         <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
@@ -35,5 +39,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>

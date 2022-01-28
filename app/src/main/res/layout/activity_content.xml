@@ -101,62 +101,68 @@
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content">
 
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/TextExact"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginBottom="80dp"
             android:orientation="vertical">
 
-            <ImageView
+
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/PhotoShow"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/orange"
                 android:transitionName="photo"
-                app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" />
 
             <TextView
                 android:id="@+id/musicDiaryTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/pingfang_medium"
                 android:text="空気"
-                android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/PhotoShow" />
 
             <TextView
                 android:id="@+id/musicDiaryDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="#12月9日 周四       11：00 "
-                android:textSize="16sp" />
+                android:text="#12月9日  周四  11:00 "
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/musicDiaryTitle"
+                app:layout_constraintTop_toBottomOf="@id/musicDiaryTitle" />
 
             <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginVertical="24dp"
+                android:layout_marginHorizontal="16dp"
                 android:fadeScrollbars="true"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:scrollbars="vertical">
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/musicDiaryDate">
 
                 <TextView
                     android:id="@+id/diaryContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/pingfang_medium"
                     android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
                     android:textSize="12sp" />
 
             </ScrollView>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/button2"
