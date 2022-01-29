@@ -49,7 +49,7 @@ public class MixActivity extends BaseActivity {
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
-    public static Handler handler = new Handler(Looper.getMainLooper()) {
+    /*public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -57,6 +57,8 @@ public class MixActivity extends BaseActivity {
                 showDeleteArea();
         }
     };
+
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +162,7 @@ public class MixActivity extends BaseActivity {
                      */
                     Log.d(TAG, "2");
                     startPlayingSoundItem(soundItemId, position);
-                    hideDeleteArea();
+                    //hideDeleteArea();
                     return true;
                 }
                 if(event.getAction() == DragEvent.ACTION_DRAG_STARTED){
@@ -178,7 +180,7 @@ public class MixActivity extends BaseActivity {
                  */
             }));
         }
-        cardImage.setOnDragListener(new View.OnDragListener() {
+        /*cardImage.setOnDragListener(new View.OnDragListener() {
             @Override
             public boolean onDrag(View v, DragEvent event) {
                 switch (event.getAction()){
@@ -198,15 +200,9 @@ public class MixActivity extends BaseActivity {
                 }
             }
         });
-        setRecyclerView();
-    }
 
-    private void setRecyclerView() {
-        WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this);
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setOnDragListener((v, event) -> {
+         */
+        delete_area.setOnDragListener((v, event) -> {
             if (event.getAction() == DragEvent.ACTION_DROP) {
                 int rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
                 if (rmposition != -1) {
@@ -221,29 +217,45 @@ public class MixActivity extends BaseActivity {
                     squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
                     constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
                     squareLayoutList.get(rmposition).setOnTouchListener(null);
+                    return true;
                 }
-                hideDeleteArea();
+                //hideDeleteArea();
                 StartDrag.makeVibrate();
+                return false;
+            }
+            else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
+                if(!event.getResult()&&_last_drag_position!=-1){
+                    squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
+                }
+                v.setAlpha(0.0f);
+            }
+            else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+                _last_drag_position = (Integer) event.getLocalState();
+                Log.d("debug_drag","start"+_last_drag_position);
+                if(_last_drag_position!= -1){
+                    v.setAlpha(1.0f);
+                }
             }
             return true;
 
         });
-
+        setRecyclerView();
     }
 
-    private static void showDeleteArea() {
-        if (delete_area.getVisibility() != View.VISIBLE) {
-            delete_area.startAnimation(fadeIn);
-            delete_area.setVisibility(View.VISIBLE);
-        }
+    private void setRecyclerView() {
+        WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                return false;
+            }
+        });
     }
 
-    private static void hideDeleteArea() {
-        if (delete_area.getVisibility() == View.VISIBLE) {
-            delete_area.startAnimation(fadeout);
-            delete_area.setVisibility(View.INVISIBLE);
-        }
-    }
+
 
     private void stopPlayingSoundItem(int soundItemId, int position) {
         AudioExoPlayerUtil.stopPlayingSoundItem(position);
@@ -258,4 +270,20 @@ public class MixActivity extends BaseActivity {
         super.onDestroy();
         AudioExoPlayerUtil.stopAllSoundPlayers();
     }
+    /*
+    private static void showDeleteArea() {
+        if (delete_area.getVisibility() != View.VISIBLE) {
+            delete_area.startAnimation(fadeIn);
+            delete_area.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private static void hideDeleteArea() {
+        if (delete_area.getVisibility() == View.VISIBLE) {
+            delete_area.startAnimation(fadeout);
+            delete_area.setVisibility(View.INVISIBLE);
+        }
+    }
+
+     */
 }
