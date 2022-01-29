@@ -5,6 +5,7 @@ import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +35,8 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     private ImageView showPhoto;
     private String ImagePath = null;
     private CardView addPhoto;
+    private static final String TAG = "EditActivity";
+    private String currentDate;
     private EditContract.IPresenter presenter;
 
     @Override
@@ -63,16 +66,15 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
         textContent = findViewById(R.id.editTextContent);
         textTitle = findViewById(R.id.editTextTitle);
-        TextView textView_hour = findViewById(R.id.textView_hour);
-        TextView textView_week = findViewById(R.id.textView_week);
-        TextView textView_month = findViewById(R.id.textView_month);
+
         ConstraintLayout complete_layout = findViewById(R.id.completeLayout_edit);
         ConstraintLayout back_layout = findViewById(R.id.backLayout_edit);
         addPhoto = findViewById(R.id.addPhotoIcon);
         showPhoto = findViewById(R.id.BigPhoto);
-        textView_hour.setText(getTime("HH:mm"));
-        textView_month.setText(getTime("MM月dd日"));
-        textView_week.setText(getTime("E"));
+        TextView currentTime = findViewById(R.id.currentTime);
+        currentDate = getTime("MM月dd日 E HH:mm");
+        currentTime.setText("# " + currentDate);
+        Log.d(TAG, "initUI: " + currentDate);
         addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +88,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                 MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
                 musicDiaryItem.setTitle(title);
                 musicDiaryItem.setArticle(content);
+                musicDiaryItem.setDate(currentDate);
                 musicDiaryItem.setMusicTabId(getIntent().getIntExtra("musicTabId", 0));
                 musicDiaryItem.setItemID(musicDiaryList.size() + 1);
                 if (ImagePath != null) musicDiaryItem.setImagePath(ImagePath);

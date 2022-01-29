@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:fitsSystemWindows="true"
     android:fadeScrollbars="false"
+    android:fitsSystemWindows="true"
     tools:context="com.hustunique.morii.edit.EditActivity">
 
 
@@ -39,8 +39,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:textColor="#1D283F"
                 android:text="上一步"
+                android:textColor="#1D283F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imageView_edit_back"
@@ -51,8 +51,8 @@
             android:id="@+id/textView_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#1D283F"
             android:text="编辑"
+            android:textColor="#1D283F"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="4dp"
-                android:textColor="#1D283F"
                 android:text="下一步"
+                android:textColor="#1D283F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/imageView_edit_complete"
@@ -91,25 +91,25 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/editCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="21dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:outlineAmbientShadowColor="#CC819FED"
+        android:outlineSpotShadowColor="#CC0048FF"
         app:cardCornerRadius="16dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toTopOf="@id/include_edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_edit"
-        app:layout_constraintBottom_toTopOf="@id/include_edit"
-        android:outlineAmbientShadowColor="#CC819FED"
-        android:outlineSpotShadowColor="#CC819FED"
-        app:cardElevation="12dp"
-        tools:targetApi="p"
-        >
+        tools:targetApi="p">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -122,144 +122,90 @@
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" >
-            </com.google.android.material.imageview.ShapeableImageView>
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/addPhotoIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:id="@+id/addPhotoIcon"
-                app:layout_constraintBottom_toBottomOf="@id/BigPhoto"
-                app:layout_constraintEnd_toEndOf="@id/BigPhoto"
-                app:cardCornerRadius="6dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="#4D000000"
-                >
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/BigPhoto"
+                app:layout_constraintEnd_toEndOf="@id/BigPhoto">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 修改图片 "
+                    android:layout_marginHorizontal="9dp"
+                    android:layout_marginVertical="2dp"
+                    android:text="修改图片"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    android:layout_marginVertical="2dp"
-                    android:layout_marginHorizontal="5dp"
 
                     />
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/currentTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/TimeNow"
-                app:layout_constraintTop_toBottomOf="@+id/BigPhoto"
-                >
-
-                <TextView
-                    android:id="@+id/textView_month"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/pingfang_regular"
-                    android:textSize="16sp"
-                    android:text="#12月9日"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <TextView
-                    android:id="@+id/textView_week"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:text="周四"
-                    android:fontFamily="@font/pingfang_regular"
-                    android:textColor="#904CAF50"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.22848664"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_hour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="11:00"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/pingfang_regular"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="411dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintGuide_percent="0.40"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/pingfang_regular"
+                android:text="MM月dd日 E HH:mm"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/editTextTitle"
+                app:layout_constraintStart_toStartOf="@id/editTextTitle"
+                app:layout_constraintTop_toBottomOf="@id/BigPhoto" />
 
             <EditText
+                android:id="@+id/editTextTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTextTitle"
-                android:hint="给你的音乐起个名字吧"
-                android:fontFamily="@font/pingfang_medium"
-                android:textSize="24sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@null"
+                android:fontFamily="@font/pingfang_medium"
+                android:hint="给你的音乐起个名字"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/TimeNow"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                >
+                app:layout_constraintTop_toBottomOf="@id/currentTime" />
 
-            </EditText>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextTitle"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:outlineAmbientShadowColor="#819FED"
+                android:outlineSpotShadowColor="#819FED"
                 app:cardBackgroundColor="#E4ECFB"
-                >
-                    <EditText
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/editTextContent"
-                        android:hint="写点什么吧~"
-                        android:fontFamily="@font/pingfang_regular"
-                        android:textSize="12sp"
-                        android:background="@null"
-                        android:inputType="textMultiLine"
-                        android:lines="25"
-                        android:gravity="top|start"
-                        >
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextTitle">
 
-                     </EditText>
+                <EditText
+                    android:id="@+id/editTextContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp"
+                    android:background="@null"
+                    android:fontFamily="@font/pingfang_regular"
+                    android:gravity="top|start"
+                    android:hint="写点什么吧~"
+                    android:inputType="textMultiLine"
+                    android:lines="25"
+                    android:textSize="14sp">
+
+                </EditText>
 
             </androidx.cardview.widget.CardView>
 
@@ -271,14 +217,11 @@
         android:id="@+id/include_edit"
         layout="@layout/seekbar_exact"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editCard" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
