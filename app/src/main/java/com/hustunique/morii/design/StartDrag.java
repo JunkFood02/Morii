@@ -61,15 +61,15 @@ public class StartDrag implements View.OnTouchListener {
                     String[] mimeTypes = {ClipDescription.MIMETYPE_TEXT_INTENT};
                     View.DragShadowBuilder shadow = new View.DragShadowBuilder(v);
                     ClipData dragData = new ClipData("wdwd", mimeTypes, item);
-                    v.startDragAndDrop(dragData, shadow, null, 0);
+                    //v.startDragAndDrop(dragData, shadow, null, 0);
                     if (dragFromSquares) {
-                        ImageView imageView = (ImageView) v;
-                        imageView.setImageResource(R.drawable.square_transparent);
+                        v.setAlpha(0.0f);
                         Message message = handler.obtainMessage();
                         message.arg1 = position;
                         message.what = MixActivity.SHOW_DELETE_AREA;
                         handler.sendMessage(message);
                     }
+                    v.startDragAndDrop(dragData, shadow, position, 0);
                 }
                 break;
         }
