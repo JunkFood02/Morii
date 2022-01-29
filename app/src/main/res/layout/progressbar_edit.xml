@@ -17,6 +17,24 @@
 
         >
 
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_margin="5dp"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/progressbar_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:thumb="@drawable/seekbar_thumb"
+            android:id="@+id/SeekBar2"
+            android:visibility="invisible"
+            >
+
+
+
+        </SeekBar>
         <ProgressBar
             android:id="@+id/MusicLine2"
             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -36,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="00:13"
+            android:text="00:00"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/MusicLine2"
             app:layout_constraintStart_toStartOf="parent" />
@@ -58,6 +76,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
+        android:clickable="true"
+        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:outlineAmbientShadowColor="#CC1752EA"
         android:outlineSpotShadowColor="#CC205BF4"
@@ -75,6 +95,7 @@
             android:background="@drawable/gradient2">
 
             <ImageView
+                android:id="@+id/music_pause2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

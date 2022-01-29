@@ -61,6 +61,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+
         <TextView
             android:id="@+id/textView_edit"
             android:layout_width="wrap_content"
@@ -74,6 +75,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+
             android:id="@+id/completeLayout_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,6 +118,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -241,7 +244,7 @@
 
     <include
         android:id="@+id/include_edit"
-        layout="@layout/seekbar_exact"
+        layout="@layout/progressbar_edit"
         android:layout_width="0dp"
         android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"

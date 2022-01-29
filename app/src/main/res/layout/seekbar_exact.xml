@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp">
+    android:layout_height="70dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -16,6 +16,22 @@
         app:layout_constraintTop_toTopOf="parent"
 
         >
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_margin="5dp"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="30"
+            android:progressDrawable="@drawable/progressbar_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:thumb="@drawable/seekbar_thumb"
+            android:id="@+id/SeekBar"
+            android:visibility="invisible"
+            >
+
+        </SeekBar>
 
         <ProgressBar
             android:id="@+id/MusicLine"
@@ -36,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="00:13"
+            android:text="00:00"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/MusicLine"
             app:layout_constraintStart_toStartOf="parent" />
@@ -77,6 +93,7 @@
 
             <ImageView
                 android:layout_width="wrap_content"
+                android:id="@+id/music_pause"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

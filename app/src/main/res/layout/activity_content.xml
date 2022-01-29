@@ -59,6 +59,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+
         <TextView
             android:id="@+id/title_content"
             android:layout_width="wrap_content"
@@ -72,12 +73,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:visibility="gone"
             android:id="@+id/completeLayout_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/transparent"
+
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,6 +116,7 @@
                     app:srcCompat="@drawable/outline_done_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -192,8 +195,8 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="6dp"
                 android:fadeScrollbars="true"
-                android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:overScrollMode="never"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toTopOf="@id/deleteButton"
                 app:layout_constraintTop_toBottomOf="@id/musicDiaryTag">
@@ -285,6 +288,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </androidx.cardview.widget.CardView>
 
     <include
@@ -292,6 +296,7 @@
         layout="@layout/seekbar_exact"
         android:layout_width="0dp"
         android:layout_height="90dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

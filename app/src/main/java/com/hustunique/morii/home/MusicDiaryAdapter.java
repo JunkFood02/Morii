@@ -92,6 +92,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ContentActivity.class);
                 intent.putExtra("diary", musicDiaryItem);
+                intent.putExtra("Fr",1);
                 ActivityOptions options = ActivityOptions
                         .makeSceneTransitionAnimation((Activity) activity,
                                 Pair.create(holder.PhotoTitle, "photo"));

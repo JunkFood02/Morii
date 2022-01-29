@@ -537,15 +537,18 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/include"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="12dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         app:layout_constraintTop_toTopOf="parent">
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backLayout_select_mix"
@@ -558,7 +561,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
@@ -603,6 +605,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/okay_mix"
             android:layout_width="wrap_content"
@@ -614,7 +617,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
@@ -646,6 +648,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
