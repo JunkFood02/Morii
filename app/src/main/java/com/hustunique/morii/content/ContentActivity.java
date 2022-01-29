@@ -6,8 +6,13 @@ import static com.hustunique.morii.util.MyApplication.soundItemList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.Explode;
+import android.transition.Slide;
 import android.util.Log;
 
+import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +36,8 @@ import morii.R;
 public class ContentActivity extends BaseActivity {
 
     private String imagePath;
-    private CardView goBack;
+    private CardView deleteButton;
+    private CardView finishButton;
     private MusicDiaryItem musicDiaryItem;
     private static final String TAG = "ContentActivity";
     private Intent intent;
@@ -41,21 +47,39 @@ public class ContentActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new Explode());
         setContentView(R.layout.activity_content);
+        TextView titleBarText=findViewById(R.id.title_content);
+        Log.d(TAG, "onCreate: ");
         intent = getIntent();
+        finishButton = findViewById(R.id.finishButton);
+        deleteButton = findViewById(R.id.deleteButton);
         newItem = intent.getIntExtra("NewItem", 0);
-        StringBuilder builder = new StringBuilder();
-        TextView title, article, date, tag;
-        goBack = findViewById(R.id.backLayout_content);
-        goBack.setOnClickListener(view -> {
-            if (newItem == 1) {
+        if (newItem == 0) {
+            finishButton.setVisibility(View.GONE);
+            deleteButton.setVisibility(View.GONE);
+        } else {
+            titleBarText.setText("预览");
+            finishButton.setOnClickListener(v -> {
                 createMusicDiary();
                 Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
                 startActivity(backIntent);
-            } else onBackPressed();
+            });
+            deleteButton.setOnClickListener(v -> {
+                Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
+                startActivity(backIntent);
+                ;
+            });
+        }
+        StringBuilder builder = new StringBuilder();
+        TextView title, article, date, tag;
+        CardView goBack = findViewById(R.id.backLayout_content);
+        goBack.setOnClickListener(view -> {
+            onBackPressed();
         });
         musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
+        builder.append(musicTabList.get(musicDiaryItem.getMusicTabId()).getEmotion()).append(" ");
         if (newItem == 0) {
             AudioExoPlayerUtil.playMusic(musicDiaryItem.getMusicTabId());
             List<SoundItemInfo> list = musicDiaryItem.getSoundItemInfoList();

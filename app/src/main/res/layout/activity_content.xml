@@ -60,7 +60,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/textView_content"
+            android:id="@+id/title_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="回忆"
@@ -72,6 +72,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/completeLayout_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,10 +157,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="18dp"
                 android:fontFamily="@font/pingfang_medium"
-                android:text="空気"
                 android:maxLines="2"
+                android:text="空気"
                 android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/PhotoShow" />
@@ -188,11 +189,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="6dp"
                 android:fadeScrollbars="true"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:overScrollMode="never"
                 android:scrollbars="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/deleteButton"
                 app:layout_constraintTop_toBottomOf="@id/musicDiaryTag">
 
                 <TextView
@@ -206,20 +209,20 @@
             </ScrollView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/button2"
+                android:id="@+id/finishButton"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:outlineAmbientShadowColor="#CC819FED"
                 android:outlineSpotShadowColor="#CC819FED"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
-                android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/button3"
+                app:layout_constraintStart_toEndOf="@id/deleteButton"
                 tools:targetApi="p">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -230,8 +233,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="完成"
                         android:fontFamily="@font/pingfang_medium"
+                        android:text="完成"
 
                         android:textColor="@color/white"
                         android:textSize="20sp"
@@ -244,19 +247,19 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/button3"
+                android:id="@+id/deleteButton"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:outlineAmbientShadowColor="#CC819FED"
                 android:outlineSpotShadowColor="#CC0245F4"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
-                android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/button2"
+                app:layout_constraintEnd_toStartOf="@id/finishButton"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:targetApi="p">
 
@@ -268,9 +271,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/pingfang_medium"
                         android:text="删除"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/pingfang_medium"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
