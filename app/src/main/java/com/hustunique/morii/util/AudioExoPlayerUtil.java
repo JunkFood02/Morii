@@ -5,21 +5,15 @@ import static com.hustunique.morii.util.MyApplication.musicTabList;
 import static com.hustunique.morii.util.MyApplication.soundItemList;
 
 import android.net.Uri;
-import android.util.Log;
-import android.util.Pair;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.Timeline;
 import com.hustunique.morii.content.ContentActivity;
-import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.music.MusicTab;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AudioExoPlayerUtil {
     public static final int NEXT = 1;
@@ -28,7 +22,7 @@ public class AudioExoPlayerUtil {
     private static final ExoPlayer musicPlayer = new ExoPlayer.Builder(context).build();
     private static final String TAG = "AudioExoPlayerUtil";
     private static final List<ExoPlayer> soundPlayerList = new ArrayList<>();
-    private static ContentActivity.onReadyListener listener;
+    private static onReadyListener listener;
     private static long duration;
 
     public static void initMusicPlayer() {
@@ -45,8 +39,11 @@ public class AudioExoPlayerUtil {
             public void onPlaybackStateChanged(int playbackState) {
                 Player.Listener.super.onPlaybackStateChanged(playbackState);
                 if (playbackState == ExoPlayer.STATE_READY) {
-                    if (listener != null)
+                    duration = musicPlayer.getDuration();
+                    if (listener != null && duration > 0) {
                         listener.onReady(musicPlayer.getDuration());
+
+                    }
                 }
             }
         });
@@ -82,8 +79,12 @@ public class AudioExoPlayerUtil {
 
     public static void stopAllSoundPlayers() {
         for (ExoPlayer player : soundPlayerList) {
-            if (player.isPlaying())
-                player.pause();
+            {
+                if (player.isPlaying())
+                    player.pause();
+                player.removeMediaItem(0);
+            }
+
         }
     }
 
@@ -126,7 +127,7 @@ public class AudioExoPlayerUtil {
 
     }
 
-    public static void setListener(ContentActivity.onReadyListener listener) {
+    public static void setListener(onReadyListener listener) {
         AudioExoPlayerUtil.listener = listener;
     }
 }

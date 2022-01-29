@@ -31,6 +31,7 @@ import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.DatabaseUtil;
+import com.hustunique.morii.util.onReadyListener;
 
 import java.io.File;
 import java.util.List;
@@ -52,13 +53,6 @@ public class ContentActivity extends BaseActivity {
     private TextView startTime;
     private ProgressBar progressBar;
     private SeekBar seekBar;
-
-    public static class onReadyListener {
-        public void onReady(long duration) {
-
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

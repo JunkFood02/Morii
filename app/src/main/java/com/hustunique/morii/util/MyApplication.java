@@ -48,12 +48,11 @@ public class MyApplication extends Application {
         soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24, "咖啡馆", R.raw.cafe));
         soundItemList.add(new SoundItem(R.drawable.outline_grass_24, "夜晚", R.raw.night));
 
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
+        musicTabList.add(new MusicTab("安宁", R.drawable.bg_romance, R.raw.peaceful));
+        musicTabList.add(new MusicTab("律动", R.drawable.bg_groove, R.raw.jazz));
+        musicTabList.add(new MusicTab("喜悦", R.drawable.bg_passion, R.raw.happy));
+        musicTabList.add(new MusicTab("希望", R.drawable.bg_hopeful, R.raw.hopeful));
+        musicTabList.add(new MusicTab("静谧", R.drawable.bg_silent, R.raw.silent));
 
         AudioExoPlayerUtil.initMusicPlayer();
         AudioExoPlayerUtil.initSoundPlayer();
