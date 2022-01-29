@@ -51,7 +51,6 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
     @Override
     protected void onResume() {
-        if (ImagePath != null) showPhoto.setImageBitmap(BitmapFactory.decodeFile(ImagePath));
         super.onResume();
     }
 
@@ -66,7 +65,6 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
         textContent = findViewById(R.id.editTextContent);
         textTitle = findViewById(R.id.editTextTitle);
-
         ConstraintLayout complete_layout = findViewById(R.id.completeLayout_edit);
         ConstraintLayout back_layout = findViewById(R.id.backLayout_edit);
         addPhoto = findViewById(R.id.addPhotoIcon);
@@ -82,6 +80,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
             }
         });
         complete_layout.setOnClickListener(v -> {
+            Log.d(TAG, "initUI: next");
             content = Objects.requireNonNull(textTitle.getText()).toString();
             title = Objects.requireNonNull(textContent.getText()).toString();
             if (title.length() != 0 && content.length() != 0) {
@@ -92,10 +91,12 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                 musicDiaryItem.setMusicTabId(getIntent().getIntExtra("musicTabId", 0));
                 musicDiaryItem.setItemID(musicDiaryList.size() + 1);
                 if (ImagePath != null) musicDiaryItem.setImagePath(ImagePath);
-                Intent intent = new Intent(this, ContentActivity.class);
-                intent.putExtra("diary", musicDiaryItem);
-                intent.putExtra("NewItem", 1);
-                startActivity(intent);
+                Bundle bundle = getIntent().getBundleExtra("positionSoundItemIdMap");
+                Intent intentToNextActivity = new Intent(this, ContentActivity.class);
+                intentToNextActivity.putExtra("diary", musicDiaryItem);
+                intentToNextActivity.putExtra("NewItem", 1);
+                intentToNextActivity.putExtra("positionSoundItemIdMap", bundle);
+                startActivity(intentToNextActivity);
                 return;
             }
             Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();

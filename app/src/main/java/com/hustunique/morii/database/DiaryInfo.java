@@ -20,6 +20,14 @@ public class DiaryInfo {
     public int musicTabId;
     public String date;
 
+    public DiaryInfo(String title, String article, String imagePath, int musicTabId, String date) {
+        this.title = title;
+        this.article = article;
+        this.imagePath = imagePath;
+        this.musicTabId = musicTabId;
+        this.date = date;
+    }
+
     public DiaryInfo(MusicDiaryItem item) {
         title = item.getTitle();
         article = item.getArticle();

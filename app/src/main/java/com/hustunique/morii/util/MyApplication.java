@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.hustunique.morii.database.DiaryWithSoundItemInfo;
 import com.hustunique.morii.design.SoundItem;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.music.MusicTab;
@@ -31,13 +32,11 @@ public class MyApplication extends Application {
     }
 
     private void initResourcesList() {
-        for (int i = 1; i <= 10; i++) {
-            MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
-            musicDiaryItem.setItemID(i);
-            musicDiaryItem.setDate(getTime());
-            musicDiaryItem.setTitle("今天的空气是橘子味的 " + i);
-            musicDiaryItem.setArticle("This is content of the article " + i);
-            musicDiaryList.add(musicDiaryItem);
+        List<DiaryWithSoundItemInfo> list = DatabaseUtil.readDataFromRoomDataBase();
+        for (DiaryWithSoundItemInfo info : list
+        ) {
+            MusicDiaryItem item = new MusicDiaryItem(info);
+            musicDiaryList.add(item);
         }
         soundItemList.add(new SoundItem(R.drawable.outline_air_24, "风声", R.raw.wind));
         soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24, "鸟语", R.raw.bird));

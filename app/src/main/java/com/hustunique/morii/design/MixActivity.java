@@ -96,6 +96,7 @@ public class MixActivity extends BaseActivity {
         squareLayoutList.add(findViewById(R.id.square9));
 
         playbackButton.setOnClickListener(v -> {
+            Log.d(TAG, "change");
             if (playbackStatus == 1) {
                 AudioExoPlayerUtil.startAllSoundPlayers();
                 playbackButton.setText("暂停");
@@ -113,6 +114,7 @@ public class MixActivity extends BaseActivity {
                 Log.d("activityData", "key = " + entry.getKey() + " value = " + entry.getValue());
             }
             intent.putExtra("positionSoundItemIdMap", bundle);
+            Log.d(TAG, "start!");
             startActivity(intent);
         });
         backLayout.setOnClickListener(v -> onBackPressed());

@@ -13,10 +13,13 @@ import java.util.List;
 public interface DiaryDao {
 
     @Insert
-    long insertDiaryInfo(MusicDiaryItem item);
+    long insertDiaryInfo(DiaryInfo info);
 
     @Insert
-    long insertAllSoundItemInfo(SoundItemInfo... infos);
+    List<Long> insertAllSoundItemInfo(SoundItemInfo... infos);
+
+    @Insert
+    long insertSoundItemInfo(SoundItemInfo info);
 
     @Transaction
     @Query("select * from DiaryInfo")

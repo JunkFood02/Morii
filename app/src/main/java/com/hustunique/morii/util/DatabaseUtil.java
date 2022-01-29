@@ -6,7 +6,9 @@ import androidx.room.Room;
 
 import com.hustunique.morii.database.AppDatabase;
 import com.hustunique.morii.database.DiaryDao;
+import com.hustunique.morii.database.DiaryInfo;
 import com.hustunique.morii.database.DiaryWithSoundItemInfo;
+import com.hustunique.morii.database.SoundItemInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ public class DatabaseUtil {
             .build();
     public static DiaryDao dao = appDatabase.diaryDao();
 
-    public List<DiaryWithSoundItemInfo> readDataFromRoomDataBase() {
+    public static List<DiaryWithSoundItemInfo> readDataFromRoomDataBase() {
         Future<List<DiaryWithSoundItemInfo>> future = exec.submit(() -> dao.getAllDiaryWithSoundItemInfo());
         List<DiaryWithSoundItemInfo> list = null;
         try {
@@ -33,4 +35,18 @@ public class DatabaseUtil {
         return list;
     }
 
+    public static long insertDiaryInfo(DiaryInfo diaryInfo) {
+        Future<Long> future = exec.submit(() -> dao.insertDiaryInfo(diaryInfo));
+        long id = 0;
+        try {
+            id = future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    public static void insertSoundItemInfo(SoundItemInfo info) {
+        new Thread(() -> dao.insertAllSoundItemInfo(info)).start();
+    }
 }

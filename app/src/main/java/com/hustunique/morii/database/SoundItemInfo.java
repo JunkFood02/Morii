@@ -15,8 +15,15 @@ public class SoundItemInfo implements Serializable {
     public int soundItemId;
     public int soundItemPosition;
 
+    public SoundItemInfo(long soundItemInfoId, long diaryInfoId, int soundItemId, int soundItemPosition) {
+        this.soundItemInfoId = soundItemInfoId;
+        this.diaryInfoId = diaryInfoId;
+        this.soundItemId = soundItemId;
+        this.soundItemPosition = soundItemPosition;
+    }
+
     @Ignore
-    public SoundItemInfo(long diaryInfoId, int soundItemId, int soundItemPosition) {
+    public SoundItemInfo(long diaryInfoId, int soundItemPosition, int soundItemId) {
         this.diaryInfoId = diaryInfoId;
         this.soundItemId = soundItemId;
         this.soundItemPosition = soundItemPosition;

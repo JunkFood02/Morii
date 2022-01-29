@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity implements HomePageContract.IView
         //setImmersiveStatusBar();
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         getWindow().setExitTransition(new Slide());
-        getWindow().setSharedElementExitTransition(new ChangeBounds());
+        //getWindow().setSharedElementExitTransition(new ChangeBounds());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
