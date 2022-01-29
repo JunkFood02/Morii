@@ -3,6 +3,7 @@ package com.hustunique.morii.util;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.net.Uri;
 
 import com.hustunique.morii.database.DiaryWithSoundItemInfo;
 import com.hustunique.morii.design.SoundItem;
@@ -67,5 +68,10 @@ public class MyApplication extends Application {
     private String getTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 E HH:mm", Locale.CHINA);
         return simpleDateFormat.format(new Date().getTime());
+    }
+
+    public static Uri UriParser(int resId) {
+        return Uri.parse("android.resource://"
+                + context.getPackageName() + "/" + resId);
     }
 }

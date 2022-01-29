@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.MyApplication;
@@ -37,14 +38,14 @@ public class MixActivity extends BaseActivity {
     @SuppressLint("StaticFieldLeak")
     private static int _last_drag_position;
     private RecyclerView recyclerView;
-    private androidx.cardview.widget.CardView backLayout,completeLayout;
+    private androidx.cardview.widget.CardView backLayout, completeLayout;
     private static LinearLayout delete_area;
     private ImageView cardImage;
     private static final String TAG = "MixActivity";
     public static final int SHOW_DELETE_AREA = -1;
     private static int playbackStatus = 1;
-    private  final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
-    private  final List<ImageView> squareList = new ArrayList<>(9);
+    private final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
+    private final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
@@ -71,7 +72,8 @@ public class MixActivity extends BaseActivity {
         recyclerView = findViewById(R.id.recyclerView03);
         cardImage = findViewById(R.id.imageView_card);
         //cardImage.setImageResource(R.drawable.x2);
-        cardImage.setImageResource(MyApplication.musicTabList.get(getIntent().getIntExtra("musicTabId",1)).getImageResId());
+        MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
+        cardImage.setImageResource(MyApplication.musicTabList.get(diary.getMusicTabId()).getImageResId());
         int animationDuration = 100;
         Button playbackButton = findViewById(R.id.playbackButton);
         fadeIn.setDuration(animationDuration);
@@ -116,11 +118,12 @@ public class MixActivity extends BaseActivity {
             Intent intent = new Intent(this, EditActivity.class);
             Bundle bundle = new Bundle();
             for (Map.Entry<Integer, Integer> entry : positionSoundItemIdMap.entrySet()) {
+
                 bundle.putInt(entry.getKey() + "", entry.getValue());
                 Log.d("activityData", "key = " + entry.getKey() + " value = " + entry.getValue());
             }
             intent.putExtra("positionSoundItemIdMap", bundle);
-            Log.d(TAG, "start!");
+            intent.putExtra("diary", diary);
             startActivity(intent);
         });
         backLayout.setOnClickListener(v -> onBackPressed());
@@ -165,7 +168,7 @@ public class MixActivity extends BaseActivity {
                     //hideDeleteArea();
                     return true;
                 }
-                if(event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+                if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                     return true;
                 }
                 return false;
@@ -222,17 +225,15 @@ public class MixActivity extends BaseActivity {
                 //hideDeleteArea();
                 StartDrag.makeVibrate();
                 return false;
-            }
-            else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
-                if(!event.getResult()&&_last_drag_position!=-1){
+            } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED) {
+                if (!event.getResult() && _last_drag_position != -1) {
                     squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
                 }
                 v.setAlpha(0.0f);
-            }
-            else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+            } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                 _last_drag_position = (Integer) event.getLocalState();
-                Log.d("debug_drag","start"+_last_drag_position);
-                if(_last_drag_position!= -1){
+                Log.d("debug_drag", "start" + _last_drag_position);
+                if (_last_drag_position != -1) {
                     v.setAlpha(1.0f);
                 }
             }
@@ -254,7 +255,6 @@ public class MixActivity extends BaseActivity {
             }
         });
     }
-
 
 
     private void stopPlayingSoundItem(int soundItemId, int position) {

@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import morii.R;
 
 public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.ViewHolder> {
@@ -41,7 +43,8 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
         //将数据和控件绑定
         //
 
-        holder.imageView.setBackgroundResource(musicTabList.get(position).getImageResId());
+        Glide.with(holder.itemView).load(musicTabList.get(position).getImageResId()).into(holder.imageView);
+        //holder.imageView.setBackgroundResource();
         Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(v -> {
         });

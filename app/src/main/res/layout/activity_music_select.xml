@@ -29,8 +29,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backLayout_select"
-            android:layout_width="98dp"
-            android:layout_height="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#4DFFFFFF"
             app:cardCornerRadius="12dp"
@@ -42,8 +42,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:padding="3dp">
+                android:layout_margin="6dp"
+               >
 
                 <ImageView
                     android:id="@+id/imageView_select_back"
@@ -83,8 +83,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:padding="3dp">
+                android:layout_margin="6dp"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"

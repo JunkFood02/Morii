@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import morii.R;
 
 import com.hustunique.morii.design.MixActivity;
+import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.BaseActivity;
 
 public class MusicSelectActivity extends BaseActivity implements MusicSelectContract.IView {
@@ -53,7 +54,9 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         Log.d(TAG, "onCreate: " + Selected.getMeasuredWidth());
         Selected.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
-            intent.putExtra("musicTabId", currentPosition);
+            MusicDiaryItem diary=new MusicDiaryItem();
+            diary.setMusicTabId(currentPosition);
+            intent.putExtra("diary", diary);
             startActivity(intent);
         });
         GiveUp.setOnClickListener(view -> {

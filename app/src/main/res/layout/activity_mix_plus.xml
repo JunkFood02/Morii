@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     tools:context="com.hustunique.morii.design.MixActivity">
 
 
@@ -539,7 +539,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/include"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="12dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -547,10 +549,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backLayout_select_mix"
-            android:layout_width="98dp"
-            android:layout_height="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="#4DFFFFFF"
+            app:cardBackgroundColor="@color/transparent"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -561,23 +563,23 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:padding="3dp">
+                android:layout_margin="6dp"
+                >
 
                 <ImageView
                     android:id="@+id/imageView_select_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_icon_back_design" />
+                    app:srcCompat="@drawable/ic_icon_left_design" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="返回首页"
+                    android:text="上一步"
                     android:textColor="#1D283F"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -594,7 +596,7 @@
 
             android:text="创作"
             android:textColor="#1D283F"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -606,7 +608,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="#4DFFFFFF"
+            app:cardBackgroundColor="@color/transparent"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -617,8 +619,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:padding="3dp">
+                android:layout_margin="6dp"
+
+                >
 
                 <TextView
                     android:layout_width="wrap_content"

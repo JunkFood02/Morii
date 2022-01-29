@@ -5,46 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E3E9F4"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     tools:context="com.hustunique.morii.content.ContentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleBarLayout_content"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:fitsSystemWindows="true"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/backLayout_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView_edit_back"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="6dp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_icon_back_design" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="返回"
-                android:textColor="#1D283F"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageView_edit_back"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageView_edit_back"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_icon_back_design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="返回"
+                    android:textColor="#1D283F"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageView_edit_back"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView_content"
@@ -52,40 +65,54 @@
             android:layout_height="wrap_content"
             android:text="回忆"
             android:textColor="#1D283F"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/completeLayout_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="4dp"
-                android:text="保存"
-                android:textColor="#1D283F"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageView_content_complete"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
 
-            <ImageView
-                android:id="@+id/imageView_content_complete"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_margin="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/outline_done_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:text="保存"
+                    android:textColor="#1D283F"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageView_content_complete"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView_content_complete"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/outline_done_24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -94,22 +121,21 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="21dp"
-        app:cardCornerRadius="16dp"
         android:outlineAmbientShadowColor="#CC819FED"
         android:outlineSpotShadowColor="#CC819FED"
+        app:cardCornerRadius="16dp"
         app:cardElevation="12dp"
-        tools:targetApi="p"
         app:layout_constraintBottom_toTopOf="@id/include2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content">
+        app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content"
+        tools:targetApi="p">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/TextExact"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="80dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
 
@@ -133,7 +159,8 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/pingfang_medium"
                 android:text="空気"
-                android:textSize="26sp"
+                android:maxLines="2"
+                android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/PhotoShow" />
 
@@ -141,22 +168,32 @@
                 android:id="@+id/musicDiaryDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#12月9日  周四  11:00 "
+                android:layout_marginTop="6dp"
                 android:fontFamily="@font/pingfang_regular"
+                android:text="#12月9日  周四  11:00 "
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/musicDiaryTitle"
                 app:layout_constraintTop_toBottomOf="@id/musicDiaryTitle" />
 
+            <TextView
+                android:id="@+id/musicDiaryTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/musicDiaryDate"
+                app:layout_constraintTop_toBottomOf="@id/musicDiaryDate" />
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginVertical="24dp"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="24dp"
                 android:fadeScrollbars="true"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/musicDiaryDate">
+                app:layout_constraintTop_toBottomOf="@id/musicDiaryTag">
 
                 <TextView
                     android:id="@+id/diaryContent"
@@ -164,43 +201,86 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pingfang_medium"
                     android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
             </ScrollView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/button2"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:outlineAmbientShadowColor="#CC819FED"
+                android:outlineSpotShadowColor="#CC819FED"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button3"
+                tools:targetApi="p">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradient2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="完成"
+                        android:fontFamily="@font/pingfang_medium"
+
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/button3"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:outlineAmbientShadowColor="#CC819FED"
+                android:outlineSpotShadowColor="#CC0245F4"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button2"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:targetApi="p">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="删除"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/pingfang_medium"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/button2"
-            android:layout_width="311dp"
-            android:layout_height="48dp"
-            android:layout_gravity="bottom|center"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="20dp"
-            android:outlineAmbientShadowColor="#CC819FED"
-            android:outlineSpotShadowColor="#CC819FED"
-            app:cardElevation="12dp"
-            tools:targetApi="p"
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradient2"
-                >
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="删除音乐"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                >
-            </TextView>
-
-        </androidx.cardview.widget.CardView>
-
 
     </androidx.cardview.widget.CardView>
 
@@ -208,9 +288,7 @@
         android:id="@+id/include2"
         layout="@layout/seekbar_exact"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
+        android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

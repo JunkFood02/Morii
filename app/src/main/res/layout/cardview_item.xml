@@ -10,9 +10,9 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="6dp"
     android:outlineAmbientShadowColor="#CC819FED"
     android:outlineSpotShadowColor="#CC819FED"
+    app:cardCornerRadius="6dp"
     app:cardElevation="12dp"
     tools:targetApi="p">
 
@@ -32,9 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6"
-             />
-
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" />
 
 
         <TextView
@@ -42,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pingfang_regular"
             android:text="12月9日 周四"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,26 +51,16 @@
             android:id="@+id/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:fontFamily="sans-serif"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/pingfang_medium"
             android:text="今天的空气是橘子味的"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TextDate" />
 
-        <TextView
-            android:id="@+id/TextTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:text="Time : 06:06:06"
-            android:textSize="16sp"
-            android:textStyle="italic|bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TextTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,7 @@
 package com.hustunique.morii.home;
 
+import static com.hustunique.morii.util.MyApplication.musicTabList;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -76,10 +78,14 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
                     .into(holder.PhotoTitle);
             //Picasso.get().load(imagePath).into(holder.PhotoTitle);
             Log.d(TAG, "load image success");
-        } else Glide.with(holder.itemView).load(R.drawable.orange)
-                .into(holder.PhotoTitle);
+        } else {
+            Glide.with(holder.itemView)
+                    .load(musicTabList.get(musicDiaryItem.getMusicTabId()).getImageResId())
+                    .into(holder.PhotoTitle);
+            Log.d(TAG, "onBindViewHolder: " + musicTabList.get(musicDiaryItem.getMusicTabId()).getImageResId());
+        }
         holder.TextTitle.setText(musicDiaryItem.getTitle());
-        holder.TextDate.setText(musicDiaryItem.getDate());
+        holder.TextDate.setText("# " + musicDiaryItem.getDate());
         Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +112,6 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
     //内部类，绑定控件
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView TextTitle;
-        TextView TextTime;
         TextView TextDate;
         ShapeableImageView PhotoTitle;
 
@@ -115,7 +120,6 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             TextTitle = itemView.findViewById(R.id.TextTitle);
             TextDate = itemView.findViewById(R.id.TextDate);
             PhotoTitle = itemView.findViewById(R.id.PhotoTitle);
-            TextTime = itemView.findViewById(R.id.TextTime);
 
         }
     }

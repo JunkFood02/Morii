@@ -16,7 +16,7 @@ public class MusicDiaryItem implements Serializable {
     private String article;
     private long itemID;
     private String imagePath;
-    transient private List<SoundItemInfo> soundItemInfoList = new ArrayList<>();
+    private List<SoundItemInfo> soundItemInfoList = new ArrayList<>();
 
 
     public long getItemID() {
