@@ -26,6 +26,8 @@
         android:layout_height="0dp"
         android:translationZ="30dp"
         app:layout_constraintBottom_toTopOf="@id/BackGroundView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1.2">
 
@@ -44,10 +46,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pingfang_medium"
-            android:translationZ="20dp"
             android:text="点击创造属于你的自然音乐"
-            android:textSize="21sp"
             android:textColor="@color/design_default_color_on_primary"
+            android:textSize="21sp"
+            android:translationZ="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/icon" />

@@ -98,7 +98,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_edit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/include_edit"
+        android:outlineAmbientShadowColor="#CC819FED"
+        android:outlineSpotShadowColor="#CC819FED"
+        app:cardElevation="12dp"
+        tools:targetApi="p"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,7 +132,8 @@
                 android:id="@+id/addPhotoIcon"
                 app:layout_constraintBottom_toBottomOf="@id/BigPhoto"
                 app:layout_constraintEnd_toEndOf="@id/BigPhoto"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="6dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="#4D000000"
                 >
                 <TextView
@@ -136,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:text=" 修改图片 "
                     android:textColor="@color/white"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     android:layout_marginVertical="2dp"
                     android:layout_marginHorizontal="5dp"
 
@@ -158,6 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginStart="16dp"
+                    android:fontFamily="@font/pingfang_regular"
                     android:textSize="16sp"
                     android:text="#12月9日"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -171,6 +177,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:text="周四"
+                    android:fontFamily="@font/pingfang_regular"
                     android:textColor="#904CAF50"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -191,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:text="11:00"
                     android:textSize="16sp"
+                    android:fontFamily="@font/pingfang_regular"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
@@ -237,32 +245,38 @@
                 app:cardCornerRadius="16dp"
                 app:cardBackgroundColor="#E4ECFB"
                 >
-                <ScrollView
-                    android:layout_margin="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fadeScrollbars="true"
-                    android:scrollbarAlwaysDrawVerticalTrack="true"
-                    android:scrollbars="vertical"
-                    >
                     <EditText
+                        android:layout_margin="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/editTextContent"
                         android:hint="写点什么吧~"
+                        android:fontFamily="@font/pingfang_regular"
                         android:textSize="12sp"
                         android:background="@null"
+                        android:inputType="textMultiLine"
+                        android:lines="25"
+                        android:gravity="top|start"
                         >
 
                      </EditText>
-
-                 </ScrollView>
 
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <include
+        android:id="@+id/include_edit"
+        layout="@layout/seekbar_exact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 
