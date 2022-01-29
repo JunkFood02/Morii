@@ -29,8 +29,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backLayout_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="98dp"
+            android:layout_height="32dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardBackgroundColor="#4DFFFFFF"
             app:cardCornerRadius="12dp"
