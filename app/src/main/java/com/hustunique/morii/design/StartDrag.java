@@ -1,6 +1,6 @@
 package com.hustunique.morii.design;
 
-import static com.hustunique.morii.design.MixActivity.handler;
+//import static com.hustunique.morii.design.MixActivity.handler;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
@@ -64,10 +64,10 @@ public class StartDrag implements View.OnTouchListener {
                     //v.startDragAndDrop(dragData, shadow, null, 0);
                     if (dragFromSquares) {
                         v.setAlpha(0.0f);
-                        Message message = handler.obtainMessage();
-                        message.arg1 = position;
-                        message.what = MixActivity.SHOW_DELETE_AREA;
-                        handler.sendMessage(message);
+                        //Message message = handler.obtainMessage();
+                        //message.arg1 = position;
+                        //message.what = MixActivity.SHOW_DELETE_AREA;
+                        //handler.sendMessage(message);
                     }
                     v.startDragAndDrop(dragData, shadow, position, 0);
                 }
