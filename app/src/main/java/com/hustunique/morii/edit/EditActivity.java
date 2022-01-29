@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,18 +30,18 @@ import morii.R;
 
 public class EditActivity extends BaseActivity implements EditContract.IView {
     private String content = "", title = "";
-    private TextInputEditText textTitle, textContent;
+    private EditText textTitle, textContent;
     private ImageView showPhoto;
     private String ImagePath = null;
+    private CardView addPhoto;
     private EditContract.IPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        initUI();
         presenter = new EditPresenter(this);
-
+        initUI();
 
     }
 
@@ -67,7 +68,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         TextView textView_month = findViewById(R.id.textView_month);
         ConstraintLayout complete_layout = findViewById(R.id.completeLayout_edit);
         ConstraintLayout back_layout = findViewById(R.id.backLayout_edit);
-        CardView addPhoto = findViewById(R.id.addPhotoButton);
+        addPhoto = findViewById(R.id.addPhotoIcon);
         showPhoto = findViewById(R.id.BigPhoto);
         textView_hour.setText(getTime("HH:mm"));
         textView_month.setText(getTime("MM月dd日"));

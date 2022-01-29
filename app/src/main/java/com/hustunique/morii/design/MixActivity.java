@@ -190,7 +190,7 @@ public class MixActivity extends BaseActivity {
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
-                    //squareList.get(rmposition).setImageResource(R.drawable.square);
+                    squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
                     imageViewSoundItemMap.remove(squareList.get(rmposition));
                     squareList.get(rmposition).setOnTouchListener(null);
                 }
