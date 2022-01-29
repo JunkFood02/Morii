@@ -10,9 +10,9 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="6dp"
     android:outlineAmbientShadowColor="#CC819FED"
     android:outlineSpotShadowColor="#CC819FED"
-    app:cardCornerRadius="6dp"
     app:cardElevation="12dp"
     tools:targetApi="p">
 

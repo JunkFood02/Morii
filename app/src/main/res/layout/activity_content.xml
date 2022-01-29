@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="返回首页"
+                android:text="返回"
                 android:textColor="#1D283F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="4dp"
-                android:text="分享"
+                android:text="保存"
                 android:textColor="#1D283F"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_icon_share_design" />
+                app:srcCompat="@drawable/outline_done_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,6 +95,10 @@
         android:layout_height="0dp"
         android:layout_margin="21dp"
         app:cardCornerRadius="16dp"
+        android:outlineAmbientShadowColor="#CC819FED"
+        android:outlineSpotShadowColor="#CC819FED"
+        app:cardElevation="12dp"
+        tools:targetApi="p"
         app:layout_constraintBottom_toTopOf="@id/include2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,6 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="#12月9日  周四  11:00 "
+                android:fontFamily="@font/pingfang_regular"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/musicDiaryTitle"
                 app:layout_constraintTop_toBottomOf="@id/musicDiaryTitle" />
@@ -157,22 +162,45 @@
                     android:id="@+id/diaryContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/pingfang_medium"
+                    android:fontFamily="@font/pingfang_regular"
                     android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
                     android:textSize="12sp" />
 
             </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
+        <androidx.cardview.widget.CardView
             android:id="@+id/button2"
             android:layout_width="311dp"
-            android:layout_height="60dp"
+            android:layout_height="48dp"
             android:layout_gravity="bottom|center"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#C1D3FF"
-            android:text="删除音乐"
-            android:textSize="20sp" />
+            app:cardCornerRadius="20dp"
+            android:outlineAmbientShadowColor="#CC819FED"
+            android:outlineSpotShadowColor="#CC819FED"
+            app:cardElevation="12dp"
+            tools:targetApi="p"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient2"
+                >
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除音乐"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                >
+            </TextView>
+
+        </androidx.cardview.widget.CardView>
+
 
     </androidx.cardview.widget.CardView>
 
@@ -182,7 +210,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
