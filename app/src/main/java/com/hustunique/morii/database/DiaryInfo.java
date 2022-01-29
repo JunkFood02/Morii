@@ -2,24 +2,38 @@ package com.hustunique.morii.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.hustunique.morii.home.MusicDiaryItem;
+
+import java.util.List;
 
 @Entity
 public class DiaryInfo {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
-    @ColumnInfo
     public String title;
-    @ColumnInfo
     public String article;
-    @ColumnInfo
     public String imagePath;
-    @ColumnInfo
-    public int musicId;
-    @ColumnInfo
-    public int[] soundIds;
-    @ColumnInfo
+    public int musicTabId;
     public String date;
+
+    public DiaryInfo(String title, String article, String imagePath, int musicTabId, String date) {
+        this.title = title;
+        this.article = article;
+        this.imagePath = imagePath;
+        this.musicTabId = musicTabId;
+        this.date = date;
+    }
+
+    public DiaryInfo(MusicDiaryItem item) {
+        title = item.getTitle();
+        article = item.getArticle();
+        imagePath = item.getImagePath();
+        musicTabId = item.getMusicTabId();
+        date = item.getDate();
+    }
 }
 

@@ -13,12 +13,12 @@ public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 
     @Override
     public void switchMusic(int position) {
-        AudioExoPlayerUtil.play(position);
+        AudioExoPlayerUtil.playMusic(position);
     }
 
     @Override
     public void stopMusic() {
-        AudioExoPlayerUtil.pause();
+        AudioExoPlayerUtil.pauseMusicPlayer();
     }
 
 }

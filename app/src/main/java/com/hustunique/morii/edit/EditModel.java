@@ -102,13 +102,8 @@ public class EditModel implements EditContract.IModel{
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             // 判断手机系统版本号
-                            if (Build.VERSION.SDK_INT >= 19) {
-                                // 4.4及以上系统使用这个方法处理图片
-                                handleImageOnKitKat(data);
-                            } else {
-                                // 4.4以下系统使用这个方法处理图片
-                                handleImageBeforeKitKat(data);
-                            }
+                            // 4.4及以上系统使用这个方法处理图片
+                            handleImageOnKitKat(data);
                         }
                     }
                 });
@@ -152,12 +147,6 @@ public class EditModel implements EditContract.IModel{
         displayImage(imagePath); // 根据图片路径显示图片
     }
 
-    public void handleImageBeforeKitKat(Intent data) {
-        Uri uri = data.getData();
-        String imagePath = getImagePath(uri, null);
-        displayImage(imagePath);
-    }
-
     @SuppressLint("Range")
     public String getImagePath(Uri uri, String selection) {
         String path = null;
@@ -174,9 +163,9 @@ public class EditModel implements EditContract.IModel{
 
     private void displayImage(String imagePath) {
         if (imagePath != null) {
-            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            this.path = CreatePath(bitmap);
-            iListener.setIt(path);
+            /*Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            this.path = CreatePath(bitmap);*/
+            iListener.setIt(imagePath);
         } else {
             Toast.makeText(appCompatActivityUse, "failed to get image", Toast.LENGTH_SHORT).show();
         }

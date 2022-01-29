@@ -1,24 +1,30 @@
 package com.hustunique.morii.home;
 
+import com.hustunique.morii.database.DiaryInfo;
+import com.hustunique.morii.database.DiaryWithSoundItemInfo;
+import com.hustunique.morii.database.SoundItemInfo;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MusicDiaryItem implements Serializable {
-    private Calendar calendar;
     private String date;
     private int musicTabId;
-    private int SoundItemId;
     private String title;
     private String article;
-    private int itemID;
+    private long itemID;
     private String imagePath;
+    private List<SoundItemInfo> soundItemInfoList = new ArrayList<>();
 
-    public MusicDiaryItem() {
-        calendar = Calendar.getInstance();
+
+    public long getItemID() {
+        return itemID;
     }
 
-    public int getItemID() {
-        return itemID;
+    public void setItemID(long itemID) {
+        this.itemID = itemID;
     }
 
     public void setItemID(int itemID) {
@@ -31,10 +37,6 @@ public class MusicDiaryItem implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setCalendar() {
-        this.calendar = Calendar.getInstance();
     }
 
     public void setTitle(String s) {
@@ -61,18 +63,6 @@ public class MusicDiaryItem implements Serializable {
         this.musicTabId = musicTabId;
     }
 
-    public int getSoundItemId() {
-        return SoundItemId;
-    }
-
-    public void setSoundItemId(int soundItemId) {
-        SoundItemId = soundItemId;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
     public String getImagePath() {
         return imagePath;
     }
@@ -81,4 +71,31 @@ public class MusicDiaryItem implements Serializable {
         this.imagePath = imagePath;
     }
 
+    public void addSoundItemInfo(SoundItemInfo itemInfo) {
+        if (soundItemInfoList == null)
+            soundItemInfoList = new ArrayList<>();
+        soundItemInfoList.add(itemInfo);
+    }
+
+    public List<SoundItemInfo> getSoundItemInfoList() {
+        return soundItemInfoList;
+    }
+
+    public MusicDiaryItem() {
+        soundItemInfoList = new ArrayList<>();
+    }
+
+    public MusicDiaryItem(DiaryInfo info) {
+        this.date = info.date;
+        this.musicTabId = info.musicTabId;
+        this.title = info.title;
+        this.article = info.article;
+        this.itemID = info.id;
+        this.imagePath = info.imagePath;
+    }
+
+    public MusicDiaryItem(DiaryWithSoundItemInfo d) {
+        this(d.diaryInfo);
+        soundItemInfoList.addAll(d.soundItemInfoList);
+    }
 }

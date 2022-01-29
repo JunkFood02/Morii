@@ -5,15 +5,16 @@ import static com.hustunique.morii.util.MyApplication.musicTabList;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.AutoTransition;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -26,28 +27,40 @@ import androidx.recyclerview.widget.RecyclerView;
 import morii.R;
 
 import com.hustunique.morii.design.MixActivity;
-import com.hustunique.morii.edit.EditActivity;
+import com.hustunique.morii.home.MusicDiaryItem;
+import com.hustunique.morii.util.BaseActivity;
 
-public class MusicSelectActivity extends AppCompatActivity implements MusicSelectContract.IView {
+public class MusicSelectActivity extends BaseActivity implements MusicSelectContract.IView {
 
     private MusicSelectContract.IPresenter presenter;
     private static final String TAG = "MusicSelectActivity";
+    private androidx.cardview.widget.CardView GiveUp;
+    private androidx.cardview.widget.CardView Selected;
     private TextView textView;
-    private TextView Selected;
     private ConstraintLayout constraintLayout;
     private int previousPosition, currentPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setEnterTransition(new AutoTransition());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
         presenter = new MusicSelectPresenter(this);
-        Selected = (TextView) findViewById(R.id.okay);
+        Selected = findViewById(R.id.okay);
+        GiveUp = findViewById(R.id.backLayout_select);
         initUI();
+        Selected.measure(0, 0);
+        Log.d(TAG, "onCreate: " + Selected.getMeasuredWidth());
         Selected.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
-            intent.putExtra("musicTabId", currentPosition);
+            MusicDiaryItem diary=new MusicDiaryItem();
+            diary.setMusicTabId(currentPosition);
+            intent.putExtra("diary", diary);
             startActivity(intent);
+        });
+        GiveUp.setOnClickListener(view -> {
+            onBackPressed();
         });
 
     }
@@ -62,7 +75,7 @@ public class MusicSelectActivity extends AppCompatActivity implements MusicSelec
         textView = findViewById(R.id.Emotion);
         constraintLayout = findViewById(R.id.musicSelectLayout);
         setRecyclerView();
-        setImmersiveStatusBar();
+        //setImmersiveStatusBar();
     }
 
     private void setRecyclerView() {

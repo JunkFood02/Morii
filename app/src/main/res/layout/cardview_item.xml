@@ -2,43 +2,37 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="12dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="6dp">
+    android:outlineAmbientShadowColor="#CC819FED"
+    android:outlineSpotShadowColor="#CC819FED"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="12dp"
+    tools:targetApi="p">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="6dp">
+        android:layout_marginBottom="12dp">
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/photoCard"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/PhotoTitle"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="6dp"
-            android:transitionName="photo"
-            app:cardCornerRadius="10dp"
+            android:layout_height="135dp"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/PhotoTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@drawable/orange" />
-
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" />
 
 
         <TextView
@@ -46,33 +40,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pingfang_regular"
             android:text="12月9日 周四"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/photoCard"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PhotoTitle" />
 
         <TextView
             android:id="@+id/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/TextDate"
-            app:layout_constraintStart_toStartOf="@id/TextDate"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/pingfang_medium"
             android:text="今天的空气是橘子味的"
-            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:textStyle="bold"
-             />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextDate" />
 
-        <TextView
-            android:id="@+id/TextTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/TextTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="12dp"
-            android:text="Time : 06:06:06"
-            android:textSize="16sp"
-            android:textStyle="italic|bold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
