@@ -4,44 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
+    android:background="@color/colorBackground"
+    android:fitsSystemWindows="true"
     tools:context="com.hustunique.morii.design.MixActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:id="@+id/gridLayout"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView03"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@id/include">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/imageView_bacground"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#80817A7A"
+            android:background="@color/design_default_color_on_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:round="20dp" />
+            app:round="16dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +43,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:cardCornerRadius="20dp"
+                android:outlineAmbientShadowColor="#CC819FED"
+                android:outlineSpotShadowColor="#CC819FED"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,129 +54,227 @@
 
                 <ImageView
                     android:id="@+id/imageView_card"
-                    android:layout_width="700dp"
-                    android:layout_height="850dp"
-                    android:layout_gravity="center" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square9"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/guideline10"
-                        app:layout_constraintTop_toTopOf="@+id/guideline11">
+                        app:layout_constraintTop_toTopOf="@+id/guideline11"
+                        app:layout_constraintVertical_bias="1.0">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac9"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image9"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
 
-                    <LinearLayout
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square8"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
                         app:layout_constraintStart_toStartOf="@+id/guideline9"
                         app:layout_constraintTop_toTopOf="@+id/guideline11">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac8"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image8"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square7"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/guideline9"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/guideline11">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac7"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square6"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
                         app:layout_constraintBottom_toTopOf="@+id/guideline11"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline10"
                         app:layout_constraintTop_toTopOf="@+id/guideline12">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac6"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square5"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
                         app:layout_constraintBottom_toTopOf="@+id/guideline11"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
                         app:layout_constraintStart_toStartOf="@+id/guideline9"
                         app:layout_constraintTop_toTopOf="@+id/guideline12">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac5"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image5"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square4"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
                         app:layout_constraintBottom_toTopOf="@+id/guideline11"
                         app:layout_constraintEnd_toStartOf="@+id/guideline9"
                         app:layout_constraintHorizontal_bias="0.062"
@@ -188,43 +282,81 @@
                         app:layout_constraintTop_toTopOf="@+id/guideline12">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac4"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:orientation="horizontal"
+                        android:alpha="0"
                         app:layout_constraintBottom_toTopOf="@+id/guideline12"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline10"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac3"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+
+                        android:alpha="0"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toTopOf="@+id/guideline12"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
@@ -232,21 +364,40 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac2"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:round="15dp" />
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/square1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:alpha="0"
                         android:orientation="horizontal"
                         app:layout_constraintBottom_toTopOf="@+id/guideline12"
                         app:layout_constraintEnd_toStartOf="@+id/guideline9"
@@ -254,20 +405,43 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/imageView_bac1"
+                            android:layout_width="113dp"
+                            android:layout_height="113dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="24dp"
+                            android:paddingEnd="24dp"
+                            android:paddingBottom="24dp"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/square" />
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
                             android:id="@+id/square_image1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="16dp"
-                            app:round="15dp" />
-                    </LinearLayout>
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+
+                            android:paddingStart="32dp"
+                            android:paddingTop="32dp"
+                            android:paddingEnd="32dp"
+                            android:paddingBottom="32dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            app:round="15dp"
+                            tools:layout_conversion_absoluteHeight="109dp"
+                            tools:layout_conversion_absoluteWidth="109dp" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:id="@+id/divider3"
-                        android:layout_width="5dp"
+                        android:layout_width="4dp"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -278,7 +452,7 @@
                     <View
                         android:id="@+id/divider5"
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"
+                        android:layout_height="4dp"
                         android:background="#FFFFFF"
                         app:layout_constraintBottom_toTopOf="@+id/guideline11"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -287,7 +461,7 @@
 
                     <View
                         android:id="@+id/divider2"
-                        android:layout_width="5dp"
+                        android:layout_width="4dp"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -298,7 +472,7 @@
                     <View
                         android:id="@+id/divider4"
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"
+                        android:layout_height="4dp"
                         android:background="#FFFFFF"
                         app:layout_constraintBottom_toTopOf="@+id/guideline12"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -311,7 +485,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintGuide_begin="250dp"
+                        app:layout_constraintGuide_percent="0.66"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <androidx.constraintlayout.widget.Guideline
@@ -353,80 +527,114 @@
         android:id="@+id/include"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/backLayout_mix"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/backLayout_select_mix"
+            android:layout_width="98dp"
+            android:layout_height="32dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="#4DFFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView_mix_back"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_chevron_left_24" />
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:padding="3dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="返回"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageView_mix_back"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageView_select_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_icon_back_design" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="返回首页"
+                    android:textColor="#1D283F"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageView_select_back"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView_mix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="组合"
-            android:textSize="24sp"
+            android:text="创作"
+            android:textColor="#1D283F"
+            android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/completeLayout_mix"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/okay_mix"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="#4DFFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="完成"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imageView_mix_complete"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:padding="3dp">
 
-            <ImageView
-                android:id="@+id/imageView_mix_complete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:background="@android:color/transparent"
+                    android:text="下一步"
+                    android:textColor="#1D283F"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageView_select_complete"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView_select_complete"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_icon_right_design" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView03"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/square2"
+        android:layout_marginBottom="3dp"
         app:layout_constraintBottom_toTopOf="@+id/playbackButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -442,23 +650,25 @@
     <LinearLayout
         android:id="@+id/delete_area"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:background="#80F50303"
         android:orientation="vertical"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView03"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/recyclerView03"
-        app:layout_constraintTop_toTopOf="@+id/recyclerView03">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:gravity="center"
             android:text="删除"
             android:textColor="#5F3A3A"
             android:textSize="24sp" />
+
     </LinearLayout>
 
 

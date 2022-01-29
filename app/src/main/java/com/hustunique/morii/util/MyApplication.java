@@ -33,7 +33,7 @@ public class MyApplication extends Application {
             MusicDiaryItem musicDiaryItem = new MusicDiaryItem();
             musicDiaryItem.setItemID(i);
             musicDiaryItem.setDate(Calendar.getInstance().getTime().toString());
-            musicDiaryItem.setTitle("Default Title " + i);
+            musicDiaryItem.setTitle("今天的空气是橘子味的 " + i);
             musicDiaryItem.setArticle("This is content of the article " + i);
             musicDiaryList.add(musicDiaryItem);
         }
@@ -56,26 +56,7 @@ public class MyApplication extends Application {
         AudioExoPlayerUtil.initMusicPlayer();
         AudioExoPlayerUtil.initSoundPlayer();
     }
-    public static int getSoundItemPositionThroughIconID(int iconID){
-        switch (iconID){
-            case R.drawable.outline_air_24:
-                return 0;
-            case R.drawable.outline_flutter_dash_24:
-                return 1;
-            case R.drawable.outline_free_breakfast_24:
-                return 2;
-            case R.drawable.outline_grass_24:
-                return 3;
-            case R.drawable.x5:
-                return 4;
-            case R.drawable.x6:
-                return 5;
-            case R.drawable.x7:
-                return 6;
-            default:
-                return 7;
-        }
-    }
+
     public static void clearAllResIdInSoundItemList(){
         for (SoundItem soundItem:soundItemList){
             //soundItem.getResIdList().clear();

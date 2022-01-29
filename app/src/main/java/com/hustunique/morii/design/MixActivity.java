@@ -16,15 +16,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import morii.R;
-
 import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
+import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.MyApplication;
 
 import java.util.ArrayList;
@@ -32,19 +30,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import morii.R;
 
-public class MixActivity extends AppCompatActivity {
+
+public class MixActivity extends BaseActivity {
     @SuppressLint("StaticFieldLeak")
+    private static int _last_drag_position;
+    private RecyclerView recyclerView;
+    private androidx.cardview.widget.CardView backLayout,completeLayout;
     private static LinearLayout delete_area;
     private ImageView cardImage;
     private static final String TAG = "MixActivity";
     public static final int SHOW_DELETE_AREA = -1;
     private static int playbackStatus = 1;
-    private  final List<LinearLayout> squareLayoutList = new ArrayList<>(9);
+    private  final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
     private  final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
-    private final Map<ImageView, SoundItem> imageViewSoundItemMap = new HashMap<>(9);
+    private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
     public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -63,6 +66,7 @@ public class MixActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        recyclerView = findViewById(R.id.recyclerView03);
         cardImage = findViewById(R.id.imageView_card);
         //cardImage.setImageResource(R.drawable.x2);
         cardImage.setImageResource(MyApplication.musicTabList.get(getIntent().getIntExtra("musicTabId",1)).getImageResId());
@@ -74,8 +78,8 @@ public class MixActivity extends AppCompatActivity {
         fadeout.setFillAfter(true);
         MyApplication.clearAllResIdInSoundItemList();
         delete_area = findViewById(R.id.delete_area);
-        ConstraintLayout backLayout = findViewById(R.id.backLayout_mix);
-        ConstraintLayout completeLayout = findViewById(R.id.completeLayout_mix);
+        backLayout = findViewById(R.id.backLayout_select_mix);
+        completeLayout = findViewById(R.id.okay_mix);
         squareList.add(findViewById(R.id.square_image1));
         squareList.add(findViewById(R.id.square_image2));
         squareList.add(findViewById(R.id.square_image3));
@@ -116,14 +120,14 @@ public class MixActivity extends AppCompatActivity {
             startActivity(intent);
         });
         backLayout.setOnClickListener(v -> onBackPressed());
-        for (ImageView square : squareList) {
-            imageViewSoundItemMap.put(square, null);
+        for (ConstraintLayout constraintLayout : squareLayoutList) {
+            constraintLayoutSoundItemMap.put(constraintLayout, null);
         }
 
-        for (ImageView imageView : imageViewSoundItemMap.keySet()) {
-            imageView.setOnDragListener(((v, event) -> {
+        for (ConstraintLayout constraintLayout : constraintLayoutSoundItemMap.keySet()) {
+            constraintLayout.setOnDragListener(((v, event) -> {
                 int rmposition;
-                int position = squareList.indexOf(imageView);
+                int position = squareLayoutList.indexOf(constraintLayout);
                 int soundItemId;
                 int iconID;
                 if (event.getAction() == DragEvent.ACTION_DROP) {
@@ -137,18 +141,16 @@ public class MixActivity extends AppCompatActivity {
                         Log.d(TAG, "3");
                         stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                         positionSoundItemIdMap.remove(rmposition);
-                        //squareList.get(rmposition).setImageResource(R.drawable.square);
-                        imageViewSoundItemMap.remove(squareList.get(rmposition));
-                        squareList.get(rmposition).setOnTouchListener(null);
+                        constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
+                        squareLayoutList.get(rmposition).setOnTouchListener(null);
                     }
                     iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
-                    //position = squareList.indexOf(imageView);
-                    squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.transparent));
+                    constraintLayout.setAlpha(1.0f);
                     soundItemId = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem", 0);
-                    imageView.setImageResource(iconID);
+                    squareList.get(position).setImageResource(iconID);
                     positionSoundItemIdMap.put(position, soundItemId);
-                    imageViewSoundItemMap.put(imageView, MyApplication.soundItemList.get(soundItemId));
-                    imageView.setOnTouchListener(new StartDrag(position, true, soundItemId));
+                    constraintLayoutSoundItemMap.put(constraintLayout, MyApplication.soundItemList.get(soundItemId));
+                    constraintLayout.setOnTouchListener(new StartDrag(position, true, soundItemId));
                     /**
                      *here to start a sound item , params may be used here are
                      * soundItemId  -- soundItemId
@@ -157,23 +159,47 @@ public class MixActivity extends AppCompatActivity {
                     Log.d(TAG, "2");
                     startPlayingSoundItem(soundItemId, position);
                     hideDeleteArea();
+                    return true;
                 }
-                if (imageViewSoundItemMap.get(imageView) == null) {
+                if(event.getAction() == DragEvent.ACTION_DRAG_STARTED){
+                    return true;
+                }
+                return false;
+                /*if (imageViewSoundItemMap.get(completeLayout) == null) {
                     if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED) {
                         squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.gray));
                     } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED) {
                         squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.transparent));
                     }
                 }
-                return true;
+
+                 */
             }));
         }
-
+        cardImage.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                switch (event.getAction()){
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        Log.d("debug_drag","start");
+                        _last_drag_position = (Integer) event.getLocalState();
+                        return true;
+                        case DragEvent.ACTION_DRAG_ENDED:
+                            Log.d("debug_drag","end "+_last_drag_position);
+                            if(!event.getResult()&&_last_drag_position!=-1){
+                                squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
+                                hideDeleteArea();
+                            }
+                            return true;
+                    default:
+                        return true;
+                }
+            }
+        });
         setRecyclerView();
     }
 
     private void setRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerView03);
         WhiteNoiseAdapter adapter = new WhiteNoiseAdapter(this);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
@@ -190,10 +216,8 @@ public class MixActivity extends AppCompatActivity {
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
-                    //squareList.get(rmposition).setImageResource(R.drawable.square);
-                    squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
-                    imageViewSoundItemMap.remove(squareList.get(rmposition));
-                    squareList.get(rmposition).setOnTouchListener(null);
+                    constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
+                    squareLayoutList.get(rmposition).setOnTouchListener(null);
                 }
                 hideDeleteArea();
                 StartDrag.makeVibrate();

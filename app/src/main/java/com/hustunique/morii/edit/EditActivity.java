@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hustunique.morii.content.ContentActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
+import com.hustunique.morii.util.BaseActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 import morii.R;
 
-public class EditActivity extends AppCompatActivity implements EditContract.IView {
+public class EditActivity extends BaseActivity implements EditContract.IView {
     private String content = "", title = "";
     private TextInputEditText textTitle, textContent;
     private ImageView showPhoto;
