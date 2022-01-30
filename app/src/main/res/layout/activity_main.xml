@@ -15,8 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="-30dp"
-        android:src="@drawable/gradient_base"
+        android:src="@drawable/background"
         android:translationZ="10dp"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/upperBackground"/>
 
@@ -71,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
-            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pingfang_regular"
             android:text="我的创作"
             android:textSize="21sp"
             app:layout_constraintStart_toStartOf="parent"

@@ -51,6 +51,8 @@ public class MixActivity extends BaseActivity {
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
+    ImageView playbackImage;
+
     /*public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -77,7 +79,7 @@ public class MixActivity extends BaseActivity {
         cardImage.setImageResource(MyApplication.musicTabList.get(diary.getMusicTabId()).getImageResId());
         int animationDuration = 100;
         CardView playbackButton = findViewById(R.id.playbackButton);
-        ImageView playbackImage=findViewById(R.id.playbackButton_image);
+        playbackImage = findViewById(R.id.playbackButton_image);
         fadeIn.setDuration(animationDuration);
         fadeIn.setFillAfter(true);
         fadeout.setDuration(animationDuration);
@@ -270,9 +272,19 @@ public class MixActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!AudioExoPlayerUtil.isPlaying()) {
+            playbackStatus = 1;
+            playbackImage.setImageResource(R.drawable.round_play_arrow_24);
+
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        AudioExoPlayerUtil.stopAllSoundPlayers();
+        AudioExoPlayerUtil.resetAllSoundPlayers();
     }
     /*
     private static void showDeleteArea() {
