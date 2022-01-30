@@ -229,12 +229,14 @@ public class MixActivity extends BaseActivity {
                 if (!event.getResult() && _last_drag_position != -1) {
                     squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
                 }
+                v.startAnimation(fadeout);
                 v.setAlpha(0.0f);
             } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                 _last_drag_position = (Integer) event.getLocalState();
                 Log.d("debug_drag", "start" + _last_drag_position);
                 if (_last_drag_position != -1) {
                     v.setAlpha(1.0f);
+                    v.startAnimation(fadeIn);
                 }
             }
             return true;

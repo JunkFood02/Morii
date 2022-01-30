@@ -678,7 +678,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:alpha="0.0"
-        android:background="#80F50303"
+        android:background="#99E75A70"
+        android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -686,16 +687,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
 
-        <TextView
-            android:id="@+id/textView6"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:text="删除"
-            android:textColor="#5F3A3A"
-            android:textSize="24sp" />
-
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_vector_delete" />
     </LinearLayout>
 
 
