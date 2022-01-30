@@ -108,10 +108,10 @@ public class MixActivity extends BaseActivity {
         playbackButton.setOnClickListener(v -> {
             Log.d(TAG, "change");
             if (playbackStatus == 1) {
-                AudioExoPlayerUtil.startAllSoundPlayers();
+                AudioExoPlayerUtil.startAllPlayers();
                 playbackImage.setImageResource(R.drawable.outline_pause_24);
             } else {
-                AudioExoPlayerUtil.stopAllSoundPlayers();
+                AudioExoPlayerUtil.pauseAllPlayers();
                 playbackImage.setImageResource(R.drawable.round_play_arrow_24);
             }
             playbackStatus = -playbackStatus;

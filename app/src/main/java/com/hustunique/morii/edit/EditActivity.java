@@ -171,6 +171,11 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         showPhoto.setImageResource(musicTabList.get(musicTabId).getImageResId());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private String getTime() {
 
 

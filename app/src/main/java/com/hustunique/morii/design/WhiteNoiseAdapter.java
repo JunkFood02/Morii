@@ -48,7 +48,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
         holder.textView.setText(soundItemList.get(position).getSoundName());
         Log.d("RECYCLER2", String.valueOf(position));
         //holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
-        holder.itemView.setOnTouchListener(new StartDrag(position % 7));
+        holder.itemView.setOnTouchListener(new StartDrag(position));
         holder.itemView.setOnClickListener(v -> {
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000"));
             else holder.textView.setTextColor(Color.parseColor("#FF888888"));

@@ -50,7 +50,6 @@ public class ContentActivity extends BaseActivity {
     private ProgressBar progressBar;
     private SeekBar seekBar;
     private int Position = (int) AudioExoPlayerUtil.getCurrentPosition();
-    boolean isPlaying = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,6 +233,7 @@ public class ContentActivity extends BaseActivity {
     }
 
     class goThread implements Runnable {
+        boolean isPlaying = true;
 
         @Override
         //实现run方法
