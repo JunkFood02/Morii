@@ -82,9 +82,14 @@ public class AudioExoPlayerUtil {
             {
                 if (player.isPlaying())
                     player.pause();
-                player.removeMediaItem(0);
             }
 
+        }
+    }
+
+    public static void resetAllSoundPlayers() {
+        for (ExoPlayer player : soundPlayerList) {
+            player.removeMediaItem(0);
         }
     }
 

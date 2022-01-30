@@ -212,7 +212,7 @@ public class ContentActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (newItem == 0) {
-            AudioExoPlayerUtil.stopAllSoundPlayers();
+            AudioExoPlayerUtil.resetAllSoundPlayers();
             AudioExoPlayerUtil.pauseMusicPlayer();
         }
     }
