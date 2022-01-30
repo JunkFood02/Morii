@@ -82,6 +82,7 @@ public class AudioExoPlayerUtil {
             {
                 if (player.isPlaying())
                     player.pause();
+
             }
 
         }

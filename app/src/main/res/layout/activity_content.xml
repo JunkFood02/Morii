@@ -293,7 +293,7 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/seekbar_exact"
+        layout="@layout/seekbar_content"
         android:layout_width="0dp"
         android:layout_height="100dp"
 

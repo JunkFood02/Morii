@@ -2,6 +2,7 @@ package com.hustunique.morii.edit;
 
 import static com.hustunique.morii.util.MyApplication.UriParser;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
+import static com.hustunique.morii.util.MyApplication.soundItemList;
 
 import android.content.Intent;
 
@@ -23,14 +24,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bumptech.glide.Glide;
 
 import com.hustunique.morii.content.ContentActivity;
+import com.hustunique.morii.database.SoundItemInfo;
 import com.hustunique.morii.home.MusicDiaryItem;
+import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.BaseActivity;
+import com.hustunique.morii.util.onReadyListener;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 
 import morii.R;
 
@@ -47,8 +53,8 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     int musicTabId;
     private ProgressBar progressBar;
     private SeekBar seekBar;
-    private MediaPlayer player = new MediaPlayer();
     private TextView startTime;
+    private int Position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
     private void initUI() {
         MusicDiaryItem diary=(MusicDiaryItem) getIntent().getSerializableExtra("diary");
+        AudioExoPlayerUtil.startAllPlayers();
         editCardLayout=findViewById(R.id.editCardLayout);
         musicTabId = diary.getMusicTabId();
 
@@ -81,27 +88,26 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         CardView pauseMusic = (CardView) findViewById(R.id.MusicPlay_Edit);
         imageView = (ImageView) findViewById(R.id.music_pause2);
         startTime = (TextView) findViewById(R.id.StartTime2);
-        TextView endTime = (TextView) findViewById(R.id.EndTime2);
         progressBar = (ProgressBar) findViewById(R.id.MusicLine2);
         seekBar = (SeekBar) findViewById(R.id.SeekBar2);
-
-        player = MediaPlayer.create(this,R.raw.night);
-        int Duration = player.getDuration();
-        progressBar.setMax(Duration);
-        seekBar.setMax(Duration);
-        String sss , mmm;
-        sss = String.valueOf(Duration/1000%60);
-        mmm = String.valueOf(Duration / 60 /1000);
-        if (sss.length()<2) sss = "0" + sss;
-        if (mmm.length()<2) mmm = "0" + mmm;
-        endTime.setText(mmm+":"+sss);
-
+        TextView endTime = (TextView) findViewById(R.id.EndTime2);
+        long Duration = AudioExoPlayerUtil.getDuration();
+        Log.d(TAG, "onCreate: " + Duration);
+        progressBar.setMax((int) Duration);
+        seekBar.setMax((int) Duration);
+        String sss, mmm;
+        sss = String.valueOf(Duration / 1000 % 60);
+        mmm = String.valueOf(Duration / 60 / 1000);
+        if (sss.length() < 2) sss = "0" + sss;
+        if (mmm.length() < 2) mmm = "0" + mmm;
+        endTime.setText(mmm + ":" + sss);
+        play();
         pauseMusic.setOnClickListener(view -> {
-            if (player.isPlaying()){
-                player.pause();
-                imageView.setImageResource(R.drawable.ic_icon_start_design);
-            }else{
-                player.start();
+            if (AudioExoPlayerUtil.isPlaying()) {
+                AudioExoPlayerUtil.pauseAllPlayers();
+                imageView.setImageResource(R.drawable.round_play_arrow_24);
+            } else {
+                AudioExoPlayerUtil.startAllPlayers();
                 play();
                 imageView.setImageResource(R.drawable.outline_pause_24);
 
@@ -181,20 +187,34 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
     class goThread implements Runnable {
 
+        boolean isPlaying = true;
+
         @Override
         //实现run方法
         public void run() {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //判断状态，在不暂停的情况下向总线程发出信息
-            while (player.isPlaying()) {
+            while (isPlaying) {
                 try {
+                    runOnUiThread(() -> {
+                        isPlaying = AudioExoPlayerUtil.isPlaying();
+                        if (isPlaying)
+                            Position = (int) AudioExoPlayerUtil.getCurrentPosition();
+                    });
+                    Log.d(TAG, "position: " + Position);
+                    seekBar.setProgress(Position);
+                    progressBar.setProgress(Position);
                     // 每0.1秒更新一次位置
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 //发出的信息
-                seekBar.setProgress(player.getCurrentPosition());
-                progressBar.setProgress(player.getCurrentPosition());
+
             }
 
         }
