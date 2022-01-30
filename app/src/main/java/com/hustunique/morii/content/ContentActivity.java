@@ -53,6 +53,7 @@ public class ContentActivity extends BaseActivity {
     private TextView startTime;
     private ProgressBar progressBar;
     private SeekBar seekBar;
+    private int Position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,15 +97,7 @@ public class ContentActivity extends BaseActivity {
                 TextView endTime = (TextView) findViewById(R.id.EndTime);
                 long Duration = AudioExoPlayerUtil.getDuration();
                 Log.d(TAG, "onCreate: " + Duration);
-                progressBar.setMax((int) Duration);
-                seekBar.setMax((int) Duration);
-                String sss, mmm;
-                sss = String.valueOf(Duration / 1000 % 60);
-                mmm = String.valueOf(Duration / 60 / 1000);
-                if (sss.length() < 2) sss = "0" + sss;
-                if (mmm.length() < 2) mmm = "0" + mmm;
-                endTime.setText(mmm + ":" + sss);
-                play();
+                SetMax(Duration);
             }
         });
 
@@ -124,6 +117,7 @@ public class ContentActivity extends BaseActivity {
             for (String key : stringSet) {
                 builder.append(soundItemList.get(bundle.getInt(key)).getSoundName()).append(" ");
             }
+            SetMax((long) AudioExoPlayerUtil.getDuration());
         }
         title = findViewById(R.id.musicDiaryTitle);
         article = findViewById(R.id.diaryContent);
@@ -188,6 +182,23 @@ public class ContentActivity extends BaseActivity {
 
     }
 
+    private void SetMax(long Duration){
+        TextView endTime = (TextView) findViewById(R.id.EndTime);
+        Log.e(TAG,String.valueOf(Duration));
+        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
+        seekBar = (SeekBar) findViewById(R.id.SeekBar);
+        progressBar.setMax((int) Duration);
+        seekBar.setMax((int) Duration);
+        String sss, mmm;
+        sss = String.valueOf(Duration / 1000 % 60);
+        mmm = String.valueOf(Duration / 60 / 1000);
+        if (sss.length() < 2) sss = "0" + sss;
+        if (mmm.length() < 2) mmm = "0" + mmm;
+        endTime.setText(mmm + ":" + sss);
+        play();
+    }
+
+
     private void createMusicDiary() {
         DiaryInfo diaryInfo = new DiaryInfo(musicDiaryItem);
         long diaryInfoId = DatabaseUtil.insertDiaryInfo(diaryInfo);
@@ -225,7 +236,6 @@ public class ContentActivity extends BaseActivity {
 
     class goThread implements Runnable {
         boolean isPlaying = true;
-        int position;
 
         @Override
         //实现run方法
@@ -241,13 +251,13 @@ public class ContentActivity extends BaseActivity {
                     runOnUiThread(() -> {
                         isPlaying = AudioExoPlayerUtil.isPlaying();
                         if (isPlaying)
-                            position = (int) AudioExoPlayerUtil.getCurrentPosition();
+                            Position = (int) AudioExoPlayerUtil.getCurrentPosition();
                     });
-                    Log.d(TAG, "position: " + position);
-                    seekBar.setProgress(position);
-                    progressBar.setProgress(position);
+                    Log.d(TAG, "position: " + Position);
+                    seekBar.setProgress(Position);
+                    progressBar.setProgress(Position);
                     // 每0.1秒更新一次位置
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
