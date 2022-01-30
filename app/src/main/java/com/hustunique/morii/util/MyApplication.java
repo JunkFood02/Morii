@@ -39,21 +39,21 @@ public class MyApplication extends Application {
             MusicDiaryItem item = new MusicDiaryItem(info);
             musicDiaryList.add(item);
         }
-        soundItemList.add(new SoundItem(R.drawable.outline_air_24, "风声", R.raw.wind));
-        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24, "鸟语", R.raw.bird));
-        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24, "咖啡馆", R.raw.cafe));
-        soundItemList.add(new SoundItem(R.drawable.outline_grass_24, "夜晚", R.raw.night));
-        soundItemList.add(new SoundItem(R.drawable.outline_air_24, "风声", R.raw.wind));
-        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24, "鸟语", R.raw.bird));
-        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24, "咖啡馆", R.raw.cafe));
-        soundItemList.add(new SoundItem(R.drawable.outline_grass_24, "夜晚", R.raw.night));
 
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
-        musicTabList.add(new MusicTab("宁静", R.drawable.x7, R.raw.peaceful));
-        musicTabList.add(new MusicTab("律动", R.drawable.x1, R.raw.jazz));
+        soundItemList.add(new SoundItem(R.drawable.round_whatshot_24, "炉火", R.raw.fire));
+        soundItemList.add(new SoundItem(R.drawable.outline_air_24, "风声", R.raw.wind));
+        soundItemList.add(new SoundItem(R.drawable.round_dark_mode_24, "夜晚", R.raw.night));
+        soundItemList.add(new SoundItem(R.drawable.round_umbrella_24, "雨季", R.raw.rain));
+        soundItemList.add(new SoundItem(R.drawable.round_waves_24, "海浪", R.raw.wave));
+        soundItemList.add(new SoundItem(R.drawable.outline_free_breakfast_24, "咖啡馆", R.raw.cafe));
+        soundItemList.add(new SoundItem(R.drawable.round_thunderstorm_24, "雷鸣", R.raw.thunder));
+        soundItemList.add(new SoundItem(R.drawable.outline_flutter_dash_24, "鸟语", R.raw.bird));
+
+        musicTabList.add(new MusicTab("安宁", R.drawable.bg_romance, R.raw.peaceful));
+        musicTabList.add(new MusicTab("律动", R.drawable.bg_groove, R.raw.jazz));
+        musicTabList.add(new MusicTab("喜悦", R.drawable.bg_passion, R.raw.happy));
+        musicTabList.add(new MusicTab("希望", R.drawable.bg_hopeful, R.raw.hopeful));
+        musicTabList.add(new MusicTab("静谧", R.drawable.bg_silent, R.raw.silent));
 
         AudioExoPlayerUtil.initMusicPlayer();
         AudioExoPlayerUtil.initSoundPlayer();

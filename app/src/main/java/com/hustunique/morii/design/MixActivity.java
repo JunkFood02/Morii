@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,17 +40,19 @@ public class MixActivity extends BaseActivity {
     private static int _last_drag_position;
     private RecyclerView recyclerView;
     private androidx.cardview.widget.CardView backLayout, completeLayout;
-    private static LinearLayout delete_area;
+    private static ConstraintLayout delete_area;
     private ImageView cardImage;
     private static final String TAG = "MixActivity";
     public static final int SHOW_DELETE_AREA = -1;
-    private static int playbackStatus = 1;
+    private static int playbackStatus = -1;
     private final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
     private final List<ImageView> squareList = new ArrayList<>(9);
     private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
     private static final Animation fadeout = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
+    ImageView playbackImage;
+
     /*public static Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -75,7 +78,8 @@ public class MixActivity extends BaseActivity {
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
         cardImage.setImageResource(MyApplication.musicTabList.get(diary.getMusicTabId()).getImageResId());
         int animationDuration = 100;
-        Button playbackButton = findViewById(R.id.playbackButton);
+        CardView playbackButton = findViewById(R.id.playbackButton);
+        playbackImage = findViewById(R.id.playbackButton_image);
         fadeIn.setDuration(animationDuration);
         fadeIn.setFillAfter(true);
         fadeout.setDuration(animationDuration);
@@ -106,11 +110,11 @@ public class MixActivity extends BaseActivity {
         playbackButton.setOnClickListener(v -> {
             Log.d(TAG, "change");
             if (playbackStatus == 1) {
-                AudioExoPlayerUtil.startAllSoundPlayers();
-                playbackButton.setText("暂停");
+                AudioExoPlayerUtil.startAllPlayers();
+                playbackImage.setImageResource(R.drawable.outline_pause_24);
             } else {
-                AudioExoPlayerUtil.stopAllSoundPlayers();
-                playbackButton.setText("播放");
+                AudioExoPlayerUtil.pauseAllPlayers();
+                playbackImage.setImageResource(R.drawable.round_play_arrow_24);
             }
             playbackStatus = -playbackStatus;
         });
@@ -229,11 +233,13 @@ public class MixActivity extends BaseActivity {
                 if (!event.getResult() && _last_drag_position != -1) {
                     squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
                 }
+                delete_area.startAnimation(fadeout);
                 v.setAlpha(0.0f);
             } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                 _last_drag_position = (Integer) event.getLocalState();
                 Log.d("debug_drag", "start" + _last_drag_position);
                 if (_last_drag_position != -1) {
+                    delete_area.startAnimation(fadeIn);
                     v.setAlpha(1.0f);
                 }
             }
@@ -266,9 +272,19 @@ public class MixActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!AudioExoPlayerUtil.isPlaying()) {
+            playbackStatus = 1;
+            playbackImage.setImageResource(R.drawable.round_play_arrow_24);
+
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        AudioExoPlayerUtil.stopAllSoundPlayers();
+        AudioExoPlayerUtil.resetAllSoundPlayers();
     }
     /*
     private static void showDeleteArea() {

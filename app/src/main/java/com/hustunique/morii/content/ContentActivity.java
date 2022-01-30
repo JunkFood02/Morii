@@ -5,11 +5,8 @@ import static com.hustunique.morii.util.MyApplication.musicTabList;
 import static com.hustunique.morii.util.MyApplication.soundItemList;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.transition.AutoTransition;
 import android.transition.Explode;
-import android.transition.Slide;
 import android.util.Log;
 
 import android.view.View;
@@ -25,12 +22,12 @@ import androidx.cardview.widget.CardView;
 import com.bumptech.glide.Glide;
 import com.hustunique.morii.database.DiaryInfo;
 import com.hustunique.morii.database.SoundItemInfo;
-import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.home.MainActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.DatabaseUtil;
+import com.hustunique.morii.util.onReadyListener;
 
 import java.io.File;
 import java.util.List;
@@ -52,13 +49,7 @@ public class ContentActivity extends BaseActivity {
     private TextView startTime;
     private ProgressBar progressBar;
     private SeekBar seekBar;
-
-    public static class onReadyListener {
-        public void onReady(long duration) {
-
-        }
-
-    }
+    private int Position = (int) AudioExoPlayerUtil.getCurrentPosition();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,26 +85,20 @@ public class ContentActivity extends BaseActivity {
         goBack.setOnClickListener(view -> {
             onBackPressed();
         });
-
-        AudioExoPlayerUtil.setListener(new onReadyListener() {
-            @Override
-            public void onReady(long duration) {
-                super.onReady(duration);
-                TextView endTime = (TextView) findViewById(R.id.EndTime);
-                long Duration = AudioExoPlayerUtil.getDuration();
-                Log.d(TAG, "onCreate: " + Duration);
-                progressBar.setMax((int) Duration);
-                seekBar.setMax((int) Duration);
-                String sss, mmm;
-                sss = String.valueOf(Duration / 1000 % 60);
-                mmm = String.valueOf(Duration / 60 / 1000);
-                if (sss.length() < 2) sss = "0" + sss;
-                if (mmm.length() < 2) mmm = "0" + mmm;
-                endTime.setText(mmm + ":" + sss);
-                play();
-            }
-        });
-
+        if (newItem == 1) {
+            initProgressBar(AudioExoPlayerUtil.getDuration());
+        } else {
+            AudioExoPlayerUtil.setListener(new onReadyListener() {
+                @Override
+                public void onReady(long duration) {
+                    super.onReady(duration);
+                    TextView endTime = (TextView) findViewById(R.id.EndTime);
+                    long Duration = AudioExoPlayerUtil.getDuration();
+                    Log.d(TAG, "onCreate: " + Duration);
+                    initProgressBar(Duration);
+                }
+            });
+        }
         musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
         builder.append(musicTabList.get(musicDiaryItem.getMusicTabId()).getEmotion()).append(" ");
         if (newItem == 0) {
@@ -130,6 +115,7 @@ public class ContentActivity extends BaseActivity {
             for (String key : stringSet) {
                 builder.append(soundItemList.get(bundle.getInt(key)).getSoundName()).append(" ");
             }
+            initProgressBar((long) AudioExoPlayerUtil.getDuration());
         }
         title = findViewById(R.id.musicDiaryTitle);
         article = findViewById(R.id.diaryContent);
@@ -162,7 +148,7 @@ public class ContentActivity extends BaseActivity {
         pauseMusic.setOnClickListener(view -> {
             if (AudioExoPlayerUtil.isPlaying()) {
                 AudioExoPlayerUtil.pauseAllPlayers();
-                imageView2.setImageResource(R.drawable.ic_icon_start_design);
+                imageView2.setImageResource(R.drawable.round_play_arrow_24);
             } else {
                 AudioExoPlayerUtil.startAllPlayers();
                 play();
@@ -191,8 +177,24 @@ public class ContentActivity extends BaseActivity {
         });
 
 
-
     }
+
+    private void initProgressBar(long Duration) {
+        TextView endTime = (TextView) findViewById(R.id.EndTime);
+        Log.e(TAG, String.valueOf(Duration));
+        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
+        seekBar = (SeekBar) findViewById(R.id.SeekBar);
+        progressBar.setMax((int) Duration);
+        seekBar.setMax((int) Duration);
+        String sss, mmm;
+        sss = String.valueOf(Duration / 1000 % 60);
+        mmm = String.valueOf(Duration / 60 / 1000);
+        if (sss.length() < 2) sss = "0" + sss;
+        if (mmm.length() < 2) mmm = "0" + mmm;
+        endTime.setText(mmm + ":" + sss);
+        play();
+    }
+
 
     private void createMusicDiary() {
         DiaryInfo diaryInfo = new DiaryInfo(musicDiaryItem);
@@ -218,8 +220,9 @@ public class ContentActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (newItem == 0) {
-            AudioExoPlayerUtil.stopAllSoundPlayers();
+            AudioExoPlayerUtil.resetAllSoundPlayers();
             AudioExoPlayerUtil.pauseMusicPlayer();
+
         }
     }
 
@@ -231,7 +234,6 @@ public class ContentActivity extends BaseActivity {
 
     class goThread implements Runnable {
         boolean isPlaying = true;
-        int position;
 
         @Override
         //实现run方法
@@ -247,13 +249,13 @@ public class ContentActivity extends BaseActivity {
                     runOnUiThread(() -> {
                         isPlaying = AudioExoPlayerUtil.isPlaying();
                         if (isPlaying)
-                            position = (int) AudioExoPlayerUtil.getCurrentPosition();
+                            Position = (int) AudioExoPlayerUtil.getCurrentPosition();
                     });
-                    Log.d(TAG, "position: " + position);
-                    seekBar.setProgress(position);
-                    progressBar.setProgress(position);
+                    Log.d(TAG, "position: " + Position);
+                    seekBar.setProgress(Position);
+                    progressBar.setProgress(Position);
                     // 每0.1秒更新一次位置
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

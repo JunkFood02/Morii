@@ -164,7 +164,7 @@
                 android:fontFamily="@font/pingfang_medium"
                 android:maxLines="2"
                 android:text="空気"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/PhotoShow" />
 
@@ -293,9 +293,9 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/seekbar_exact"
+        layout="@layout/seekbar_content"
         android:layout_width="0dp"
-        android:layout_height="90dp"
+        android:layout_height="100dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
