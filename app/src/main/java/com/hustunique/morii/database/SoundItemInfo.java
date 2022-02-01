@@ -1,6 +1,5 @@
 package com.hustunique.morii.database;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -25,6 +24,12 @@ public class SoundItemInfo implements Serializable {
     @Ignore
     public SoundItemInfo(long diaryInfoId, int soundItemPosition, int soundItemId) {
         this.diaryInfoId = diaryInfoId;
+        this.soundItemId = soundItemId;
+        this.soundItemPosition = soundItemPosition;
+    }
+
+    @Ignore
+    public SoundItemInfo(int soundItemPosition, int soundItemId) {
         this.soundItemId = soundItemId;
         this.soundItemPosition = soundItemPosition;
     }
