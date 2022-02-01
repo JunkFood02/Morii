@@ -131,10 +131,8 @@ public class ContentActivity extends BaseActivity {
         Log.d(TAG, "onCreate: " + imagePath);
 
         if (imagePath != null) {
-            //Picasso.get().load(imagePath).into(imageView);
             Glide.with(this).load(imagePath).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(imageView);
         } else {
-            //Picasso.get().load(imagePath).into(imageView);
             Glide.with(this).load(musicTabList.get(musicDiaryItem.getMusicTabId())
                     .getImageResId()).into(imageView);
         }
