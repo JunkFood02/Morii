@@ -42,7 +42,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     private ProgressBar progressBar;
     private SeekBar seekBar;
     private TextView startTime;
-    private int Position = 0;
+    private int Position = (int) AudioExoPlayerUtil.getCurrentPosition();
     private CardView complete_layout;
     private CardView back_layout;
     private TextView endTime;
@@ -54,7 +54,6 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         presenter = new EditPresenter(this);
-        AudioExoPlayerUtil.startAllPlayers();
         initUI();
 
     }
@@ -62,8 +61,8 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
     @Override
     protected void onResume() {
-        if (ImagePath != null) Glide.with(this).load(ImagePath).into(showPhoto);
         super.onResume();
+        checkPlayStatus();
     }
 
     @Override
@@ -77,16 +76,12 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
         musicTabId = diary.getMusicTabId();
         long Duration = AudioExoPlayerUtil.getDuration();
-        Log.d(TAG, "onCreate: " + Duration);
-        progressBar.setMax((int) Duration);
-        seekBar.setMax((int) Duration);
-        String sss, mmm;
-        sss = String.valueOf(Duration / 1000 % 60);
-        mmm = String.valueOf(Duration / 60 / 1000);
-        if (sss.length() < 2) sss = "0" + sss;
-        if (mmm.length() < 2) mmm = "0" + mmm;
-        endTime.setText(mmm + ":" + sss);
-        play();
+        initProgressBar(Duration);
+        if (AudioExoPlayerUtil.isPlaying())
+            Glide.with(this).load(R.drawable.outline_pause_24).into(imageView);
+        else
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(imageView);
+
         pauseMusic.setOnClickListener(view -> {
             if (AudioExoPlayerUtil.isPlaying()) {
                 AudioExoPlayerUtil.pauseAllPlayers();
@@ -132,11 +127,9 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                 diary.setDate(currentDate);
                 diary.setMusicTabId(musicTabId);
                 if (ImagePath != null) diary.setImagePath(ImagePath);
-                //Bundle bundle = getIntent().getBundleExtra("positionSoundItemIdMap");
                 Intent intentToNextActivity = new Intent(this, ContentActivity.class);
                 intentToNextActivity.putExtra("diary", diary);
                 intentToNextActivity.putExtra("NewItem", 1);
-                //intentToNextActivity.putExtra("positionSoundItemIdMap", bundle);
                 startActivity(intentToNextActivity);
             } else
                 Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();
@@ -160,7 +153,25 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         endTime = (TextView) findViewById(R.id.EndTime2);
         currentTime = findViewById(R.id.currentTime);
         pauseMusic = findViewById(R.id.MusicPlay_Edit);
+    }
 
+    private void initProgressBar(long Duration) {
+        progressBar.setMax((int) Duration);
+        seekBar.setMax((int) Duration);
+        String sss, mmm;
+        sss = String.valueOf(Duration / 1000 % 60);
+        mmm = String.valueOf(Duration / 60 / 1000);
+        if (sss.length() < 2) sss = "0" + sss;
+        if (mmm.length() < 2) mmm = "0" + mmm;
+        endTime.setText(mmm + ":" + sss);
+        play();
+    }
+
+    private void checkPlayStatus() {
+        if (AudioExoPlayerUtil.isPlaying())
+            Glide.with(this).load(R.drawable.outline_pause_24).into(imageView);
+        else
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(imageView);
     }
 
     @Override

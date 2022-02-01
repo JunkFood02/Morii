@@ -63,12 +63,11 @@ public class AudioExoPlayerUtil {
         musicPlayer.play();
     }
 
-    public static void startPlayingSoundItem(int soundItemId, int position) {
+    public static void setSoundPlayer(int soundItemId, int position) {
         ExoPlayer player = soundPlayerList.get(position);
         int soundResId = soundItemList.get(soundItemId).getSoundResIds().get(position % 3);
         player.setMediaItem(MediaItem.fromUri(UriParser(soundResId)));
         player.prepare();
-        player.play();
     }
 
     public static void stopPlayingSoundItem(int position) {
@@ -82,10 +81,12 @@ public class AudioExoPlayerUtil {
             {
                 if (player.isPlaying())
                     player.pause();
-
             }
-
         }
+    }
+
+    public static void startSoundPlayer(int position) {
+        soundPlayerList.get(position).play();
     }
 
     public static void resetAllSoundPlayers() {
@@ -111,8 +112,8 @@ public class AudioExoPlayerUtil {
     }
 
     public static void pauseAllPlayers() {
-        pauseMusicPlayer();
         stopAllSoundPlayers();
+        pauseMusicPlayer();
     }
 
     public static void startAllPlayers() {

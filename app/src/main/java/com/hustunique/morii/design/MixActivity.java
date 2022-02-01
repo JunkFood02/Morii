@@ -5,19 +5,13 @@ import static com.hustunique.morii.util.MyApplication.musicTabList;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -104,10 +98,10 @@ public class MixActivity extends BaseActivity {
             Log.d(TAG, "change");
             if (playbackStatus == 1) {
                 AudioExoPlayerUtil.startAllPlayers();
-                playbackImage.setImageResource(R.drawable.outline_pause_24);
+                Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
             } else {
                 AudioExoPlayerUtil.pauseAllPlayers();
-                playbackImage.setImageResource(R.drawable.round_play_arrow_24);
+                Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
             }
             playbackStatus = -playbackStatus;
         });
@@ -115,7 +109,7 @@ public class MixActivity extends BaseActivity {
             Intent intent = new Intent(this, EditActivity.class);
             diary.getSoundItemInfoList().clear();
             for (Map.Entry<Integer, Integer> entry : positionSoundItemIdMap.entrySet()) {
-                diary.getSoundItemInfoList().add(new SoundItemInfo(entry.getKey(),entry.getValue()));
+                diary.getSoundItemInfoList().add(new SoundItemInfo(entry.getKey(), entry.getValue()));
                 Log.d("activityData", "key = " + entry.getKey() + " value = " + entry.getValue());
             }
             intent.putExtra("diary", diary);
@@ -249,7 +243,9 @@ public class MixActivity extends BaseActivity {
     }
 
     private void startPlayingSoundItem(int soundItemId, int position) {
-        AudioExoPlayerUtil.startPlayingSoundItem(soundItemId, position);
+        AudioExoPlayerUtil.setSoundPlayer(soundItemId, position);
+        if (playbackStatus == -1)
+            AudioExoPlayerUtil.startSoundPlayer(position);
     }
 
     @Override
@@ -257,14 +253,23 @@ public class MixActivity extends BaseActivity {
         super.onResume();
         if (!AudioExoPlayerUtil.isPlaying()) {
             playbackStatus = 1;
-            playbackImage.setImageResource(R.drawable.round_play_arrow_24);
-
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
+        } else {
+            playbackStatus = -1;
+            Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AudioExoPlayerUtil.stopAllSoundPlayers();
+        AudioExoPlayerUtil.resetAllSoundPlayers();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AudioExoPlayerUtil.resetAllSoundPlayers();
+
     }
 }

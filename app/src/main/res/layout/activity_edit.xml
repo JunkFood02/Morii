@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="6dp"
                     android:text="上一步"
                     android:textColor="#1D283F"
                     android:textSize="16sp"
@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="6dp"
                     android:text="下一步"
                     android:textColor="#1D283F"
                     android:textSize="16sp"

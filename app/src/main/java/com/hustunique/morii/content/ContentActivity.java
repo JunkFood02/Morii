@@ -53,6 +53,7 @@ public class ContentActivity extends BaseActivity {
     private TextView article;
     private TextView date;
     private TextView tag;
+    private TextView endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +84,19 @@ public class ContentActivity extends BaseActivity {
         article = findViewById(R.id.diaryContent);
         date = findViewById(R.id.musicDiaryDate);
         tag = findViewById(R.id.musicDiaryTag);
+        endTime = (TextView) findViewById(R.id.EndTime);
+        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
+        seekBar = (SeekBar) findViewById(R.id.SeekBar);
     }
 
     private void setCallbacks() {
+        if (AudioExoPlayerUtil.isPlaying() || newItem == 0) {
+            Glide.with(this).load(R.drawable.outline_pause_24).into(imageView2);
+            Log.d(TAG, "Playing");
+        } else {
+            Log.d(TAG, "not Playing");
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(imageView2);
+        }
         pauseMusic.setOnClickListener(view -> {
             if (AudioExoPlayerUtil.isPlaying()) {
                 AudioExoPlayerUtil.pauseAllPlayers();
@@ -103,11 +114,13 @@ public class ContentActivity extends BaseActivity {
         } else {
             titleBarText.setText("预览");
             finishButton.setOnClickListener(v -> {
+                newItem = 0;
                 createMusicDiary();
                 Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
                 startActivity(backIntent);
             });
             deleteButton.setOnClickListener(v -> {
+                newItem = 0;
                 Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
                 startActivity(backIntent);
             });
@@ -151,25 +164,21 @@ public class ContentActivity extends BaseActivity {
         musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
         builder.append(musicTabList.get(musicDiaryItem.getMusicTabId()).getEmotion()).append(" ");
         if (newItem == 0) {
+            Log.d(TAG, "initMusicDiaryContent: newItem=0");
             AudioExoPlayerUtil.playMusic(musicDiaryItem.getMusicTabId());
             List<SoundItemInfo> list = musicDiaryItem.getSoundItemInfoList();
             for (SoundItemInfo info : list) {
                 Log.d(TAG, info.soundItemId + " position:" + info.soundItemPosition);
-                AudioExoPlayerUtil.startPlayingSoundItem(info.soundItemId, info.soundItemPosition);
+                AudioExoPlayerUtil.setSoundPlayer(info.soundItemId, info.soundItemPosition);
+                AudioExoPlayerUtil.startSoundPlayer(info.soundItemPosition);
                 builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
             }
         } else {
-            /*bundle = intent.getBundleExtra("positionSoundItemIdMap");
-            Set<String> stringSet = bundle.keySet();
-            for (String key : stringSet) {
-                builder.append(soundItemList.get(bundle.getInt(key)).getSoundName()).append(" ");
-            }*/
             for (SoundItemInfo info : musicDiaryItem.getSoundItemInfoList()) {
                 builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
             }
             initProgressBar((long) AudioExoPlayerUtil.getDuration());
         }
-
         title.setText(musicDiaryItem.getTitle());
         article.setText(musicDiaryItem.getArticle());
         date.setText(musicDiaryItem.getDate());
@@ -188,10 +197,6 @@ public class ContentActivity extends BaseActivity {
     }
 
     private void initProgressBar(long Duration) {
-        TextView endTime = (TextView) findViewById(R.id.EndTime);
-        Log.e(TAG, String.valueOf(Duration));
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar);
         progressBar.setMax((int) Duration);
         seekBar.setMax((int) Duration);
         String sss, mmm;
@@ -224,9 +229,8 @@ public class ContentActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (newItem == 0) {
+            AudioExoPlayerUtil.pauseAllPlayers();
             AudioExoPlayerUtil.resetAllSoundPlayers();
-            AudioExoPlayerUtil.pauseMusicPlayer();
-
         }
     }
 
