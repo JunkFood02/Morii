@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.transition.Explode;
 import android.util.Log;
-
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -17,11 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hustunique.morii.database.DiaryInfo;
 import com.hustunique.morii.database.SoundItemInfo;
 import com.hustunique.morii.home.MainActivity;
@@ -31,17 +28,17 @@ import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.DatabaseUtil;
 import com.hustunique.morii.util.onReadyListener;
 
-import java.io.File;
 import java.util.List;
-import java.util.Set;
 
 import morii.R;
 
 public class ContentActivity extends BaseActivity {
 
-    private String imagePath;
     private CardView deleteButton;
     private CardView finishButton;
+    private CardView pauseMusic;
+    private CardView goBack;
+    private TextView titleBarText;
     private MusicDiaryItem musicDiaryItem;
     private static final String TAG = "ContentActivity";
     private Intent intent;
@@ -52,6 +49,10 @@ public class ContentActivity extends BaseActivity {
     private ProgressBar progressBar;
     private SeekBar seekBar;
     private int Position = (int) AudioExoPlayerUtil.getCurrentPosition();
+    private TextView title;
+    private TextView article;
+    private TextView date;
+    private TextView tag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,42 @@ public class ContentActivity extends BaseActivity {
         getWindow().setSharedElementExitTransition(new AutoTransition());
         getWindow().setEnterTransition(new Explode());
         setContentView(R.layout.activity_content);
-        TextView titleBarText = findViewById(R.id.title_content);
         Log.d(TAG, "onCreate: ");
         intent = getIntent();
+        newItem = intent.getIntExtra("NewItem", 0);
+        viewBinding();
+        initMusicDiaryContent();
+        setCallbacks();
+    }
+
+    private void viewBinding() {
+        pauseMusic = (CardView) findViewById(R.id.MusicPlay);
+        imageView2 = (ImageView) findViewById(R.id.music_pause);
+        startTime = (TextView) findViewById(R.id.StartTime);
+        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
+        seekBar = (SeekBar) findViewById(R.id.SeekBar);
+        titleBarText = findViewById(R.id.title_content);
         finishButton = findViewById(R.id.finishButton);
         deleteButton = findViewById(R.id.deleteButton);
-        newItem = intent.getIntExtra("NewItem", 0);
+        goBack = findViewById(R.id.backLayout_content);
+        title = findViewById(R.id.musicDiaryTitle);
+        article = findViewById(R.id.diaryContent);
+        date = findViewById(R.id.musicDiaryDate);
+        tag = findViewById(R.id.musicDiaryTag);
+    }
+
+    private void setCallbacks() {
+        pauseMusic.setOnClickListener(view -> {
+            if (AudioExoPlayerUtil.isPlaying()) {
+                AudioExoPlayerUtil.pauseAllPlayers();
+                Glide.with(this).load(R.drawable.round_play_arrow_24).into(imageView2);
+            } else {
+                AudioExoPlayerUtil.startAllPlayers();
+                play();
+                Glide.with(this).load(R.drawable.outline_pause_24).into(imageView2);
+
+            }
+        });
         if (newItem == 0) {
             finishButton.setVisibility(View.GONE);
             deleteButton.setVisibility(View.GONE);
@@ -81,12 +112,7 @@ public class ContentActivity extends BaseActivity {
                 startActivity(backIntent);
             });
         }
-        StringBuilder builder = new StringBuilder();
-        TextView title, article, date, tag;
-        CardView goBack = findViewById(R.id.backLayout_content);
-        goBack.setOnClickListener(view -> {
-            onBackPressed();
-        });
+        goBack.setOnClickListener(view -> onBackPressed());
         if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration());
         } else {
@@ -94,69 +120,11 @@ public class ContentActivity extends BaseActivity {
                 @Override
                 public void onReady(long duration) {
                     super.onReady(duration);
-                    Log.d(TAG, "onReady: "+duration);
+                    Log.d(TAG, "onReady: " + duration);
                     initProgressBar(duration);
                 }
             });
         }
-        musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
-        builder.append(musicTabList.get(musicDiaryItem.getMusicTabId()).getEmotion()).append(" ");
-        if (newItem == 0) {
-            AudioExoPlayerUtil.playMusic(musicDiaryItem.getMusicTabId());
-            List<SoundItemInfo> list = musicDiaryItem.getSoundItemInfoList();
-            for (SoundItemInfo info : list) {
-                Log.d(TAG, info.soundItemId + " position:" + info.soundItemPosition);
-                AudioExoPlayerUtil.startPlayingSoundItem(info.soundItemId, info.soundItemPosition);
-                builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
-            }
-        } else {
-            bundle = intent.getBundleExtra("positionSoundItemIdMap");
-            Set<String> stringSet = bundle.keySet();
-            for (String key : stringSet) {
-                builder.append(soundItemList.get(bundle.getInt(key)).getSoundName()).append(" ");
-            }
-            initProgressBar((long) AudioExoPlayerUtil.getDuration());
-        }
-        title = findViewById(R.id.musicDiaryTitle);
-        article = findViewById(R.id.diaryContent);
-        date = findViewById(R.id.musicDiaryDate);
-        tag = findViewById(R.id.musicDiaryTag);
-        title.setText(musicDiaryItem.getTitle());
-        article.setText(musicDiaryItem.getArticle());
-        date.setText(musicDiaryItem.getDate());
-        tag.setText(builder.toString());
-        // get the information
-        ImageView imageView = (ImageView) findViewById(R.id.PhotoShow);
-        imagePath = musicDiaryItem.getImagePath();
-        Log.d(TAG, "onCreate: " + imagePath);
-
-        if (imagePath != null) {
-            Glide.with(this).load(imagePath).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).into(imageView);
-        } else {
-            Glide.with(this).load(musicTabList.get(musicDiaryItem.getMusicTabId())
-                    .getImageResId()).into(imageView);
-        }
-
-
-        CardView pauseMusic = (CardView) findViewById(R.id.MusicPlay);
-        imageView2 = (ImageView) findViewById(R.id.music_pause);
-        startTime = (TextView) findViewById(R.id.StartTime);
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar);
-        imageView2.setImageResource(R.drawable.outline_pause_24);
-
-
-        pauseMusic.setOnClickListener(view -> {
-            if (AudioExoPlayerUtil.isPlaying()) {
-                AudioExoPlayerUtil.pauseAllPlayers();
-                imageView2.setImageResource(R.drawable.round_play_arrow_24);
-            } else {
-                AudioExoPlayerUtil.startAllPlayers();
-                play();
-                imageView2.setImageResource(R.drawable.outline_pause_24);
-
-            }
-        });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -176,8 +144,47 @@ public class ContentActivity extends BaseActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
+    }
 
+    private void initMusicDiaryContent() {
+        StringBuilder builder = new StringBuilder();
+        musicDiaryItem = (MusicDiaryItem) intent.getSerializableExtra("diary");
+        builder.append(musicTabList.get(musicDiaryItem.getMusicTabId()).getEmotion()).append(" ");
+        if (newItem == 0) {
+            AudioExoPlayerUtil.playMusic(musicDiaryItem.getMusicTabId());
+            List<SoundItemInfo> list = musicDiaryItem.getSoundItemInfoList();
+            for (SoundItemInfo info : list) {
+                Log.d(TAG, info.soundItemId + " position:" + info.soundItemPosition);
+                AudioExoPlayerUtil.startPlayingSoundItem(info.soundItemId, info.soundItemPosition);
+                builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
+            }
+        } else {
+            /*bundle = intent.getBundleExtra("positionSoundItemIdMap");
+            Set<String> stringSet = bundle.keySet();
+            for (String key : stringSet) {
+                builder.append(soundItemList.get(bundle.getInt(key)).getSoundName()).append(" ");
+            }*/
+            for (SoundItemInfo info : musicDiaryItem.getSoundItemInfoList()) {
+                builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
+            }
+            initProgressBar((long) AudioExoPlayerUtil.getDuration());
+        }
 
+        title.setText(musicDiaryItem.getTitle());
+        article.setText(musicDiaryItem.getArticle());
+        date.setText(musicDiaryItem.getDate());
+        tag.setText(builder.toString());
+        // get the information
+        ImageView imageView = (ImageView) findViewById(R.id.PhotoShow);
+        String imagePath = musicDiaryItem.getImagePath();
+        Log.d(TAG, "onCreate: " + imagePath);
+
+        if (imagePath != null) {
+            Glide.with(this).load(imagePath).into(imageView);
+        } else {
+            Glide.with(this).load(musicTabList.get(musicDiaryItem.getMusicTabId())
+                    .getImageResId()).into(imageView);
+        }
     }
 
     private void initProgressBar(long Duration) {
@@ -201,15 +208,11 @@ public class ContentActivity extends BaseActivity {
         DiaryInfo diaryInfo = new DiaryInfo(musicDiaryItem);
         long diaryInfoId = DatabaseUtil.insertDiaryInfo(diaryInfo);
         musicDiaryItem.setItemID(diaryInfoId);
-        Set<String> stringSet = bundle.keySet();
-        for (String key : stringSet) {
-            SoundItemInfo soundItemInfo = new SoundItemInfo(diaryInfoId, Integer.parseInt(key),
-                    bundle.getInt(key));
-            musicDiaryItem.addSoundItemInfo(soundItemInfo);
-            DatabaseUtil.insertSoundItemInfo(soundItemInfo);
+        for (SoundItemInfo info : musicDiaryItem.getSoundItemInfoList()) {
+            info.diaryInfoId = diaryInfoId;
+            DatabaseUtil.insertSoundItemInfo(info);
         }
-        if (intent.getIntExtra("NewItem", 0) == 1)
-            musicDiaryList.add(musicDiaryItem);
+        musicDiaryList.add(musicDiaryItem);
     }
 
     @Override
@@ -237,9 +240,7 @@ public class ContentActivity extends BaseActivity {
         boolean isPlaying = true;
 
         @Override
-        //实现run方法
         public void run() {
-            //判断状态，在不暂停的情况下向总线程发出信息
             while (isPlaying) {
                 try {
                     runOnUiThread(() -> {
@@ -247,15 +248,12 @@ public class ContentActivity extends BaseActivity {
                         if (isPlaying)
                             Position = (int) AudioExoPlayerUtil.getCurrentPosition();
                     });
-                    //Log.d(TAG, "position: " + Position);
                     seekBar.setProgress(Position);
                     progressBar.setProgress(Position);
-                    // 每0.1秒更新一次位置
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //发出的信息
 
             }
 

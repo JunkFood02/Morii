@@ -1,10 +1,8 @@
 package com.hustunique.morii.edit;
 
-import static com.hustunique.morii.util.MyApplication.context;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -14,15 +12,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.hustunique.morii.content.ContentActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
@@ -50,12 +43,18 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     private SeekBar seekBar;
     private TextView startTime;
     private int Position = 0;
+    private CardView complete_layout;
+    private CardView back_layout;
+    private TextView endTime;
+    private TextView currentTime;
+    private CardView pauseMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         presenter = new EditPresenter(this);
+        AudioExoPlayerUtil.startAllPlayers();
         initUI();
 
     }
@@ -74,18 +73,9 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     }
 
     private void initUI() {
+        viewBinding();
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
-        AudioExoPlayerUtil.startAllPlayers();
-        editCardLayout = findViewById(R.id.editCardLayout);
         musicTabId = diary.getMusicTabId();
-
-
-        CardView pauseMusic = (CardView) findViewById(R.id.MusicPlay_Edit);
-        imageView = (ImageView) findViewById(R.id.music_pause2);
-        startTime = (TextView) findViewById(R.id.StartTime2);
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine2);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar2);
-        TextView endTime = (TextView) findViewById(R.id.EndTime2);
         long Duration = AudioExoPlayerUtil.getDuration();
         Log.d(TAG, "onCreate: " + Duration);
         progressBar.setMax((int) Duration);
@@ -100,12 +90,11 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         pauseMusic.setOnClickListener(view -> {
             if (AudioExoPlayerUtil.isPlaying()) {
                 AudioExoPlayerUtil.pauseAllPlayers();
-                imageView.setImageResource(R.drawable.round_play_arrow_24);
+                Glide.with(this).load(R.drawable.round_play_arrow_24).into(imageView);
             } else {
                 AudioExoPlayerUtil.startAllPlayers();
                 play();
-                imageView.setImageResource(R.drawable.outline_pause_24);
-
+                Glide.with(this).load(R.drawable.outline_pause_24).into(imageView);
             }
         });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -127,17 +116,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
-
-        textContent = findViewById(R.id.editTextContent);
-        textTitle = findViewById(R.id.editTextTitle);
-        CardView complete_layout = findViewById(R.id.completeLayout_edit);
-        CardView back_layout = findViewById(R.id.backLayout_edit);
-        addPhoto = findViewById(R.id.addPhotoIcon);
-        CardView addPhoto = findViewById(R.id.addPhotoIcon);
-        showPhoto = findViewById(R.id.BigPhoto);
         Glide.with(this).load(musicTabList.get(musicTabId).getImageResId()).into(showPhoto);
-        TextView currentTime = findViewById(R.id.currentTime);
         currentDate = getTime();
         currentTime.setText("# " + currentDate);
         Log.d(TAG, "initUI: " + currentDate);
@@ -153,17 +132,35 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                 diary.setDate(currentDate);
                 diary.setMusicTabId(musicTabId);
                 if (ImagePath != null) diary.setImagePath(ImagePath);
-                Bundle bundle = getIntent().getBundleExtra("positionSoundItemIdMap");
+                //Bundle bundle = getIntent().getBundleExtra("positionSoundItemIdMap");
                 Intent intentToNextActivity = new Intent(this, ContentActivity.class);
                 intentToNextActivity.putExtra("diary", diary);
                 intentToNextActivity.putExtra("NewItem", 1);
-                intentToNextActivity.putExtra("positionSoundItemIdMap", bundle);
+                //intentToNextActivity.putExtra("positionSoundItemIdMap", bundle);
                 startActivity(intentToNextActivity);
-                return;
-            }
-            Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();
         });
         back_layout.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void viewBinding() {
+        textContent = findViewById(R.id.editTextContent);
+        textTitle = findViewById(R.id.editTextTitle);
+        complete_layout = findViewById(R.id.completeLayout_edit);
+        back_layout = findViewById(R.id.backLayout_edit);
+        addPhoto = findViewById(R.id.addPhotoIcon);
+        addPhoto = findViewById(R.id.addPhotoIcon);
+        showPhoto = findViewById(R.id.BigPhoto);
+        editCardLayout = findViewById(R.id.editCardLayout);
+        imageView = (ImageView) findViewById(R.id.music_pause2);
+        startTime = (TextView) findViewById(R.id.StartTime2);
+        progressBar = (ProgressBar) findViewById(R.id.MusicLine2);
+        seekBar = (SeekBar) findViewById(R.id.SeekBar2);
+        endTime = (TextView) findViewById(R.id.EndTime2);
+        currentTime = findViewById(R.id.currentTime);
+        pauseMusic = findViewById(R.id.MusicPlay_Edit);
+
     }
 
     @Override
@@ -172,13 +169,10 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     }
 
     private String getTime() {
-
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 E HH:mm", Locale.CHINA);
         return simpleDateFormat.format(new Date());
     }
 
-    //-------------------------------------------------------//
     private void play() {
 
         Thread thread = new Thread(new goThread());
@@ -190,9 +184,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         boolean isPlaying = true;
 
         @Override
-        //实现run方法
         public void run() {
-            //判断状态，在不暂停的情况下向总线程发出信息
             while (isPlaying) {
                 try {
                     runOnUiThread(() -> {
@@ -200,19 +192,15 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                         if (isPlaying)
                             Position = (int) AudioExoPlayerUtil.getCurrentPosition();
                     });
-                    //Log.d(TAG, "position: " + Position);
                     seekBar.setProgress(Position);
                     progressBar.setProgress(Position);
-                    // 每0.1秒更新一次位置
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //发出的信息
 
             }
 
         }
     }
-    //---------------------------------------------------------//
 }

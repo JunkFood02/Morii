@@ -91,13 +91,10 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(activity, ContentActivity.class);
             intent.putExtra("diary", musicDiaryItem);
-            intent.putExtra("Fr", 1);
             ActivityOptions options = ActivityOptions
                     .makeSceneTransitionAnimation((Activity) activity,
                             Pair.create(holder.PhotoTitle, "photo"));
-            activity.startActivity(intent,
-
-                    options.toBundle());
+            activity.startActivity(intent, options.toBundle());
         });
         holder.itemView.setOnLongClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity);

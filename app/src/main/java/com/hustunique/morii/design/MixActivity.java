@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.hustunique.morii.database.SoundItemInfo;
 import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
@@ -112,13 +113,11 @@ public class MixActivity extends BaseActivity {
         });
         completeLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditActivity.class);
-            Bundle bundle = new Bundle();
+            diary.getSoundItemInfoList().clear();
             for (Map.Entry<Integer, Integer> entry : positionSoundItemIdMap.entrySet()) {
-
-                bundle.putInt(entry.getKey() + "", entry.getValue());
+                diary.getSoundItemInfoList().add(new SoundItemInfo(entry.getKey(),entry.getValue()));
                 Log.d("activityData", "key = " + entry.getKey() + " value = " + entry.getValue());
             }
-            intent.putExtra("positionSoundItemIdMap", bundle);
             intent.putExtra("diary", diary);
             startActivity(intent);
         });
