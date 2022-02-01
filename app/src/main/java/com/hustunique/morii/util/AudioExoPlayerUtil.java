@@ -18,7 +18,7 @@ import java.util.List;
 public class AudioExoPlayerUtil {
     public static final int NEXT = 1;
     public static final int PREVIOUS = -1;
-    private static final float[] volumes = {0.45f, 0.3f, 0.15f};
+    private static final float[] volumes = {0.3f, 0.2f, 0.1f};
     private static final ExoPlayer musicPlayer = new ExoPlayer.Builder(context).build();
     private static final String TAG = "AudioExoPlayerUtil";
     private static final List<ExoPlayer> soundPlayerList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class AudioExoPlayerUtil {
             MediaItem mediaItem = MediaItem.fromUri(UriParser(musicTab.getMusicResId()));
             musicPlayer.addMediaItem(mediaItem);
         }
-        musicPlayer.setVolume(0.2f);
+        musicPlayer.setVolume(0.6f);
         musicPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ONE);
         musicPlayer.prepare();
         musicPlayer.addListener(new Player.Listener() {

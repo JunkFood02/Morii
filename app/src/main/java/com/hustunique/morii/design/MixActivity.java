@@ -155,7 +155,8 @@ public class MixActivity extends BaseActivity {
                         constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
                         squareLayoutList.get(rmposition).setOnTouchListener(null);
                     }
-                    iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID", R.drawable.x1);
+                    iconID = event.getClipData().getItemAt(0).getIntent().getIntExtra("ImageID",
+                            R.drawable.outline_air_24);
                     constraintLayout.setAlpha(1.0f);
                     soundItemId = event.getClipData().getItemAt(0).getIntent().getIntExtra("indexOfSoundItem", 0);
                     squareList.get(position).setImageResource(iconID);
@@ -233,6 +234,7 @@ public class MixActivity extends BaseActivity {
                 if (!event.getResult() && _last_drag_position != -1) {
                     squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
                 }
+                StartDrag.makeVibrate();
                 delete_area.startAnimation(fadeout);
                 v.setAlpha(0.0f);
             } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {

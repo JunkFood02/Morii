@@ -23,8 +23,6 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     //类型待定
 
 
-    private View inflater;
-
     //构造方法，传入数据
     public MusicSelectAdapter(Context context, MusicSelectContract.IPresenter presenter) {
         this.context = context;
@@ -34,7 +32,8 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     @Override
     public MusicSelectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.musictab_item, parent, false);
+
+        View inflater = LayoutInflater.from(context).inflate(R.layout.musictab_item, parent, false);
         return new ViewHolder(inflater);
     }
 
@@ -44,7 +43,6 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
         //
 
         Glide.with(holder.itemView).load(musicTabList.get(position).getImageResId()).into(holder.imageView);
-        //holder.imageView.setBackgroundResource();
         Log.d("RECYCLER", String.valueOf(position));
         holder.itemView.setOnClickListener(v -> {
         });
@@ -57,7 +55,7 @@ public class MusicSelectAdapter extends RecyclerView.Adapter<MusicSelectAdapter.
     }
 
     //内部类，绑定控件
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
         public ViewHolder(View itemView) {

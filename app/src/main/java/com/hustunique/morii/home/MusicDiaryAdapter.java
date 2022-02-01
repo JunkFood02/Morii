@@ -73,10 +73,8 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         MusicDiaryItem musicDiaryItem = list.get(position);
         String imagePath = musicDiaryItem.getImagePath();
         if (null != imagePath) {
-            //holder.PhotoTitle.setImageBitmap(BitmapFactory.decodeFile(imagePaRth));
             Glide.with(holder.itemView).load(imagePath)
                     .into(holder.PhotoTitle);
-            //Picasso.get().load(imagePath).into(holder.PhotoTitle);
             Log.d(TAG, "load image success");
         } else {
             Glide.with(holder.itemView)
