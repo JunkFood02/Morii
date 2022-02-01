@@ -53,17 +53,6 @@ public class MixActivity extends BaseActivity {
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
     ImageView playbackImage;
 
-    /*public static Handler handler = new Handler(Looper.getMainLooper()) {
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == SHOW_DELETE_AREA)
-                showDeleteArea();
-        }
-    };
-
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,19 +162,7 @@ public class MixActivity extends BaseActivity {
                     //hideDeleteArea();
                     return true;
                 }
-                if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
-                    return true;
-                }
-                return false;
-                /*if (imageViewSoundItemMap.get(completeLayout) == null) {
-                    if (event.getAction() == DragEvent.ACTION_DRAG_ENTERED) {
-                        squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.gray));
-                    } else if (event.getAction() == DragEvent.ACTION_DRAG_EXITED) {
-                        squareLayoutList.get(position).setBackgroundColor(getResources().getColor(R.color.transparent));
-                    }
-                }
-
-                 */
+                return event.getAction() == DragEvent.ACTION_DRAG_STARTED;
             }));
         }
         /*cardImage.setOnDragListener(new View.OnDragListener() {
@@ -288,20 +265,4 @@ public class MixActivity extends BaseActivity {
         super.onDestroy();
         AudioExoPlayerUtil.resetAllSoundPlayers();
     }
-    /*
-    private static void showDeleteArea() {
-        if (delete_area.getVisibility() != View.VISIBLE) {
-            delete_area.startAnimation(fadeIn);
-            delete_area.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private static void hideDeleteArea() {
-        if (delete_area.getVisibility() == View.VISIBLE) {
-            delete_area.startAnimation(fadeout);
-            delete_area.setVisibility(View.INVISIBLE);
-        }
-    }
-
-     */
 }

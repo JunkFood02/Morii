@@ -49,10 +49,8 @@ public class MainActivity extends BaseActivity implements HomePageContract.IView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //setImmersiveStatusBar();
         getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         getWindow().setExitTransition(new Slide());
-        //getWindow().setSharedElementExitTransition(new ChangeBounds());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI();
@@ -89,24 +87,5 @@ public class MainActivity extends BaseActivity implements HomePageContract.IView
         });
 
     }
-    /**
-     * <p>Make contents show behind the transparent Status Bar.<p/>
-     */
-    private void setImmersiveStatusBar() {
-        if (Build.VERSION.SDK_INT >= 31) {
-            WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-            ViewCompat.setOnApplyWindowInsetsListener(constraintLayout, (v, windowInsets) -> {
-                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-                mlp.leftMargin = insets.left;
-                mlp.bottomMargin = insets.bottom;
-                mlp.rightMargin = insets.right;
-                v.setLayoutParams(mlp);
-                return WindowInsetsCompat.CONSUMED;
-            });
-        } else {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-    }
+
 }

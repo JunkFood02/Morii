@@ -79,7 +79,6 @@ public class ContentActivity extends BaseActivity {
             deleteButton.setOnClickListener(v -> {
                 Intent backIntent = new Intent(ContentActivity.this, MainActivity.class);
                 startActivity(backIntent);
-                ;
             });
         }
         StringBuilder builder = new StringBuilder();

@@ -13,16 +13,7 @@
     android:outlineSpotShadowColor="#CC819FED"
     app:cardCornerRadius="12dp"
     tools:targetApi="p">
-    <!--com.hustunique.morii.util.RoundImage
-        android:layout_width="118dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="4dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/IconName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/orange" -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

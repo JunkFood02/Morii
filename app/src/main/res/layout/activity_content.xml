@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E3E9F4"
+    android:background="@color/colorBackground"
     android:fitsSystemWindows="false"
     tools:context="com.hustunique.morii.content.ContentActivity">
 

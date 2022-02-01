@@ -4,10 +4,10 @@ import android.content.Context;
 
 public interface EditContract {
     interface IPresenter {
-        void getUI();
         void getPicture();
 
-    };
+    }
+
     interface IModel{
         void setAppCompatActivityUse(Context context);
 
@@ -22,5 +22,5 @@ public interface EditContract {
     interface IView {
 
         void setAddPhoto(String path);
-    };
+    }
 }

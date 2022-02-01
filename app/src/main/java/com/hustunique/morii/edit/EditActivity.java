@@ -58,7 +58,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     private static final String TAG = "EditActivity";
     private String currentDate;
     private EditContract.IPresenter presenter;
-    int musicTabId;
+    private int musicTabId;
     private ProgressBar progressBar;
     private SeekBar seekBar;
     private TextView startTime;
