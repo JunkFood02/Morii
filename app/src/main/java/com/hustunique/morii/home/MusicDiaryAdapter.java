@@ -1,10 +1,13 @@
 package com.hustunique.morii.home;
 
+import static com.hustunique.morii.util.MyApplication.context;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,8 +26,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.hustunique.morii.content.ContentActivity;
+import com.hustunique.morii.util.DatabaseUtil;
 
 import java.io.File;
 import java.util.List;
@@ -43,14 +48,12 @@ import morii.R;
 */
 public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.MyViewHolder> {
 
-    private Activity activity;
+    private final Activity activity;
     private static final String TAG = "MusicDiaryAdapter";
 
-    private List<MusicDiaryItem> list;
+    private final List<MusicDiaryItem> list;
     //类型待定
 
-
-    private View inflater;
 
     //构造方法，传入数据
     public MusicDiaryAdapter(Activity context, List<MusicDiaryItem> list) {
@@ -62,7 +65,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(activity).inflate(R.layout.cardview_item, parent, false);
+        View inflater = LayoutInflater.from(activity).inflate(R.layout.cardview_item, parent, false);
         return new MyViewHolder(inflater);
     }
 
@@ -85,31 +88,41 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
         holder.TextTitle.setText(musicDiaryItem.getTitle());
         holder.TextDate.setText("# " + musicDiaryItem.getDate());
         Log.d("RECYCLER", String.valueOf(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ContentActivity.class);
-                intent.putExtra("diary", musicDiaryItem);
-                intent.putExtra("Fr",1);
-                ActivityOptions options = ActivityOptions
-                        .makeSceneTransitionAnimation((Activity) activity,
-                                Pair.create(holder.PhotoTitle, "photo"));
-                activity.startActivity(intent,
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, ContentActivity.class);
+            intent.putExtra("diary", musicDiaryItem);
+            intent.putExtra("Fr", 1);
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation((Activity) activity,
+                            Pair.create(holder.PhotoTitle, "photo"));
+            activity.startActivity(intent,
 
-                        options.toBundle());
-            }
+                    options.toBundle());
+        });
+        holder.itemView.setOnLongClickListener(v -> {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity);
+            builder.setTitle("确定删除这个音乐日记吗？")
+                    .setMessage("这个操作不可被撤销。")
+                    .setNegativeButton("取消", (dialog, which) -> {
+                    })
+                    .setPositiveButton("确认", (dialog, which) -> {
+                        DatabaseUtil.deleteDiary(musicDiaryItem.getItemID());
+                        Log.d(TAG, "deletePosition: " + holder.getLayoutPosition());
+                        notifyItemRemoved(holder.getLayoutPosition());
+                        list.remove(holder.getLayoutPosition());
+                    })
+                    .show();
+            return true;
         });
     }
 
     @Override
     public int getItemCount() {
-        //返回Item总条数
         return list.size();
-//        return 5;
     }
 
     //内部类，绑定控件
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView TextTitle;
         TextView TextDate;
         ShapeableImageView PhotoTitle;

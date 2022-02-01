@@ -15,7 +15,7 @@ public class ArcImageView extends AppCompatImageView {
     /*
      *弧形高度
      */
-    private int mArcHeight = 100;
+    private final int mArcHeight = 100;
 
     public ArcImageView(Context context) {
         this(context, null);

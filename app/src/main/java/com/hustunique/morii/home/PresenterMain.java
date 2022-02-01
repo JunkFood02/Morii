@@ -4,7 +4,6 @@ import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 
 public class PresenterMain implements HomePageContract.IPresenter {
     HomePageContract.IView view;
-    HomePageContract.IModel model;
 
     PresenterMain(HomePageContract.IView iViewMain){
         this.view = iViewMain;
@@ -13,11 +12,6 @@ public class PresenterMain implements HomePageContract.IPresenter {
     @Override
     public void getUI(){
         view.GetRecyclerView(musicDiaryList);
-    }
-
-    @Override
-    public void setRecyclerViewItem(int position) {
-
     }
 
 

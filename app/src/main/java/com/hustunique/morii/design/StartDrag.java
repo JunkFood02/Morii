@@ -20,7 +20,9 @@ import morii.R;
 import com.hustunique.morii.util.MyApplication;
 
 public class StartDrag implements View.OnTouchListener {
-    private int imageID,soundItemId,position = -1;
+    private int imageID;
+    private final int soundItemId;
+    private int position = -1;
     private boolean dragFromSquares = false;
     private long start;
     private float x, y;
@@ -64,10 +66,6 @@ public class StartDrag implements View.OnTouchListener {
                     //v.startDragAndDrop(dragData, shadow, null, 0);
                     if (dragFromSquares) {
                         v.setAlpha(0.0f);
-                        //Message message = handler.obtainMessage();
-                        //message.arg1 = position;
-                        //message.what = MixActivity.SHOW_DELETE_AREA;
-                        //handler.sendMessage(message);
                     }
                     v.startDragAndDrop(dragData, shadow, position, 0);
                 }

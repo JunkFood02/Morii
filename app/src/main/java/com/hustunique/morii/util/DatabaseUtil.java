@@ -20,9 +20,9 @@ import java.util.concurrent.Future;
 
 public class DatabaseUtil {
     private static final ExecutorService exec = Executors.newCachedThreadPool();
-    public static AppDatabase appDatabase = Room.databaseBuilder(context, AppDatabase.class, "app_database")
+    public static final AppDatabase appDatabase = Room.databaseBuilder(context, AppDatabase.class, "app_database")
             .build();
-    public static DiaryDao dao = appDatabase.diaryDao();
+    public static final DiaryDao dao = appDatabase.diaryDao();
 
     public static List<DiaryWithSoundItemInfo> readDataFromRoomDataBase() {
         Future<List<DiaryWithSoundItemInfo>> future = exec.submit(() -> dao.getAllDiaryWithSoundItemInfo());
@@ -47,6 +47,10 @@ public class DatabaseUtil {
     }
 
     public static void insertSoundItemInfo(SoundItemInfo info) {
-        new Thread(() -> dao.insertAllSoundItemInfo(info)).start();
+        new Thread(() -> dao.insertSoundItemInfo(info)).start();
+    }
+
+    public static void deleteDiary(long id) {
+        new Thread(() -> dao.deleteInfoById(id)).start();
     }
 }

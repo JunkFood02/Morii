@@ -4,7 +4,7 @@ import com.hustunique.morii.util.AudioExoPlayerUtil;
 
 public class MusicSelectPresenter implements MusicSelectContract.IPresenter {
 
-    private MusicSelectContract.IView view;
+    private final MusicSelectContract.IView view;
 
     MusicSelectPresenter(MusicSelectContract.IView view) {
         this.view = view;

@@ -40,7 +40,7 @@ public class EditModel implements EditContract.IModel{
 
     private AppCompatActivity appCompatActivityUse;
 
-    private EditContract.IListener iListener;
+    private final EditContract.IListener iListener;
     //注册权限请求
     private ActivityResultLauncher<String> ActivityLauncherPermission = new ActivityResultLauncher<String>() {
         @Override
@@ -163,8 +163,6 @@ public class EditModel implements EditContract.IModel{
 
     private void displayImage(String imagePath) {
         if (imagePath != null) {
-            /*Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            this.path = CreatePath(bitmap);*/
             iListener.setIt(imagePath);
         } else {
             Toast.makeText(appCompatActivityUse, "failed to get image", Toast.LENGTH_SHORT).show();
