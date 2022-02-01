@@ -1,24 +1,12 @@
 package com.hustunique.morii.edit;
 
-import static com.hustunique.morii.util.MyApplication.UriParser;
+import static com.hustunique.morii.util.MyApplication.context;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
-import static com.hustunique.morii.util.MyApplication.soundItemList;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-
-import android.graphics.BitmapFactory;
-import android.media.MediaPlayer;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
-import android.transition.ChangeScroll;
-import android.transition.Explode;
-import android.transition.Slide;
 import android.util.Log;
-import android.util.Pair;
-import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,25 +14,24 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
-
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.hustunique.morii.content.ContentActivity;
-import com.hustunique.morii.database.SoundItemInfo;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
 import com.hustunique.morii.util.BaseActivity;
-import com.hustunique.morii.util.onReadyListener;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
 
 import morii.R;
 
@@ -149,6 +136,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         addPhoto = findViewById(R.id.addPhotoIcon);
         CardView addPhoto = findViewById(R.id.addPhotoIcon);
         showPhoto = findViewById(R.id.BigPhoto);
+        Glide.with(this).load(musicTabList.get(musicTabId).getImageResId()).into(showPhoto);
         TextView currentTime = findViewById(R.id.currentTime);
         currentDate = getTime();
         currentTime.setText("# " + currentDate);
@@ -176,7 +164,6 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
             Toast.makeText(this, "未输入完全（^.^）", Toast.LENGTH_SHORT).show();
         });
         back_layout.setOnClickListener(v -> onBackPressed());
-        showPhoto.setImageResource(musicTabList.get(musicTabId).getImageResId());
     }
 
     @Override

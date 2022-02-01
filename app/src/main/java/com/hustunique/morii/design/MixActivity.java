@@ -1,5 +1,7 @@
 package com.hustunique.morii.design;
 
+import static com.hustunique.morii.util.MyApplication.musicTabList;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.hustunique.morii.edit.EditActivity;
 import com.hustunique.morii.home.MusicDiaryItem;
 import com.hustunique.morii.util.AudioExoPlayerUtil;
@@ -65,7 +68,7 @@ public class MixActivity extends BaseActivity {
         cardImage = findViewById(R.id.imageView_card);
         //cardImage.setImageResource(R.drawable.x2);
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
-        cardImage.setImageResource(MyApplication.musicTabList.get(diary.getMusicTabId()).getImageResId());
+        Glide.with(this).load(musicTabList.get(diary.getMusicTabId()).getImageResId()).into(cardImage);
         int animationDuration = 100;
         CardView playbackButton = findViewById(R.id.playbackButton);
         playbackImage = findViewById(R.id.playbackButton_image);
