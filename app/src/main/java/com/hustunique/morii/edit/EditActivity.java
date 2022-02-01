@@ -4,13 +4,21 @@ import static com.hustunique.morii.util.MyApplication.UriParser;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
 import static com.hustunique.morii.util.MyApplication.soundItemList;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.ChangeBounds;
+import android.transition.ChangeScroll;
+import android.transition.Explode;
+import android.transition.Slide;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -43,7 +51,7 @@ import morii.R;
 public class EditActivity extends BaseActivity implements EditContract.IView {
     private String content = "", title = "";
     private EditText textTitle, textContent;
-    private ImageView showPhoto,imageView;
+    private ImageView showPhoto, imageView;
     private String ImagePath = null;
     private CardView addPhoto;
     private ConstraintLayout editCardLayout;
@@ -68,7 +76,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
 
     @Override
     protected void onResume() {
-        if (ImagePath != null) showPhoto.setImageBitmap(BitmapFactory.decodeFile(ImagePath));
+        if (ImagePath != null) Glide.with(this).load(ImagePath).into(showPhoto);
         super.onResume();
     }
 
@@ -79,9 +87,9 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     }
 
     private void initUI() {
-        MusicDiaryItem diary=(MusicDiaryItem) getIntent().getSerializableExtra("diary");
+        MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
         AudioExoPlayerUtil.startAllPlayers();
-        editCardLayout=findViewById(R.id.editCardLayout);
+        editCardLayout = findViewById(R.id.editCardLayout);
         musicTabId = diary.getMusicTabId();
 
 
@@ -116,22 +124,22 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                String sss , mmm;
-                sss = String.valueOf(progress/1000%60);
-                mmm = String.valueOf(progress / 60 /1000);
-                if (sss.length()<2) sss = "0" + sss;
-                if (mmm.length()<2) mmm = "0" + mmm;
-                startTime.setText(mmm+":"+sss);
+                String sss, mmm;
+                sss = String.valueOf(progress / 1000 % 60);
+                mmm = String.valueOf(progress / 60 / 1000);
+                if (sss.length() < 2) sss = "0" + sss;
+                if (mmm.length() < 2) mmm = "0" + mmm;
+                startTime.setText(mmm + ":" + sss);
             }
+
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {          }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {          }
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
         });
-
-
-
-
 
 
         textContent = findViewById(R.id.editTextContent);
@@ -184,7 +192,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
     }
 
     //-------------------------------------------------------//
-    private void play(){
+    private void play() {
 
         Thread thread = new Thread(new goThread());
         thread.start();
@@ -197,11 +205,6 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         @Override
         //实现run方法
         public void run() {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             //判断状态，在不暂停的情况下向总线程发出信息
             while (isPlaying) {
                 try {
@@ -210,7 +213,7 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
                         if (isPlaying)
                             Position = (int) AudioExoPlayerUtil.getCurrentPosition();
                     });
-                    Log.d(TAG, "position: " + Position);
+                    //Log.d(TAG, "position: " + Position);
                     seekBar.setProgress(Position);
                     progressBar.setProgress(Position);
                     // 每0.1秒更新一次位置

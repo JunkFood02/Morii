@@ -2,6 +2,5 @@
 <resources>
 
     <color name="colorBackground">#FFAAAAAA</color>
-    <color name="colorDelete">@color/cardview_shadow_end_color</color>
 
 </resources>

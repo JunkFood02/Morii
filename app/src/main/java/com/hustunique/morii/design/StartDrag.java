@@ -80,11 +80,11 @@ public class StartDrag implements View.OnTouchListener {
         long lastTime = System.currentTimeMillis() - start;
         float offsetX = Math.abs(thisX - x);
         float offsetY = Math.abs(thisY - y);
-        return (lastTime >= 50 && offsetX <= 50 && offsetY <= 25);
+        return (lastTime >= 100 && offsetX <= 25 && offsetY <= 25);
     }
 
     public static void makeVibrate() {
-        long vibrateDuration = 50;
+        long vibrateDuration = 20;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createOneShot(vibrateDuration, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
