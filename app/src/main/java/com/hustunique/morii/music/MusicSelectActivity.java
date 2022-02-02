@@ -54,7 +54,7 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         Log.d(TAG, "onCreate: " + Selected.getMeasuredWidth());
         Selected.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
-            MusicDiaryItem diary=new MusicDiaryItem();
+            MusicDiaryItem diary = new MusicDiaryItem();
             diary.setMusicTabId(currentPosition);
             intent.putExtra("diary", diary);
             startActivity(intent);
@@ -75,7 +75,6 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         textView = findViewById(R.id.Emotion);
         constraintLayout = findViewById(R.id.musicSelectLayout);
         setRecyclerView();
-        //setImmersiveStatusBar();
     }
 
     private void setRecyclerView() {
@@ -114,25 +113,6 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         });
     }
 
-    /**
-     * <p>Make contents show behind the transparent Status Bar.<p/>
-     */
-    private void setImmersiveStatusBar() {
-        if (Build.VERSION.SDK_INT >= 31) {
-            WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-            ViewCompat.setOnApplyWindowInsetsListener(constraintLayout, (v, windowInsets) -> {
-                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-                mlp.leftMargin = insets.left;
-                mlp.bottomMargin = insets.bottom;
-                mlp.rightMargin = insets.right;
-                v.setLayoutParams(mlp);
-                return WindowInsetsCompat.CONSUMED;
-            });
-        } else {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-    }
+
 
 }
