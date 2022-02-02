@@ -540,14 +540,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/include"
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_marginHorizontal="12dp"
         android:layout_height="40dp"
+        android:layout_marginHorizontal="12dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="12dp"
         app:layout_constraintTop_toTopOf="parent">
-
 
 
         <androidx.cardview.widget.CardView
@@ -565,8 +564,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="6dp"
-                >
+                android:layout_margin="6dp">
 
                 <ImageView
                     android:id="@+id/imageView_select_back"
@@ -603,7 +601,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
         <androidx.cardview.widget.CardView
@@ -674,9 +671,9 @@
         android:outlineSpotShadowColor="#CC2963FA"
         app:cardCornerRadius="16dp"
         app:cardElevation="12dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:targetApi="p">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -696,6 +693,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/delete_area"
         android:layout_width="0dp"
@@ -716,11 +714,10 @@
             android:layout_height="match_parent"
             android:layout_marginVertical="9dp"
             android:src="@drawable/outline_delete_24"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
