@@ -56,11 +56,12 @@
         <entry key="app/src/main/res/layout/musicdesign_item.xml" value="0.45736143144434394" />
         <entry key="app/src/main/res/layout/musictab_item.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/progressbar_edit.xml" value="0.6521739130434783" />
+        <entry key="app/src/main/res/layout/seekbar_content.xml" value="0.23162393162393163" />
         <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
