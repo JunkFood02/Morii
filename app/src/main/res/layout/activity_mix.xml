@@ -9,8 +9,9 @@
     tools:context="com.hustunique.morii.design.MixActivity">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/helpButton"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_marginBottom="21dp"
         android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
@@ -21,6 +22,19 @@
         app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.circle" />
 
+    <ImageView
+        android:id="@+id/helpMessage"
+        android:layout_width="270dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="-9dp"
+        android:src="@drawable/ic_help_msg"
+        android:translationZ="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/gridLayout"
+        app:layout_constraintEnd_toStartOf="@id/helpButton">
+
+    </ImageView>
+
     <androidx.cardview.widget.CardView
 
         android:id="@+id/gridLayout"
@@ -29,11 +43,12 @@
         android:outlineAmbientShadowColor="@color/colorAmbient"
         android:outlineSpotShadowColor="@color/colorSpot"
         app:cardCornerRadius="16dp"
-        app:cardElevation="12dp"
+        app:cardElevation="24dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView03"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_area">
+        app:layout_constraintTop_toBottomOf="@id/delete_area">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,6 +69,14 @@
                 app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.16" />
 
+            <View
+                android:id="@+id/hintBG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:background="@color/design_default_color_on_primary"
+                android:elevation="10dp" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -62,42 +85,54 @@
                     android:id="@+id/hintText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:elevation="20dp"
                     android:text="SIMPLE"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/square4"
                     app:layout_constraintEnd_toEndOf="@id/square4"
                     app:layout_constraintStart_toStartOf="@id/square4"
                     app:layout_constraintTop_toTopOf="@id/square4" />
+
                 <TextView
                     android:id="@+id/hintText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:elevation="20dp"
                     android:text="LOUD"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/square2"
                     app:layout_constraintEnd_toEndOf="@id/square2"
                     app:layout_constraintStart_toStartOf="@id/square2"
                     app:layout_constraintTop_toTopOf="@id/square2" />
+
                 <TextView
                     android:id="@+id/hintText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:elevation="20dp"
                     android:text="COMPLEX"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/square6"
                     app:layout_constraintEnd_toEndOf="@id/square6"
                     app:layout_constraintStart_toStartOf="@id/square6"
                     app:layout_constraintTop_toTopOf="@id/square6" />
+
                 <TextView
                     android:id="@+id/hintText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:elevation="20dp"
                     android:text="SOFT"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/square8"
                     app:layout_constraintEnd_toEndOf="@id/square8"
                     app:layout_constraintStart_toStartOf="@id/square8"
                     app:layout_constraintTop_toTopOf="@id/square8" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/square9"
                     android:layout_width="0dp"
@@ -582,7 +617,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/transparent"
+            app:cardBackgroundColor="@color/colorTransparentButton"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -621,7 +656,7 @@
             android:id="@+id/textView_mix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:fontFamily="@font/pingfang_regular"
             android:text="创作"
             android:textColor="#1D283F"
             android:textSize="28sp"
@@ -636,7 +671,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/transparent"
+            app:cardBackgroundColor="@color/colorTransparentButton"
             app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -725,9 +760,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/delete_area"
         android:layout_width="0dp"
-
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
+        android:alpha="0"
         android:background="#99E75A70"
         android:orientation="vertical"
         android:visibility="visible"

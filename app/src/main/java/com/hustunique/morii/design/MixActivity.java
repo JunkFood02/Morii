@@ -26,7 +26,6 @@ import com.hustunique.morii.util.BaseActivity;
 import com.hustunique.morii.util.MyApplication;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,24 +39,26 @@ public class MixActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private androidx.cardview.widget.CardView backLayout, completeLayout;
     private static ConstraintLayout delete_area;
+    private ImageView helpMessage;
     private ImageView cardImage;
     private static final String TAG = "MixActivity";
-    public static final int SHOW_DELETE_AREA = -1;
+    private ImageView helpButton;
     private static int playbackStatus = -1;
     private final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
     private final List<ImageView> squareList = new ArrayList<>(9);
-    private static final Animation fadeOut = new AlphaAnimation(0f, 1f);
-    private static final Animation fadeIn = new AlphaAnimation(1f, 0f);
+    private static Animation appear = new AlphaAnimation(0f, 1f);
+    private static Animation fade = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
-    ImageView playbackImage;
+    private ImageView playbackIcon;
     private CardView playbackButton;
+    private final int animationDuration = 150;
     private final List<View> hints = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mix_plus);
+        setContentView(R.layout.activity_mix);
         initUI();
     }
 
@@ -65,15 +66,22 @@ public class MixActivity extends BaseActivity {
         viewBinding();
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
         Glide.with(this).load(musicTabList.get(diary.getMusicTabId()).getImageResId()).into(cardImage);
-
+        helpButton.setOnClickListener(v -> {
+            if (helpMessage.getVisibility() == View.GONE)
+                startFadeIn(helpMessage);
+            else startFadeOut(helpMessage);
+        });
+        helpMessage.setOnClickListener(v -> {
+            if (v.getVisibility() == View.VISIBLE)
+                startFadeOut(helpMessage);
+        });
         playbackButton.setOnClickListener(v -> {
-            Log.d(TAG, "change");
             if (playbackStatus == 1) {
                 AudioExoPlayerUtil.startAllPlayers();
-                Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
+                Glide.with(this).load(R.drawable.outline_pause_24).into(playbackIcon);
             } else {
                 AudioExoPlayerUtil.pauseAllPlayers();
-                Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
+                Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackIcon);
             }
             playbackStatus = -playbackStatus;
         });
@@ -166,12 +174,13 @@ public class MixActivity extends BaseActivity {
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
-                    squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
+                    Glide.with(this).load(R.drawable.square_transparent).into(squareList.get(rmposition));
+                    //squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
                     constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
                     squareLayoutList.get(rmposition).setOnTouchListener(null);
+                    StartDrag.makeVibrate();
                     return true;
                 }
-                StartDrag.makeVibrate();
                 return false;
             } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED) {
                 if (!event.getResult() && _last_drag_position != -1) {
@@ -179,14 +188,16 @@ public class MixActivity extends BaseActivity {
                 }
                 StartDrag.makeVibrate();
                 v.setAlpha(0f);
-                onItemDragged();
+                delete_area.startAnimation(fade);
+                onItemDropped();
             } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                 _last_drag_position = (Integer) event.getLocalState();
                 Log.d("debug_drag", "start" + _last_drag_position);
                 if (_last_drag_position != -1) {
-                    onItemDropped();
+                    delete_area.startAnimation(appear);
                     v.setAlpha(1f);
                 }
+                onItemDragged();
             }
             return true;
         });
@@ -217,21 +228,38 @@ public class MixActivity extends BaseActivity {
         squareLayoutList.add(findViewById(R.id.square7));
         squareLayoutList.add(findViewById(R.id.square8));
         squareLayoutList.add(findViewById(R.id.square9));
-        hints.add(findViewById(R.id.delete_area));
         hints.add(findViewById(R.id.hintText1));
         hints.add(findViewById(R.id.hintText2));
         hints.add(findViewById(R.id.hintText3));
         hints.add(findViewById(R.id.hintText4));
+        hints.add(findViewById(R.id.hintBG));
         for (View v : hints) {
             v.setVisibility(View.INVISIBLE);
         }
-        int animationDuration = 100;
         playbackButton = findViewById(R.id.playbackButton);
-        playbackImage = findViewById(R.id.playbackButton_image);
-        fadeOut.setDuration(animationDuration);
-        fadeOut.setFillAfter(true);
-        fadeIn.setDuration(animationDuration);
-        fadeIn.setFillAfter(true);
+        playbackIcon = findViewById(R.id.playbackButton_image);
+        appear.setDuration(animationDuration);
+        appear.setFillAfter(true);
+        fade.setDuration(animationDuration);
+        fade.setFillAfter(true);
+        fade.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.d(TAG, "onAnimationEnd: ");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        helpButton = findViewById(R.id.helpButton);
+        helpMessage = findViewById(R.id.helpMessage);
     }
 
     private void setRecyclerView() {
@@ -263,10 +291,10 @@ public class MixActivity extends BaseActivity {
         super.onResume();
         if (!AudioExoPlayerUtil.isPlaying()) {
             playbackStatus = 1;
-            Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackIcon);
         } else {
             playbackStatus = -1;
-            Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
+            Glide.with(this).load(R.drawable.outline_pause_24).into(playbackIcon);
         }
     }
 
@@ -285,16 +313,32 @@ public class MixActivity extends BaseActivity {
 
     private void onItemDragged() {
         for (View v : hints) {
-            v.startAnimation(fadeIn);
-            v.setVisibility(View.VISIBLE);
+            startFadeIn(v);
+            appear = new AlphaAnimation(0f, 1f);
+            appear.setDuration(animationDuration);
         }
-
     }
 
     private void onItemDropped() {
         for (View v : hints) {
-            v.startAnimation(fadeOut);
-            v.setVisibility(View.INVISIBLE);
+            if (v.getVisibility() == View.VISIBLE) {
+                startFadeOut(v);
+                fade = new AlphaAnimation(1f, 0f);
+                fade.setDuration(150);
+            }
         }
+    }
+
+    private void startFadeOut(View v) {
+        if (v.getVisibility() == View.VISIBLE) {
+
+            v.startAnimation(fade);
+            v.setVisibility(View.GONE);
+        }
+    }
+
+    private void startFadeIn(View v) {
+        v.setVisibility(View.VISIBLE);
+        v.startAnimation(appear);
     }
 }
