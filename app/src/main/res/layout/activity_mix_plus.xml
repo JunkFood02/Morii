@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="21dp"
+        android:background="?selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
-        android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/outline_help_outline_24"
         app:layout_constraintBottom_toTopOf="@id/gridLayout"
         app:layout_constraintEnd_toEndOf="@id/gridLayout"
@@ -39,7 +39,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:layout_margin="9dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +58,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
+                <TextView
+                    android:id="@+id/hintText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SIMPLE"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/square4"
+                    app:layout_constraintEnd_toEndOf="@id/square4"
+                    app:layout_constraintStart_toStartOf="@id/square4"
+                    app:layout_constraintTop_toTopOf="@id/square4" />
+                <TextView
+                    android:id="@+id/hintText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOUD"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/square2"
+                    app:layout_constraintEnd_toEndOf="@id/square2"
+                    app:layout_constraintStart_toStartOf="@id/square2"
+                    app:layout_constraintTop_toTopOf="@id/square2" />
+                <TextView
+                    android:id="@+id/hintText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COMPLEX"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/square6"
+                    app:layout_constraintEnd_toEndOf="@id/square6"
+                    app:layout_constraintStart_toStartOf="@id/square6"
+                    app:layout_constraintTop_toTopOf="@id/square6" />
+                <TextView
+                    android:id="@+id/hintText4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SOFT"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/square8"
+                    app:layout_constraintEnd_toEndOf="@id/square8"
+                    app:layout_constraintStart_toStartOf="@id/square8"
+                    app:layout_constraintTop_toTopOf="@id/square8" />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/square9"
                     android:layout_width="0dp"
@@ -68,10 +106,8 @@
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/guideline10"
-                    app:layout_constraintTop_toTopOf="@+id/guideline11"
-                    app:layout_constraintVertical_bias="1.0">
+                    app:layout_constraintTop_toTopOf="@+id/guideline11">
 
                     <androidx.constraintlayout.utils.widget.ImageFilterView
                         android:id="@+id/imageView_bac9"
@@ -692,7 +728,6 @@
 
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        android:alpha="0"
         android:background="#99E75A70"
         android:orientation="vertical"
         android:visibility="visible"
