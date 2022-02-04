@@ -59,12 +59,6 @@ public class MyApplication extends Application {
         AudioExoPlayerUtil.initSoundPlayer();
     }
 
-    public static void clearAllResIdInSoundItemList() {
-        for (SoundItem soundItem : soundItemList) {
-            //soundItem.getResIdList().clear();
-        }
-    }
-
     private String getTime() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月dd日 E HH:mm", Locale.CHINA);
         return simpleDateFormat.format(new Date().getTime());

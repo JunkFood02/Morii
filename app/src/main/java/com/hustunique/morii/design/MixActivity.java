@@ -39,69 +39,49 @@ public class MixActivity extends BaseActivity {
     private RecyclerView recyclerView;
     private androidx.cardview.widget.CardView backLayout, completeLayout;
     private static ConstraintLayout delete_area;
+    private ImageView helpMessage;
     private ImageView cardImage;
     private static final String TAG = "MixActivity";
-    public static final int SHOW_DELETE_AREA = -1;
+    private ImageView helpButton;
     private static int playbackStatus = -1;
     private final List<ConstraintLayout> squareLayoutList = new ArrayList<>(9);
     private final List<ImageView> squareList = new ArrayList<>(9);
-    private static final Animation fadeIn = new AlphaAnimation(0f, 1f);
-    private static final Animation fadeout = new AlphaAnimation(1f, 0f);
+    private static Animation appear = new AlphaAnimation(0f, 1f);
+    private static Animation fade = new AlphaAnimation(1f, 0f);
     private final Map<ConstraintLayout, SoundItem> constraintLayoutSoundItemMap = new HashMap<>(9);
     private final Map<Integer, Integer> positionSoundItemIdMap = new HashMap<>(9);
-    ImageView playbackImage;
+    private ImageView playbackIcon;
+    private CardView playbackButton;
+    private final int animationDuration = 150;
+    private final List<View> hints = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mix_plus);
+        setContentView(R.layout.activity_mix);
         initUI();
     }
 
     private void initUI() {
-        recyclerView = findViewById(R.id.recyclerView03);
-        cardImage = findViewById(R.id.imageView_card);
-        //cardImage.setImageResource(R.drawable.x2);
+        viewBinding();
         MusicDiaryItem diary = (MusicDiaryItem) getIntent().getSerializableExtra("diary");
         Glide.with(this).load(musicTabList.get(diary.getMusicTabId()).getImageResId()).into(cardImage);
-        int animationDuration = 100;
-        CardView playbackButton = findViewById(R.id.playbackButton);
-        playbackImage = findViewById(R.id.playbackButton_image);
-        fadeIn.setDuration(animationDuration);
-        fadeIn.setFillAfter(true);
-        fadeout.setDuration(animationDuration);
-        fadeout.setFillAfter(true);
-        MyApplication.clearAllResIdInSoundItemList();
-        delete_area = findViewById(R.id.delete_area);
-        backLayout = findViewById(R.id.backLayout_select_mix);
-        completeLayout = findViewById(R.id.okay_mix);
-        squareList.add(findViewById(R.id.square_image1));
-        squareList.add(findViewById(R.id.square_image2));
-        squareList.add(findViewById(R.id.square_image3));
-        squareList.add(findViewById(R.id.square_image4));
-        squareList.add(findViewById(R.id.square_image5));
-        squareList.add(findViewById(R.id.square_image6));
-        squareList.add(findViewById(R.id.square_image7));
-        squareList.add(findViewById(R.id.square_image8));
-        squareList.add(findViewById(R.id.square_image9));
-        squareLayoutList.add(findViewById(R.id.square1));
-        squareLayoutList.add(findViewById(R.id.square2));
-        squareLayoutList.add(findViewById(R.id.square3));
-        squareLayoutList.add(findViewById(R.id.square4));
-        squareLayoutList.add(findViewById(R.id.square5));
-        squareLayoutList.add(findViewById(R.id.square6));
-        squareLayoutList.add(findViewById(R.id.square7));
-        squareLayoutList.add(findViewById(R.id.square8));
-        squareLayoutList.add(findViewById(R.id.square9));
-
+        helpButton.setOnClickListener(v -> {
+            if (helpMessage.getVisibility() == View.GONE)
+                startFadeIn(helpMessage);
+            else startFadeOut(helpMessage);
+        });
+        helpMessage.setOnClickListener(v -> {
+            if (v.getVisibility() == View.VISIBLE)
+                startFadeOut(helpMessage);
+        });
         playbackButton.setOnClickListener(v -> {
-            Log.d(TAG, "change");
             if (playbackStatus == 1) {
                 AudioExoPlayerUtil.startAllPlayers();
-                Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
+                Glide.with(this).load(R.drawable.outline_pause_24).into(playbackIcon);
             } else {
                 AudioExoPlayerUtil.pauseAllPlayers();
-                Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
+                Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackIcon);
             }
             playbackStatus = -playbackStatus;
         });
@@ -155,7 +135,6 @@ public class MixActivity extends BaseActivity {
                      */
                     Log.d(TAG, "2");
                     startPlayingSoundItem(soundItemId, position);
-                    //hideDeleteArea();
                     return true;
                 }
                 return event.getAction() == DragEvent.ACTION_DRAG_STARTED;
@@ -195,33 +174,92 @@ public class MixActivity extends BaseActivity {
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);
-                    squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
+                    Glide.with(this).load(R.drawable.square_transparent).into(squareList.get(rmposition));
+                    //squareList.get(rmposition).setImageResource(R.drawable.square_transparent);
                     constraintLayoutSoundItemMap.remove(squareLayoutList.get(rmposition));
                     squareLayoutList.get(rmposition).setOnTouchListener(null);
+                    StartDrag.makeVibrate();
                     return true;
                 }
-                //hideDeleteArea();
-                StartDrag.makeVibrate();
                 return false;
             } else if (event.getAction() == DragEvent.ACTION_DRAG_ENDED) {
                 if (!event.getResult() && _last_drag_position != -1) {
                     squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
                 }
                 StartDrag.makeVibrate();
-                delete_area.startAnimation(fadeout);
-                v.setAlpha(0.0f);
+                v.setAlpha(0f);
+                delete_area.startAnimation(fade);
+                onItemDropped();
             } else if (event.getAction() == DragEvent.ACTION_DRAG_STARTED) {
                 _last_drag_position = (Integer) event.getLocalState();
                 Log.d("debug_drag", "start" + _last_drag_position);
                 if (_last_drag_position != -1) {
-                    delete_area.startAnimation(fadeIn);
-                    v.setAlpha(1.0f);
+                    delete_area.startAnimation(appear);
+                    v.setAlpha(1f);
                 }
+                onItemDragged();
             }
             return true;
-
         });
         setRecyclerView();
+    }
+
+    private void viewBinding() {
+        recyclerView = findViewById(R.id.recyclerView03);
+        cardImage = findViewById(R.id.imageView_card);
+        delete_area = findViewById(R.id.delete_area);
+        backLayout = findViewById(R.id.backLayout_select_mix);
+        completeLayout = findViewById(R.id.okay_mix);
+        squareList.add(findViewById(R.id.square_image1));
+        squareList.add(findViewById(R.id.square_image2));
+        squareList.add(findViewById(R.id.square_image3));
+        squareList.add(findViewById(R.id.square_image4));
+        squareList.add(findViewById(R.id.square_image5));
+        squareList.add(findViewById(R.id.square_image6));
+        squareList.add(findViewById(R.id.square_image7));
+        squareList.add(findViewById(R.id.square_image8));
+        squareList.add(findViewById(R.id.square_image9));
+        squareLayoutList.add(findViewById(R.id.square1));
+        squareLayoutList.add(findViewById(R.id.square2));
+        squareLayoutList.add(findViewById(R.id.square3));
+        squareLayoutList.add(findViewById(R.id.square4));
+        squareLayoutList.add(findViewById(R.id.square5));
+        squareLayoutList.add(findViewById(R.id.square6));
+        squareLayoutList.add(findViewById(R.id.square7));
+        squareLayoutList.add(findViewById(R.id.square8));
+        squareLayoutList.add(findViewById(R.id.square9));
+        hints.add(findViewById(R.id.hintText1));
+        hints.add(findViewById(R.id.hintText2));
+        hints.add(findViewById(R.id.hintText3));
+        hints.add(findViewById(R.id.hintText4));
+        hints.add(findViewById(R.id.hintBG));
+        for (View v : hints) {
+            v.setVisibility(View.INVISIBLE);
+        }
+        playbackButton = findViewById(R.id.playbackButton);
+        playbackIcon = findViewById(R.id.playbackButton_image);
+        appear.setDuration(animationDuration);
+        appear.setFillAfter(true);
+        fade.setDuration(animationDuration);
+        fade.setFillAfter(true);
+        fade.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.d(TAG, "onAnimationEnd: ");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        helpButton = findViewById(R.id.helpButton);
+        helpMessage = findViewById(R.id.helpMessage);
     }
 
     private void setRecyclerView() {
@@ -253,10 +291,10 @@ public class MixActivity extends BaseActivity {
         super.onResume();
         if (!AudioExoPlayerUtil.isPlaying()) {
             playbackStatus = 1;
-            Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackImage);
+            Glide.with(this).load(R.drawable.round_play_arrow_24).into(playbackIcon);
         } else {
             playbackStatus = -1;
-            Glide.with(this).load(R.drawable.outline_pause_24).into(playbackImage);
+            Glide.with(this).load(R.drawable.outline_pause_24).into(playbackIcon);
         }
     }
 
@@ -271,5 +309,36 @@ public class MixActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+    }
+
+    private void onItemDragged() {
+        for (View v : hints) {
+            startFadeIn(v);
+            appear = new AlphaAnimation(0f, 1f);
+            appear.setDuration(animationDuration);
+        }
+    }
+
+    private void onItemDropped() {
+        for (View v : hints) {
+            if (v.getVisibility() == View.VISIBLE) {
+                startFadeOut(v);
+                fade = new AlphaAnimation(1f, 0f);
+                fade.setDuration(150);
+            }
+        }
+    }
+
+    private void startFadeOut(View v) {
+        if (v.getVisibility() == View.VISIBLE) {
+
+            v.startAnimation(fade);
+            v.setVisibility(View.GONE);
+        }
+    }
+
+    private void startFadeIn(View v) {
+        v.setVisibility(View.VISIBLE);
+        v.startAnimation(appear);
     }
 }

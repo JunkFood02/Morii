@@ -64,6 +64,7 @@
             android:id="@+id/title_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pingfang_regular"
             android:text="回忆"
             android:textColor="#1D283F"
             android:textSize="28sp"
@@ -149,12 +150,12 @@
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:transitionName="photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6" />
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Card.Media.6top" />
 
             <TextView
                 android:id="@+id/musicDiaryTitle"
@@ -166,8 +167,8 @@
                 android:text="空気"
                 android:textColor="@color/black"
                 android:textSize="28sp"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/PhotoShow" />
 
             <TextView
@@ -207,9 +208,9 @@
                     android:id="@+id/diaryContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/pingfang_medium"
                     android:text="    秋が好きで、夏の暑さを消し、少し涼しく、赤いカエデが舞い上がるのを見て、蒸し暑いサツマイモを食べ、午後に風が吹くときにコートを着て、夜は鍋バーベキューを食べる賑やかな場所を見つけ、後で家に帰っても大丈夫です  "
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </ScrollView>
@@ -299,7 +300,7 @@
         layout="@layout/seekbar_content"
         android:layout_width="0dp"
         android:layout_height="100dp"
-
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
