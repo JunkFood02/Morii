@@ -10,4 +10,5 @@
     <color name="colorBackground">#E3E9F4</color>
     <color name="colorAmbient">#CC819FED</color>
     <color name="colorSpot">#CC2963FA</color>
+    <color name="colorTransparentButton">#4DFFFFFF</color>
 </resources>

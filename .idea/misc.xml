@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_chevron_left_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_chevron_right_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_pause_24.xml" value="0.1859375" />
+        <entry key="app/src/main/res/drawable/ic_help_msg.xml" value="0.161" />
         <entry key="app/src/main/res/drawable/ic_intersect.xml" value="0.1665" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1859375" />
         <entry key="app/src/main/res/drawable/outline_pause_24.xml" value="0.1465" />

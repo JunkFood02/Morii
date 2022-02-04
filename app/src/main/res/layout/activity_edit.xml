@@ -66,6 +66,7 @@
             android:id="@+id/textView_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pingfang_regular"
             android:text="编辑"
             android:textColor="#1D283F"
             android:textSize="28sp"
