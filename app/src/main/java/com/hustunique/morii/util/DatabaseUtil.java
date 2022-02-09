@@ -10,9 +10,7 @@ import com.hustunique.morii.database.DiaryInfo;
 import com.hustunique.morii.database.DiaryWithSoundItemInfo;
 import com.hustunique.morii.database.SoundItemInfo;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +23,7 @@ public class DatabaseUtil {
     public static final DiaryDao dao = appDatabase.diaryDao();
 
     public static List<DiaryWithSoundItemInfo> readDataFromRoomDataBase() {
-        Future<List<DiaryWithSoundItemInfo>> future = exec.submit(() -> dao.getAllDiaryWithSoundItemInfo());
+        Future<List<DiaryWithSoundItemInfo>> future = exec.submit(dao::getAllDiaryWithSoundItemInfo);
         List<DiaryWithSoundItemInfo> list = null;
         try {
             list = future.get();

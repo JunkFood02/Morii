@@ -23,8 +23,6 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
     //类型待定
 
 
-    private View inflater;
-
     //构造方法，传入数据
     public WhiteNoiseAdapter(Context context) {
         this.context = context;
@@ -34,7 +32,7 @@ public class WhiteNoiseAdapter extends RecyclerView.Adapter<WhiteNoiseAdapter.Vi
     @Override
     public WhiteNoiseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.musicdesign_item, parent, false);
+        View inflater = LayoutInflater.from(context).inflate(R.layout.musicdesign_item, parent, false);
         return new WhiteNoiseAdapter.ViewHolder(inflater);
     }
 

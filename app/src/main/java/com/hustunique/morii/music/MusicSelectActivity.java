@@ -3,12 +3,9 @@ package com.hustunique.morii.music;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.transition.AutoTransition;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -16,10 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,10 +27,7 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
 
     private MusicSelectContract.IPresenter presenter;
     private static final String TAG = "MusicSelectActivity";
-    private androidx.cardview.widget.CardView GiveUp;
-    private androidx.cardview.widget.CardView Selected;
     private TextView textView;
-    private ConstraintLayout constraintLayout;
     private int previousPosition, currentPosition;
 
     @Override
@@ -47,19 +37,19 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_select);
         presenter = new MusicSelectPresenter(this);
-        Selected = findViewById(R.id.okay);
-        GiveUp = findViewById(R.id.backLayout_select);
+        androidx.cardview.widget.CardView nextStepButton = findViewById(R.id.okay);
+        androidx.cardview.widget.CardView backButton = findViewById(R.id.backLayout_select);
         initUI();
-        Selected.measure(0, 0);
-        Log.d(TAG, "onCreate: " + Selected.getMeasuredWidth());
-        Selected.setOnClickListener(view -> {
+        nextStepButton.measure(0, 0);
+        Log.d(TAG, "onCreate: " + nextStepButton.getMeasuredWidth());
+        nextStepButton.setOnClickListener(view -> {
             Intent intent = new Intent(MusicSelectActivity.this, MixActivity.class);
             MusicDiaryItem diary = new MusicDiaryItem();
             diary.setMusicTabId(currentPosition);
             intent.putExtra("diary", diary);
             startActivity(intent);
         });
-        GiveUp.setOnClickListener(view -> {
+        backButton.setOnClickListener(view -> {
             onBackPressed();
         });
 
@@ -73,7 +63,7 @@ public class MusicSelectActivity extends BaseActivity implements MusicSelectCont
 
     private void initUI() {
         textView = findViewById(R.id.Emotion);
-        constraintLayout = findViewById(R.id.musicSelectLayout);
+        ConstraintLayout constraintLayout = findViewById(R.id.musicSelectLayout);
         setRecyclerView();
     }
 

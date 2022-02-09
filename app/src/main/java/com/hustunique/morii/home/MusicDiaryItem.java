@@ -27,10 +27,6 @@ public class MusicDiaryItem implements Serializable {
         this.itemID = itemID;
     }
 
-    public void setItemID(int itemID) {
-        this.itemID = itemID;
-    }
-
     public String getDate() {
         return date;
     }

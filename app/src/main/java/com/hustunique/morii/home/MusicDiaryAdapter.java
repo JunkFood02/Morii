@@ -1,39 +1,28 @@
 package com.hustunique.morii.home;
 
-import static com.hustunique.morii.util.MyApplication.context;
 import static com.hustunique.morii.util.MyApplication.musicTabList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.hustunique.morii.content.ContentActivity;
 import com.hustunique.morii.util.DatabaseUtil;
 
-import java.io.File;
 import java.util.List;
-import java.util.Locale;
 
 import morii.R;
 
@@ -92,7 +81,7 @@ public class MusicDiaryAdapter extends RecyclerView.Adapter<MusicDiaryAdapter.My
             Intent intent = new Intent(activity, ContentActivity.class);
             intent.putExtra("diary", musicDiaryItem);
             ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation((Activity) activity,
+                    .makeSceneTransitionAnimation(activity,
                             Pair.create(holder.PhotoTitle, "photo"));
             activity.startActivity(intent, options.toBundle());
         });

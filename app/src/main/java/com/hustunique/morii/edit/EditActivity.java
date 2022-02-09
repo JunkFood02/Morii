@@ -146,11 +146,11 @@ public class EditActivity extends BaseActivity implements EditContract.IView {
         addPhoto = findViewById(R.id.addPhotoIcon);
         showPhoto = findViewById(R.id.BigPhoto);
         editCardLayout = findViewById(R.id.editCardLayout);
-        imageView = (ImageView) findViewById(R.id.music_pause2);
-        startTime = (TextView) findViewById(R.id.StartTime2);
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine2);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar2);
-        endTime = (TextView) findViewById(R.id.EndTime2);
+        imageView = findViewById(R.id.music_pause2);
+        startTime = findViewById(R.id.StartTime2);
+        progressBar = findViewById(R.id.MusicLine2);
+        seekBar = findViewById(R.id.SeekBar2);
+        endTime = findViewById(R.id.EndTime2);
         currentTime = findViewById(R.id.currentTime);
         pauseMusic = findViewById(R.id.MusicPlay_Edit);
     }

@@ -1,26 +1,20 @@
 package com.hustunique.morii.design;
 
-//import static com.hustunique.morii.design.MixActivity.handler;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Message;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-
-import morii.R;
 
 import com.hustunique.morii.util.MyApplication;
 
 public class StartDrag implements View.OnTouchListener {
-    private int imageID;
     private final int soundItemId;
     private int position = -1;
     private boolean dragFromSquares = false;
@@ -53,7 +47,7 @@ public class StartDrag implements View.OnTouchListener {
                     //MyApplication.getSoundItemThroughIconID(imageID).reResId(resId);
                     //传递被拖动View数据
                     makeVibrate();
-                    imageID = MyApplication.soundItemList.get(soundItemId).getIconResId();
+                    int imageID = MyApplication.soundItemList.get(soundItemId).getIconResId();
                     Intent intent = new Intent();
                     intent.putExtra("position", position);
                     intent.putExtra("ImageID", imageID);
@@ -89,5 +83,4 @@ public class StartDrag implements View.OnTouchListener {
             v.vibrate(vibrateDuration);
         }
     }
-
 }
