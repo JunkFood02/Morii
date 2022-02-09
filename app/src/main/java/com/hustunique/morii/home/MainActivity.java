@@ -4,33 +4,16 @@ import static com.hustunique.morii.util.MyApplication.musicDiaryList;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.ChangeBounds;
-import android.transition.ChangeScroll;
-import android.transition.Explode;
 import android.transition.Slide;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.transition.MaterialElevationScale;
-import com.google.android.material.transition.platform.MaterialFadeThrough;
 import com.hustunique.morii.music.MusicSelectActivity;
 import com.hustunique.morii.util.BaseActivity;
 

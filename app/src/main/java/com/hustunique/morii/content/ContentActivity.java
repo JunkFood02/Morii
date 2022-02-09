@@ -43,7 +43,6 @@ public class ContentActivity extends BaseActivity {
     private static final String TAG = "ContentActivity";
     private Intent intent;
     int newItem = 0;
-    private Bundle bundle;
     private ImageView imageView2;
     private TextView startTime;
     private ProgressBar progressBar;
@@ -71,11 +70,11 @@ public class ContentActivity extends BaseActivity {
     }
 
     private void viewBinding() {
-        pauseMusic = (CardView) findViewById(R.id.MusicPlay);
-        imageView2 = (ImageView) findViewById(R.id.music_pause);
-        startTime = (TextView) findViewById(R.id.StartTime);
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar);
+        pauseMusic = findViewById(R.id.MusicPlay);
+        imageView2 = findViewById(R.id.music_pause);
+        startTime = findViewById(R.id.StartTime);
+        progressBar = findViewById(R.id.MusicLine);
+        seekBar = findViewById(R.id.SeekBar);
         titleBarText = findViewById(R.id.title_content);
         finishButton = findViewById(R.id.finishButton);
         deleteButton = findViewById(R.id.deleteButton);
@@ -84,9 +83,9 @@ public class ContentActivity extends BaseActivity {
         article = findViewById(R.id.diaryContent);
         date = findViewById(R.id.musicDiaryDate);
         tag = findViewById(R.id.musicDiaryTag);
-        endTime = (TextView) findViewById(R.id.EndTime);
-        progressBar = (ProgressBar) findViewById(R.id.MusicLine);
-        seekBar = (SeekBar) findViewById(R.id.SeekBar);
+        endTime = findViewById(R.id.EndTime);
+        progressBar = findViewById(R.id.MusicLine);
+        seekBar = findViewById(R.id.SeekBar);
     }
 
     private void setCallbacks() {
@@ -177,14 +176,14 @@ public class ContentActivity extends BaseActivity {
             for (SoundItemInfo info : musicDiaryItem.getSoundItemInfoList()) {
                 builder.append(soundItemList.get(info.soundItemId).getSoundName()).append(" ");
             }
-            initProgressBar((long) AudioExoPlayerUtil.getDuration());
+            initProgressBar(AudioExoPlayerUtil.getDuration());
         }
         title.setText(musicDiaryItem.getTitle());
         article.setText(musicDiaryItem.getArticle());
         date.setText(musicDiaryItem.getDate());
         tag.setText(builder.toString());
         // get the information
-        ImageView imageView = (ImageView) findViewById(R.id.PhotoShow);
+        ImageView imageView = findViewById(R.id.PhotoShow);
         String imagePath = musicDiaryItem.getImagePath();
         Log.d(TAG, "onCreate: " + imagePath);
 

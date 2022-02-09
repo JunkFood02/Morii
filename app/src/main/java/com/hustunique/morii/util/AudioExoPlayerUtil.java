@@ -9,15 +9,12 @@ import android.net.Uri;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
-import com.hustunique.morii.content.ContentActivity;
 import com.hustunique.morii.music.MusicTab;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AudioExoPlayerUtil {
-    public static final int NEXT = 1;
-    public static final int PREVIOUS = -1;
     private static final float[] volumes = {0.3f, 0.2f, 0.1f};
     private static final ExoPlayer musicPlayer = new ExoPlayer.Builder(context).build();
     private static final String TAG = "AudioExoPlayerUtil";

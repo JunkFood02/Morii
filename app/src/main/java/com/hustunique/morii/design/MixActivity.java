@@ -109,11 +109,6 @@ public class MixActivity extends BaseActivity {
                 if (event.getAction() == DragEvent.ACTION_DROP) {
                     rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
                     if (rmposition != -1) {
-                        /**
-                         *here to cover a sound item , params may be used here are
-                         *  positionSoundItemIdMap.get(rmposition) -- soundItemId
-                         *  rmposition ,the position of the soundItem
-                         */
                         Log.d(TAG, "3");
                         stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                         positionSoundItemIdMap.remove(rmposition);
@@ -128,11 +123,6 @@ public class MixActivity extends BaseActivity {
                     positionSoundItemIdMap.put(position, soundItemId);
                     constraintLayoutSoundItemMap.put(constraintLayout, MyApplication.soundItemList.get(soundItemId));
                     constraintLayout.setOnTouchListener(new StartDrag(position, true, soundItemId));
-                    /**
-                     *here to start a sound item , params may be used here are
-                     * soundItemId  -- soundItemId
-                     *  position ,the position of the soundItem
-                     */
                     Log.d(TAG, "2");
                     startPlayingSoundItem(soundItemId, position);
                     return true;
@@ -140,37 +130,10 @@ public class MixActivity extends BaseActivity {
                 return event.getAction() == DragEvent.ACTION_DRAG_STARTED;
             }));
         }
-        /*cardImage.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
-                switch (event.getAction()){
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        Log.d("debug_drag","start");
-                        _last_drag_position = (Integer) event.getLocalState();
-                        return true;
-                        case DragEvent.ACTION_DRAG_ENDED:
-                            Log.d("debug_drag","end "+_last_drag_position);
-                            if(!event.getResult()&&_last_drag_position!=-1){
-                                squareLayoutList.get(_last_drag_position).setAlpha(1.0f);
-                                hideDeleteArea();
-                            }
-                            return true;
-                    default:
-                        return true;
-                }
-            }
-        });
-
-         */
         delete_area.setOnDragListener((v, event) -> {
             if (event.getAction() == DragEvent.ACTION_DROP) {
                 int rmposition = event.getClipData().getItemAt(0).getIntent().getIntExtra("position", -1);
                 if (rmposition != -1) {
-                    /**
-                     *here to stop a sound item , params may be used here are
-                     *  positionSoundItemIdMap.get(rmposition) -- soundItemId
-                     *  rmposition ,the position of the soundItem
-                     */
                     Log.d(TAG, "1");
                     stopPlayingSoundItem(positionSoundItemIdMap.get(rmposition), rmposition);
                     positionSoundItemIdMap.remove(rmposition);

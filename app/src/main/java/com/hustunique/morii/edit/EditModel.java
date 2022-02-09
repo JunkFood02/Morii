@@ -8,17 +8,12 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -26,13 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 public class EditModel implements EditContract.IModel{
 
@@ -89,22 +77,17 @@ public class EditModel implements EditContract.IModel{
         ActivityLauncherPermission =  appCompatActivityUse.registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(), result ->{
                     if (result.booleanValue() == true ){
-                        ChoosePhoto(appCompatActivityUse);
+                        ChoosePhoto();
                     }else{
                         Toast.makeText(appCompatActivityUse,"获取相册权限失败",Toast.LENGTH_SHORT).show();
                     }
                 });
         ActivityResultLauncher = appCompatActivityUse.registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent data = result.getData();
-                            // 判断手机系统版本号
-                            // 4.4及以上系统使用这个方法处理图片
-                            handleImageOnKitKat(data);
-                        }
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        handleImageOnKitKat(data);
                     }
                 });
     }
@@ -114,7 +97,7 @@ public class EditModel implements EditContract.IModel{
         ActivityLauncherPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
-    public void ChoosePhoto(AppCompatActivity appCompatActivity) {
+    public void ChoosePhoto() {
             Intent intent = new Intent("android.intent.action.GET_CONTENT");
             intent.setType("image/*");
             ActivityResultLauncher.launch(intent);
@@ -166,28 +149,6 @@ public class EditModel implements EditContract.IModel{
             iListener.setIt(imagePath);
         } else {
             Toast.makeText(appCompatActivityUse, "failed to get image", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public String CreatePath(Bitmap bitmap)  {
-        try {
-            Calendar calendar = new GregorianCalendar();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault());
-            String picture_Name = simpleDateFormat.format(calendar.getTime());
-            String framePath = appCompatActivityUse.getExternalFilesDir(null).getAbsolutePath()+"/Picture";
-            File frameFile = new File(framePath);
-            if(!frameFile.exists()){
-                frameFile.mkdirs();
-            }
-            File picture_file = new File(frameFile,picture_Name+".jpg");
-            FileOutputStream out = new FileOutputStream(picture_file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-            out.flush();
-            out.close();
-            return picture_file.getAbsolutePath();
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
         }
     }
 
