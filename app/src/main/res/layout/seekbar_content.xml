@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="100dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/MusicPlay"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        >
         <SeekBar
+            android:id="@+id/SeekBar"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:layout_margin="5dp"
@@ -24,12 +25,10 @@
             android:maxHeight="2dp"
             android:progress="30"
             android:progressDrawable="@drawable/progressbar_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:thumb="@drawable/seekbar_thumb"
-            android:id="@+id/SeekBar"
             android:visibility="invisible"
-            >
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </SeekBar>
 
@@ -74,6 +73,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
@@ -92,8 +92,8 @@
             android:background="@drawable/gradient2">
 
             <ImageView
-                android:layout_width="36dp"
                 android:id="@+id/music_pause"
+                android:layout_width="36dp"
                 android:layout_height="36dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -125,7 +125,7 @@
         android:id="@+id/CardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="21dp"
+        android:layout_margin="18dp"
         android:outlineAmbientShadowColor="#CC819FED"
         android:outlineSpotShadowColor="#CC819FED"
         app:cardCornerRadius="16dp"
@@ -298,9 +298,8 @@
     <include
         android:id="@+id/include2"
         layout="@layout/seekbar_content"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
