@@ -12,12 +12,11 @@ class MusicDiaryItem : Serializable {
     var article: String? = null
     var itemID: Long = 0
     var imagePath: String? = null
-    var soundItemInfoList: MutableList<SoundItemInfo?>? = ArrayList()
+    var soundItemInfoList: MutableList<SoundItemInfo?> = ArrayList()
         private set
 
     fun addSoundItemInfo(itemInfo: SoundItemInfo?) {
-        if (soundItemInfoList == null) soundItemInfoList = ArrayList()
-        soundItemInfoList!!.add(itemInfo)
+        soundItemInfoList.add(itemInfo)
     }
 
     constructor() {
@@ -33,7 +32,7 @@ class MusicDiaryItem : Serializable {
         imagePath = info.imagePath
     }
 
-    constructor(d: DiaryWithSoundItemInfo?) : this(d!!.diaryInfo) {
-        soundItemInfoList!!.addAll(d.soundItemInfoList!!)
+    constructor(d: DiaryWithSoundItemInfo) : this(d.diaryInfo) {
+        soundItemInfoList.addAll(d.soundItemInfoList!!)
     }
 }

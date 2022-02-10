@@ -24,7 +24,7 @@ import morii.databinding.CardviewItemBinding
 
 
 class MusicDiaryAdapter
-    (private val activity: Activity, private val list: MutableList<MusicDiaryItem?>) :
+    (private val activity: Activity, private val list: MutableList<MusicDiaryItem>) :
     RecyclerView.Adapter<MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding: CardviewItemBinding =
@@ -37,7 +37,7 @@ class MusicDiaryAdapter
         @SuppressLint("RecyclerView") position: Int
     ) {
         val musicDiaryItem = list[position]
-        val imagePath = musicDiaryItem?.imagePath
+        val imagePath = musicDiaryItem.imagePath
         if (null != imagePath) {
             Glide.with(holder.itemView).load(imagePath)
                 .into(holder.itemBinding.PhotoTitle)
@@ -45,7 +45,7 @@ class MusicDiaryAdapter
         } else {
             Glide.with(holder.itemView)
                 .load(
-                    MyApplication.musicTabList[musicDiaryItem!!.musicTabId]
+                    MyApplication.musicTabList[musicDiaryItem.musicTabId]
                         .imageResId
                 )
                 .into(holder.itemBinding.PhotoTitle)
@@ -90,8 +90,7 @@ class MusicDiaryAdapter
 
     //内部类，绑定控件
     inner class MyViewHolder(val itemBinding: CardviewItemBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
-    }
+        RecyclerView.ViewHolder(itemBinding.root)
 
     companion object {
         private const val TAG = "MusicDiaryAdapter"

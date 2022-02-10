@@ -15,39 +15,38 @@ import com.hustunique.morii.util.BaseActivity
 import com.hustunique.morii.util.MyApplication
 import com.hustunique.morii.util.MyApplication.Companion.musicDiaryList
 import morii.R
+import morii.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
-    private var constraintLayout: ConstraintLayout? = null
-    private var recyclerView: RecyclerView? = null
-    private var adapter: MusicDiaryAdapter? = null
-    private var button: ImageView? = null
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: MusicDiaryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         window.exitTransition = Slide()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initUI()
-        setRecyclerView(musicDiaryList)
+        setRecyclerView()
     }
 
-    private fun setRecyclerView(list: MutableList<MusicDiaryItem?>) {
-        recyclerView = findViewById(R.id.recyclerView01)
-        adapter = MusicDiaryAdapter(this, list)
-        val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView!!.layoutManager = manager
-        recyclerView!!.adapter = adapter
+    private fun setRecyclerView() {
+        adapter = MusicDiaryAdapter(this, musicDiaryList)
+        binding.musicDiaryRecyclerView.apply {
+            adapter = this@MainActivity.adapter
+            layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        adapter!!.notifyItemInserted(MyApplication.musicDiaryList.size)
+        adapter.notifyItemInserted(musicDiaryList.size)
     }
 
     private fun initUI() {
         Log.d(TAG, "initUI: ")
-        button = findViewById(R.id.arcMain)
-        constraintLayout = findViewById(R.id.mainLayout)
-        button!!.setOnClickListener {
+        binding.buttonMain.setOnClickListener {
             val intent = Intent(this@MainActivity, MusicSelectActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         }

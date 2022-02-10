@@ -24,7 +24,7 @@ import java.lang.StringBuilder
 
 class ContentActivity : BaseActivity() {
     private lateinit var binding: ActivityContentBinding
-    private var musicDiaryItem: MusicDiaryItem? = null
+    private lateinit var musicDiaryItem: MusicDiaryItem
     private lateinit var intentTemp: Intent
     var newItem = 0
     private var Position = AudioExoPlayerUtil.currentPosition.toInt()
@@ -113,15 +113,15 @@ class ContentActivity : BaseActivity() {
 
     private fun initMusicDiaryContent() {
         val builder = StringBuilder()
-        musicDiaryItem = intentTemp.getSerializableExtra("diary") as MusicDiaryItem?
+        musicDiaryItem = intentTemp.getSerializableExtra("diary") as MusicDiaryItem
         builder.append(
-            MyApplication.Companion.musicTabList[musicDiaryItem?.musicTabId!!].emotion
+            MyApplication.musicTabList[musicDiaryItem.musicTabId].emotion
         ).append(" ")
         if (newItem == 0) {
             Log.d(TAG, "initMusicDiaryContent: newItem=0")
-            AudioExoPlayerUtil.playMusic(musicDiaryItem!!.musicTabId)
-            val list = musicDiaryItem!!.soundItemInfoList
-            for (info in list!!) {
+            AudioExoPlayerUtil.playMusic(musicDiaryItem.musicTabId)
+            val list = musicDiaryItem.soundItemInfoList
+            for (info in list) {
                 Log.d(TAG, info!!.soundItemId.toString() + " position:" + info.soundItemPosition)
                 AudioExoPlayerUtil.setSoundPlayer(info.soundItemId, info.soundItemPosition)
                 AudioExoPlayerUtil.startSoundPlayer(info.soundItemPosition)
@@ -130,24 +130,24 @@ class ContentActivity : BaseActivity() {
                 ).append(" ")
             }
         } else {
-            for (info in musicDiaryItem?.soundItemInfoList!!) {
+            for (info in musicDiaryItem.soundItemInfoList) {
                 builder.append(
                     MyApplication.soundItemList[info!!.soundItemId].soundName
                 ).append(" ")
             }
             initProgressBar(AudioExoPlayerUtil.getDuration())
         }
-        binding.musicDiaryTitle.text = musicDiaryItem?.title
-        binding.diaryContent.text = musicDiaryItem?.article
-        binding.musicDiaryDate.text = musicDiaryItem?.date
+        binding.musicDiaryTitle.text = musicDiaryItem.title
+        binding.diaryContent.text = musicDiaryItem.article
+        binding.musicDiaryDate.text = musicDiaryItem.date
         binding.musicDiaryTag.text = builder.toString()
-        val imagePath = musicDiaryItem!!.imagePath
+        val imagePath = musicDiaryItem.imagePath
         Log.d(TAG, "onCreate: $imagePath")
         if (imagePath != null) {
             Glide.with(this).load(imagePath).into(binding.PhotoShow)
         } else {
             Glide.with(this).load(
-                MyApplication.musicTabList[musicDiaryItem?.musicTabId!!]
+                MyApplication.musicTabList[musicDiaryItem.musicTabId]
                     .imageResId
             ).into(binding.PhotoShow)
         }
@@ -169,8 +169,8 @@ class ContentActivity : BaseActivity() {
     private fun createMusicDiary() {
         val diaryInfo = DiaryInfo(musicDiaryItem)
         val diaryInfoId = DatabaseUtil.insertDiaryInfo(diaryInfo)
-        musicDiaryItem?.itemID = diaryInfoId
-        for (info in musicDiaryItem?.soundItemInfoList!!) {
+        musicDiaryItem.itemID = diaryInfoId
+        for (info in musicDiaryItem.soundItemInfoList) {
             info!!.diaryInfoId = diaryInfoId
             DatabaseUtil.insertSoundItemInfo(info)
         }
