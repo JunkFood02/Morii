@@ -11,7 +11,7 @@
     android:outlineAmbientShadowColor="#80000000"
     android:outlineSpotShadowColor="#80000000"
     app:cardCornerRadius="12dp"
-    app:cardElevation="24dp"
+    app:cardElevation="12dp"
     tools:targetApi="p">
 
 
@@ -37,8 +37,8 @@
             android:id="@+id/TextDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="9dp"
             android:fontFamily="@font/notosans_regular"
             android:includeFontPadding="false"
             android:text="12月9日 周四"
@@ -50,13 +50,13 @@
             android:id="@+id/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
+            android:layout_marginStart="12dp"
             android:fontFamily="@font/notosans_medium"
             android:includeFontPadding="false"
             android:text="今天的空气是橘子味的"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TextDate" />

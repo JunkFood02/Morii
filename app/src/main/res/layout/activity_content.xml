@@ -131,7 +131,7 @@
         android:outlineSpotShadowColor="#CC819FED"
         app:cardCornerRadius="16dp"
         app:cardElevation="12dp"
-        app:layout_constraintBottom_toTopOf="@id/include2"
+        app:layout_constraintBottom_toTopOf="@id/progressbar_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_content"
@@ -304,8 +304,8 @@
     </androidx.cardview.widget.CardView>
 
     <include
-        android:id="@+id/include2"
-        layout="@layout/seekbar_content"
+        android:id="@+id/progressbar_content"
+        layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

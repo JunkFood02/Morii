@@ -11,7 +11,7 @@
 
     <com.hustunique.morii.ui.ArcImageView
         android:foreground="?android:attr/selectableItemBackground"
-        android:id="@+id/arcMain"
+        android:id="@+id/buttonMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="-30dp"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/buttonMain"
+            android:id="@+id/textMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosans_medium"
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="48dp"
             android:textColor="@color/black"
             android:fontFamily="@font/notosans_regular"
             android:text="我的创作"
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView01"
+            android:id="@+id/musicDiaryRecyclerView"
             android:layout_width="match_parent"
             android:overScrollMode="never"
             android:layout_height="0dp"
