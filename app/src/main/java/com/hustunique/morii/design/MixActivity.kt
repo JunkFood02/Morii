@@ -73,9 +73,9 @@ class MixActivity : BaseActivity() {
         }
         completeLayout!!.setOnClickListener { v: View? ->
             val intent = Intent(this, EditActivity::class.java)
-            diary?.soundItemInfoList?.clear()
+            diary.soundItemInfoList?.clear()
             for ((key, value) in positionSoundItemIdMap) {
-                diary?.soundItemInfoList?.add(SoundItemInfo(key, value))
+                diary.soundItemInfoList?.add(SoundItemInfo(key, value))
                 Log.d("activityData", "key = $key value = $value")
             }
             intent.putExtra("diary", diary)
@@ -239,10 +239,6 @@ class MixActivity : BaseActivity() {
         super.onBackPressed()
         AudioExoPlayerUtil.stopAllSoundPlayers()
         AudioExoPlayerUtil.resetAllSoundPlayers()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     private fun onItemDragged() {

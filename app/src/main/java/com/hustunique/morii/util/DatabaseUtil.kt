@@ -13,18 +13,18 @@ import java.util.concurrent.Future
 object DatabaseUtil {
     private val exec = Executors.newCachedThreadPool()
     private val appDatabase = Room.databaseBuilder(
-        MyApplication.context!!,
+        MyApplication.context,
         AppDatabase::class.java,
         "app_database"
     )
         .build()
     private val dao = appDatabase.diaryDao()
-    fun readDataFromRoomDataBase(): List<DiaryWithSoundItemInfo?>? {
-        val future: Future<List<DiaryWithSoundItemInfo?>?>? = exec.submit(
-            Callable<List<DiaryWithSoundItemInfo?>?> { dao?.allDiaryWithSoundItemInfo })
-        var list: List<DiaryWithSoundItemInfo?>? = null
+    fun readDataFromRoomDataBase(): List<DiaryWithSoundItemInfo> {
+        val future: Future<List<DiaryWithSoundItemInfo>> = exec.submit(
+            Callable { dao.allDiaryWithSoundItemInfo })
+        lateinit var list: List<DiaryWithSoundItemInfo>
         try {
-            list = future?.get()
+            list = future.get()
         } catch (e: ExecutionException) {
             e.printStackTrace()
         } catch (e: InterruptedException) {
@@ -34,7 +34,7 @@ object DatabaseUtil {
     }
 
     fun insertDiaryInfo(diaryInfo: DiaryInfo?): Long {
-        val future = exec.submit<Long> { dao!!.insertDiaryInfo(diaryInfo) }
+        val future = exec.submit<Long> { dao.insertDiaryInfo(diaryInfo) }
         var id: Long = 0
         try {
             id = future.get()
@@ -47,10 +47,10 @@ object DatabaseUtil {
     }
 
     fun insertSoundItemInfo(info: SoundItemInfo?) {
-        Thread { dao!!.insertSoundItemInfo(info) }.start()
+        Thread { dao.insertSoundItemInfo(info) }.start()
     }
 
     fun deleteDiary(id: Long) {
-        Thread { dao!!.deleteInfoById(id) }.start()
+        Thread { dao.deleteInfoById(id) }.start()
     }
 }

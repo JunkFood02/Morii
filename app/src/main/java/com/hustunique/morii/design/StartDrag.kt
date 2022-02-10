@@ -73,7 +73,7 @@ class StartDrag : OnTouchListener {
 
     companion object {
         private val v =
-            MyApplication.context!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            MyApplication.context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         fun makeVibrate() {
             val vibrateDuration: Long = 20

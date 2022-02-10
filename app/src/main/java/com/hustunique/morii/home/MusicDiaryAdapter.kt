@@ -20,14 +20,16 @@ import android.util.Log
 import android.util.Pair
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import morii.databinding.CardviewItemBinding
 
 
 class MusicDiaryAdapter
     (private val activity: Activity, private val list: MutableList<MusicDiaryItem?>) :
     RecyclerView.Adapter<MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val inflater = LayoutInflater.from(activity).inflate(R.layout.cardview_item, parent, false)
-        return MyViewHolder(inflater)
+        val binding: CardviewItemBinding =
+            CardviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(
@@ -38,23 +40,23 @@ class MusicDiaryAdapter
         val imagePath = musicDiaryItem?.imagePath
         if (null != imagePath) {
             Glide.with(holder.itemView).load(imagePath)
-                .into(holder.PhotoTitle)
+                .into(holder.itemBinding.PhotoTitle)
             Log.d(TAG, "load image success")
         } else {
             Glide.with(holder.itemView)
                 .load(
-                    MyApplication.Companion.musicTabList[musicDiaryItem!!.musicTabId]
+                    MyApplication.musicTabList[musicDiaryItem!!.musicTabId]
                         .imageResId
                 )
-                .into(holder.PhotoTitle)
+                .into(holder.itemBinding.PhotoTitle)
             Log.d(
                 TAG,
                 "onBindViewHolder: " + MyApplication.musicTabList[musicDiaryItem.musicTabId]
                     .imageResId
             )
         }
-        holder.TextTitle.text = musicDiaryItem?.title
-        holder.TextDate.text = "# " + musicDiaryItem?.date
+        holder.itemBinding.TextTitle.text = musicDiaryItem.title
+        holder.itemBinding.TextDate.text = "# " + musicDiaryItem.date
         Log.d("RECYCLER", position.toString())
         holder.itemView.setOnClickListener {
             val intent = Intent(activity, ContentActivity::class.java)
@@ -62,7 +64,7 @@ class MusicDiaryAdapter
             val options = ActivityOptions
                 .makeSceneTransitionAnimation(
                     activity,
-                    Pair.create(holder.PhotoTitle, "photo")
+                    Pair.create(holder.itemBinding.PhotoTitle, "photo")
                 )
             activity.startActivity(intent, options.toBundle())
         }
@@ -72,7 +74,7 @@ class MusicDiaryAdapter
                 .setMessage("这个操作不可被撤销。")
                 .setNegativeButton("取消") { dialog: DialogInterface?, which: Int -> }
                 .setPositiveButton("确认") { dialog: DialogInterface?, which: Int ->
-                    DatabaseUtil.deleteDiary(musicDiaryItem!!.itemID)
+                    DatabaseUtil.deleteDiary(musicDiaryItem.itemID)
                     Log.d(TAG, "deletePosition: " + holder.layoutPosition)
                     notifyItemRemoved(holder.layoutPosition)
                     list.removeAt(holder.layoutPosition)
@@ -87,16 +89,8 @@ class MusicDiaryAdapter
     }
 
     //内部类，绑定控件
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var TextTitle: TextView
-        var TextDate: TextView
-        var PhotoTitle: ShapeableImageView
-
-        init {
-            TextTitle = itemView.findViewById(R.id.TextTitle)
-            TextDate = itemView.findViewById(R.id.TextDate)
-            PhotoTitle = itemView.findViewById(R.id.PhotoTitle)
-        }
+    inner class MyViewHolder(val itemBinding: CardviewItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
     }
 
     companion object {

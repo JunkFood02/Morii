@@ -17,7 +17,7 @@ class MyApplication : Application() {
 
     private fun initResourcesList() {
         val list = DatabaseUtil.readDataFromRoomDataBase()
-        for (info in list!!) {
+        for (info in list) {
             val item = MusicDiaryItem(info)
             musicDiaryList.add(item)
         }

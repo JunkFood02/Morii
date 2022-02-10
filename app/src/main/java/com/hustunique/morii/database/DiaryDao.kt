@@ -12,7 +12,7 @@ interface DiaryDao {
 
     @get:Query("select * from DiaryInfo")
     @get:Transaction
-    val allDiaryWithSoundItemInfo: List<DiaryWithSoundItemInfo?>?
+    val allDiaryWithSoundItemInfo: List<DiaryWithSoundItemInfo>
 
     @Transaction
     fun deleteInfoById(diaryId: Long) {

@@ -30,7 +30,7 @@ class WhiteNoiseAdapter     //类型待定
         holder.imageView.setImageResource(
             MyApplication.Companion.soundItemList.get(position).iconResId
         )
-        holder.textView.setText(MyApplication.Companion.soundItemList.get(position).soundName)
+        holder.textView.text = MyApplication.Companion.soundItemList.get(position).soundName
         Log.d("RECYCLER2", position.toString())
         //holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
         holder.itemView.setOnTouchListener(StartDrag(position))

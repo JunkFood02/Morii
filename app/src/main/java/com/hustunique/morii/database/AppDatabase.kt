@@ -7,5 +7,5 @@ import com.hustunique.morii.database.SoundItemInfo
 
 @Database(entities = [DiaryInfo::class, SoundItemInfo::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun diaryDao(): DiaryDao?
+    abstract fun diaryDao(): DiaryDao
 }

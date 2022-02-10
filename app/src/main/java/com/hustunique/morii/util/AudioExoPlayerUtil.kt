@@ -7,7 +7,7 @@ import com.google.android.exoplayer2.Player
 
 object AudioExoPlayerUtil {
     private val volumes = floatArrayOf(0.3f, 0.2f, 0.1f)
-    private val musicPlayer = ExoPlayer.Builder(MyApplication.Companion.context!!).build()
+    private val musicPlayer = ExoPlayer.Builder(MyApplication.Companion.context).build()
     private const val TAG = "AudioExoPlayerUtil"
     private val soundPlayerList: MutableList<ExoPlayer> = ArrayList()
     private var listener: OnReadyListener? = null
@@ -35,7 +35,7 @@ object AudioExoPlayerUtil {
 
     fun initSoundPlayer() {
         for (i in 0..8) {
-            val player = ExoPlayer.Builder(MyApplication.Companion.context!!).build()
+            val player = ExoPlayer.Builder(MyApplication.Companion.context).build()
             player.volume = volumes[i / 3]
             player.repeatMode = ExoPlayer.REPEAT_MODE_ONE
             soundPlayerList.add(player)
@@ -91,7 +91,7 @@ object AudioExoPlayerUtil {
     private fun UriParser(resId: Int): Uri {
         return Uri.parse(
             "android.resource://"
-                    + MyApplication.Companion.context!!.getPackageName() + "/" + resId
+                    + MyApplication.context.packageName + "/" + resId
         )
     }
 
