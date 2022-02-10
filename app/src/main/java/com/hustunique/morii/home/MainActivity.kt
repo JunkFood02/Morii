@@ -16,8 +16,7 @@ import com.hustunique.morii.util.MyApplication
 import com.hustunique.morii.util.MyApplication.Companion.musicDiaryList
 import morii.R
 
-class MainActivity : BaseActivity(), HomePageContract.IView {
-    private var presenter: HomePageContract.IPresenter? = null
+class MainActivity : BaseActivity() {
     private var constraintLayout: ConstraintLayout? = null
     private var recyclerView: RecyclerView? = null
     private var adapter: MusicDiaryAdapter? = null
@@ -28,11 +27,10 @@ class MainActivity : BaseActivity(), HomePageContract.IView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
-        presenter = PresenterMain(this)
         setRecyclerView(musicDiaryList)
     }
 
-    override fun setRecyclerView(list: MutableList<MusicDiaryItem?>) {
+    private fun setRecyclerView(list: MutableList<MusicDiaryItem?>) {
         recyclerView = findViewById(R.id.recyclerView01)
         adapter = MusicDiaryAdapter(this, list)
         val manager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

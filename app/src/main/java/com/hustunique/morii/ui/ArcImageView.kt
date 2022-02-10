@@ -6,16 +6,11 @@ import android.graphics.Path
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 
-/**
- * 弧形的view
- */
+
 class ArcImageView @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null) :
     AppCompatImageView(
         context!!, attrs, 0
     ) {
-    /*
-     *弧形高度
-     */
     private val mArcHeight = 100
     override fun onDraw(canvas: Canvas) {
         val path = Path()

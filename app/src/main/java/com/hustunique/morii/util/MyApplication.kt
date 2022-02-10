@@ -40,7 +40,7 @@ class MyApplication : Application() {
 
     companion object {
         @SuppressLint("StaticFieldLeak")
-        var context: Context? = null
+        lateinit var context: Context
         val musicTabList: MutableList<MusicTab> = ArrayList()
         val soundItemList: MutableList<SoundItem> = ArrayList()
         val musicDiaryList: MutableList<MusicDiaryItem?> = ArrayList()

@@ -96,7 +96,7 @@ class ContentActivity : BaseActivity() {
             deleteButton!!.visibility = View.GONE
         } else {
             titleBarText!!.text = "预览"
-            finishButton!!.setOnClickListener { v: View? ->
+            finishButton!!.setOnClickListener {
                 newItem = 0
                 createMusicDiary()
                 val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
@@ -108,7 +108,7 @@ class ContentActivity : BaseActivity() {
                 startActivity(backIntent)
             }
         }
-        goBack!!.setOnClickListener { view: View? -> onBackPressed() }
+        goBack!!.setOnClickListener { onBackPressed() }
         if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration())
         } else {
@@ -201,7 +201,7 @@ class ContentActivity : BaseActivity() {
             info!!.diaryInfoId = diaryInfoId
             DatabaseUtil.insertSoundItemInfo(info)
         }
-        MyApplication.Companion.musicDiaryList.add(musicDiaryItem)
+        MyApplication.musicDiaryList.add(musicDiaryItem)
     }
 
     override fun onDestroy() {

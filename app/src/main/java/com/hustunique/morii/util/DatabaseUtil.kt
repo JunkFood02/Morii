@@ -12,7 +12,7 @@ import java.util.concurrent.Future
 
 object DatabaseUtil {
     private val exec = Executors.newCachedThreadPool()
-    val appDatabase = Room.databaseBuilder(
+    private val appDatabase = Room.databaseBuilder(
         MyApplication.context!!,
         AppDatabase::class.java,
         "app_database"

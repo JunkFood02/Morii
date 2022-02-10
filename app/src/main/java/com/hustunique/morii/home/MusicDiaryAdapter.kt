@@ -21,20 +21,11 @@ import android.util.Pair
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-/*
-① 创建一个继承RecyclerView.Adapter<VH>的Adapter类
-② 创建一个继承RecyclerView.ViewHolder的静态内部类
-③ 在Adapter中实现3个方法：
-   onCreateViewHolder()
-   onBindViewHolder()
-   getItemCount()
-*/
-class MusicDiaryAdapter     //类型待定
-//构造方法，传入数据
+
+class MusicDiaryAdapter
     (private val activity: Activity, private val list: MutableList<MusicDiaryItem?>) :
     RecyclerView.Adapter<MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        //创建ViewHolder，返回每一项的布局
         val inflater = LayoutInflater.from(activity).inflate(R.layout.cardview_item, parent, false)
         return MyViewHolder(inflater)
     }
@@ -43,8 +34,6 @@ class MusicDiaryAdapter     //类型待定
         holder: MyViewHolder,
         @SuppressLint("RecyclerView") position: Int
     ) {
-        //将数据和控件绑定
-        //
         val musicDiaryItem = list[position]
         val imagePath = musicDiaryItem?.imagePath
         if (null != imagePath) {
@@ -60,7 +49,7 @@ class MusicDiaryAdapter     //类型待定
                 .into(holder.PhotoTitle)
             Log.d(
                 TAG,
-                "onBindViewHolder: " + MyApplication.Companion.musicTabList[musicDiaryItem.musicTabId]
+                "onBindViewHolder: " + MyApplication.musicTabList[musicDiaryItem.musicTabId]
                     .imageResId
             )
         }
