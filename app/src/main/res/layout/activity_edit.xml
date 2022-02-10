@@ -18,7 +18,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/backLayout_edit"
+            android:id="@+id/backButtonEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -78,7 +78,7 @@
 
         <androidx.cardview.widget.CardView
 
-            android:id="@+id/completeLayout_edit"
+            android:id="@+id/nextstepButtonEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
@@ -132,7 +132,7 @@
         android:outlineSpotShadowColor="#CC0048FF"
         app:cardCornerRadius="16dp"
         app:cardElevation="12dp"
-        app:layout_constraintBottom_toTopOf="@id/include_edit"
+        app:layout_constraintBottom_toTopOf="@id/progressbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleBarLayout_edit"
@@ -155,7 +155,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/addPhotoIcon"
+                android:id="@+id/addPhotoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="9dp"
@@ -180,7 +180,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/currentTime"
+                android:id="@+id/currentDateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -205,7 +205,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/currentTime" />
+                app:layout_constraintTop_toBottomOf="@id/currentDateText" />
 
 
             <androidx.cardview.widget.CardView
@@ -247,7 +247,7 @@
     </androidx.cardview.widget.CardView>
 
     <include
-        android:id="@+id/include_edit"
+        android:id="@+id/progressbar"
         layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
