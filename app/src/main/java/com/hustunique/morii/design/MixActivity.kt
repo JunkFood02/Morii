@@ -158,7 +158,7 @@ class MixActivity : BaseActivity() {
     }
 
     private fun viewBinding() {
-        recyclerView = findViewById(R.id.recyclerView03)
+        recyclerView = findViewById(R.id.soundItemRecyclerView)
         cardImage = findViewById(R.id.imageView_card)
         delete_area = findViewById(R.id.delete_area)
         backLayout = findViewById(R.id.backLayout_select_mix)
@@ -189,8 +189,8 @@ class MixActivity : BaseActivity() {
         for (v in hints) {
             v.visibility = View.INVISIBLE
         }
-        playbackButton = findViewById(R.id.playbackButton)
-        playbackIcon = findViewById(R.id.playbackButton_image)
+        playbackButton = findViewById(R.id.playbackButtonMix)
+        playbackIcon = findViewById(R.id.playbackButtonImageMix)
         appear.duration = animationDuration.toLong()
         appear.fillAfter = true
         fade.duration = animationDuration.toLong()

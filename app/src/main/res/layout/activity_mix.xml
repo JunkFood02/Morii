@@ -45,7 +45,7 @@
         android:outlineSpotShadowColor="@color/colorSpot"
         app:cardCornerRadius="16dp"
         app:cardElevation="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView03"
+        app:layout_constraintBottom_toTopOf="@+id/soundItemRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/delete_area">
@@ -715,17 +715,17 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView03"
+        android:id="@+id/soundItemRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/playbackButton"
+        app:layout_constraintBottom_toTopOf="@+id/playbackButtonMix"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/playbackButton"
+        android:id="@+id/playbackButtonMix"
         android:layout_width="160dp"
         android:layout_height="40dp"
         android:layout_marginBottom="40dp"
@@ -747,7 +747,7 @@
             android:background="@drawable/gradient2">
 
             <ImageView
-                android:id="@+id/playbackButton_image"
+                android:id="@+id/playbackButtonImageMix"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/outline_pause_24"

@@ -248,7 +248,7 @@
 
     <include
         android:id="@+id/include_edit"
-        layout="@layout/progressbar_edit"
+        layout="@layout/progressbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

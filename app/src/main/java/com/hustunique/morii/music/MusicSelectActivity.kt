@@ -59,7 +59,7 @@ class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
 
     private fun setRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView02)
-        val adapter = MusicSelectAdapter(this)
+        val adapter = MusicSelectAdapter(this, presenter)
         val manager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = manager
         recyclerView.adapter = adapter

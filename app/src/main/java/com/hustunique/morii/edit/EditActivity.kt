@@ -130,13 +130,13 @@ class EditActivity : BaseActivity(), EditContract.IView {
         addPhoto = findViewById(R.id.addPhotoIcon)
         showPhoto = findViewById(R.id.BigPhoto)
         editCardLayout = findViewById(R.id.editCardLayout)
-        imageView = findViewById(R.id.music_pause2)
-        startTime = findViewById(R.id.StartTime2)
-        progressBar = findViewById(R.id.MusicLine2)
-        seekBar = findViewById(R.id.SeekBar2)
-        endTime = findViewById(R.id.EndTime2)
+        imageView = findViewById(R.id.image)
+        startTime = findViewById(R.id.StartTime)
+        progressBar = findViewById(R.id.MusicLine)
+        seekBar = findViewById(R.id.SeekBar)
+        endTime = findViewById(R.id.EndTime)
         currentTime = findViewById(R.id.currentTime)
-        pauseMusic = findViewById(R.id.MusicPlay_Edit)
+        pauseMusic = findViewById(R.id.button)
     }
 
     private fun initProgressBar(Duration: Long) {

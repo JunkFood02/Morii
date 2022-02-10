@@ -13,7 +13,7 @@
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/MusicPlay"
+        app:layout_constraintStart_toEndOf="@id/button"
         app:layout_constraintTop_toTopOf="parent">
 
         <SeekBar
@@ -40,7 +40,7 @@
             android:layout_margin="5dp"
             android:max="100"
             android:maxHeight="2dp"
-            android:progress="30"
+            android:progress="0"
             android:progressDrawable="@drawable/progressbar_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/MusicPlay"
+        android:id="@+id/button"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="20dp"
@@ -92,7 +92,7 @@
             android:background="@drawable/gradient2">
 
             <ImageView
-                android:id="@+id/music_pause"
+                android:id="@+id/image"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 app:layout_constraintBottom_toBottomOf="parent"

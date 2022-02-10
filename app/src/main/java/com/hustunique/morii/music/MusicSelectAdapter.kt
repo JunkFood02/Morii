@@ -12,7 +12,8 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
-class MusicSelectAdapter(private val context: Context) :
+class MusicSelectAdapter
+    (private val context: Context, presenter: MusicSelectContract.IPresenter?) :
     RecyclerView.Adapter<MusicSelectAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context).inflate(R.layout.musictab_item, parent, false)
