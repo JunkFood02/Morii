@@ -1,17 +1,28 @@
-// Write C++ code here.
-//
-// Do not forget to dynamically load the C++ library into your application.
-//
-// For instance,
-//
-// In MainActivity.java:
-//    static {
-//       System.loadLibrary("morii");
-//    }
-//
-// Or, in MainActivity.kt:
-//    companion object {
-//      init {
-//         System.loadLibrary("morii")
-//      }
-//    }
+
+#include <jni.h>
+#include <customlog.h>
+#include <android/log.h>
+
+
+extern "C" {
+#include <ffmpeg.h>
+JNIEXPORT void JNICALL
+Java_com_hustunique_morii_util_FFmpegUtil_run(JNIEnv *env, jclass clazz, jobjectArray commands) {
+    int argc = (*env).GetArrayLength(commands);
+    char *argv[argc];
+    int i;
+    for (i = 0; i < argc; i++) {
+        auto js = (jstring) (*env).GetObjectArrayElement(commands, i);
+        argv[i] = (char *) (*env).GetStringUTFChars(js, 0);
+        __android_log_print(ANDROID_LOG_VERBOSE, "FFmpeg", "%s", argv[i]);
+    }
+    int resultCode = ffmpeg_exec(argc, argv);
+    jmethodID returnResult = (*env).GetStaticMethodID(clazz, "onProcessResult", "(Z)V");
+    if (nullptr == returnResult) {
+        LOGE("can't find method getStringFromStatic from JniHandle ");
+        return;
+    }
+    (*env).CallStaticVoidMethod(clazz, returnResult, resultCode);
+
+}
+}
