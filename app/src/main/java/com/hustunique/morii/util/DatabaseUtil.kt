@@ -33,7 +33,7 @@ object DatabaseUtil {
         return list
     }
 
-    fun insertDiaryInfo(diaryInfo: DiaryInfo?): Long {
+    fun insertDiaryInfo(diaryInfo: DiaryInfo): Long {
         val future = exec.submit<Long> { dao.insertDiaryInfo(diaryInfo) }
         var id: Long = 0
         try {
@@ -46,7 +46,7 @@ object DatabaseUtil {
         return id
     }
 
-    fun insertSoundItemInfo(info: SoundItemInfo?) {
+    fun insertSoundItemInfo(info: SoundItemInfo) {
         Thread { dao.insertSoundItemInfo(info) }.start()
     }
 
