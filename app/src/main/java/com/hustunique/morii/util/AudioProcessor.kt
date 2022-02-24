@@ -2,7 +2,6 @@ package com.hustunique.morii.util
 
 import android.os.Environment
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.util.MyApplication.Companion.context
@@ -18,9 +17,10 @@ object AudioProcessor {
             super.onProcessFinished(code, path)
             Looper.prepare()
             Toast.makeText(context, "音频文件创建成功，路径:$path", Toast.LENGTH_SHORT).show()
+            cleanTemp()
         }
-
     }
+    val tempList: MutableList<String> = ArrayList()
 
     @JvmStatic
     fun makeAudioMix(item: MusicDiaryItem) {
@@ -30,14 +30,16 @@ object AudioProcessor {
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).absolutePath + "/audioMix_%s.aac".format(
                     item.title
                 )
+            createTempFiles(musicTabList[item.musicTabId].musicResId)
+            item.soundItemInfoList.forEach { createTempFiles(soundItemList[it!!.soundItemId].getSoundResIds()[0]) }
             commands.add("ffmpeg")
             commands.add("-i")
-            commands.add(temp(musicTabList[item.musicTabId].musicResId))
+            commands.add(tempList.first())
             commands.add("-stream_loop")
             commands.add("-1")
-            item.soundItemInfoList.forEach {
+            for (i in 1..item.soundItemInfoList.size) {
                 commands.add("-i")
-                commands.add(temp(soundItemList[it!!.soundItemId].getSoundResIds()[0]))
+                commands.add(tempList[i])
             }
             commands.add("-filter_complex")
             commands.add(
@@ -51,7 +53,7 @@ object AudioProcessor {
         }.start()
     }
 
-    private fun temp(resId: Int): String {
+    private fun createTempFiles(resId: Int) {
         val song: InputStream = context.resources.openRawResource(resId)
         val file = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC),
@@ -68,8 +70,11 @@ object AudioProcessor {
             readvalue = song.read(buffer)
         }
         copySong.close()
-        Log.d(TAG, "temp: " + file.absolutePath)
+        tempList.add(file.absolutePath)
+    }
 
-        return file.absolutePath;
+    private fun cleanTemp() {
+        tempList.forEach { if (File(it).exists()) File(it).delete() }
+        tempList.clear()
     }
 }
