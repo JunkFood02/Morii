@@ -5,7 +5,7 @@ import com.hustunique.morii.util.MyApplication.Companion.context
 
 object FFmpegUtil {
     @JvmStatic
-    private external fun run(commands: Array<String>)
+    external fun run(commands: Array<String>)
 
     @JvmStatic
     private fun onProcessResult(code: Boolean) {
@@ -14,6 +14,7 @@ object FFmpegUtil {
     }
 
     init {
-        System.loadLibrary("galleryview")
+        System.loadLibrary("x264")
+        System.loadLibrary("morii")
     }
 }

@@ -80,6 +80,12 @@ set_target_properties(swscale
         PROPERTIES IMPORTED_LOCATION
         ${CMAKE_SOURCE_DIR}/lib/${CMAKE_ANDROID_ARCH_ABI}/libswscale.so)
 
+add_library(x264
+        SHARED
+        IMPORTED)
+set_target_properties(x264
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/lib/${CMAKE_ANDROID_ARCH_ABI}/libx264.so)
 
 include_directories(${CMAKE_SOURCE_DIR}/include
         )
@@ -92,6 +98,7 @@ target_link_libraries(
         ${log-lib})
 target_link_libraries(
         ffmpeg
+        x264
         avfilter
         avformat
         postproc

@@ -100,8 +100,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:text="保存"
+                    android:layout_marginEnd="4dp"
+                    android:text="分享"
                     android:textColor="#1D283F"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -115,7 +115,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/outline_done_24" />
+                    app:srcCompat="@drawable/outline_ios_share_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

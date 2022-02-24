@@ -305,7 +305,6 @@ static int write_option(void *optctx, const OptionDef *po, const char *opt,
         (*so)[*dstcount - 1].specifier = str;
         dst = &(*so)[*dstcount - 1].u;
     }
-
     if (po->flags & OPT_STRING) {
         char *str;
         str = av_strdup(arg);
@@ -332,6 +331,7 @@ static int write_option(void *optctx, const OptionDef *po, const char *opt,
             return ret;
         }
     }
+
     if (po->flags & OPT_EXIT)
         exit_program(0);
 
@@ -424,7 +424,6 @@ int parse_optgroup(void *optctx, OptionGroup *g)
 
         av_log(NULL, AV_LOG_DEBUG, "Applying option %s (%s) with argument %s.\n",
                o->key, o->opt->help, o->val);
-
         ret = write_option(optctx, o->opt, o->key, o->val);
         if (ret < 0)
             return ret;
@@ -776,6 +775,7 @@ do {                                                                           \
         }
 
         /* normal options */
+
         po = find_option(options, opt);
         if (po->name) {
             if (po->flags & OPT_EXIT) {
@@ -787,10 +787,9 @@ do {                                                                           \
                 arg = "1";
             }
 
-            av_log(NULL, AV_LOG_DEBUG, "i'm here!\n");
             add_opt(octx, po, opt, arg);
             av_log(NULL, AV_LOG_DEBUG, " matched as option '%s' (%s) with "
-                   "argument '%s'.\n", po->name, po->help, arg);
+                                       "argument '%s'.\n", po->name, po->help, arg);
             continue;
         }
 
