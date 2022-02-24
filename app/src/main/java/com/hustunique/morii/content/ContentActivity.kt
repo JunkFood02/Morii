@@ -1,5 +1,6 @@
 package com.hustunique.morii.content
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.cardview.widget.CardView
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.transition.Explode
 import android.util.Log
 import android.view.*
 import android.widget.*
+import com.google.android.material.snackbar.Snackbar
 import com.hustunique.morii.util.*
 import morii.databinding.ActivityContentBinding
 import java.lang.StringBuilder
@@ -81,7 +83,10 @@ class ContentActivity : BaseActivity() {
             }
         }
         binding.backLayoutContent.setOnClickListener { onBackPressed() }
-        binding.completeLayoutContent.setOnClickListener{ AudioProcessor.makeAudioMix(musicDiaryItem)}
+        binding.completeLayoutContent.setOnClickListener {
+            Toast.makeText(this, "正在生成音频文件。", Toast.LENGTH_SHORT).show()
+            AudioProcessor.makeAudioMix(musicDiaryItem)
+        }
         if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration())
         } else {
@@ -175,6 +180,7 @@ class ContentActivity : BaseActivity() {
         }
         MyApplication.musicDiaryList.add(musicDiaryItem)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         if (newItem == 0) {

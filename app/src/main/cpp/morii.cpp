@@ -17,7 +17,7 @@ Java_com_hustunique_morii_util_FFmpegUtil_run(JNIEnv *env, jclass clazz, jobject
         __android_log_print(ANDROID_LOG_VERBOSE, "FFmpegCommands", "%s", argv[i]);
     }
     int resultCode = ffmpeg_exec(argc, argv);
-    jmethodID returnResult = (*env).GetStaticMethodID(clazz, "onProcessResult", "(Z)V");
+    jmethodID returnResult = (*env).GetStaticMethodID(clazz, "onProcessResult", "(I)V");
     if (nullptr == returnResult) {
         LOGE("can't find method getStringFromStatic from JniHandle ");
         return;

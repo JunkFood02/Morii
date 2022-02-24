@@ -4,13 +4,22 @@ import android.widget.Toast
 import com.hustunique.morii.util.MyApplication.Companion.context
 
 object FFmpegUtil {
+    private lateinit var listener: OnProgressListener
+    private lateinit var path: String
+
     @JvmStatic
     external fun run(commands: Array<String>)
 
     @JvmStatic
-    private fun onProcessResult(code: Boolean) {
-        if (code)
-            Toast.makeText(context, "Process succeeded.", Toast.LENGTH_SHORT).show()
+    fun run(commands: Array<String>, listener: OnProgressListener) {
+        path = commands.last()
+        this.listener = listener
+        run(commands)
+    }
+
+    @JvmStatic
+    private fun onProcessResult(code: Int) {
+        listener.onProcessFinished(code, path)
     }
 
     init {
