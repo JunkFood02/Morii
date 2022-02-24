@@ -1,24 +1,23 @@
 package com.hustunique.morii.content
 
+import android.app.ProgressDialog
 import android.content.Intent
-import com.hustunique.morii.util.BaseActivity
 import androidx.cardview.widget.CardView
-import com.hustunique.morii.util.AudioExoPlayerUtil
 import android.os.Bundle
+import android.provider.MediaStore
 import morii.R
 import com.bumptech.glide.Glide
 import com.hustunique.morii.home.MusicDiaryItem
 import android.widget.SeekBar.OnSeekBarChangeListener
-import com.hustunique.morii.util.MyApplication
 import com.hustunique.morii.home.MainActivity
 import com.hustunique.morii.database.DiaryInfo
-import com.hustunique.morii.util.DatabaseUtil
-import com.hustunique.morii.util.OnReadyListener
 import android.transition.AutoTransition
 import android.transition.Explode
 import android.util.Log
 import android.view.*
 import android.widget.*
+import com.google.android.material.snackbar.Snackbar
+import com.hustunique.morii.util.*
 import morii.databinding.ActivityContentBinding
 import java.lang.StringBuilder
 
@@ -68,6 +67,7 @@ class ContentActivity : BaseActivity() {
         if (newItem == 0) {
             binding.finishButton.visibility = View.GONE
             binding.deleteButton.visibility = View.GONE
+            binding.completeLayoutContent.visibility = View.VISIBLE;
         } else {
             binding.titleContent.text = "预览"
             binding.finishButton.setOnClickListener {
@@ -83,6 +83,10 @@ class ContentActivity : BaseActivity() {
             }
         }
         binding.backLayoutContent.setOnClickListener { onBackPressed() }
+        binding.completeLayoutContent.setOnClickListener {
+            Toast.makeText(this, "正在生成音频文件。", Toast.LENGTH_SHORT).show()
+            AudioProcessor.makeAudioMix(musicDiaryItem)
+        }
         if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration())
         } else {

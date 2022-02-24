@@ -12,15 +12,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.hustunique.morii.util.MyApplication
 import morii.R
+import morii.databinding.MusicdesignItemBinding
 
 class WhiteNoiseAdapter     //类型待定
 //构造方法，传入数据
     (private val context: Context) : RecyclerView.Adapter<WhiteNoiseAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //创建ViewHolder，返回每一项的布局
-        val inflater =
-            LayoutInflater.from(context).inflate(R.layout.musicdesign_item, parent, false)
-        return ViewHolder(inflater)
+        LayoutInflater.from(context).inflate(R.layout.musicdesign_item, parent, false)
+        val binding: MusicdesignItemBinding =
+            MusicdesignItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
@@ -28,11 +30,10 @@ class WhiteNoiseAdapter     //类型待定
         //
         holder.Select = false
         holder.imageView.setImageResource(
-            MyApplication.Companion.soundItemList.get(position).iconResId
+            MyApplication.soundItemList[position].iconResId
         )
-        holder.textView.text = MyApplication.Companion.soundItemList.get(position).soundName
+        holder.textView.text = MyApplication.soundItemList[position].soundName
         Log.d("RECYCLER2", position.toString())
-        //holder.itemView.setOnTouchListener(new Drag(soundItemList.get(position % 7).getIconResId()));
         holder.itemView.setOnTouchListener(StartDrag(position))
         holder.itemView.setOnClickListener { v: View? ->
             if (!holder.Select) holder.textView.setTextColor(Color.parseColor("#FF0000")) else holder.textView.setTextColor(
@@ -44,18 +45,16 @@ class WhiteNoiseAdapter     //类型待定
 
     override fun getItemCount(): Int {
         //返回Item总条数
-        return MyApplication.Companion.soundItemList.size
+        return MyApplication.soundItemList.size
     }
 
     //内部类，绑定控件
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var imageView: ShapeableImageView
-        var textView: TextView
+    inner class ViewHolder(itemBinding: MusicdesignItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
+
+        var imageView: ShapeableImageView = itemBinding.RoundIcon;
+        var textView: TextView = itemBinding.IconName
         var Select = false
 
-        init {
-            imageView = itemView.findViewById(R.id.RoundIcon)
-            textView = itemView.findViewById(R.id.IconName)
-        }
     }
 }

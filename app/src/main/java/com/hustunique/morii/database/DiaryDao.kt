@@ -5,10 +5,10 @@ import androidx.room.*
 @Dao
 interface DiaryDao {
     @Insert
-    fun insertDiaryInfo(info: DiaryInfo?): Long
+    fun insertDiaryInfo(info: DiaryInfo): Long
 
     @Insert
-    fun insertSoundItemInfo(info: SoundItemInfo?)
+    fun insertSoundItemInfo(info: SoundItemInfo)
 
     @get:Query("select * from DiaryInfo")
     @get:Transaction

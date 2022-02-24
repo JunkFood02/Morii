@@ -88,7 +88,7 @@ object AudioExoPlayerUtil {
         musicPlayer.pause()
     }
 
-    private fun UriParser(resId: Int): Uri {
+    fun UriParser(resId: Int): Uri {
         return Uri.parse(
             "android.resource://"
                     + MyApplication.context.packageName + "/" + resId
