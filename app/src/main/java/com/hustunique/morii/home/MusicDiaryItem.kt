@@ -12,10 +12,10 @@ class MusicDiaryItem : Serializable {
     var article: String? = null
     var itemID: Long = 0
     var imagePath: String? = null
-    var soundItemInfoList: MutableList<SoundItemInfo?> = ArrayList()
+    var soundItemInfoList: MutableList<SoundItemInfo> = ArrayList()
         private set
 
-    fun addSoundItemInfo(itemInfo: SoundItemInfo?) {
+    fun addSoundItemInfo(itemInfo: SoundItemInfo) {
         soundItemInfoList.add(itemInfo)
     }
 
