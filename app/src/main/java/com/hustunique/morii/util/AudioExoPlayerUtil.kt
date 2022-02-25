@@ -6,8 +6,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 
 object AudioExoPlayerUtil {
-    private val volumes = floatArrayOf(0.3f, 0.2f, 0.1f)
-    private val musicPlayer = ExoPlayer.Builder(MyApplication.Companion.context).build()
+    val volumes = floatArrayOf(0.3f, 0.2f, 0.1f)
+    private val musicPlayer = ExoPlayer.Builder(MyApplication.context).build()
     private const val TAG = "AudioExoPlayerUtil"
     private val soundPlayerList: MutableList<ExoPlayer> = ArrayList()
     private var listener: OnReadyListener? = null

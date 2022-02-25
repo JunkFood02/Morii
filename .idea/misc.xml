@@ -59,6 +59,7 @@
         <entry key="app/src/main/res/layout/progressbar_edit.xml" value="0.6521739130434783" />
         <entry key="app/src/main/res/layout/seekbar_content.xml" value="0.23162393162393163" />
         <entry key="app/src/main/res/layout/seekbar_exact.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/file_paths.xml" value="0.1" />
       </map>
     </option>
   </component>

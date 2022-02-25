@@ -1,30 +1,32 @@
 package com.hustunique.morii.content
 
-import android.app.ProgressDialog
 import android.content.Intent
-import androidx.cardview.widget.CardView
+import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import morii.R
-import com.bumptech.glide.Glide
-import com.hustunique.morii.home.MusicDiaryItem
-import android.widget.SeekBar.OnSeekBarChangeListener
-import com.hustunique.morii.home.MainActivity
-import com.hustunique.morii.database.DiaryInfo
+import android.os.Handler
 import android.transition.AutoTransition
 import android.transition.Explode
 import android.util.Log
 import android.view.*
 import android.widget.*
-import com.google.android.material.snackbar.Snackbar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
+import com.hustunique.morii.database.DiaryInfo
+import com.hustunique.morii.home.MainActivity
+import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.util.*
+import morii.R
 import morii.databinding.ActivityContentBinding
-import java.lang.StringBuilder
+import java.io.File
+
 
 class ContentActivity : BaseActivity() {
     private lateinit var binding: ActivityContentBinding
     private lateinit var musicDiaryItem: MusicDiaryItem
     private lateinit var intentTemp: Intent
+    private lateinit var handler: Handler
     var newItem = 0
     private var Position = AudioExoPlayerUtil.currentPosition.toInt()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +69,7 @@ class ContentActivity : BaseActivity() {
         if (newItem == 0) {
             binding.finishButton.visibility = View.GONE
             binding.deleteButton.visibility = View.GONE
-            binding.completeLayoutContent.visibility = View.VISIBLE;
+            binding.completeLayoutContent.visibility = View.VISIBLE
         } else {
             binding.titleContent.text = "预览"
             binding.finishButton.setOnClickListener {
@@ -84,8 +86,8 @@ class ContentActivity : BaseActivity() {
         }
         binding.backLayoutContent.setOnClickListener { onBackPressed() }
         binding.completeLayoutContent.setOnClickListener {
-            Toast.makeText(this, "正在生成音频文件。", Toast.LENGTH_SHORT).show()
-            AudioProcessor.makeAudioMix(musicDiaryItem)
+            Toast.makeText(this, "正在生成音频文件", Toast.LENGTH_SHORT).show()
+            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
         }
         if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration())
@@ -113,6 +115,15 @@ class ContentActivity : BaseActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
+        handler = Handler(this.mainLooper) {
+            val uri = FileProvider.getUriForFile(
+                this,
+                "com.hustunique.morii.provider",
+                File(it.obj as String)
+            )
+            shareAudioFile(uri)
+            return@Handler true
+        }
     }
 
     private fun initMusicDiaryContent() {
@@ -126,7 +137,7 @@ class ContentActivity : BaseActivity() {
             AudioExoPlayerUtil.playMusic(musicDiaryItem.musicTabId)
             val list = musicDiaryItem.soundItemInfoList
             for (info in list) {
-                Log.d(TAG, info!!.soundItemId.toString() + " position:" + info.soundItemPosition)
+                Log.d(TAG, info.soundItemId.toString() + " position:" + info.soundItemPosition)
                 AudioExoPlayerUtil.setSoundPlayer(info.soundItemId, info.soundItemPosition)
                 AudioExoPlayerUtil.startSoundPlayer(info.soundItemPosition)
                 builder.append(
@@ -136,7 +147,7 @@ class ContentActivity : BaseActivity() {
         } else {
             for (info in musicDiaryItem.soundItemInfoList) {
                 builder.append(
-                    MyApplication.soundItemList[info!!.soundItemId].soundName
+                    MyApplication.soundItemList[info.soundItemId].soundName
                 ).append(" ")
             }
             initProgressBar(AudioExoPlayerUtil.getDuration())
@@ -175,7 +186,7 @@ class ContentActivity : BaseActivity() {
         val diaryInfoId = DatabaseUtil.insertDiaryInfo(diaryInfo)
         musicDiaryItem.itemID = diaryInfoId
         for (info in musicDiaryItem.soundItemInfoList) {
-            info!!.diaryInfoId = diaryInfoId
+            info.diaryInfoId = diaryInfoId
             DatabaseUtil.insertSoundItemInfo(info)
         }
         MyApplication.musicDiaryList.add(musicDiaryItem)
@@ -187,6 +198,16 @@ class ContentActivity : BaseActivity() {
             AudioExoPlayerUtil.pauseAllPlayers()
             AudioExoPlayerUtil.resetAllSoundPlayers()
         }
+    }
+
+    private fun shareAudioFile(uri: Uri) {
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_STREAM, uri)
+            type = "audio/*"
+        }
+        startActivity(Intent.createChooser(shareIntent, "very bad"))
+
     }
 
     private fun play() {
@@ -216,4 +237,5 @@ class ContentActivity : BaseActivity() {
     companion object {
         private const val TAG = "ContentActivity"
     }
+
 }
