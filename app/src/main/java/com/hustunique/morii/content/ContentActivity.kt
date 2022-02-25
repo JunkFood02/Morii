@@ -204,9 +204,9 @@ class ContentActivity : BaseActivity() {
         val shareIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_STREAM, uri)
-            type = "audio/*"
+            type = "*/*"
         }
-        startActivity(Intent.createChooser(shareIntent, "very bad"))
+        startActivity(Intent.createChooser(shareIntent, "分享音频文件"))
 
     }
 
