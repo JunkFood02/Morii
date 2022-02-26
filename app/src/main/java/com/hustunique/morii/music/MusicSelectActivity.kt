@@ -18,7 +18,7 @@ import morii.databinding.ActivityMusicSelectBinding
 
 class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
     private lateinit var binding: ActivityMusicSelectBinding
-    private var presenter: MusicSelectContract.IPresenter? = null
+    private lateinit var presenter: MusicSelectContract.IPresenter
     private val fadeOut: Animation = AlphaAnimation(0.0f, 1f)
     private val animationDuration: Long = 200
     private var previousPosition = 0
@@ -29,7 +29,7 @@ class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
         window.enterTransition = AutoTransition()
         binding = ActivityMusicSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter = MusicSelectPresenter(this)
+        presenter = MusicSelectPresenter()
         initUI()
 
         binding.nextstepButton.setOnClickListener { view: View? ->
@@ -44,7 +44,7 @@ class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter!!.stopMusic()
+        presenter.stopMusic()
     }
 
     private fun initUI() {
@@ -71,7 +71,7 @@ class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
             })
         }
         fadeOut.duration = animationDuration
-        presenter!!.switchMusic(0)
+        presenter.switchMusic(0)
         binding.Emotion.text = MyApplication.musicTabList[0].emotion
     }
 
@@ -84,7 +84,7 @@ class MusicSelectActivity : BaseActivity(), MusicSelectContract.IView {
             binding.Emotion.startAnimation(fadeOut)
             binding.Emotion.text =
                 MyApplication.musicTabList[currentPosition].emotion
-            presenter!!.switchMusic(currentPosition)
+            presenter.switchMusic(currentPosition)
             previousPosition = currentPosition
         }
     }

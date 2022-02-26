@@ -1,7 +1,6 @@
 package com.hustunique.morii.content
 
 import android.content.Intent
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -25,10 +24,9 @@ import java.io.File
 class ContentActivity : BaseActivity() {
     private lateinit var binding: ActivityContentBinding
     private lateinit var musicDiaryItem: MusicDiaryItem
-    private lateinit var intentTemp: Intent
     private lateinit var handler: Handler
     var newItem = 0
-    private var Position = AudioExoPlayerUtil.currentPosition.toInt()
+    private var position = AudioExoPlayerUtil.currentPosition.toInt()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
@@ -36,23 +34,31 @@ class ContentActivity : BaseActivity() {
         window.enterTransition = Explode()
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d(TAG, "onCreate: ")
-        intentTemp = intent
-        newItem = intentTemp.getIntExtra("NewItem", 0)
+        newItem = intent.getIntExtra("NewItem", 0)
+        initUI()
         initMusicDiaryContent()
         setCallbacks()
     }
 
-    private fun setCallbacks() {
+    private fun initUI() {
         if (AudioExoPlayerUtil.isPlaying || newItem == 0) {
             Glide.with(this).load(R.drawable.outline_pause_24)
                 .into(binding.progressbarContent.image)
-            Log.d(TAG, "Playing")
         } else {
-            Log.d(TAG, "not Playing")
             Glide.with(this).load(R.drawable.round_play_arrow_24)
                 .into(binding.progressbarContent.image)
         }
+        if (newItem == 0) {
+            binding.finishButton.visibility = View.GONE
+            binding.deleteButton.visibility = View.GONE
+            binding.completeLayoutContent.visibility = View.VISIBLE
+        } else {
+            binding.titleContent.text = "预览"
+        }
+    }
+
+    private fun setCallbacks() {
+
         binding.progressbarContent.button
             .setOnClickListener {
                 if (AudioExoPlayerUtil.isPlaying) {
@@ -66,31 +72,17 @@ class ContentActivity : BaseActivity() {
                         .into(binding.progressbarContent.image)
                 }
             }
-        if (newItem == 0) {
-            binding.finishButton.visibility = View.GONE
-            binding.deleteButton.visibility = View.GONE
-            binding.completeLayoutContent.visibility = View.VISIBLE
-        } else {
-            binding.titleContent.text = "预览"
+
+        if (newItem == 1) {
             binding.finishButton.setOnClickListener {
-                newItem = 0
                 createMusicDiary()
-                val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
-                startActivity(backIntent)
+                backToMainActivity()
             }
             binding.deleteButton.setOnClickListener { v: View? ->
-                newItem = 0
-                val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
-                startActivity(backIntent)
+                backToMainActivity()
             }
-        }
-        binding.backLayoutContent.setOnClickListener { onBackPressed() }
-        binding.completeLayoutContent.setOnClickListener {
-            Toast.makeText(this, "正在生成音频文件", Toast.LENGTH_SHORT).show()
-            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
-        }
-        if (newItem == 1) {
             initProgressBar(AudioExoPlayerUtil.getDuration())
+
         } else {
             AudioExoPlayerUtil.setListener(object : OnReadyListener() {
                 override fun onReady(duration: Long) {
@@ -100,6 +92,12 @@ class ContentActivity : BaseActivity() {
                 }
             })
         }
+        binding.backLayoutContent.setOnClickListener { onBackPressed() }
+        binding.completeLayoutContent.setOnClickListener {
+            Toast.makeText(this, "正在生成音频文件", Toast.LENGTH_SHORT).show()
+            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
+        }
+
         binding.progressbarContent.SeekBar.setOnSeekBarChangeListener(object :
             OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -128,20 +126,20 @@ class ContentActivity : BaseActivity() {
 
     private fun initMusicDiaryContent() {
         val builder = StringBuilder()
-        musicDiaryItem = intentTemp.getSerializableExtra("diary") as MusicDiaryItem
+        musicDiaryItem = intent.getSerializableExtra("diary") as MusicDiaryItem
         builder.append(
             MyApplication.musicTabList[musicDiaryItem.musicTabId].emotion
         ).append(" ")
+
         if (newItem == 0) {
             Log.d(TAG, "initMusicDiaryContent: newItem=0")
             AudioExoPlayerUtil.playMusic(musicDiaryItem.musicTabId)
-            val list = musicDiaryItem.soundItemInfoList
-            for (info in list) {
+            for (info in musicDiaryItem.soundItemInfoList) {
                 Log.d(TAG, info.soundItemId.toString() + " position:" + info.soundItemPosition)
                 AudioExoPlayerUtil.setSoundPlayer(info.soundItemId, info.soundItemPosition)
                 AudioExoPlayerUtil.startSoundPlayer(info.soundItemPosition)
                 builder.append(
-                    MyApplication.Companion.soundItemList[info.soundItemId].soundName
+                    MyApplication.soundItemList[info.soundItemId].soundName
                 ).append(" ")
             }
         } else {
@@ -222,16 +220,21 @@ class ContentActivity : BaseActivity() {
                 try {
                     runOnUiThread {
                         isPlaying = AudioExoPlayerUtil.isPlaying
-                        if (isPlaying) Position = AudioExoPlayerUtil.currentPosition.toInt()
+                        if (isPlaying) position = AudioExoPlayerUtil.currentPosition.toInt()
                     }
-                    binding.progressbarContent.SeekBar.progress = Position
-                    binding.progressbarContent.MusicLine.progress = Position
+                    binding.progressbarContent.SeekBar.progress = position
+                    binding.progressbarContent.MusicLine.progress = position
                     Thread.sleep(100)
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
             }
         }
+    }
+
+    private fun backToMainActivity() {
+        val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
+        startActivity(backIntent)
     }
 
     companion object {
