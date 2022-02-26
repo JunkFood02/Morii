@@ -5,34 +5,29 @@ import com.hustunique.morii.database.DiaryWithSoundItemInfo
 import com.hustunique.morii.database.SoundItemInfo
 import java.io.Serializable
 
-class MusicDiaryItem : Serializable {
-    var date: String? = null
-    var musicTabId = 0
-    var title: String? = null
-    var article: String? = null
-    var itemID: Long = 0
-    var imagePath: String? = null
+class MusicDiaryItem(
+    var date: String,
+    var musicTabId: Int,
+    var title: String,
+    var article: String,
+    var itemID: Long,
+    var imagePath: String?,
     var soundItemInfoList: MutableList<SoundItemInfo> = ArrayList()
-        private set
+) : Serializable {
 
-    fun addSoundItemInfo(itemInfo: SoundItemInfo) {
-        soundItemInfoList.add(itemInfo)
+    constructor() : this("02月26日 周六 23:00", 0, "标题", "内容", 0, null) {
     }
 
-    constructor() {
-        soundItemInfoList = ArrayList()
-    }
-
-    constructor(info: DiaryInfo?) {
-        date = info!!.date
-        musicTabId = info.musicTabId
-        title = info.title
-        article = info.article
-        itemID = info.id
-        imagePath = info.imagePath
-    }
+    constructor(info: DiaryInfo) : this(
+        info.date,
+        info.musicTabId,
+        info.title,
+        info.article,
+        info.id,
+        info.imagePath
+    )
 
     constructor(d: DiaryWithSoundItemInfo) : this(d.diaryInfo) {
-        soundItemInfoList.addAll(d.soundItemInfoList!!)
+        soundItemInfoList.addAll(d.soundItemInfoList)
     }
 }

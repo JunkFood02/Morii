@@ -2,12 +2,10 @@ package com.hustunique.morii.database
 
 import androidx.room.*
 
-class DiaryWithSoundItemInfo {
-    @kotlin.jvm.JvmField
+data class DiaryWithSoundItemInfo(
     @Embedded
-    var diaryInfo: DiaryInfo? = null
+    val diaryInfo: DiaryInfo,
 
-    @kotlin.jvm.JvmField
     @Relation(parentColumn = "id", entityColumn = "diaryInfoId")
-    var soundItemInfoList: List<SoundItemInfo>? = null
-}
+    val soundItemInfoList: List<SoundItemInfo>
+)

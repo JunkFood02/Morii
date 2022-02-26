@@ -22,15 +22,15 @@ object AudioProcessor {
     private val listener: OnProgressListener = object : OnProgressListener() {
         override fun onProcessFinished(code: Int, path: String) {
             super.onProcessFinished(code, path)
-            Looper.prepare()
-            if (code != 0) {
-                Toast.makeText(context, "音频文件创建失败", Toast.LENGTH_SHORT).show()
-            }
-            Toast.makeText(context, "音频文件创建成功", Toast.LENGTH_SHORT).show()
             cleanTemp()
-            val message = Message()
-            message.obj = path
-            handler.sendMessage(message)
+            Looper.prepare()
+            if (code == 0) {
+                Toast.makeText(context, "音频文件创建成功", Toast.LENGTH_SHORT).show()
+                val message = Message()
+                message.obj = path
+                handler.sendMessage(message)
+            } else
+                Toast.makeText(context, "音频文件创建失败", Toast.LENGTH_SHORT).show()
         }
     }
     val tempList: MutableList<String> = ArrayList()
@@ -77,13 +77,12 @@ object AudioProcessor {
         val song: InputStream = context.resources.openRawResource(resId)
         val tempPath =
             externalPath + "/" + context.resources.getResourceEntryName(resId) + "_tmp" + ".aac"
-        val file =
-            File(tempPath)
+        val file = File(tempPath)
         if (file.exists())
             file.delete()
         val copySong: OutputStream = FileOutputStream(file)
         val buffer = ByteArray(1024)
-        var readvalue = 0
+        var readvalue: Int
         readvalue = song.read(buffer)
         while (readvalue > 0) {
             copySong.write(buffer, 0, readvalue)

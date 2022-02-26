@@ -96,9 +96,9 @@ class EditActivity : BaseActivity(), EditContract.IView {
             if (title.isNotEmpty() && content.isNotEmpty()) {
                 diary.title = title
                 diary.article = content
-                diary.date = currentDate
+                diary.date = currentDate as String
                 diary.musicTabId = musicTabId
-                if (imagePath != null) diary.imagePath = imagePath
+                if (imagePath != null) diary.imagePath = imagePath as String
                 val intentToNextActivity = Intent(this, ContentActivity::class.java)
                 intentToNextActivity.putExtra("diary", diary)
                 intentToNextActivity.putExtra("NewItem", 1)
