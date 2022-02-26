@@ -136,7 +136,7 @@ class MixActivity : BaseActivity() {
                 if (!event.result && previousPosition != -1) {
                     squareLayoutList[previousPosition].alpha = 1.0f
                 }
-                StartDrag.Companion.makeVibrate()
+                StartDrag.makeVibrate()
                 v.alpha = 0f
                 binding.deleteArea.startAnimation(fade)
                 onItemDropped()

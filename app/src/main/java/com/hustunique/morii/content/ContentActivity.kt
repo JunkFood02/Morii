@@ -131,7 +131,7 @@ class ContentActivity : BaseActivity() {
         val builder = StringBuilder()
         musicDiaryItem = intent.getSerializableExtra("diary") as MusicDiaryItem
         builder.append(
-            MyApplication.musicTabList[musicDiaryItem.musicTabId].emotion
+            musicTabList[musicDiaryItem.musicTabId].emotion
         ).append(" ")
 
         if (newItem == 0) {
@@ -188,14 +188,6 @@ class ContentActivity : BaseActivity() {
         MyApplication.musicDiaryList.add(musicDiaryItem)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (newItem == 0) {
-            AudioExoPlayerUtil.pauseAllPlayers()
-            AudioExoPlayerUtil.resetAllSoundPlayers()
-        }
-    }
-
     private fun shareAudioFile(uri: Uri) {
         val shareIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -230,9 +222,19 @@ class ContentActivity : BaseActivity() {
         }
     }
 
+    override fun onDestroy() {
+        if (newItem == 0) {
+            AudioExoPlayerUtil.pauseAllPlayers()
+            AudioExoPlayerUtil.resetAllSoundPlayers()
+        }
+        super.onDestroy()
+    }
+
     private fun backToMainActivity() {
         val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
         startActivity(backIntent)
+        AudioExoPlayerUtil.pauseAllPlayers()
+        AudioExoPlayerUtil.resetAllSoundPlayers()
     }
 
     companion object {
