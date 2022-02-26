@@ -22,10 +22,9 @@ class EditActivity : BaseActivity(), EditContract.IView {
     private lateinit var binding: ActivityEditBinding
     private var content = ""
     private var title = ""
-    private lateinit var imagePath: String
+    private var imagePath: String? = null
     private lateinit var currentDate: String
     private lateinit var presenter: EditContract.IPresenter
-    private var musicTabId = 0
     private var position = AudioExoPlayerUtil.currentPosition.toInt()
     private lateinit var diary: MusicDiaryItem
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +66,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
                 var mmm: String
                 sss = (progress / 1000 % 60).toString()
                 mmm = (progress / 60 / 1000).toString()
-                if (sss.length  < 2) sss = "0$sss"
+                if (sss.length < 2) sss = "0$sss"
                 if (mmm.length < 2) mmm = "0$mmm"
                 binding.progressbar.StartTime.text = "$mmm:$sss"
             }
@@ -82,7 +81,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
         binding.addPhotoButton.setOnClickListener { presenter?.picture }
         Log.d(
             TAG,
-            "initUI: " + musicTabList[musicTabId].imageResId
+            "initUI: " + musicTabList[diary.musicTabId].imageResId
         )
         binding.nextstepButtonEdit.setOnClickListener { v: View? ->
             Log.d(TAG, "initUI: next")
@@ -91,8 +90,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
             if (title.isNotEmpty() && content.isNotEmpty()) {
                 diary.title = title
                 diary.article = content
-                diary.date = currentDate as String
-                diary.musicTabId = musicTabId
+                diary.date = currentDate
                 if (imagePath != null) diary.imagePath = imagePath as String
                 val intentToNextActivity = Intent(this, ContentActivity::class.java)
                 intentToNextActivity.putExtra("diary", diary)
