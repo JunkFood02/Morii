@@ -38,12 +38,13 @@ class MusicDiaryAdapter
         val musicDiaryItem = list[position]
         val imagePath = musicDiaryItem.imagePath
 
-            Glide.with(holder.itemView).load(imagePath).placeholder(
-                musicTabList[musicDiaryItem.musicTabId]
-                    .imageResId
-            )
+        if (musicDiaryItem.imagePath != null)
+            Glide.with(holder.itemView).load(musicDiaryItem.imagePath)
                 .into(holder.itemBinding.PhotoTitle)
-            Log.d(TAG, "load image success")
+        else
+            Glide.with(holder.itemView).load(musicTabList[musicDiaryItem.musicTabId].imageResId)
+                .into(holder.itemBinding.PhotoTitle)
+        Log.d(TAG, "load image success")
 
         holder.itemBinding.TextTitle.text = musicDiaryItem.title
         holder.itemBinding.TextDate.text = "# " + musicDiaryItem.date

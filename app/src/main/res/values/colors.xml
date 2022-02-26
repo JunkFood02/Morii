@@ -11,4 +11,8 @@
     <color name="colorAmbient">#CC819FED</color>
     <color name="colorSpot">#CC2963FA</color>
     <color name="colorTransparentButton">#4DFFFFFF</color>
+    <color name="colorGradientPrimary">#6B98DC</color>
+    <color name="colorGradientSecondary">#C1D3FF</color>
+    <color name="colorDelete">#99E75A70</color>
+    <color name="colorLightButton">#FFFFFF</color>
 </resources>

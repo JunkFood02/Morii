@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.Morii" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorSpot</item>
-        <item name="colorPrimaryVariant">@color/colorSpot</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/colorBackground</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/teal_200</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>

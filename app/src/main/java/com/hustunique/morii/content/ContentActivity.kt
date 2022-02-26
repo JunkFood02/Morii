@@ -157,12 +157,11 @@ class ContentActivity : BaseActivity() {
         binding.diaryContent.text = musicDiaryItem.article
         binding.musicDiaryDate.text = musicDiaryItem.date
         binding.musicDiaryTag.text = builder.toString()
-        Glide.with(this).load(musicDiaryItem.imagePath)
-            .placeholder(
-                musicTabList[musicDiaryItem.musicTabId].imageResId
-            ).into(binding.PhotoShow)
-
-
+        if (musicDiaryItem.imagePath != null)
+            Glide.with(this).load(musicDiaryItem.imagePath).into(binding.PhotoShow)
+        else
+            Glide.with(this).load(musicTabList[musicDiaryItem.musicTabId].imageResId)
+                .into(binding.PhotoShow)
     }
 
     private fun initProgressBar(Duration: Long) {
@@ -191,7 +190,10 @@ class ContentActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        AudioExoPlayerUtil.pauseAllPlayers()
+        if (newItem == 0) {
+            AudioExoPlayerUtil.pauseAllPlayers()
+            AudioExoPlayerUtil.resetAllSoundPlayers()
+        }
     }
 
     private fun shareAudioFile(uri: Uri) {
@@ -231,7 +233,6 @@ class ContentActivity : BaseActivity() {
     private fun backToMainActivity() {
         val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
         startActivity(backIntent)
-        AudioExoPlayerUtil.resetAllSoundPlayers()
     }
 
     companion object {
