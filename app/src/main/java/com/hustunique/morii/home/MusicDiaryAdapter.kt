@@ -1,26 +1,23 @@
 package com.hustunique.morii.home
 
-import android.content.Intent
-import android.app.Activity
 import android.annotation.SuppressLint
-import android.widget.TextView
-import morii.R
-import com.bumptech.glide.Glide
-import com.hustunique.morii.util.MyApplication
-import com.hustunique.morii.content.ContentActivity
+import android.app.Activity
 import android.app.ActivityOptions
-import com.hustunique.morii.home.MusicDiaryAdapter.MyViewHolder
-import android.view.ViewGroup
-import android.view.LayoutInflater
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import android.content.DialogInterface
-import com.hustunique.morii.util.DatabaseUtil
-import com.google.android.material.imageview.ShapeableImageView
+import android.content.Intent
 import android.util.Log
 import android.util.Pair
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hustunique.morii.content.ContentActivity
+import com.hustunique.morii.home.MusicDiaryAdapter.MyViewHolder
+import com.hustunique.morii.util.DatabaseUtil
 import com.hustunique.morii.util.MyApplication.Companion.externalPath
+import com.hustunique.morii.util.MyApplication.Companion.musicTabList
 import morii.databinding.CardviewItemBinding
 import java.io.File
 
@@ -40,23 +37,14 @@ class MusicDiaryAdapter
     ) {
         val musicDiaryItem = list[position]
         val imagePath = musicDiaryItem.imagePath
-        if (null != imagePath) {
-            Glide.with(holder.itemView).load(imagePath)
-                .into(holder.itemBinding.PhotoTitle)
-            Log.d(TAG, "load image success")
-        } else {
-            Glide.with(holder.itemView)
-                .load(
-                    MyApplication.musicTabList[musicDiaryItem.musicTabId]
-                        .imageResId
-                )
-                .into(holder.itemBinding.PhotoTitle)
-            Log.d(
-                TAG,
-                "onBindViewHolder: " + MyApplication.musicTabList[musicDiaryItem.musicTabId]
+
+            Glide.with(holder.itemView).load(imagePath).placeholder(
+                musicTabList[musicDiaryItem.musicTabId]
                     .imageResId
             )
-        }
+                .into(holder.itemBinding.PhotoTitle)
+            Log.d(TAG, "load image success")
+
         holder.itemBinding.TextTitle.text = musicDiaryItem.title
         holder.itemBinding.TextDate.text = "# " + musicDiaryItem.date
         Log.d("RECYCLER", position.toString())

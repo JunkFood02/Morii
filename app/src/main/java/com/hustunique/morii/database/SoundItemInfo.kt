@@ -20,6 +20,5 @@ data class SoundItemInfo(
         0,
         soundItemId,
         soundItemPosition
-    ) {
-    }
+    )
 }

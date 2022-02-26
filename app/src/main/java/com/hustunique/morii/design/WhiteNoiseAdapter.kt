@@ -52,7 +52,7 @@ class WhiteNoiseAdapter     //类型待定
     inner class ViewHolder(itemBinding: MusicdesignItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-        var imageView: ShapeableImageView = itemBinding.RoundIcon;
+        var imageView: ShapeableImageView = itemBinding.RoundIcon
         var textView: TextView = itemBinding.IconName
         var Select = false
 

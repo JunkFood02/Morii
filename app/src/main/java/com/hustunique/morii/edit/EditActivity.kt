@@ -12,6 +12,7 @@ import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.util.AudioExoPlayerUtil
 import com.hustunique.morii.util.BaseActivity
 import com.hustunique.morii.util.MyApplication
+import com.hustunique.morii.util.MyApplication.Companion.musicTabList
 import morii.R
 import morii.databinding.ActivityEditBinding
 import java.text.SimpleDateFormat
@@ -26,6 +27,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
     private var presenter: EditContract.IPresenter? = null
     private var musicTabId = 0
     private var position = AudioExoPlayerUtil.currentPosition.toInt()
+    private lateinit var diary: MusicDiaryItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditBinding.inflate(layoutInflater)
@@ -41,30 +43,23 @@ class EditActivity : BaseActivity(), EditContract.IView {
 
     override fun setAddPhoto(path: String?) {
         imagePath = path
-        Glide.with(this).load(path).into(binding.BigPhoto)
+        Glide.with(this).load(path).placeholder(musicTabList[diary.musicTabId].imageResId)
+            .into(binding.BigPhoto)
     }
 
     private fun initUI() {
-        viewBinding()
-        val diary = intent.getSerializableExtra("diary") as MusicDiaryItem?
-        musicTabId = diary!!.musicTabId
+        diary = intent.getSerializableExtra("diary") as MusicDiaryItem
         val Duration = AudioExoPlayerUtil.getDuration()
         initProgressBar(Duration)
-        if (AudioExoPlayerUtil.isPlaying) Glide.with(this).load(R.drawable.outline_pause_24).into(
-            binding.progressbar.image
-        ) else Glide.with(this).load(R.drawable.round_play_arrow_24).into(
-            binding.progressbar.image
-        )
+        checkPlayStatus()
         binding.progressbar.button.setOnClickListener {
             if (AudioExoPlayerUtil.isPlaying) {
                 AudioExoPlayerUtil.pauseAllPlayers()
-                Glide.with(this).load(R.drawable.round_play_arrow_24)
-                    .into(binding.progressbar.image)
             } else {
                 AudioExoPlayerUtil.startAllPlayers()
                 play()
-                Glide.with(this).load(R.drawable.outline_pause_24).into(binding.progressbar.image)
             }
+            checkPlayStatus()
         }
         binding.progressbar.SeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -72,7 +67,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
                 var mmm: String
                 sss = (progress / 1000 % 60).toString()
                 mmm = (progress / 60 / 1000).toString()
-                if (sss.length < 2) sss = "0$sss"
+                if (sss.length  < 2) sss = "0$sss"
                 if (mmm.length < 2) mmm = "0$mmm"
                 binding.progressbar.StartTime.text = "$mmm:$sss"
             }
@@ -80,14 +75,14 @@ class EditActivity : BaseActivity(), EditContract.IView {
             override fun onStartTrackingTouch(seekBar: SeekBar) {}
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
-        Glide.with(this).load(MyApplication.musicTabList.get(musicTabId).imageResId)
+        Glide.with(this).load(musicTabList[diary.musicTabId].imageResId)
             .into(binding.BigPhoto)
         currentDate = getDate()
         binding.currentDateText.text = "# $currentDate"
         binding.addPhotoButton.setOnClickListener { presenter?.picture }
         Log.d(
             TAG,
-            "initUI: " + MyApplication.musicTabList[musicTabId].imageResId
+            "initUI: " + musicTabList[musicTabId].imageResId
         )
         binding.nextstepButtonEdit.setOnClickListener { v: View? ->
             Log.d(TAG, "initUI: next")
@@ -108,7 +103,6 @@ class EditActivity : BaseActivity(), EditContract.IView {
         binding.backButtonEdit.setOnClickListener { v: View? -> onBackPressed() }
     }
 
-    private fun viewBinding() {}
 
     private fun initProgressBar(Duration: Long) {
         binding.progressbar.MusicLine.max = Duration.toInt()

@@ -42,13 +42,14 @@
         android:layout_height="350dp"
         android:layout_marginTop="30dp"
         android:outlineAmbientShadowColor="@color/colorAmbient"
-        android:outlineSpotShadowColor="@color/colorSpot"
+        android:outlineSpotShadowColor="@color/colorAmbient"
         app:cardCornerRadius="16dp"
         app:cardElevation="24dp"
         app:layout_constraintBottom_toTopOf="@+id/soundItemRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/delete_area">
+        app:layout_constraintTop_toBottomOf="@id/delete_area"
+        tools:targetApi="p">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,13 +75,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <View
+                <androidx.cardview.widget.CardView
                     android:id="@+id/hintBG"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:alpha="0.5"
                     android:background="@color/design_default_color_on_primary"
-                    android:translationZ="1dp" />
+                    android:translationZ="1dp"
+                    app:cardCornerRadius="16dp" />
 
                 <TextView
                     android:id="@+id/hintText1"

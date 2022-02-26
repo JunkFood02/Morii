@@ -15,8 +15,7 @@ class MusicDiaryItem(
     var soundItemInfoList: MutableList<SoundItemInfo> = ArrayList()
 ) : Serializable {
 
-    constructor() : this("02月26日 周六 23:00", 0, "标题", "内容", 0, null) {
-    }
+    constructor() : this("02月26日 周六 23:00", 0, "标题", "内容", 0, null)
 
     constructor(info: DiaryInfo) : this(
         info.date,

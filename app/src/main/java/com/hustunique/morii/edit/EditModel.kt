@@ -69,7 +69,7 @@ class EditModel internal constructor(private val iListener: IListener) : IModel 
 
     override val picture: Unit
         get() {
-            ActivityLauncherPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            ActivityLauncherPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
 
     fun ChoosePhoto() {
