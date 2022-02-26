@@ -4,16 +4,18 @@ import android.net.Uri
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
+import com.hustunique.morii.util.MyApplication.Companion.musicTabList
+import com.hustunique.morii.util.MyApplication.Companion.soundItemList
 
 object AudioExoPlayerUtil {
-    val volumes = floatArrayOf(0.3f, 0.2f, 0.1f)
+    val volumes = floatArrayOf(0.3f, 0.15f, 0.08f)
     private val musicPlayer = ExoPlayer.Builder(MyApplication.context).build()
     private const val TAG = "AudioExoPlayerUtil"
     private val soundPlayerList: MutableList<ExoPlayer> = ArrayList()
     private var listener: OnReadyListener? = null
     private var duration: Long = 0
     fun initMusicPlayer() {
-        for (musicTab in MyApplication.Companion.musicTabList) {
+        for (musicTab in musicTabList) {
             val mediaItem = MediaItem.fromUri(UriParser(musicTab.musicResId))
             musicPlayer.addMediaItem(mediaItem)
         }
@@ -50,8 +52,7 @@ object AudioExoPlayerUtil {
     fun setSoundPlayer(soundItemId: Int, position: Int) {
         val player = soundPlayerList[position]
         val soundResId: Int =
-            MyApplication.Companion.soundItemList.get(soundItemId).getSoundResIds()
-                .get(position % 3)
+            soundItemList[soundItemId].soundResIds[position % 3]
         player.setMediaItem(MediaItem.fromUri(UriParser(soundResId)))
         player.prepare()
     }

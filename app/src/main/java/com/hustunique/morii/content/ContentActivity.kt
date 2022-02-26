@@ -16,6 +16,7 @@ import com.hustunique.morii.database.DiaryInfo
 import com.hustunique.morii.home.MainActivity
 import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.util.*
+import com.hustunique.morii.util.MyApplication.Companion.musicTabList
 import morii.R
 import morii.databinding.ActivityContentBinding
 import java.io.File
@@ -25,7 +26,7 @@ class ContentActivity : BaseActivity() {
     private lateinit var binding: ActivityContentBinding
     private lateinit var musicDiaryItem: MusicDiaryItem
     private lateinit var handler: Handler
-    var newItem = 0
+    private var newItem = 0
     private var position = AudioExoPlayerUtil.currentPosition.toInt()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,8 @@ class ContentActivity : BaseActivity() {
             binding.completeLayoutContent.visibility = View.VISIBLE
         } else {
             binding.titleContent.text = "预览"
+            Glide.with(this).load(R.drawable.ic_icon_left_design).into(binding.backButtonImage)
+            binding.backButtonText.text = "上一步"
         }
     }
 
@@ -154,16 +157,12 @@ class ContentActivity : BaseActivity() {
         binding.diaryContent.text = musicDiaryItem.article
         binding.musicDiaryDate.text = musicDiaryItem.date
         binding.musicDiaryTag.text = builder.toString()
-        val imagePath = musicDiaryItem.imagePath
-        Log.d(TAG, "onCreate: $imagePath")
-        if (imagePath != null) {
-            Glide.with(this).load(imagePath).into(binding.PhotoShow)
-        } else {
-            Glide.with(this).load(
-                MyApplication.musicTabList[musicDiaryItem.musicTabId]
-                    .imageResId
+        Glide.with(this).load(musicDiaryItem.imagePath)
+            .placeholder(
+                musicTabList[musicDiaryItem.musicTabId].imageResId
             ).into(binding.PhotoShow)
-        }
+
+
     }
 
     private fun initProgressBar(Duration: Long) {
@@ -192,10 +191,7 @@ class ContentActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (newItem == 0) {
-            AudioExoPlayerUtil.pauseAllPlayers()
-            AudioExoPlayerUtil.resetAllSoundPlayers()
-        }
+        AudioExoPlayerUtil.pauseAllPlayers()
     }
 
     private fun shareAudioFile(uri: Uri) {
@@ -235,6 +231,7 @@ class ContentActivity : BaseActivity() {
     private fun backToMainActivity() {
         val backIntent = Intent(this@ContentActivity, MainActivity::class.java)
         startActivity(backIntent)
+        AudioExoPlayerUtil.resetAllSoundPlayers()
     }
 
     companion object {

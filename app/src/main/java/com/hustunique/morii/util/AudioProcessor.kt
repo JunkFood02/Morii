@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
 
 object AudioProcessor {
     private const val TAG = "AudioProcessor"
-    private lateinit var handler: Handler;
+    private lateinit var handler: Handler
     private val listener: OnProgressListener = object : OnProgressListener() {
         override fun onProcessFinished(code: Int, path: String) {
             super.onProcessFinished(code, path)
@@ -44,7 +44,7 @@ object AudioProcessor {
                     item.title, item.date
                 )
             createTempFiles(musicTabList[item.musicTabId].musicResId)
-            item.soundItemInfoList.forEach { createTempFiles(soundItemList[it.soundItemId].getSoundResIds()[it.soundItemPosition % 3]) }
+            item.soundItemInfoList.forEach { createTempFiles(soundItemList[it.soundItemId].soundResIds[it.soundItemPosition % 3]) }
             commands.add("ffmpeg")
             commands.add("-i")
             commands.add(tempList.first())
