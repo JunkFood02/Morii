@@ -6,39 +6,20 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-class SoundItemInfo : Serializable {
-    @kotlin.jvm.JvmField
+data class SoundItemInfo(
     @PrimaryKey(autoGenerate = true)
-    var soundItemInfoId: Long = 0
-    @kotlin.jvm.JvmField
-    var diaryInfoId: Long = 0
-    @kotlin.jvm.JvmField
-    var soundItemId: Int
-    @kotlin.jvm.JvmField
-    var soundItemPosition: Int
+    val soundItemInfoId: Long,
+    var diaryInfoId: Long,
+    val soundItemId: Int,
+    val soundItemPosition: Int
+) : Serializable {
 
-    constructor(
-        soundItemInfoId: Long,
-        diaryInfoId: Long,
-        soundItemId: Int,
-        soundItemPosition: Int
+    @Ignore
+    constructor(soundItemPosition: Int, soundItemId: Int) : this(
+        0,
+        0,
+        soundItemId,
+        soundItemPosition
     ) {
-        this.soundItemInfoId = soundItemInfoId
-        this.diaryInfoId = diaryInfoId
-        this.soundItemId = soundItemId
-        this.soundItemPosition = soundItemPosition
-    }
-
-    @Ignore
-    constructor(diaryInfoId: Long, soundItemPosition: Int, soundItemId: Int) {
-        this.diaryInfoId = diaryInfoId
-        this.soundItemId = soundItemId
-        this.soundItemPosition = soundItemPosition
-    }
-
-    @Ignore
-    constructor(soundItemPosition: Int, soundItemId: Int) {
-        this.soundItemId = soundItemId
-        this.soundItemPosition = soundItemPosition
     }
 }

@@ -20,7 +20,9 @@ import android.util.Log
 import android.util.Pair
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.hustunique.morii.util.MyApplication.Companion.externalPath
 import morii.databinding.CardviewItemBinding
+import java.io.File
 
 
 class MusicDiaryAdapter
@@ -75,6 +77,11 @@ class MusicDiaryAdapter
                 .setNegativeButton("取消") { dialog: DialogInterface?, which: Int -> }
                 .setPositiveButton("确认") { dialog: DialogInterface?, which: Int ->
                     DatabaseUtil.deleteDiary(musicDiaryItem.itemID)
+                    File(
+                        externalPath + "/%s_%s.aac".format(
+                            musicDiaryItem.title, musicDiaryItem.date
+                        )
+                    ).delete()
                     Log.d(TAG, "deletePosition: " + holder.layoutPosition)
                     notifyItemRemoved(holder.layoutPosition)
                     list.removeAt(holder.layoutPosition)

@@ -4,45 +4,22 @@ import androidx.room.*
 import com.hustunique.morii.home.MusicDiaryItem
 
 @Entity
-class DiaryInfo {
-    @kotlin.jvm.JvmField
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0
+data class DiaryInfo(
+    @PrimaryKey(autoGenerate = true) val id: Long,
+    val title: String,
+    val article: String,
+    val imagePath: String?,
+    val musicTabId: Int,
+    val date: String
+) {
 
-    @kotlin.jvm.JvmField
-    var title: String?
-
-    @kotlin.jvm.JvmField
-    var article: String?
-
-    @kotlin.jvm.JvmField
-    var imagePath: String?
-
-    @kotlin.jvm.JvmField
-    var musicTabId: Int
-
-    @kotlin.jvm.JvmField
-    var date: String?
-
-    constructor(
-        title: String?,
-        article: String?,
-        imagePath: String?,
-        musicTabId: Int,
-        date: String?
-    ) {
-        this.title = title
-        this.article = article
-        this.imagePath = imagePath
-        this.musicTabId = musicTabId
-        this.date = date
-    }
-
-    constructor(item: MusicDiaryItem?) {
-        title = item?.title
-        article = item?.article
-        imagePath = item?.imagePath
-        musicTabId = item?.musicTabId!!
-        date = item.date
-    }
+    @Ignore
+    constructor(item: MusicDiaryItem) : this(
+        0,
+        item.title,
+        item.article,
+        item.imagePath,
+        item.musicTabId,
+        item.date
+    )
 }
