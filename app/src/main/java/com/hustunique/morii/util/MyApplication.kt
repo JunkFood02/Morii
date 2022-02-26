@@ -3,6 +3,7 @@ package com.hustunique.morii.util
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.os.Environment
 import com.hustunique.morii.design.SoundItem
 import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.music.MusicTab
@@ -13,6 +14,7 @@ class MyApplication : Application() {
         super.onCreate()
         context = applicationContext
         initResourcesList()
+        externalPath = getExternalFilesDir(null)!!.absolutePath
     }
 
     private fun initResourcesList() {
@@ -44,5 +46,6 @@ class MyApplication : Application() {
         val musicTabList: MutableList<MusicTab> = ArrayList()
         val soundItemList: MutableList<SoundItem> = ArrayList()
         val musicDiaryList: MutableList<MusicDiaryItem> = ArrayList()
+        lateinit var externalPath: String
     }
 }
