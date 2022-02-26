@@ -8,15 +8,15 @@ interface EditContract {
     }
 
     interface IModel {
-        fun setAppCompatActivityUse(context: Context?)
+        fun setAppCompatActivityUse(context: Context)
         val picture: Unit
     }
 
     interface IListener {
-        fun setIt(path: String?)
+        fun setIt(path: String)
     }
 
     interface IView {
-        fun setAddPhoto(path: String?)
+        fun setAddPhoto(path: String)
     }
 }

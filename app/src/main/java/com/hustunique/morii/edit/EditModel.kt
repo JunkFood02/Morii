@@ -21,8 +21,7 @@ import com.hustunique.morii.edit.EditContract.IListener
 import com.hustunique.morii.edit.EditContract.IModel
 
 class EditModel internal constructor(private val iListener: IListener) : IModel {
-    private val path: String? = null
-    private var appCompatActivityUse: AppCompatActivity? = null
+    private lateinit var appCompatActivityUse: AppCompatActivity
 
     //注册权限请求
     private var ActivityLauncherPermission: ActivityResultLauncher<String?> =
@@ -46,9 +45,9 @@ class EditModel internal constructor(private val iListener: IListener) : IModel 
 
         }
 
-    override fun setAppCompatActivityUse(context: Context?) {
-        appCompatActivityUse = context as AppCompatActivity?
-        ActivityLauncherPermission = appCompatActivityUse!!.registerForActivityResult(
+    override fun setAppCompatActivityUse(context: Context) {
+        appCompatActivityUse = context as AppCompatActivity
+        ActivityLauncherPermission = appCompatActivityUse.registerForActivityResult(
             RequestPermission()
         ) { result: Boolean ->
             if (result) {
@@ -57,7 +56,7 @@ class EditModel internal constructor(private val iListener: IListener) : IModel 
                 Toast.makeText(appCompatActivityUse, "获取相册权限失败", Toast.LENGTH_SHORT).show()
             }
         }
-        ActivityResultLauncher = appCompatActivityUse!!.registerForActivityResult(
+        ActivityResultLauncher = appCompatActivityUse.registerForActivityResult(
             StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -111,7 +110,7 @@ class EditModel internal constructor(private val iListener: IListener) : IModel 
     fun getImagePath(uri: Uri?, selection: String?): String? {
         var path: String? = null
         // 通过Uri和selection来获取真实的图片路径
-        val cursor = appCompatActivityUse!!.contentResolver.query(
+        val cursor = appCompatActivityUse.contentResolver.query(
             uri!!, null, selection, null, null
         )
         if (cursor != null) {

@@ -230,8 +230,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:outlineAmbientShadowColor="#CC819FED"
-                android:outlineSpotShadowColor="#CC819FED"
+                android:outlineAmbientShadowColor="@color/colorAmbient"
+                android:outlineSpotShadowColor="@color/colorAmbient"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -269,8 +269,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:outlineAmbientShadowColor="#CC819FED"
-                android:outlineSpotShadowColor="#CC0245F4"
+                android:outlineAmbientShadowColor="@color/colorAmbient"
+                android:outlineSpotShadowColor="@color/colorAmbient"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -281,7 +281,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white">
+                    android:background="@color/colorLightButton">
 
                     <TextView
                         android:layout_width="wrap_content"

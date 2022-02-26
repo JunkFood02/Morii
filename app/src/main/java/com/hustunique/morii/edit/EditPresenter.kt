@@ -12,7 +12,7 @@ class EditPresenter internal constructor(context: Context) : EditContract.IPrese
             model.picture
         }
 
-    override fun setIt(path: String?) {
+    override fun setIt(path: String) {
         view.setAddPhoto(path)
     }
 

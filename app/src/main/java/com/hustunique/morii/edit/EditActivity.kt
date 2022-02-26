@@ -22,9 +22,9 @@ class EditActivity : BaseActivity(), EditContract.IView {
     private lateinit var binding: ActivityEditBinding
     private var content = ""
     private var title = ""
-    private var imagePath: String? = null
-    private var currentDate: String? = null
-    private var presenter: EditContract.IPresenter? = null
+    private lateinit var imagePath: String
+    private lateinit var currentDate: String
+    private lateinit var presenter: EditContract.IPresenter
     private var musicTabId = 0
     private var position = AudioExoPlayerUtil.currentPosition.toInt()
     private lateinit var diary: MusicDiaryItem
@@ -41,7 +41,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
         checkPlayStatus()
     }
 
-    override fun setAddPhoto(path: String?) {
+    override fun setAddPhoto(path: String) {
         imagePath = path
         Glide.with(this).load(path).placeholder(musicTabList[diary.musicTabId].imageResId)
             .into(binding.BigPhoto)
