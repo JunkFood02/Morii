@@ -1,5 +1,6 @@
 package com.hustunique.morii.content
 
+import android.content.ClipData
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -193,6 +194,12 @@ class ContentActivity : BaseActivity() {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_STREAM, uri)
             type = "*/*"
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            clipData = ClipData(
+                "Audio File",
+                arrayOf("*/*"),
+                ClipData.Item(uri)
+            )
         }
         startActivity(Intent.createChooser(shareIntent, "分享音频文件"))
 
