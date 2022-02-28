@@ -36,7 +36,7 @@ class MusicDiaryAdapter
         @SuppressLint("RecyclerView") position: Int
     ) {
         val musicDiaryItem = list[position]
-        val imagePath = musicDiaryItem.imagePath
+        musicDiaryItem.imagePath
 
         if (musicDiaryItem.imagePath != null)
             Glide.with(holder.itemView).load(musicDiaryItem.imagePath)
@@ -44,7 +44,6 @@ class MusicDiaryAdapter
         else
             Glide.with(holder.itemView).load(musicTabList[musicDiaryItem.musicTabId].imageResId)
                 .into(holder.itemBinding.PhotoTitle)
-        Log.d(TAG, "load image success")
 
         holder.itemBinding.TextTitle.text = musicDiaryItem.title
         holder.itemBinding.TextDate.text = "# " + musicDiaryItem.date
