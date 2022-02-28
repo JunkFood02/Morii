@@ -1,6 +1,7 @@
 package com.hustunique.morii.util
 
 import android.net.Uri
+import android.provider.MediaStore
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -14,6 +15,8 @@ object AudioExoPlayerUtil {
     private val soundPlayerList: MutableList<ExoPlayer> = ArrayList()
     private var listener: OnReadyListener? = null
     private var duration: Long = 0
+    private val mediaItemMap: MutableMap<Int, MediaItem> = HashMap()
+
     fun initMusicPlayer() {
         for (musicTab in musicTabList) {
             val mediaItem = MediaItem.fromUri(UriParser(musicTab.musicResId))
@@ -53,7 +56,7 @@ object AudioExoPlayerUtil {
         val player = soundPlayerList[position]
         val soundResId: Int =
             soundItemList[soundItemId].soundResIds[position % 3]
-        player.setMediaItem(MediaItem.fromUri(UriParser(soundResId)))
+        player.setMediaItem(mediaItemMap[soundResId]!!)
         player.prepare()
     }
 
@@ -117,5 +120,12 @@ object AudioExoPlayerUtil {
 
     fun setListener(listener: OnReadyListener?) {
         AudioExoPlayerUtil.listener = listener
+    }
+
+    fun initSoundItems() {
+        for (item in soundItemList) {
+            for (resId in item.soundResIds)
+                mediaItemMap[resId] = MediaItem.fromUri(UriParser(resId))
+        }
     }
 }

@@ -38,6 +38,7 @@ class MyApplication : Application() {
         musicTabList.add(MusicTab("静谧", R.drawable.bg_silent, R.raw.silent))
         AudioExoPlayerUtil.initMusicPlayer()
         AudioExoPlayerUtil.initSoundPlayer()
+        AudioExoPlayerUtil.initSoundItems()
     }
 
     companion object {
