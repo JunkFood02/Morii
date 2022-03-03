@@ -54,7 +54,7 @@
             android:fontFamily="@font/notosans_medium"
             android:includeFontPadding="false"
             android:text="今天的空气是橘子味的"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
