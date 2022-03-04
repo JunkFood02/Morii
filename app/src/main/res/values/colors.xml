@@ -15,4 +15,5 @@
     <color name="colorGradientSecondary">#C1D3FF</color>
     <color name="colorDelete">#99E75A70</color>
     <color name="colorLightButton">#FFFFFF</color>
+    <color name="textColor">#1D283F</color>
 </resources>
