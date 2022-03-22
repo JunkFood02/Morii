@@ -288,7 +288,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosans_medium"
                         android:includeFontPadding="false"
-                        android:text="删除"
+                        android:text="放弃"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"

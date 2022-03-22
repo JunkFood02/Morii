@@ -60,7 +60,7 @@ class MusicDiaryAdapter
         }
         holder.itemView.setOnLongClickListener { v: View? ->
             val builder = MaterialAlertDialogBuilder(activity)
-            builder.setTitle("确定删除这个音乐日记吗？")
+            builder.setTitle("确定要删除这个音乐日记吗？")
                 .setMessage("这个操作不可被撤销。")
                 .setNegativeButton("取消") { dialog: DialogInterface?, which: Int -> }
                 .setPositiveButton("确认") { dialog: DialogInterface?, which: Int ->

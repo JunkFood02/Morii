@@ -92,7 +92,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@id/textView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textView">
+>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_margin="3dp"
