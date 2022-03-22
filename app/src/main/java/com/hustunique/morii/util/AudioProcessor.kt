@@ -39,10 +39,7 @@ object AudioProcessor {
         Thread {
             this.handler = handler
             val commands: MutableList<String> = ArrayList()
-            val outputPath: String =
-                externalPath + "/%s_%s.aac".format(
-                    item.title, item.date
-                )
+            val outputPath = DatabaseUtil.getAudioFilePath(item.title, item.date)
             createTempFiles(musicTabList[item.musicTabId].musicResId)
             item.soundItemInfoList.forEach { createTempFiles(soundItemList[it.soundItemId].soundResIds[it.soundItemPosition % 3]) }
             commands.add("ffmpeg")

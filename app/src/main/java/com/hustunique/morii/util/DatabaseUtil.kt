@@ -5,12 +5,14 @@ import com.hustunique.morii.database.DiaryInfo
 import com.hustunique.morii.database.DiaryWithSoundItemInfo
 import com.hustunique.morii.database.AppDatabase
 import androidx.room.Room
+import java.io.File
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 
 object DatabaseUtil {
+    private const val TAG = "DatabaseUtil"
     private val exec = Executors.newCachedThreadPool()
     private val appDatabase = Room.databaseBuilder(
         MyApplication.context,
@@ -52,5 +54,15 @@ object DatabaseUtil {
 
     fun deleteDiary(id: Long) {
         Thread { dao.deleteInfoById(id) }.start()
+    }
+
+    fun deleteAudioFile(title: String, date: String) {
+        File(getAudioFilePath(title, date)).delete()
+    }
+
+    fun getAudioFilePath(title: String, date: String): String {
+        return MyApplication.externalPath + "/%s_%s.aac".format(
+            title.replace('/', '_'), date
+        )
     }
 }

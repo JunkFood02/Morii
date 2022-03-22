@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.transition.Slide
 import android.util.Log
@@ -27,6 +28,7 @@ class MainActivity : BaseActivity() {
     private lateinit var adapter: MusicDiaryAdapter
     private var showAssistantDialog: Boolean = true
     private var sortByDateAscending: Boolean = true
+    private lateinit var sharedPref: SharedPreferences;
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         window.exitTransition = Slide()
@@ -39,13 +41,21 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showAssistantDialog() {
-        val sharedPref = this.getSharedPreferences(
+        sharedPref = this.getSharedPreferences(
             MyApplication.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
         )
         showAssistantDialog = sharedPref.getBoolean("showAssistantDialog", true);
         if (showAssistantDialog) {
             val builder = MaterialAlertDialogBuilder(this);
-            builder.setMessage("用户指引").setTitle("欢迎使用Morii音乐日记").setNegativeButton(
+            builder.setMessage(
+                "在音乐选取页面，左右滑动选取一段符合你当前心情的音乐\n" +
+                        "\n" +
+                        "在创作页面，自由选取风格不同的白噪音素材进行混合\n" +
+                        "\n" +
+                        "在编辑界面，使用文字及图片记录你当前的心情\n" +
+                        "\n" +
+                        "在首页回顾你之前创建的音乐日记，并且将日记导出分享给他人（目前暂仅支持分享音频文件）"
+            ).setTitle("欢迎使用Morii音乐日记").setNegativeButton(
                 "关闭且不再显示"
             ) { dialog, which ->
                 with(sharedPref.edit()) {
@@ -81,6 +91,13 @@ class MainActivity : BaseActivity() {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         }
         binding.reverseSwitchButton.setOnClickListener { reverseRecyclerView() }
+        binding.reverseSwitchButton.setOnLongClickListener {
+            with(sharedPref.edit()) {
+                putBoolean("showAssistantDialog", true)
+                apply()
+            }
+            return@setOnLongClickListener true;
+        }
     }
 
     private fun reverseRecyclerView() {

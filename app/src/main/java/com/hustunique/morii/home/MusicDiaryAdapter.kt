@@ -65,11 +65,7 @@ class MusicDiaryAdapter
                 .setNegativeButton("取消") { dialog: DialogInterface?, which: Int -> }
                 .setPositiveButton("确认") { dialog: DialogInterface?, which: Int ->
                     DatabaseUtil.deleteDiary(musicDiaryItem.itemID)
-                    File(
-                        externalPath + "/%s_%s.aac".format(
-                            musicDiaryItem.title, musicDiaryItem.date
-                        )
-                    ).delete()
+                    DatabaseUtil.deleteAudioFile(musicDiaryItem.title, musicDiaryItem.date)
                     Log.d(TAG, "deletePosition: " + holder.layoutPosition)
                     notifyItemRemoved(holder.layoutPosition)
                     list.removeAt(holder.layoutPosition)
