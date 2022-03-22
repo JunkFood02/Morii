@@ -50,6 +50,6 @@ class MyApplication : Application() {
         val soundItemList: MutableList<SoundItem> = ArrayList()
         val musicDiaryList: MutableList<MusicDiaryItem> = ArrayList()
         lateinit var externalPath: String
-        lateinit var PREFERENCE_FILE_KEY: String;
+        lateinit var PREFERENCE_FILE_KEY: String
     }
 }
