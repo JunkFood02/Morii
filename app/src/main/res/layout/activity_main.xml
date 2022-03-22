@@ -2,24 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:fitsSystemWindows="false"
-    android:id="@+id/mainLayout"
     tools:context="com.hustunique.morii.home.MainActivity">
 
     <com.hustunique.morii.ui.ArcImageView
-        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/buttonMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="-30dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:scaleType="centerCrop"
         android:src="@drawable/background"
         android:translationZ="10dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/upperBackground"/>
+        app:layout_constraintBottom_toBottomOf="@id/upperBackground"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upperBackground"
@@ -73,20 +73,60 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="48dp"
-            android:textColor="@color/black"
             android:fontFamily="@font/notosans_regular"
-            android:text="我的创作"
-            android:textSize="21sp"
             android:includeFontPadding="false"
+            android:text="我的创作"
+            android:textColor="@color/black"
+            android:textSize="21sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/reverseSwitchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/transparent"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_margin="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/sortButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="倒序排列"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/outline_sort_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/sortButtonText"
+                    android:layout_marginEnd="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/musicDiaryRecyclerView"
             android:layout_width="match_parent"
-            android:overScrollMode="never"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
