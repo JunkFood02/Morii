@@ -8,6 +8,7 @@ import com.hustunique.morii.design.SoundItem
 import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.music.MusicTab
 import morii.R
+import java.lang.StringBuilder
 
 class MyApplication : Application() {
     override fun onCreate() {
@@ -15,6 +16,7 @@ class MyApplication : Application() {
         context = applicationContext
         initResourcesList()
         externalPath = getExternalFilesDir(null)!!.absolutePath
+        PREFERENCE_FILE_KEY = "$packageName.SharedPreference"
     }
 
     private fun initResourcesList() {
@@ -48,5 +50,6 @@ class MyApplication : Application() {
         val soundItemList: MutableList<SoundItem> = ArrayList()
         val musicDiaryList: MutableList<MusicDiaryItem> = ArrayList()
         lateinit var externalPath: String
+        lateinit var PREFERENCE_FILE_KEY: String;
     }
 }
