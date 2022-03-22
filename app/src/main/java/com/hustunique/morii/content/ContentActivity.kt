@@ -13,6 +13,7 @@ import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hustunique.morii.database.DiaryInfo
 import com.hustunique.morii.home.MainActivity
 import com.hustunique.morii.home.MusicDiaryItem
@@ -82,8 +83,14 @@ class ContentActivity : BaseActivity() {
                 createMusicDiary()
                 backToMainActivity()
             }
-            binding.deleteButton.setOnClickListener { v: View? ->
-                backToMainActivity()
+            binding.deleteButton.setOnClickListener {
+                with(MaterialAlertDialogBuilder(this)) {
+                    setTitle("确定要丢弃当前已编辑的内容吗？")
+                    setMessage("这个操作不可被撤销，你将回到应用首页。")
+                    setNegativeButton("返回", null)
+                    setPositiveButton("确认") { _, _ -> backToMainActivity() }
+                    show()
+                }
             }
             initProgressBar(AudioExoPlayerUtil.getDuration())
 
