@@ -11,7 +11,6 @@ import com.hustunique.morii.content.ContentActivity
 import com.hustunique.morii.home.MusicDiaryItem
 import com.hustunique.morii.util.AudioExoPlayerUtil
 import com.hustunique.morii.util.BaseActivity
-import com.hustunique.morii.util.MyApplication
 import com.hustunique.morii.util.MyApplication.Companion.musicTabList
 import morii.R
 import morii.databinding.ActivityEditBinding
@@ -48,8 +47,8 @@ class EditActivity : BaseActivity(), EditContract.IView {
 
     private fun initUI() {
         diary = intent.getSerializableExtra("diary") as MusicDiaryItem
-        val Duration = AudioExoPlayerUtil.getDuration()
-        initProgressBar(Duration)
+        val duration = AudioExoPlayerUtil.getDuration()
+        initProgressBar(duration)
         checkPlayStatus()
         binding.progressbar.button.setOnClickListener {
             if (AudioExoPlayerUtil.isPlaying) {
@@ -78,7 +77,7 @@ class EditActivity : BaseActivity(), EditContract.IView {
             .into(binding.BigPhoto)
         currentDate = getDate()
         binding.currentDateText.text = "# $currentDate"
-        binding.addPhotoButton.setOnClickListener { presenter?.picture }
+        binding.addPhotoButton.setOnClickListener { presenter.picture }
         Log.d(
             TAG,
             "initUI: " + musicTabList[diary.musicTabId].imageResId
