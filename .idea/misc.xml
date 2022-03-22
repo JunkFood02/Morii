@@ -36,6 +36,8 @@
         <entry key="app/src/main/res/drawable/ic_help_msg.xml" value="0.161" />
         <entry key="app/src/main/res/drawable/ic_intersect.xml" value="0.1665" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1859375" />
+        <entry key="app/src/main/res/drawable/outline_delete_24.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/outline_done_24.xml" value="0.18" />
         <entry key="app/src/main/res/drawable/outline_pause_24.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/outline_sort_24.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/progressbar_color.xml" value="0.1795" />

@@ -10,6 +10,7 @@ import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -18,6 +19,7 @@ import com.hustunique.morii.home.MusicDiaryAdapter.MyViewHolder
 import com.hustunique.morii.util.DatabaseUtil
 import com.hustunique.morii.util.MyApplication.Companion.externalPath
 import com.hustunique.morii.util.MyApplication.Companion.musicTabList
+import morii.R
 import morii.databinding.CardviewItemBinding
 import java.io.File
 
@@ -58,21 +60,35 @@ class MusicDiaryAdapter
                 )
             activity.startActivity(intent, options.toBundle())
         }
-        holder.itemView.setOnLongClickListener { v: View? ->
+        holder.itemView.setOnLongClickListener {
             val builder = MaterialAlertDialogBuilder(activity)
-            builder.setTitle("确定要删除这个音乐日记吗？")
-                .setMessage("这个操作不可被撤销。")
-                .setNegativeButton("取消") { dialog: DialogInterface?, which: Int -> }
-                .setPositiveButton("确认") { dialog: DialogInterface?, which: Int ->
-                    DatabaseUtil.deleteDiary(musicDiaryItem.itemID)
-                    DatabaseUtil.deleteAudioFile(musicDiaryItem.title, musicDiaryItem.date)
-                    Log.d(TAG, "deletePosition: " + holder.layoutPosition)
-                    notifyItemRemoved(holder.layoutPosition)
-                    list.removeAt(holder.layoutPosition)
+            builder.run {
+                setItems(arrayOf("操作 1", "操作 2", "删除日记")) { _, which ->
+                    if (which != 2) {
+                        Toast.makeText(activity, "Not yet implemented.", Toast.LENGTH_SHORT).show()
+                    } else if (which == 2) {
+                        MaterialAlertDialogBuilder(activity).setTitle("确定要删除这个音乐日记吗？")
+                            .setMessage("这个操作不可被撤销。")
+                            .setNegativeButton("取消") { _: DialogInterface?, _: Int -> }
+                            .setPositiveButton("确认") { _: DialogInterface?, _: Int ->
+                                DatabaseUtil.deleteDiary(musicDiaryItem.itemID)
+                                DatabaseUtil.deleteAudioFile(
+                                    musicDiaryItem.title,
+                                    musicDiaryItem.date
+                                )
+                                Log.d(TAG, "deletePosition: " + holder.layoutPosition)
+                                notifyItemRemoved(holder.layoutPosition)
+                                list.removeAt(holder.layoutPosition)
+                            }
+                            .show()
+                    }
                 }
-                .show()
+                show()
+            }
+
             true
         }
+
     }
 
     override fun getItemCount(): Int {

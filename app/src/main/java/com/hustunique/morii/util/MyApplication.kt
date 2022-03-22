@@ -3,6 +3,7 @@ package com.hustunique.morii.util
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Environment
 import com.hustunique.morii.design.SoundItem
 import com.hustunique.morii.home.MusicDiaryItem
@@ -17,6 +18,10 @@ class MyApplication : Application() {
         initResourcesList()
         externalPath = getExternalFilesDir(null)!!.absolutePath
         PREFERENCE_FILE_KEY = "$packageName.SharedPreference"
+        sharedPref = this.getSharedPreferences(
+            PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
+        )
+        showAssistantDialog = sharedPref.getBoolean("showAssistantDialog", true)
     }
 
     private fun initResourcesList() {
@@ -51,5 +56,7 @@ class MyApplication : Application() {
         val musicDiaryList: MutableList<MusicDiaryItem> = ArrayList()
         lateinit var externalPath: String
         lateinit var PREFERENCE_FILE_KEY: String
+        var showAssistantDialog: Boolean = true
+        lateinit var sharedPref: SharedPreferences
     }
 }

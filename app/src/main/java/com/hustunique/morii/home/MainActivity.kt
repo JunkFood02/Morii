@@ -1,34 +1,24 @@
 package com.hustunique.morii.home
 
 import android.app.ActivityOptions
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.transition.Slide
 import android.util.Log
-import android.view.*
-import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.Window
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hustunique.morii.music.MusicSelectActivity
 import com.hustunique.morii.util.BaseActivity
-import com.hustunique.morii.util.MyApplication
 import com.hustunique.morii.util.MyApplication.Companion.musicDiaryList
-import morii.R
+import com.hustunique.morii.util.MyApplication.Companion.sharedPref
+import com.hustunique.morii.util.MyApplication.Companion.showAssistantDialog
 import morii.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MusicDiaryAdapter
-    private var showAssistantDialog: Boolean = true
-    private var sortByDateAscending: Boolean = true
-    private lateinit var sharedPref: SharedPreferences;
+    private var sortByDateAscending: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         window.exitTransition = Slide()
@@ -41,12 +31,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showAssistantDialog() {
-        sharedPref = this.getSharedPreferences(
-            MyApplication.PREFERENCE_FILE_KEY, Context.MODE_PRIVATE
-        )
-        showAssistantDialog = sharedPref.getBoolean("showAssistantDialog", true);
+
         if (showAssistantDialog) {
-            val builder = MaterialAlertDialogBuilder(this);
+            val builder = MaterialAlertDialogBuilder(this)
             builder.setMessage(
                 "在音乐选取页面，左右滑动选取一段符合你当前心情的音乐\n" +
                         "\n" +
@@ -75,7 +62,11 @@ class MainActivity : BaseActivity() {
         binding.musicDiaryRecyclerView.apply {
             adapter = this@MainActivity.adapter
             layoutManager =
-                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(
+                    this@MainActivity,
+                    LinearLayoutManager.VERTICAL,
+                    true
+                ).apply { stackFromEnd = true }
         }
     }
 
@@ -96,19 +87,19 @@ class MainActivity : BaseActivity() {
                 putBoolean("showAssistantDialog", true)
                 apply()
             }
-            return@setOnLongClickListener true;
+            return@setOnLongClickListener true
         }
     }
 
     private fun reverseRecyclerView() {
         if (sortByDateAscending) {
-            binding.sortButtonText.setText("正序排列")
+            binding.sortButtonText.text = "正序排列"
             binding.musicDiaryRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true).apply {
                     stackFromEnd = true
                 }
         } else {
-            binding.sortButtonText.setText("倒序排列")
+            binding.sortButtonText.text = "倒序排列"
             binding.musicDiaryRecyclerView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         }
