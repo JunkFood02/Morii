@@ -1,7 +1,6 @@
 package com.hustunique.morii.content
 
-import android.content.ClipData
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -105,8 +104,26 @@ class ContentActivity : BaseActivity() {
         }
         binding.backLayoutContent.setOnClickListener { onBackPressed() }
         binding.completeLayoutContent.setOnClickListener {
-            Toast.makeText(this, "正在生成音频文件", Toast.LENGTH_SHORT).show()
-            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
+            MaterialAlertDialogBuilder(this).run {
+                setItems(
+                    arrayOf("以文字分享", "以音乐分享"),
+                    DialogInterface.OnClickListener { dialog, which ->
+                        if (which == 0) {
+                            var clipboardManager: ClipboardManager =
+                                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            val mClipData =
+                                ClipData.newPlainText("Name", binding.diaryContent.text.toString())
+                            clipboardManager.setPrimaryClip(mClipData)
+                            Toast.makeText(this@ContentActivity, "复制成功", Toast.LENGTH_SHORT).show()
+                        } else if (which == 1) {
+
+                            Toast.makeText(this@ContentActivity, "正在生成音频文件", Toast.LENGTH_SHORT)
+                                .show()
+                            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
+                        }
+                    })
+                show()
+            }
         }
 
         binding.progressbarContent.SeekBar.setOnSeekBarChangeListener(object :
