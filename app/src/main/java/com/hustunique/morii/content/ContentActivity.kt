@@ -106,22 +106,35 @@ class ContentActivity : BaseActivity() {
         binding.completeLayoutContent.setOnClickListener {
             MaterialAlertDialogBuilder(this).run {
                 setItems(
-                    arrayOf("以文字分享", "以音乐分享"),
-                    DialogInterface.OnClickListener { dialog, which ->
-                        if (which == 0) {
-                            var clipboardManager: ClipboardManager =
-                                getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            val mClipData =
-                                ClipData.newPlainText("Name", binding.diaryContent.text.toString())
-                            clipboardManager.setPrimaryClip(mClipData)
-                            Toast.makeText(this@ContentActivity, "复制成功", Toast.LENGTH_SHORT).show()
-                        } else if (which == 1) {
-
-                            Toast.makeText(this@ContentActivity, "正在生成音频文件", Toast.LENGTH_SHORT)
-                                .show()
-                            AudioProcessor.makeAudioMix(musicDiaryItem, handler)
+                    arrayOf("将日记内容复制到剪贴板", "以文字分享", "以音乐分享")
+                ) { _, which ->
+                    if (which == 0) {
+                        val clipboardManager: ClipboardManager =
+                            getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        val mClipData =
+                            ClipData.newPlainText("Name", binding.diaryContent.text.toString())
+                        clipboardManager.setPrimaryClip(mClipData)
+                        Toast.makeText(this@ContentActivity, "内容已复制到剪贴板", Toast.LENGTH_SHORT).show()
+                    } else if (which == 1) {
+                        binding.run {
+                            shareDiaryContent(
+                                StringBuilder().append(
+                                    musicDiaryTitle.text,
+                                    "\n",
+                                    musicDiaryDate.text,
+                                    "\n",
+                                    diaryContent.text
+                                ).toString()
+                            )
                         }
-                    })
+
+
+                    } else if (which == 2) {
+                        Toast.makeText(this@ContentActivity, "正在生成音频文件", Toast.LENGTH_SHORT)
+                            .show()
+                        AudioProcessor.makeAudioMix(musicDiaryItem, handler)
+                    }
+                }
                 show()
             }
         }
@@ -226,7 +239,15 @@ class ContentActivity : BaseActivity() {
             )
         }
         startActivity(Intent.createChooser(shareIntent, "分享音频文件"))
+    }
 
+    private fun shareDiaryContent(s: String) {
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, s)
+            type = "text/*"
+        }
+        startActivity(Intent.createChooser(shareIntent, "分享日记内容"))
     }
 
     private fun play() {
