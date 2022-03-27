@@ -41,10 +41,10 @@ class MainActivity : BaseActivity() {
                         "\n" +
                         "在编辑界面，使用文字及图片记录你当前的心情\n" +
                         "\n" +
-                        "在首页回顾你之前创建的音乐日记，并且将日记导出分享给他人（目前暂仅支持分享音频文件）"
+                        "在首页回顾你之前创建的音乐日记，并且将日记导出分享给他人（目前暂仅支持分享音频文件或日记内容）"
             ).setTitle("欢迎使用Morii音乐日记").setNegativeButton(
                 "关闭且不再显示"
-            ) { dialog, which ->
+            ) { _, _ ->
                 with(sharedPref.edit()) {
                     putBoolean("showAssistantDialog", false)
                     apply()
